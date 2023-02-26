@@ -1,5 +1,6 @@
-# ASP.NET-Core-Razor-Pages-Clean-Architecture
-ASP.NET Core Razor Pages Clean Architecture Template with .NET 7.x
+# ASP.NET Core Razor Pages Clean Architecture Template with .NET 7.x
+
+### Old Repository Name: ASP.NET Core Razor Pages Template!
 
 After 10 years experinse about development of CMS (Content Management System) and Identity (Custom Security), I developed a new version with .NET 7.x and ASP.NET
 Core Razor Pages based on Clean Architecture and Clean Code.
