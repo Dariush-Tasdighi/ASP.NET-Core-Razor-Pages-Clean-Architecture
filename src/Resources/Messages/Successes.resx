@@ -129,4 +129,7 @@
   <data name="Updated" xml:space="preserve">
     <value>The {0} successfully updated.</value>
   </data>
+  <data name="UpdateProfile" xml:space="preserve">
+    <value>Your profile has been updated successfully.</value>
+  </data>
 </root>

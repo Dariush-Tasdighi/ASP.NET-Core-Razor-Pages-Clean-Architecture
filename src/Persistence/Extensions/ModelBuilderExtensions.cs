@@ -74,13 +74,151 @@ public static class ModelBuilderExtensions : object
 		// **************************************************
 
 		// **************************************************
+		// *** Genders **************************************
+		// **************************************************
+		var persianUnspecified =
+			new Domain.Features.Identity.Gender
+			(cultureId: persianCulture.Id,
+			code: Domain.Features.Identity.Enums.GenderEnum.Unspecified, title: "نامشخص")
+			{
+				//Id,
+				//Code,
+				//Title,
+				//Culture,
+				//CultureId,
+				//UserProfiles,
+				//InsertDateTime,
+				//UpdateDateTime,
+
+				IsActive = true,
+				Ordering = 10_000,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: persianUnspecified);
+
+		var persianMale =
+			new Domain.Features.Identity.Gender
+			(cultureId: persianCulture.Id,
+			code: Domain.Features.Identity.Enums.GenderEnum.Male, title: "آقا")
+			{
+				//Id,
+				//Code,
+				//Title,
+				//Culture,
+				//CultureId,
+				//UserProfiles,
+				//InsertDateTime,
+				//UpdateDateTime,
+
+				IsActive = true,
+				Ordering = 10_000,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: persianMale);
+
+		var persianFemale =
+			new Domain.Features.Identity.Gender
+			(cultureId: persianCulture.Id,
+			code: Domain.Features.Identity.Enums.GenderEnum.Female, title: "خانم")
+			{
+				//Id,
+				//Code,
+				//Title,
+				//Culture,
+				//CultureId,
+				//UserProfiles,
+				//InsertDateTime,
+				//UpdateDateTime,
+
+				IsActive = true,
+				Ordering = 10_000,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: persianFemale);
+
+		var englishUnspecified =
+			new Domain.Features.Identity.Gender
+			(cultureId: englishCulture.Id,
+			code: Domain.Features.Identity.Enums.GenderEnum.Unspecified, title: "Unspecified")
+			{
+				//Id,
+				//Code,
+				//Title,
+				//Culture,
+				//CultureId,
+				//UserProfiles,
+				//InsertDateTime,
+				//UpdateDateTime,
+
+				IsActive = true,
+				Ordering = 10_000,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: englishUnspecified);
+
+		var englishMale =
+			new Domain.Features.Identity.Gender
+			(cultureId: englishCulture.Id,
+			code: Domain.Features.Identity.Enums.GenderEnum.Male, title: "Male")
+			{
+				//Id,
+				//Code,
+				//Title,
+				//Culture,
+				//CultureId,
+				//UserProfiles,
+				//InsertDateTime,
+				//UpdateDateTime,
+
+				IsActive = true,
+				Ordering = 10_000,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: englishMale);
+
+		var englishFemale =
+			new Domain.Features.Identity.Gender
+			(cultureId: englishCulture.Id,
+			code: Domain.Features.Identity.Enums.GenderEnum.Female, title: "Female")
+			{
+				//Id,
+				//Code,
+				//Title,
+				//Culture,
+				//CultureId,
+				//UserProfiles,
+				//InsertDateTime,
+				//UpdateDateTime,
+
+				IsActive = true,
+				Ordering = 10_000,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: englishFemale);
+		// **************************************************
+		// *** /Genders *************************************
+		// **************************************************
+
+		// **************************************************
 		// *** Roles ****************************************
 		// **************************************************
 		var simpleUser =
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.SimpleUser,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SimpleUser),
-			title: nameof(Domain.Features.Identity.Enums.RoleEnum.SimpleUser))
+			title: "کاربر")
 			{
 				//Id,
 				//Code,
@@ -104,7 +242,7 @@ public static class ModelBuilderExtensions : object
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.SpecialUser,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SpecialUser),
-			title: nameof(Domain.Features.Identity.Enums.RoleEnum.SpecialUser))
+			title: "کاربر ویژه")
 			{
 				//Id,
 				//Code,
@@ -128,7 +266,7 @@ public static class ModelBuilderExtensions : object
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.Supervisor,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Supervisor),
-			title: nameof(Domain.Features.Identity.Enums.RoleEnum.Supervisor))
+			title: "مسئول پایگاه")
 			{
 				//Id,
 				//Code,
@@ -152,7 +290,7 @@ public static class ModelBuilderExtensions : object
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.Administrator,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Administrator),
-			title: nameof(Domain.Features.Identity.Enums.RoleEnum.Administrator))
+			title: "مدیر پایگاه")
 			{
 				//Id,
 				//Code,
@@ -176,7 +314,7 @@ public static class ModelBuilderExtensions : object
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner),
-			title: nameof(Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner))
+			title: "مالک پایگاه")
 			{
 				//Id,
 				//Code,
@@ -200,7 +338,7 @@ public static class ModelBuilderExtensions : object
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.Programmer,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Programmer),
-			title: nameof(Domain.Features.Identity.Enums.RoleEnum.Programmer))
+			title: "برنامه‌نویس")
 			{
 				//Id,
 				//Code,
@@ -271,8 +409,8 @@ public static class ModelBuilderExtensions : object
 
 		var persianUserProfile =
 			new Domain.Features.Identity.UserProfile
-			(userId: user.Id, cultureId: persianCulture.Id,
-			firstName: "داریوش", lastName: "تصدیقی")
+			(cultureId: persianCulture.Id, userId: user.Id,
+			genderId: persianMale.Id, firstName: "داریوش", lastName: "تصدیقی")
 			{
 				TitleInContactUsPage = "مالک پایگاه",
 			};

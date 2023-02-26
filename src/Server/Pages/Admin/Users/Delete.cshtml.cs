@@ -37,7 +37,7 @@ public class DeleteModel :
 	{
 		try
 		{
-			if (id.HasValue == false)
+			if (id is null)
 			{
 				AddToastError
 					(message: Resources.Messages.Errors.IdIsNull);
@@ -103,7 +103,7 @@ public class DeleteModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync(System.Guid? id)
 	{
-		if (id.HasValue == false)
+		if (id is null)
 		{
 			AddToastError
 				(message: Resources.Messages.Errors.IdIsNull);

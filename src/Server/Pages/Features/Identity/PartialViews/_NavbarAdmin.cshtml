@@ -1,0 +1,40 @@
+﻿@{
+	var currentCulture =
+		System.Threading.Thread
+		.CurrentThread.CurrentUICulture;
+
+	var currentCultureName = currentCulture.Name;
+
+	var usernameClaim =
+		User.Claims.First(predicate: current =>
+			current.Type == System.Security.Claims.ClaimTypes.NameIdentifier);
+
+	string? username = null;
+
+	if (usernameClaim is not null)
+	{
+		username =
+			usernameClaim.Value;
+	}
+
+	var link =
+		$"/profile/{currentCultureName}/{username}";
+}
+
+<li class="nav-item dropdown">
+
+	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		@(Resources.DataDictionary.IdentityAdminSettings)
+	</a>
+
+	<ul class="dropdown-menu mt-0">
+
+		<li>
+			<a class="dropdown-item" asp-page="/Features/Identity/Admin/Roles/Index">
+				@(Resources.DataDictionary.Roles)
+			</a>
+		</li>
+
+	</ul>
+
+</li>

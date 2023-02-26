@@ -5,13 +5,6 @@ public class Culture :
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
-	#region Constants
-
-	public const int NameMaxLength = Constants.MaxLength.Name;
-	public const int NativeNameMaxLength = Constants.MaxLength.NativeName;
-
-	#endregion /Constants
-
 	#region Constructor
 	public Culture(Enums.CultureEnum lcid,
 		string cultureName, string nativeName) : base()
@@ -37,6 +30,9 @@ public class Culture :
 
 		PostCategories =
 			new System.Collections.Generic.List<Cms.PostCategory>();
+
+		Genders =
+			new System.Collections.Generic.List<Identity.Gender>();
 
 		UserProfiles =
 			new System.Collections.Generic.List<Identity.UserProfile>();
@@ -79,7 +75,7 @@ public class Culture :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: NameMaxLength,
+		(length: Constants.MaxLength.Name,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 	public string CultureName { get; set; }
@@ -99,7 +95,7 @@ public class Culture :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: NativeNameMaxLength,
+		(length: Constants.MaxLength.NativeName,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 	public string NativeName { get; set; }
@@ -150,6 +146,7 @@ public class Culture :
 	public virtual System.Collections.Generic.IList<Cms.MenuItem> MenuItems { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.PostCategory> PostCategories { get; private set; }
 
+	public virtual System.Collections.Generic.IList<Identity.Gender> Genders { get; private set; }
 	public virtual System.Collections.Generic.IList<Identity.UserProfile> UserProfiles { get; private set; }
 
 	#endregion /Collections

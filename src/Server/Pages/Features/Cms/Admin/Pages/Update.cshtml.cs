@@ -34,7 +34,7 @@ public class UpdateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync(System.Guid? id)
 	{
-		if (id.HasValue == false)
+		if (id is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.BadRequest);

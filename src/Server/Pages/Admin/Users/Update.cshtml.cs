@@ -37,7 +37,7 @@ public class UpdateModel :
 	{
 		try
 		{
-			if (id.HasValue == false)
+			if (id is null)
 			{
 				AddToastError
 					(message: Resources.Messages.Errors.IdIsNull);

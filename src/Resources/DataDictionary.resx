@@ -588,4 +588,10 @@
   <data name="Inactive" xml:space="preserve">
     <value>Inactive</value>
   </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="IdentityAdminSettings" xml:space="preserve">
+    <value>Identity Admin Settings</value>
+  </data>
 </root>

@@ -129,4 +129,7 @@
   <data name="Updated" xml:space="preserve">
     <value>{0} با موفقیت ویرایش گردید.</value>
   </data>
+  <data name="UpdateProfile" xml:space="preserve">
+    <value>اطلاعات شما با موفقیت ذخیره گردید.</value>
+  </data>
 </root>

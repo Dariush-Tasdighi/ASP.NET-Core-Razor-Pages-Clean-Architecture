@@ -6,13 +6,14 @@ public class UserProfile :
 {
 	#region Constructor
 	public UserProfile
-		(System.Guid userId, System.Guid cultureId,
-		string firstName, string lastName) : base()
+		(System.Guid cultureId, System.Guid userId,
+		System.Guid genderId, string firstName, string lastName) : base()
 	{
 		UpdateDateTime =
 			InsertDateTime;
 
 		UserId = userId;
+		GenderId = genderId;
 		CultureId = cultureId;
 
 		LastName = lastName;
@@ -51,6 +52,36 @@ public class UserProfile :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public virtual User? User { get; set; }
 	#endregion /public virtual User? User { get; set; }
+
+	#region public System.Guid GenderId { get; set; }
+	/// <summary>
+	/// جنسیت
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Gender))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid GenderId { get; set; }
+	#endregion /public System.Guid GenderId { get; set; }
+
+	#region public virtual Gender? Gender { get; set; }
+	/// <summary>
+	/// جنسیت
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Gender))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public virtual Gender? Gender { get; set; }
+	#endregion /public virtual Gender? Gender { get; set; }
 
 	#region public System.Guid CultureId { get; set; }
 	/// <summary>

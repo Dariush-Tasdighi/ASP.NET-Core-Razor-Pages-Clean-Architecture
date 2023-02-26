@@ -20,6 +20,21 @@ public class UpdateProfileViewModel : object
 	public bool IsProfilePublic { get; set; }
 	#endregion /public bool IsProfilePublic { get; set; }
 
+	#region public System.Guid GenderId { get; set; }
+	/// <summary>
+	/// جنسیت
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Gender))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid GenderId { get; set; }
+	#endregion /public System.Guid GenderId { get; set; }
+
 	#region public string? FirstName { get; set; }
 	/// <summary>
 	/// نام

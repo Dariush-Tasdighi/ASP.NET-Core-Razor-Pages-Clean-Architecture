@@ -95,5 +95,14 @@ namespace Resources.Messages {
                 return ResourceManager.GetString("Updated", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your profile has been updated successfully..
+        /// </summary>
+        public static string UpdateProfile {
+            get {
+                return ResourceManager.GetString("UpdateProfile", resourceCulture);
+            }
+        }
     }
 }

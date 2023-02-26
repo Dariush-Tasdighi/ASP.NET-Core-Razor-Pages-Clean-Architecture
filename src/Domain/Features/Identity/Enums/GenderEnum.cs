@@ -1,9 +1,8 @@
-﻿namespace Domain.Features.Identity.Enums
+﻿namespace Domain.Features.Identity.Enums;
+
+public enum GenderEnum : int
 {
-	public enum GenderEnum : int
-	{
-		Unspecified = 0,
-		Male = 1,
-		Female = 2,
-	}
+	Unspecified = 0,
+	Male = 1,
+	Female = 2,
 }

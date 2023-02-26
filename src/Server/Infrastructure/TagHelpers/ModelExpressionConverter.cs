@@ -11,37 +11,43 @@ public class ModelExpressionConverter : object
 		HasBeenConverted = false;
 		ModelExpression = modelExpression;
 
-		switch (modelExpression.ModelExplorer.ModelType)
+		if (modelExpression.ModelExplorer.ModelType.IsEnum)
 		{
-			case System.Type typeGuid when typeGuid == typeof(System.Guid):
+			ConvertLong();
+		}
+		else
+		{
+			switch (modelExpression.ModelExplorer.ModelType)
 			{
-				IsLeftToRight = true;
-				HasBeenConverted = true;
+				case System.Type typeGuid when typeGuid == typeof(System.Guid):
+				{
+					ConvertGuid();
 
-				break;
-			}
+					break;
+				}
 
-			case System.Type typeInt when typeInt == typeof(int):
-			case System.Type typeByte when typeByte == typeof(byte):
-			case System.Type typeLong when typeLong == typeof(long):
-			{
-				ConvertLong();
+				case System.Type typeInt when typeInt == typeof(int):
+				case System.Type typeByte when typeByte == typeof(byte):
+				case System.Type typeLong when typeLong == typeof(long):
+				{
+					ConvertLong();
 
-				break;
-			}
+					break;
+				}
 
-			case System.Type typeDateTime when typeDateTime == typeof(System.DateTime):
-			{
-				ConvertDateTime();
+				case System.Type typeDateTime when typeDateTime == typeof(System.DateTime):
+				{
+					ConvertDateTime();
 
-				break;
-			}
+					break;
+				}
 
-			case System.Type typeDateTimeOffset when typeDateTimeOffset == typeof(System.DateTimeOffset):
-			{
-				ConvertDateTimeOffset();
+				case System.Type typeDateTimeOffset when typeDateTimeOffset == typeof(System.DateTimeOffset):
+				{
+					ConvertDateTimeOffset();
 
-				break;
+					break;
+				}
 			}
 		}
 	}
@@ -53,6 +59,23 @@ public class ModelExpressionConverter : object
 	public bool HasBeenConverted { get; protected set; }
 
 	protected Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression ModelExpression { get; }
+
+	protected void ConvertGuid()
+	{
+		object value =
+			ModelExpression.Model;
+
+		IsLeftToRight = true;
+		HasBeenConverted = true;
+
+		if (value is null)
+		{
+			Value = Constants.Format.NullValue;
+			return;
+		}
+
+		Value = value.ToString();
+	}
 
 	protected void ConvertLong()
 	{

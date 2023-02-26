@@ -621,4 +621,10 @@
   <data name="Inactive" xml:space="preserve">
     <value>غیرفعال</value>
   </data>
+  <data name="Code" xml:space="preserve">
+    <value>کد</value>
+  </data>
+  <data name="IdentityAdminSettings" xml:space="preserve">
+    <value>تنظیمات مدیریتی کاربران</value>
+  </data>
 </root>

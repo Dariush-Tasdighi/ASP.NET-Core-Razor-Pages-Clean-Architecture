@@ -1,26 +1,57 @@
 ﻿namespace Domain.Features.Identity;
 
-public class Role :
+public class Gender :
 	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public Role(Enums.RoleEnum code, string name, string title) : base()
+	public Gender(System.Guid cultureId,
+		Enums.GenderEnum code, string title) : base()
 	{
-		Name = name;
 		Code = code;
 		Title = title;
+		CultureId = cultureId;
 
 		UpdateDateTime =
 			InsertDateTime;
 
-		Users =
-			new System.Collections.Generic.List<User>();
+		UserProfiles =
+			new System.Collections.Generic.List<UserProfile>();
 	}
 	#endregion /Constructor
 
 	#region Properties
+
+	#region public System.Guid CultureId { get; set; }
+	/// <summary>
+	/// زبان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Culture))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid CultureId { get; set; }
+	#endregion /public System.Guid CultureId { get; set; }
+
+	#region public virtual Common.Culture? Culture { get; set; }
+	/// <summary>
+	/// زبان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Culture))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public virtual Common.Culture? Culture { get; set; }
+	#endregion /public virtual Common.Culture? Culture { get; set; }
 
 	#region public bool IsActive { get; set; }
 	/// <summary>
@@ -32,40 +63,15 @@ public class Role :
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
 
-	#region public Enums.RoleEnum Code { get; set; }
+	#region public Enums.GenderEnum Code { get; set; }
 	/// <summary>
 	/// کد
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.Code))]
-	public Enums.RoleEnum Code { get; set; }
-	#endregion /public Enums.RoleEnum Code { get; set; }
-
-	#region public string Name { get; set; }
-	/// <summary>
-	/// نام
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Name))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Constants.MaxLength.Name,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-
-	[System.ComponentModel.DataAnnotations.RegularExpression
-		(pattern: Constants.RegularExpression.AToZDigitsUnderline,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Name))]
-	public string Name { get; set; }
-	#endregion /public string Name { get; set; }
+	public Enums.GenderEnum Code { get; set; }
+	#endregion /public Enums.GenderEnum Code { get; set; }
 
 	#region public string Title { get; set; }
 	/// <summary>
@@ -126,7 +132,7 @@ public class Role :
 
 	#region Collections
 
-	public virtual System.Collections.Generic.IList<User> Users { get; private set; }
+	public virtual System.Collections.Generic.IList<UserProfile> UserProfiles { get; private set; }
 
 	#endregion /Collections
 }

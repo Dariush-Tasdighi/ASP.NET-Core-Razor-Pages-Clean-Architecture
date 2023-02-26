@@ -25,7 +25,7 @@ public static class HtmlHelpers : object
 	public static Microsoft.AspNetCore.Html.IHtmlContent DtatDisplayInteger
 		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, long? value)
 	{
-		if (value.HasValue == false)
+		if (value is null)
 		{
 			return html.Raw
 				(value: Constants.Format.NullValue);
@@ -82,7 +82,7 @@ public static class HtmlHelpers : object
 		input.Attributes.Add
 			(key: "disabled", value: "disabled");
 
-		if (value.HasValue && value.Value)
+		if (value is not null && value.Value)
 		{
 			input.Attributes.Add
 				(key: "checked", value: "checked");
@@ -94,11 +94,17 @@ public static class HtmlHelpers : object
 	}
 
 	public static Microsoft.AspNetCore.Html.IHtmlContent DtatDisplayStringWithTd
-		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, string? value)
+		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, string? value, bool? isLeftToRight = null)
 	{
 		var td =
 			new Microsoft.AspNetCore.Mvc
 			.Rendering.TagBuilder(tagName: "td");
+
+		if (isLeftToRight is not null && isLeftToRight.Value)
+		{
+			td.Attributes.Add
+				(key: "dir", value: "ltr");
+		}
 
 		var innerHtml =
 			DtatDisplayString(html: html, value: value);
@@ -146,7 +152,7 @@ public static class HtmlHelpers : object
 	public static Microsoft.AspNetCore.Html.IHtmlContent DtatDisplayDateTime
 		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, System.DateTime? value)
 	{
-		if (value.HasValue == false)
+		if (value is null)
 		{
 			return html.Raw
 				(value: Constants.Format.NullValue);
@@ -165,7 +171,7 @@ public static class HtmlHelpers : object
 	public static Microsoft.AspNetCore.Html.IHtmlContent DtatDisplayDateTimeOffset
 		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, System.DateTimeOffset? value)
 	{
-		if (value.HasValue == false)
+		if (value is null)
 		{
 			return html.Raw
 				(value: Constants.Format.NullValue);

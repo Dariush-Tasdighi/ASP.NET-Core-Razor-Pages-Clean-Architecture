@@ -223,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        public static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comment Count.
         /// </summary>
         public static string CommentCount {
@@ -534,6 +543,15 @@ namespace Resources {
         public static string Id {
             get {
                 return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identity Admin Settings.
+        /// </summary>
+        public static string IdentityAdminSettings {
+            get {
+                return ResourceManager.GetString("IdentityAdminSettings", resourceCulture);
             }
         }
         

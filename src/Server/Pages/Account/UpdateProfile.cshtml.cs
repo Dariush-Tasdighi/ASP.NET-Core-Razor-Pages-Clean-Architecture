@@ -17,9 +17,18 @@ public class UpdateProfileModel :
 	}
 	#endregion /Constructor
 
+	#region Properties
+
 	[Microsoft.AspNetCore.Mvc.BindProperty]
 	public ViewModels.Pages.Account.UpdateProfileViewModel ViewModel { get; set; }
 
+	public Microsoft.AspNetCore.Mvc.Rendering.SelectList? GendersSelectList { get; set; }
+
+	#endregion /Properties
+
+	#region Methods
+
+	#region OnGetAsync()
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync()
 	{
@@ -45,10 +54,16 @@ public class UpdateProfileModel :
 			.Where(current => current.EmailAddress.ToLower() == userEmailAddress.ToLower())
 			.FirstOrDefaultAsync();
 
-		if (foundedUser == null)
+		if (foundedUser is null)
 		{
-			return RedirectToPage("/Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
 		}
+
+		GendersSelectList =
+			await
+			Infrastructure.SelectLists.GetGendersAsync
+			(databaseContext: DatabaseContext, selectedValue: null);
 
 		ViewModel.NationalCode = foundedUser.NationalCode;
 		ViewModel.IsProfilePublic = foundedUser.IsProfilePublic;
@@ -64,13 +79,16 @@ public class UpdateProfileModel :
 			return Page();
 		}
 
+		ViewModel.GenderId = foundedUserProfile.GenderId;
 		ViewModel.LastName = foundedUserProfile.LastName;
 		ViewModel.FirstName = foundedUserProfile.FirstName;
 		ViewModel.Description = foundedUserProfile.Description;
 
 		return Page();
 	}
+	#endregion /OnGetAsync()
 
+	#region OnPostAsync()
 	public async
 		System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
@@ -85,6 +103,11 @@ public class UpdateProfileModel :
 
 		if (ModelState.IsValid == false)
 		{
+			GendersSelectList =
+				await
+				Infrastructure.SelectLists.GetGendersAsync
+				(databaseContext: DatabaseContext, selectedValue: null);
+
 			return Page();
 		}
 
@@ -103,7 +126,8 @@ public class UpdateProfileModel :
 
 		if (foundedUser is null)
 		{
-			return RedirectToPage("/Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
 		}
 
 		foundedUser.NationalCode = ViewModel.NationalCode;
@@ -111,12 +135,13 @@ public class UpdateProfileModel :
 
 		var foundedUserProfile =
 			foundedUser.Profiles
-			.Where(current => current.Culture is not null &&
+			.Where(current => current.Culture != null &&
 				current.Culture.Lcid == currentUICultureLcid)
 			.FirstOrDefault();
 
 		if (foundedUserProfile is not null)
 		{
+			foundedUserProfile.GenderId = ViewModel.GenderId;
 			foundedUserProfile.LastName = ViewModel.LastName.Fix()!;
 			foundedUserProfile.FirstName = ViewModel.FirstName.Fix()!;
 
@@ -135,13 +160,15 @@ public class UpdateProfileModel :
 
 			if (currentCulture is null)
 			{
-				return RedirectToPage("/Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.InternalServerError);
 			}
 
 			var userProfile =
 				new Domain.Features.Identity.UserProfile
-				(userId: foundedUser.Id,
-				cultureId: currentCulture.Id,
+				(cultureId: currentCulture.Id,
+				userId: foundedUser.Id,
+				genderId: ViewModel.GenderId,
 				firstName: ViewModel.FirstName.Fix()!,
 				lastName: ViewModel.LastName.Fix()!)
 
@@ -156,8 +183,21 @@ public class UpdateProfileModel :
 
 		await DatabaseContext.SaveChangesAsync();
 
-		// TODO پیغام می‌دهیم
+		GendersSelectList =
+			await
+			Infrastructure.SelectLists.GetGendersAsync
+			(databaseContext: DatabaseContext, selectedValue: null);
+
+		// **************************************************
+		var successMessage =
+			Resources.Messages.Successes.UpdateProfile;
+
+		AddPageSuccess(message: successMessage);
+		// **************************************************
 
 		return Page();
 	}
+	#endregion /OnPostAsync()
+
+	#endregion /Methods
 }

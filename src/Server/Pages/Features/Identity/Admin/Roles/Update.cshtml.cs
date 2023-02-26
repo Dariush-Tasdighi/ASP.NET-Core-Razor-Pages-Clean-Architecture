@@ -1,8 +1,8 @@
-﻿using Dtat;
+using Dtat;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Server.Pages.Features.Cms.Admin.SubMenuItems;
+namespace Server.Pages.Features.Identity.Admin.Roles;
 
 [Microsoft.AspNetCore.Authorization
 	.Authorize(Roles = Constants.Role.Administrator)]
@@ -15,19 +15,13 @@ public class UpdateModel :
 		base(databaseContext: databaseContext)
 	{
 		ViewModel = new();
-
-		// یک دستور الکی برای جلوگیری از اخطار ویژوال استودیو
-		ParentMenuItem =
-			new(cultureId: new System.Guid(), title: string.Empty);
 	}
 	#endregion /Constructor
 
 	#region Properties
 
-	public Domain.Features.Cms.MenuItem ParentMenuItem { get; private set; }
-
 	[Microsoft.AspNetCore.Mvc.BindProperty]
-	public ViewModels.Pages.Features.Cms.Admin.MenuItems.UpdateViewModel ViewModel { get; set; }
+	public ViewModels.Pages.Features.Identity.Admin.Roles.UpdateViewModel ViewModel { get; set; }
 
 	#endregion /Properties
 
@@ -43,41 +37,30 @@ public class UpdateModel :
 				Constants.CommonRouting.BadRequest);
 		}
 
-		// **************************************************
-		var foundedItem =
+		var result =
 			await
-			DatabaseContext.MenuItems
-			.Include(current => current.Parent)
+			DatabaseContext.Roles
+
 			.Where(current => current.Id == id.Value)
+
+			.Select(current => new ViewModels.Pages
+				.Features.Identity.Admin.Roles.UpdateViewModel()
+			{
+				Id = current.Id,
+				Title = current.Title,
+				IsActive = current.IsActive,
+				Ordering = current.Ordering,
+				Description = current.Description,
+			})
 			.FirstOrDefaultAsync();
 
-		if (foundedItem is null)
+		if (result is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
 
-		if(foundedItem.Parent is null)
-		{
-			return RedirectToPage(pageName:
-				Constants.CommonRouting.InternalServerError);
-		}
-
-		ParentMenuItem = foundedItem.Parent;
-		// **************************************************
-
-		ViewModel =
-			new ViewModels.Pages.Features.Cms.Admin.MenuItems.UpdateViewModel()
-			{
-				Id = foundedItem.Id,
-				Title = foundedItem.Title,
-				Ordering = foundedItem.Ordering,
-				IsVisible = foundedItem.IsVisible,
-				IsDisabled = foundedItem.IsDisabled,
-				Description = foundedItem.Description,
-				NavigationUrl = foundedItem.NavigationUrl,
-				OpenUrlInNewWindow = foundedItem.OpenUrlInNewWindow,
-			};
+		ViewModel = result;
 
 		return Page();
 	}
@@ -95,7 +78,7 @@ public class UpdateModel :
 		// **************************************************
 		var foundedItem =
 			await
-			DatabaseContext.MenuItems
+			DatabaseContext.Roles
 			.Where(current => current.Id == ViewModel.Id)
 			.FirstOrDefaultAsync();
 
@@ -108,25 +91,42 @@ public class UpdateModel :
 
 		// **************************************************
 		ViewModel.Title =
-			ViewModel.Title.Fix();
+			ViewModel.Title.Fix()!;
 
+		//ViewModel.Title =
+		//	ViewModel.Title.Fix();
+
+		var foundedAny =
+			await
+			DatabaseContext.Roles
+			.Where(current => current.Id != ViewModel.Id)
+			.Where(current => current.Title.ToLower() == ViewModel.Title.ToLower())
+			.AnyAsync();
+
+		if (foundedAny)
+		{
+			// **************************************************
+			var errorMessage = string.Format
+				(format: Resources.Messages.Errors.AlreadyExists,
+				arg0: Resources.DataDictionary.Title);
+
+			AddPageError(message: errorMessage);
+			// **************************************************
+
+			return Page();
+		}
+		// **************************************************
+
+		// **************************************************
 		ViewModel.Description =
 			ViewModel.Description.Fix();
 
-		ViewModel.NavigationUrl =
-			ViewModel.NavigationUrl.Fix();
-
 		foundedItem.SetUpdateDateTime();
 
-		foundedItem.Title = ViewModel.Title!;
-		//foundedItem.Title = ViewModel.Title;
-
+		foundedItem.Title = ViewModel.Title;
 		foundedItem.Ordering = ViewModel.Ordering;
-		foundedItem.IsVisible = ViewModel.IsVisible;
-		foundedItem.IsDisabled = ViewModel.IsDisabled;
+		foundedItem.IsActive = ViewModel.IsActive;
 		foundedItem.Description = ViewModel.Description;
-		foundedItem.NavigationUrl = ViewModel.NavigationUrl;
-		foundedItem.OpenUrlInNewWindow = ViewModel.OpenUrlInNewWindow;
 		// **************************************************
 
 		var affectedRows =
@@ -136,13 +136,12 @@ public class UpdateModel :
 		// **************************************************
 		var successMessage = string.Format
 			(format: Resources.Messages.Successes.Updated,
-			arg0: Resources.DataDictionary.MenuItem);
+			arg0: Resources.DataDictionary.Role);
 
 		AddToastSuccess(message: successMessage);
 		// **************************************************
 
-		return RedirectToPage(pageName: "Index",
-			routeValues: new { foundedItem.ParentId });
+		return RedirectToPage(pageName: "Index");
 	}
 	#endregion /OnPostAsync()
 

@@ -1,7 +1,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Server.Pages.Features.Cms.Admin.MenuItems;
+namespace Server.Pages.Features.Identity.Admin.Roles;
 
 [Microsoft.AspNetCore.Authorization
 	.Authorize(Roles = Constants.Role.Administrator)]
@@ -19,7 +19,7 @@ public class DetailsModel :
 
 	#region Properties
 
-	public ViewModels.Pages.Features.Cms.Admin.MenuItems.DetailsOrDeleteViewModel ViewModel { get; private set; }
+	public ViewModels.Pages.Features.Identity.Admin.Roles.DetailsOrDeleteViewModel ViewModel { get; private set; }
 
 	#endregion /Properties
 
@@ -37,22 +37,23 @@ public class DetailsModel :
 
 		var result =
 			await
-			DatabaseContext.MenuItems
+			DatabaseContext.Roles
+
 			.Where(current => current.Id == id.Value)
-			.Select(current => new ViewModels.Pages
-			.Features.Cms.Admin.MenuItems.DetailsOrDeleteViewModel()
+
+			.Select(current => new ViewModels.Pages.Features
+				.Identity.Admin.Roles.DetailsOrDeleteViewModel()
 			{
 				Id = current.Id,
+				Name = current.Name,
+				Code = current.Code,
 				Title = current.Title,
+				IsActive = current.IsActive,
 				Ordering = current.Ordering,
-				IsVisible = current.IsVisible,
-				IsDisabled = current.IsDisabled,
+				UserCount = current.Users.Count,
 				Description = current.Description,
-				ChildCount = current.Children.Count,
-				NavigationUrl = current.NavigationUrl,
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
-				OpenUrlInNewWindow = current.OpenUrlInNewWindow,
 			})
 			.FirstOrDefaultAsync();
 

@@ -19,6 +19,8 @@
 
 			<dtat-full-checkbox asp-for="ViewModel.IsProfilePublic" />
 
+			<dtat-full-select asp-for="ViewModel.GenderId" asp-items="@(Model.GendersSelectList)" />
+
 			<dtat-full-input asp-for="ViewModel.FirstName" />
 
 			<dtat-full-input asp-for="ViewModel.LastName" />
