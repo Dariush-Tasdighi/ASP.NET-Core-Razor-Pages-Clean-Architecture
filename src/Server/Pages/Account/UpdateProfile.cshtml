@@ -1,0 +1,37 @@
+﻿@page
+@model Server.Pages.Account.UpdateProfileModel
+@{
+	var pageTitle =
+		Resources.PageTitles.UpdateProfile;
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<section-form>
+		<fieldset>
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsProfilePublic" />
+
+			<dtat-full-input asp-for="ViewModel.FirstName" />
+
+			<dtat-full-input asp-for="ViewModel.LastName" />
+
+			<dtat-full-input asp-for="ViewModel.NationalCode" dir="ltr" />
+
+			<dtat-full-textarea asp-for="ViewModel.Description" />
+		</fieldset>
+
+		<section-form-buttons>
+			<button-save />
+			<button-reset />
+		</section-form-buttons>
+	</section-form>
+
+</form>

@@ -1,0 +1,28 @@
+﻿@page "{path?}"
+@model Server.Pages.Features.Common.Admin.FileManager.IndexModel
+@{
+	Layout =
+		"Layouts/_FileManager";
+}
+
+<div>
+
+	<form method="post" enctype="multipart/form-data">
+
+		<input type="hidden" id="Path" name="Path" value="@(Model.CurrentPath)" />
+
+		<h5>
+			Current Path: @(Model.CurrentPath)
+		</h5>
+
+		<partial name="PartialViews/_DisplayControls" model="Model" />
+
+		<partial name="PartialViews/_DisplayDirectories" model="Model" />
+
+		<partial name="PartialViews/_DisplayFiles" model="Model" />
+
+		<partial name="PartialViews/_DisplayPictures" model="Model" />
+
+	</form>
+
+</div>

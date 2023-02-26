@@ -1,0 +1,41 @@
+﻿<li class="nav-item dropdown">
+
+	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		@(Resources.DataDictionary.CmsSettings)
+	</a>
+
+	<ul class="dropdown-menu mt-0">
+
+		<li>
+			<a class="dropdown-item" asp-page="/Features/Cms/Admin/Pages/Index">
+				@(Resources.DataDictionary.Pages)
+			</a>
+		</li>
+
+		<li>
+			<a class="dropdown-item" asp-page="/Features/Cms/Admin/Slides/Index">
+				@(Resources.DataDictionary.Slides)
+			</a>
+		</li>
+
+		<li>
+			<a class="dropdown-item" asp-page="/Features/Cms/Admin/MenuItems/Index">
+				@(Resources.DataDictionary.MenuItems)
+			</a>
+		</li>
+
+		<li>
+			<a class="dropdown-item" asp-page="/Features/Cms/Admin/Layouts/Index">
+				@(Resources.DataDictionary.Layouts)
+			</a>
+		</li>
+
+		<li>
+			<a class="dropdown-item" asp-page="/Features/Cms/Admin/PostCategories/Index">
+				@(Resources.DataDictionary.PostCategories)
+			</a>
+		</li>
+
+	</ul>
+
+</li>

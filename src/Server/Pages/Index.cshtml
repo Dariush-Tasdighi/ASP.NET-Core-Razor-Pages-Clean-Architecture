@@ -1,0 +1,32 @@
+﻿@page
+@model Server.Pages.IndexModel
+
+@{
+	var pageTitle =
+		Resources.PageTitles.Index;
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+
+	Layout =
+		"Layouts/_HomePage";
+}
+
+<h3>
+	@(pageTitle)
+</h3>
+
+<hr />
+
+<div class="row">
+	<div class="col">
+		@(Resources.DataDictionary.SourceCode)
+
+		<div dir="ltr" class"mt-3">
+			<a href="https://github.com/Dariush-Tasdighi/ASP.NET-Core-Razor-Pages-Template" target="_blank">
+				Get Source Code in GitHub
+			</a>
+		</div>
+	</div>
+</div>
+
+<hr />

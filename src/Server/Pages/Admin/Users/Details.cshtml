@@ -1,0 +1,75 @@
+﻿@page
+@model Server.Pages.Admin.Users.DetailsModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.DetailsOf} {Resources.DataDictionary.User}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<section-form>
+	<fieldset>
+		<section-form-header>
+			@(pageTitle)
+		</section-form-header>
+
+		<partial name="PartialViews/_DisplayPageMessages" />
+
+		<dtat-readonly-input asp-for="ViewModel.Id" />
+
+		<dtat-readonly-input asp-for="ViewModel.EmailAddress" dir="ltr" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsEmailAddressVerified" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsActive" />
+
+		<dtat-readonly-input asp-for="ViewModel.Username" dir="ltr" />
+
+		<dtat-readonly-input asp-for="ViewModel.FirstName" />
+
+		<dtat-readonly-input asp-for="ViewModel.LastName" />
+
+		<dtat-readonly-input asp-for="ViewModel.CellPhoneNumber" dir="ltr" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsCellPhoneNumberVerified" />
+
+		<dtat-readonly-input asp-for="ViewModel.RoleName" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsRoleActive" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsVisibleInContactUsPage" />
+
+		<dtat-readonly-input asp-for="ViewModel.TitleInContactUsPage" />
+
+		<dtat-readonly-input asp-for="ViewModel.Ordering" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsActive" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsProgrammer" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsProfilePublic" />
+
+		<dtat-readonly-input asp-for="ViewModel.LastLoginDateTime" />
+
+		<dtat-readonly-input asp-for="ViewModel.InsertDateTime" />
+
+		<dtat-readonly-input asp-for="ViewModel.UpdateDateTime" />
+
+		<dtat-readonly-textarea asp-for="ViewModel.Description" />
+
+		<dtat-readonly-textarea asp-for="ViewModel.AdminDescription" />
+	</fieldset>
+
+	<section-form-footer>
+		<a asp-page="Index">
+			@(Html.DtatGetLinkCaptionForList())
+		</a>
+		<a asp-page="Update" asp-route-id="@(Model.ViewModel.Id)">
+			@(Html.DtatGetLinkCaptionForUpdate())
+		</a>
+		<a asp-page="Delete" asp-route-id="@(Model.ViewModel.Id)">
+			@(Html.DtatGetLinkCaptionForDelete())
+		</a>
+	</section-form-footer>
+</section-form>

@@ -1,0 +1,15 @@
+﻿<title>
+	@(ViewData[Constants.ViewDataKeyName.PageTitle])
+</title>
+
+@{
+	var pageDescription =
+		ViewData[Constants.ViewDataKeyName.PageDescription] as string;
+
+	if (string.IsNullOrWhiteSpace(value: pageDescription) == false)
+	{
+		<meta name="description" content="@(pageDescription)" />
+	}
+}
+
+<meta name="author" content="Mr. Dariush Tasdighi" />

@@ -1,0 +1,56 @@
+﻿@page
+@model Server.Pages.Features.Cms.Admin.MenuItems.UpdateModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.UpdateOf} {Resources.DataDictionary.MenuItem}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<input type="hidden" asp-for="ViewModel.Id" />
+
+	<section-form>
+		<fieldset>
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsVisible" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsDisabled" />
+
+			<dtat-full-input asp-for="ViewModel.Title" />
+
+			<dtat-full-input asp-for="ViewModel.Ordering" />
+
+			<dtat-full-input asp-for="ViewModel.NavigationUrl" dir="ltr" />
+
+			<dtat-full-checkbox asp-for="ViewModel.OpenUrlInNewWindow" />
+
+			<dtat-full-textarea asp-for="ViewModel.Description" />
+		</fieldset>
+
+		<section-form-buttons>
+			<button-save />
+			<button-reset />
+		</section-form-buttons>
+
+		<section-form-footer>
+			<a asp-page="Index">
+				@(Html.DtatGetLinkCaptionForList())
+			</a>
+			<a asp-page="Details" asp-route-id="@(Model.ViewModel.Id)">
+				@(Html.DtatGetLinkCaptionForDetails())
+			</a>
+			<a asp-page="Delete" asp-route-id="@(Model.ViewModel.Id)">
+				@(Html.DtatGetLinkCaptionForDelete())
+			</a>
+		</section-form-footer>
+	</section-form>
+
+</form>

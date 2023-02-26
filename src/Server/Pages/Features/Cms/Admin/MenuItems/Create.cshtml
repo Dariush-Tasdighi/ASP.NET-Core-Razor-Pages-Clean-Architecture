@@ -1,0 +1,48 @@
+﻿@page
+@model Server.Pages.Features.Cms.Admin.MenuItems.CreateModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.CreateOf} {Resources.DataDictionary.MenuItem}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<section-form>
+		<fieldset>
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsVisible" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsDisabled" />
+
+			<dtat-full-input asp-for="ViewModel.Title" />
+
+			<dtat-full-input asp-for="ViewModel.Ordering" />
+
+			<dtat-full-input asp-for="ViewModel.NavigationUrl" dir="ltr" />
+
+			<dtat-full-checkbox asp-for="ViewModel.OpenUrlInNewWindow" />
+
+			<dtat-full-textarea asp-for="ViewModel.Description" />
+		</fieldset>
+
+		<section-form-buttons>
+			<button-create />
+			<button-reset />
+		</section-form-buttons>
+
+		<section-form-footer>
+			<a asp-page="Index">
+				@(Html.DtatGetLinkCaptionForList())
+			</a>
+		</section-form-footer>
+	</section-form>
+
+</form>

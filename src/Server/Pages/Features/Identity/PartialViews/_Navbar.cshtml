@@ -1,0 +1,49 @@
+﻿@{
+	var currentCulture =
+		System.Threading.Thread
+		.CurrentThread.CurrentUICulture;
+
+	var currentCultureName = currentCulture.Name;
+
+	var usernameClaim =
+		User.Claims.First(predicate: current =>
+			current.Type == System.Security.Claims.ClaimTypes.NameIdentifier);
+
+	string? username = null;
+
+	if (usernameClaim is not null)
+	{
+		username =
+			usernameClaim.Value;
+	}
+
+	var link =
+		$"/profile/{currentCultureName}/{username}";
+}
+
+<li class="nav-item dropdown">
+
+	<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+		@(Resources.DataDictionary.IdentitySettings)
+	</a>
+
+	<ul class="dropdown-menu mt-0">
+
+		<li>
+			<a class="dropdown-item" asp-page="/Account/UpdateProfile">
+				@(Resources.DataDictionary.UpdateProfile)
+			</a>
+		</li>
+
+		@if (string.IsNullOrWhiteSpace(value: username) == false)
+		{
+			<li>
+				<a class="dropdown-item" href="@(link)">
+					@(Resources.DataDictionary.DisplayProfile)
+				</a>
+			</li>
+		}
+
+	</ul>
+
+</li>

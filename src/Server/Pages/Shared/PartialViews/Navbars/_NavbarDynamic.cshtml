@@ -1,0 +1,142 @@
+﻿@using Microsoft.EntityFrameworkCore;
+
+@inject Persistence.DatabaseContext DatabaseContext
+
+@{
+	var currentUICultureLcid = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+	var menuItems =
+		DatabaseContext.MenuItems
+
+		.Include(current => current.Children)
+
+		.Where(current => current.IsVisible)
+		.Where(current => current.ParentId == null)
+		.Where(current => current.Culture != null
+			&& current.Culture.Lcid == currentUICultureLcid)
+
+		.OrderBy(current => current.Ordering)
+		.ThenBy(current => current.Title)
+
+		.ToList()
+		;
+
+	if (menuItems.Count == 0)
+	{
+		return;
+	}
+}
+
+<header>
+
+	<nav class="navbar navbar-expand-md bg-light border-bottom pt-0 pb-0">
+
+		<div class="container">
+
+			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarDynamic" aria-controls="navbarDynamic" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarDynamic">
+
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+					@foreach (var menuItem in menuItems)
+					{
+						if (menuItem.IsDisabled)
+						{
+							<li class="nav-item">
+								<a class="nav-link disabled">
+									@(menuItem.Title)
+								</a>
+							</li>
+
+							continue;
+						}
+
+						if (menuItem.Children.Count == 0)
+						{
+							var target = "_self";
+							if (menuItem.OpenUrlInNewWindow)
+							{
+								target = "_blank";
+							}
+
+							<li class="nav-item">
+								<a href="@(menuItem.NavigationUrl)" class="nav-link" target="@(target)">
+									@(menuItem.Title)
+								</a>
+							</li>
+
+							continue;
+						}
+
+						<li class="nav-item dropdown">
+
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								@(menuItem.Title)
+							</a>
+
+							<ul class="dropdown-menu mt-0">
+
+								@{
+									var children =
+									menuItem.Children
+									.Where(current => current.IsVisible)
+									.OrderBy(current => current.Ordering)
+									.ThenBy(current => current.Title)
+									.ToList()
+									;
+
+									foreach (var subMenuItem in children)
+									{
+										var title =
+										subMenuItem.Title
+										.Replace(oldValue: " ", newValue: string.Empty);
+
+										if (title == "-")
+										{
+											<li><hr class="dropdown-divider" /></li>
+
+											continue;
+										}
+
+										if (subMenuItem.IsDisabled)
+										{
+											<li>
+												<a class="dropdown-item disabled">
+													@(subMenuItem.Title)
+												</a>
+											</li>
+
+											continue;
+										}
+
+										var target = "_self";
+										if (subMenuItem.OpenUrlInNewWindow)
+										{
+											target = "_blank";
+										}
+
+										<li>
+											<a href="@(subMenuItem.NavigationUrl)" class="dropdown-item" target="@(target)">
+												@(subMenuItem.Title)
+											</a>
+										</li>
+									}
+								}
+
+							</ul>
+
+						</li>
+					}
+
+				</ul>
+			</div>
+
+		</div>
+
+	</nav>
+
+</header>

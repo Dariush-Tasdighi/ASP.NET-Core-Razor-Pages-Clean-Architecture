@@ -1,0 +1,66 @@
+﻿@page
+@model Server.Pages.Test.AllRoutesModel
+@{
+	if (Model.ViewModel is null)
+	{
+		return;
+	}
+}
+
+<div class="table-responsive" dir="ltr">
+	<table class="table table-bordered table-sm table-striped table-hover">
+
+		<caption>
+			All Application Routes
+		</caption>
+
+		<thead class="table-dark">
+
+			<tr>
+				<th>
+					#
+				</th>
+				<th>
+					Verb
+				</th>
+				<th>
+					Area
+				</th>
+				<th>
+					Path
+				</th>
+				<th>
+					Template
+				</th>
+				<th>
+					Method Name
+				</th>
+				<th>
+					Class Full Name
+				</th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+
+			@for (var index = 0; index <= Model.ViewModel.Count - 1; index++)
+			{
+				var route = Model.ViewModel[index];
+
+				<tr>
+					<td>@(index + 1)</td>
+					<td>@(route.HttpMethod)</td>
+					<td>@(route.AreaName)</td>
+					<td>@(route.Path)</td>
+					<td>@(route.Template)</td>
+					<td>@(route.MethodName)</td>
+					<td>@(route.ClassFullName)</td>
+				</tr>
+			}
+
+		</tbody>
+	</table>
+
+	<hr />
+</div>

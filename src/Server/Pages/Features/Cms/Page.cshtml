@@ -1,0 +1,13 @@
+﻿@page "/page/{culture?}/{name?}"
+
+@model Server.Pages.Features.Cms.PageModel
+
+@{
+	ViewData[Constants.ViewDataKeyName.PageTitle] = Model.ViewModel.Title;
+	ViewData[Constants.ViewDataKeyName.PageDescription] = Model.ViewModel.Description;
+
+	Layout =
+		$"Layouts/{Model.ViewModel.LayoutName}";
+}
+
+@(Html.Raw(Model.ViewModel.Body))

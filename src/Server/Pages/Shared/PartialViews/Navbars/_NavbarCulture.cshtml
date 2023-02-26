@@ -1,0 +1,38 @@
+﻿@inject Infrastructure.Settings.ApplicationSettings applicationSettings
+
+@inject Persistence.DatabaseContext DatabaseContext
+
+@{
+	var currentCultureName =
+		System.Threading.Thread
+		.CurrentThread.CurrentUICulture.Name;
+
+	var cultures =
+		DatabaseContext.Cultures
+		.Where(current => current.IsActive)
+		.Where(current => current.CultureName.ToLower() != currentCultureName.ToLower())
+		.OrderBy(current => current.Ordering)
+		.ToList()
+		;
+
+	if (cultures.Count == 0)
+	{
+		return;
+	}
+}
+
+<span class="d-flex">
+	@foreach (var culture in cultures)
+	{
+		var country = culture.CultureName[3..].ToLower();
+
+		var cultureInfo = new System.Globalization.CultureInfo(name: culture.CultureName);
+
+		var language = cultureInfo.Parent.NativeName;
+
+		<a href="~/ChangeCulture/@(culture.CultureName)" class="nav-link text-dark">
+			@(language)
+			<span class="fi fi-@(country)"></span>
+		</a>
+	}
+</span>

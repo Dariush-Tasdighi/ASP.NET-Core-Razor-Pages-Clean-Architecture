@@ -1,0 +1,110 @@
+﻿@page
+@model Server.Pages.Features.Common.Admin.Cultures.IndexModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.Cultures}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<section-page-header>
+	@(pageTitle)
+</section-page-header>
+
+<partial name="PartialViews/_DisplayPageMessages" />
+
+<section-table>
+	<table>
+		<caption>
+			@(pageTitle)
+		</caption>
+
+		<thead>
+			<tr>
+				<th>
+					@(Resources.DataDictionary.RowNumber)
+				</th>
+				<th>
+				</th>
+				<th>
+					@(Resources.DataDictionary.IsActive)
+				</th>
+				<th>
+					@(Resources.DataDictionary.Lcid)
+				</th>
+				<th>
+					@(Resources.DataDictionary.CultureName)
+				</th>
+				<th>
+					@(Resources.DataDictionary.NativeName)
+				</th>
+				<th>
+					@(Resources.DataDictionary.Pages)
+				</th>
+				<th>
+					@(Resources.DataDictionary.Posts)
+				</th>
+				<th>
+					@(Resources.DataDictionary.Slides)
+				</th>
+				<th>
+					@(Resources.DataDictionary.Categories)
+				</th>
+				<th>
+					@(Resources.DataDictionary.MenuItems)
+				</th>
+				<th>
+					@(Resources.DataDictionary.InsertDateTime)
+				</th>
+				<th>
+					@(Resources.DataDictionary.UpdateDateTime)
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@for (var index = 0; index <= Model.ViewModel.Count - 1; index++)
+			{
+				var item = Model.ViewModel[index];
+
+				<tr>
+					@(Html.DtatDisplayRowNumberWithTd(value: index + 1))
+
+					<table-actions>
+						<a asp-page="Details" asp-route-id="@(item.Id)">
+							@(Html.DtatGetIconDetails())
+						</a>
+						<a asp-page="Update" asp-route-id="@(item.Id)">
+							@(Html.DtatGetIconUpdate())
+						</a>
+					</table-actions>
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsActive))
+
+					@(Html.DtatDisplayIntegerWithTd(value: (int)item.Lcid))
+
+					<td dir="ltr">
+						@(item.CultureName)
+					</td>
+
+					@(Html.DtatDisplayStringWithTd(value: item.NativeName))
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.PageCount))
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.PostCount))
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.SlideCount))
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.PostCategoryCount))
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.MenuItemCount))
+
+					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.InsertDateTime))
+
+					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.UpdateDateTime))
+				</tr>
+			}
+		</tbody>
+	</table>
+</section-table>

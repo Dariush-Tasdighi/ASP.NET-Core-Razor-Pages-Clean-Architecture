@@ -1,0 +1,118 @@
+﻿@page
+@model Server.Pages.Features.Cms.Admin.MenuItems.IndexModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.MenuItems}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<section-page-header>
+	@(pageTitle)
+</section-page-header>
+
+<section-page-actions>
+	<a asp-page="Create">
+		@(Html.DtatGetLinkCaptionForCreate())
+	</a>
+</section-page-actions>
+
+<partial name="PartialViews/_DisplayPageMessages" />
+
+<section-table>
+	<table>
+		<caption>
+			@(pageTitle)
+		</caption>
+
+		<thead>
+			<tr>
+				<th>
+					@(Resources.DataDictionary.RowNumber)
+				</th>
+				<th>
+				</th>
+				<th>
+					@(Resources.DataDictionary.IsVisible)
+				</th>
+				<th>
+					@(Resources.DataDictionary.IsDisabled)
+				</th>
+				<th>
+					@(Resources.DataDictionary.OpenUrlInNewWindow)
+				</th>
+				<th>
+					@(Resources.DataDictionary.Title)
+				</th>
+				<th>
+					@(Resources.DataDictionary.Ordering)
+				</th>
+				<th>
+					@(Resources.DataDictionary.NavigationUrl)
+				</th>
+				<th>
+					@(Resources.DataDictionary.ChildCount)
+				</th>
+				<th>
+					@(Resources.DataDictionary.InsertDateTime)
+				</th>
+				<th>
+					@(Resources.DataDictionary.UpdateDateTime)
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@for (var index = 0; index <= Model.ViewModel.Count - 1; index++)
+			{
+				var item = Model.ViewModel[index];
+
+				<tr>
+					@(Html.DtatDisplayRowNumberWithTd(value: index + 1))
+
+					<table-actions>
+						<a asp-page="Details" asp-route-id="@(item.Id)">
+							@(Html.DtatGetIconDetails())
+						</a>
+						<a asp-page="Update" asp-route-id="@(item.Id)">
+							@(Html.DtatGetIconUpdate())
+						</a>
+						<a asp-page="Delete" asp-route-id="@(item.Id)">
+							@(Html.DtatGetIconDelete())
+						</a>
+					</table-actions>
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsVisible))
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.IsDisabled))
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.OpenUrlInNewWindow))
+
+					<td>
+						<a asp-page="../SubMenuItems/Index" asp-route-parentId="@item.Id">
+							@(item.Title)
+						</a>
+					</td>
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.Ordering))
+
+					<td dir="ltr">
+						@if(string.IsNullOrWhiteSpace(value: item.NavigationUrl) == false)
+						{
+							<a href="@(item.NavigationUrl)" target="_blank">
+								[LINK]
+							</a>
+						}
+					</td>
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.ChildCount))
+
+					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.InsertDateTime))
+
+					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.UpdateDateTime))
+				</tr>
+			}
+		</tbody>
+	</table>
+</section-table>

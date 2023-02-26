@@ -1,0 +1,76 @@
+﻿@inject Infrastructure.Settings.ApplicationSettings applicationSettings
+
+@{
+	var isUserAuthenticated = true;
+
+	if (User is null || User.Identity is null || User.Identity.IsAuthenticated == false)
+	{
+		isUserAuthenticated = false;
+	}
+}
+
+<header>
+
+	<nav class="navbar navbar-expand-md bg-light border-bottom pt-0 pb-0">
+
+		<div class="container">
+
+			<a class="navbar-brand" asp-page="/Index">
+				@(Resources.DataDictionary.SiteTitle)
+			</a>
+
+			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarMain">
+
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+					<li class="nav-item">
+						<a class="nav-link text-dark" asp-page="/Contact">
+							@(Resources.PageTitles.Contact)
+						</a>
+					</li>
+
+					@if (isUserAuthenticated)
+					{
+						<li class="nav-item">
+							<a class="nav-link" asp-page="/Account/Profile">
+								[@(User!.Identity!.Name)]
+								@*[@(User.Identity.Name)]*@
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" asp-page="/Account/Logout">
+								@(Resources.PageTitles.Logout)
+							</a>
+						</li>
+					}
+					else
+					{
+						<li class="nav-item">
+							<a class="nav-link" asp-page="/Account/Register">
+								@(Resources.PageTitles.Register)
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" asp-page="/Account/Login">
+								@(Resources.PageTitles.Login)
+							</a>
+						</li>
+					}
+
+				</ul>
+
+				<partial name="PartialViews/Navbars/_NavbarCulture" />
+
+			</div>
+
+		</div>
+
+	</nav>
+
+</header>

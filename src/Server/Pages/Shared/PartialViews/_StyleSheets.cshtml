@@ -1,0 +1,51 @@
+﻿@{
+	var currentCulture =
+		System.Threading.Thread
+		.CurrentThread.CurrentUICulture;
+}
+
+<environment include="Development" exclude="Production">
+
+	@if (currentCulture.Parent.TextInfo.IsRightToLeft)
+	{
+		<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.rtl.css" asp-append-version="true" />
+	}
+	else
+	{
+		<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" asp-append-version="true" />
+	}
+
+	<link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/lib/flag-icon-css/css/flag-icons.css" asp-append-version="true" />
+	@*
+	<link rel="stylesheet" href="~/lib/bootstrap-iconpicker/css/bootstrap-iconpicker.css" asp-append-version="true">
+	*@
+	<link rel="stylesheet" href="~/lib/prism/themes/prism.css" asp-append-version="true">
+
+</environment>
+
+<environment include="Production" exclude="Development">
+
+	@if (currentCulture.Parent.TextInfo.IsRightToLeft)
+	{
+		<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.rtl.min.css" asp-append-version="true" />
+	}
+	else
+	{
+		<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+	}
+
+	<link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/lib/flag-icon-css/css/flag-icons.min.css" asp-append-version="true" />
+	@*
+		<link rel="stylesheet" href="~/lib/bootstrap-iconpicker/css/bootstrap-iconpicker.min.css" asp-append-version="true">
+	*@
+	<link rel="stylesheet" href="~/lib/prism/themes/prism.min.css" asp-append-version="true">
+
+</environment>
+
+<link rel="stylesheet" href="~/css/rtl/site.css" asp-append-version="true" />
+
+@*
+	<link rel="stylesheet" href="~/@(nameof(Server)).styles.css" asp-append-version="true" />
+*@
