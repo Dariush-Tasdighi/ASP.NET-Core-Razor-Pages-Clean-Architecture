@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Dtat;
+using System.Data;
 
 namespace Server.Pages.Admin.Users;
 
@@ -51,7 +52,8 @@ public class CreateModel : Infrastructure.BasePageModelWithDatabaseContext
 			AddToastError
 				(message: Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		finally
 		{
@@ -186,7 +188,8 @@ public class CreateModel : Infrastructure.BasePageModelWithDatabaseContext
 				(text: ViewModel.Password);
 
 			var newEntity =
-				new Domain.Features.Identity.User(emailAddress: fixedEmailAddress, roleId: ViewModel.RoleId)
+				new Domain.Features.Identity.User
+				(emailAddress: fixedEmailAddress, roleId: ViewModel.RoleId)
 				{
 					//Id
 					//Role
@@ -239,7 +242,8 @@ public class CreateModel : Infrastructure.BasePageModelWithDatabaseContext
 			AddToastSuccess(message: successMessage);
 			// **************************************************
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		catch (System.Exception ex)
 		{
@@ -249,7 +253,8 @@ public class CreateModel : Infrastructure.BasePageModelWithDatabaseContext
 			AddToastError
 				(message: Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		finally
 		{

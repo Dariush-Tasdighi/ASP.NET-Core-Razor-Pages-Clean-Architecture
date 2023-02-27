@@ -31,7 +31,8 @@ namespace Server.Pages.Google
 
 			}
 
-			return RedirectToPage(pageName: "/Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.RootIndex);
 		}
 	}
 }

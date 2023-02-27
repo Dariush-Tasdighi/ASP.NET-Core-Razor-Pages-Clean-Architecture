@@ -42,7 +42,8 @@ public class DeleteModel :
 				AddToastError
 					(message: Resources.Messages.Errors.IdIsNull);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 
 			var result =
@@ -75,7 +76,8 @@ public class DeleteModel :
 				AddToastError
 					(message: Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 
 			ViewModel = result;
@@ -90,7 +92,8 @@ public class DeleteModel :
 			AddToastError
 				(message: Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		finally
 		{
@@ -108,7 +111,8 @@ public class DeleteModel :
 			AddToastError
 				(message: Resources.Messages.Errors.IdIsNull);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 
 		try
@@ -124,7 +128,8 @@ public class DeleteModel :
 				AddToastError
 					(message: Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 
 			//// TO DO: Check User Id (and maybe User Role)
@@ -139,7 +144,8 @@ public class DeleteModel :
 			//	AddToastError(message: errorMessage);
 			//	// **************************************************
 
-			//	return RedirectToPage(pageName: "Index");
+			//return RedirectToPage(pageName:
+			//	Constants.CommonRouting.CurrentIndex);
 			//}
 
 			if (foundedItem.IsUndeletable)
@@ -153,7 +159,8 @@ public class DeleteModel :
 				AddToastError(message: errorMessage);
 				// **************************************************
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 
 			var entityEntry =
@@ -171,7 +178,8 @@ public class DeleteModel :
 			AddToastSuccess(message: successMessage);
 			// **************************************************
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		catch (System.Exception ex)
 		{
@@ -181,7 +189,8 @@ public class DeleteModel :
 			AddToastError
 				(message: Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		finally
 		{

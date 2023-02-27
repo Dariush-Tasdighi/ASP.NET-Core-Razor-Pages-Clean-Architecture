@@ -42,7 +42,8 @@ public class UpdateModel :
 				AddToastError
 					(message: Resources.Messages.Errors.IdIsNull);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 
 			var result =
@@ -79,7 +80,8 @@ public class UpdateModel :
 				AddToastError
 					(message: Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 
 			ViewModel = result;
@@ -99,7 +101,8 @@ public class UpdateModel :
 			AddToastError
 				(message: Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		finally
 		{
@@ -225,7 +228,8 @@ public class UpdateModel :
 				AddToastError
 					(message: Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 			// **************************************************
 
@@ -279,7 +283,8 @@ public class UpdateModel :
 			AddToastSuccess(message: successMessage);
 			// **************************************************
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		catch (System.Exception ex)
 		{
@@ -289,7 +294,8 @@ public class UpdateModel :
 			AddToastError
 				(message: Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		finally
 		{

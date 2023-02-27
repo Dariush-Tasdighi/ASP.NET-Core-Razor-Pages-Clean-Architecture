@@ -112,7 +112,8 @@ public class DeleteModel :
 			AddToastError(message: errorMessage);
 			// **************************************************
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		// **************************************************
 
@@ -133,7 +134,8 @@ public class DeleteModel :
 		AddToastSuccess(message: successMessage);
 		// **************************************************
 
-		return RedirectToPage(pageName: "Index");
+		return RedirectToPage(pageName:
+			Constants.CommonRouting.CurrentIndex);
 	}
 	#endregion /OnPostAsync()
 

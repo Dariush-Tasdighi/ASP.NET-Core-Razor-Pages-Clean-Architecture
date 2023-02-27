@@ -57,7 +57,7 @@ public class UpdateModel :
 				Constants.CommonRouting.NotFound);
 		}
 
-		if(foundedItem.Parent is null)
+		if (foundedItem.Parent is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.InternalServerError);
@@ -141,7 +141,8 @@ public class UpdateModel :
 		AddToastSuccess(message: successMessage);
 		// **************************************************
 
-		return RedirectToPage(pageName: "Index",
+		return RedirectToPage(pageName:
+			Constants.CommonRouting.CurrentIndex,
 			routeValues: new { foundedItem.ParentId });
 	}
 	#endregion /OnPostAsync()

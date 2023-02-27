@@ -7,6 +7,16 @@ public static class CommonRouting : object
 	}
 
 	/// <summary>
+	/// Root Index
+	/// </summary>
+	public const string RootIndex = "/Index";
+
+	/// <summary>
+	/// Current Index
+	/// </summary>
+	public const string CurrentIndex = "Index";
+
+	/// <summary>
 	/// Error 400
 	/// </summary>
 	public const string BadRequest = "/Error/Error400";

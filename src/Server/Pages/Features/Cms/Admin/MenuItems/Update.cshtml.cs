@@ -125,7 +125,8 @@ public class UpdateModel :
 		AddToastSuccess(message: successMessage);
 		// **************************************************
 
-		return RedirectToPage(pageName: "Index");
+		return RedirectToPage(pageName:
+			Constants.CommonRouting.CurrentIndex);
 	}
 	#endregion /OnPostAsync()
 

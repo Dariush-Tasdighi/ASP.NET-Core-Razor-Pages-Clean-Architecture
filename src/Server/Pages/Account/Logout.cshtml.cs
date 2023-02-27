@@ -16,6 +16,7 @@ public class LogoutModel : Infrastructure.BasePageModel
 		await HttpContext.SignOutAsync
 			(scheme: Infrastructure.Security.Constants.DefaultScheme);
 
-		return RedirectToPage(pageName: "/Index");
+		return RedirectToPage(pageName:
+			Constants.CommonRouting.RootIndex);
 	}
 }

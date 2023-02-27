@@ -37,7 +37,8 @@ public class DetailsModel :
 				AddToastError
 					(message: Resources.Messages.Errors.IdIsNull);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 
 			var result =
@@ -85,7 +86,8 @@ public class DetailsModel :
 				AddToastError
 					(message: Resources.Messages.Errors.ThereIsNotAnyDataWithThisId);
 
-				return RedirectToPage(pageName: "Index");
+				return RedirectToPage(pageName:
+					Constants.CommonRouting.CurrentIndex);
 			}
 
 			ViewModel = result;
@@ -100,7 +102,8 @@ public class DetailsModel :
 			AddToastError
 				(message: Resources.Messages.Errors.UnexpectedError);
 
-			return RedirectToPage(pageName: "Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.CurrentIndex);
 		}
 		finally
 		{

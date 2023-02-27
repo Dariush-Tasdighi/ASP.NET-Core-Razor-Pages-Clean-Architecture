@@ -287,7 +287,8 @@ public class LoginModel :
 
 		if (string.IsNullOrWhiteSpace(value: ViewModel.ReturnUrl))
 		{
-			return RedirectToPage(pageName: "/Index");
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.RootIndex);
 		}
 		else
 		{
