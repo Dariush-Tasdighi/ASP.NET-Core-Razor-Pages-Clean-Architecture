@@ -17,6 +17,7 @@ public class PostViewModel : object
 
 
 	public int Hits { get; set; }
+	public int Score { get; set; }
 	public int CommentCount { get; set; }
 
 

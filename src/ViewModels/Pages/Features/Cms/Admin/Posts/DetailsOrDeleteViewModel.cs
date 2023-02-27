@@ -5,6 +5,8 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 	#region Constructor
 	public DetailsOrDeleteViewModel() : base()
 	{
+		CategoryName = Resources.DataDictionary.DefaultNullValue;
+		UserFullName = Resources.DataDictionary.DefaultNullValue;
 	}
 	#endregion /Constructor
 
@@ -27,13 +29,28 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.User))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public System.Guid UserId { get; set; }
 	#endregion /public System.Guid UserId { get; set; }
+
+	#region public string CategoryName { get; set; }
+	/// <summary>
+	/// طبقه‌بندی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Category))]
+	public string CategoryName { get; set; }
+	#endregion /public string CategoryName { get; set; }
+
+	#region public string UserFullName { get; set; }
+	/// <summary>
+	/// طبقه‌بندی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.User))]
+	public string UserFullName { get; set; }
+	#endregion /public string UserFullName { get; set; }
 
 	#region public System.DateTimeOffset InsertDateTime { get; set; }
 	/// <summary>

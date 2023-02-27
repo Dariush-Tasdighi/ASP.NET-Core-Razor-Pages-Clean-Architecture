@@ -18,9 +18,39 @@
 
 		<dtat-readonly-input asp-for="ViewModel.Id" />
 
+		<dtat-readonly-checkbox asp-for="ViewModel.IsDraft" />
+
 		<dtat-readonly-checkbox asp-for="ViewModel.IsActive" />
 
+		<dtat-readonly-checkbox asp-for="ViewModel.IsFeatured" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsDeleted" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsCommentingEnabled" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.DisplayCommentsAfterVerification" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.DoesSearchEnginesIndexIt" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.DoesSearchEnginesFollowIt" />
+
+		<dtat-readonly-input asp-for="ViewModel.UserFullName" dir="ltr" />
+
+		<dtat-readonly-input asp-for="ViewModel.CategoryName" />
+
 		<dtat-readonly-input asp-for="ViewModel.Title" />
+
+		<dtat-readonly-input asp-for="ViewModel.Description" />
+
+		<dtat-readonly-input asp-for="ViewModel.Author" />
+
+		<dtat-readonly-input asp-for="ViewModel.ImageUrl" dir="ltr" />
+
+		<dtat-readonly-input asp-for="ViewModel.AdminDescription" />
+
+		<dtat-readonly-input asp-for="ViewModel.Hits" />
+
+		<dtat-readonly-input asp-for="ViewModel.Score" />
 
 		<dtat-readonly-input asp-for="ViewModel.Ordering" />
 
@@ -30,7 +60,15 @@
 
 		<dtat-readonly-input asp-for="ViewModel.UpdateDateTime" />
 
-		<dtat-readonly-textarea asp-for="ViewModel.Description" />
+		<dtat-readonly-input asp-for="ViewModel.DeleteDateTime" />
+
+		<hr />
+
+		@(Html.Raw(Model.ViewModel.Introduction))
+
+		<hr />
+
+		@(Html.Raw(Model.ViewModel.Body))
 	</fieldset>
 
 	<section-form-footer>

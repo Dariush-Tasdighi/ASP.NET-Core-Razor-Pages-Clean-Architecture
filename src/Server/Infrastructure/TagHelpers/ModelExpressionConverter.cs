@@ -43,6 +43,7 @@ public class ModelExpressionConverter : object
 				}
 
 				case System.Type typeDateTimeOffset when typeDateTimeOffset == typeof(System.DateTimeOffset):
+				case System.Type typeDateTimeOffsetOrNull when typeDateTimeOffsetOrNull == typeof(System.DateTimeOffset?):
 				{
 					ConvertDateTimeOffset();
 

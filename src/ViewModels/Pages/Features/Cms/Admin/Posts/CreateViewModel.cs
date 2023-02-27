@@ -207,6 +207,16 @@ public class CreateViewModel : object
 	public int Hits { get; set; }
 	#endregion /public int Hits { get; set; }
 
+	#region public int Score { get; set; }
+	/// <summary>
+	/// تعداد دفعات بازدید
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Score))]
+	public int Score { get; set; }
+	#endregion /public int Score { get; set; }
+
 	#region public int Ordering { get; set; }
 	/// <summary>
 	/// چیدمان

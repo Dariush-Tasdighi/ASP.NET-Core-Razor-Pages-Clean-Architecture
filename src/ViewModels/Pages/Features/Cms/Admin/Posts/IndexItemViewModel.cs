@@ -36,6 +36,8 @@ public class IndexItemViewModel : object
 
 	public int CommentCount { get; set; }
 
+	public int Score { get; set; }
+
 	public int Hits { get; set; }
 
 	public int Ordering { get; set; }

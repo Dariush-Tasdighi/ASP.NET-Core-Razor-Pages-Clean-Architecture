@@ -103,6 +103,7 @@ public class CreateModel :
 			userId: currentUser.Id, ViewModel.CategoryId, title: ViewModel.Title.Fix()!)
 			{
 				Hits = ViewModel.Hits,
+				Score = ViewModel.Score,
 				Ordering = ViewModel.Ordering,
 
 				Body = ViewModel.Body.Fix(),
@@ -121,9 +122,13 @@ public class CreateModel :
 				DisplayCommentsAfterVerification = ViewModel.DisplayCommentsAfterVerification,
 			};
 
-		if(ViewModel.IsDeleted)
+		if (ViewModel.IsDeleted)
 		{
 			newEntity.Delete();
+		}
+		else
+		{
+			newEntity.Undelete();
 		}
 
 		var entityEntry =

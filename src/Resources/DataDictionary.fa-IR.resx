@@ -172,7 +172,7 @@
     <value>حذف شده</value>
   </data>
   <data name="DeleteDateTime" xml:space="preserve">
-    <value>تاریخ و زمان حذف</value>
+    <value>زمان حذف</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>توضیحات</value>
@@ -635,5 +635,11 @@
   </data>
   <data name="CommentCount" xml:space="preserve">
     <value>نظرات</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>امتیاز</value>
+  </data>
+  <data name="Scores" xml:space="preserve">
+    <value>امتیازات</value>
   </data>
 </root>

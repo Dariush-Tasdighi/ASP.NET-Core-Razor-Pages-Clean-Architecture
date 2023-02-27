@@ -67,6 +67,9 @@
 					@(Resources.DataDictionary.Hits)
 				</th>
 				<th>
+					@(Resources.DataDictionary.Score)
+				</th>
+				<th>
 					@(Resources.DataDictionary.UpdateDateTime)
 				</th>
 			</tr>
@@ -117,6 +120,8 @@
 					@(Html.DtatDisplayIntegerWithTd(value: item.CommentCount))
 
 					@(Html.DtatDisplayIntegerWithTd(value: item.Hits))
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.Score))
 
 					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.UpdateDateTime))
 				</tr>

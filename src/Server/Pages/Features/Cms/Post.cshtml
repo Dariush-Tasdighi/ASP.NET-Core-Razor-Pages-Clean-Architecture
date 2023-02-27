@@ -9,3 +9,12 @@
 }
 
 @(Html.Raw(Model.ViewModel.Body))
+
+@if (Model.ViewModel.Score > 0)
+{
+	<hr />
+
+	@(Resources.DataDictionary.Score)
+	<text>:</text>
+	@(Html.DtatDisplayInteger(value: Model.ViewModel.Score))
+}

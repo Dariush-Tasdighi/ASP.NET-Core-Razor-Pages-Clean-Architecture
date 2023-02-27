@@ -181,6 +181,7 @@ public class PostModel :
 				CategoryId = foundedPost.CategoryId,
 
 				Hits = foundedPost.Hits,
+				Score = foundedPost.Score,
 				CommentCount = foundedPost.Comments.Count,
 
 				Body = foundedPost.Body,

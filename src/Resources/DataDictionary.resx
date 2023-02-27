@@ -603,4 +603,10 @@
   <data name="UserFullName" xml:space="preserve">
     <value>Full Name</value>
   </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="Scores" xml:space="preserve">
+    <value>Scores</value>
+  </data>
 </root>

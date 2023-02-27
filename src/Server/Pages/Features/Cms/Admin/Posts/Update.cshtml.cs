@@ -48,6 +48,7 @@ public class UpdateModel :
 				Id = current.Id,
 				Body = current.Body,
 				Hits = current.Hits,
+				Score = current.Score,
 				Title = current.Title,
 				Author = current.Author,
 				IsDraft = current.IsDraft,
@@ -116,6 +117,7 @@ public class UpdateModel :
 		foundedItem.CategoryId = ViewModel.CategoryId;
 
 		foundedItem.Hits = ViewModel.Hits;
+		foundedItem.Score = ViewModel.Score;
 		foundedItem.Ordering = ViewModel.Ordering;
 
 		foundedItem.Title = ViewModel.Title.Fix()!;
@@ -143,6 +145,10 @@ public class UpdateModel :
 		if (ViewModel.IsDeleted)
 		{
 			foundedItem.Delete();
+		}
+		else
+		{
+			foundedItem.Undelete();
 		}
 		// **************************************************
 
