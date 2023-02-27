@@ -1,0 +1,11 @@
+﻿@page "/post/{culture?}/{id?}"
+
+@model Server.Pages.Features.Cms.PostModel
+
+@{
+	ViewData[Constants.ViewDataKeyName.PageTitle] = Model.ViewModel.Title;
+	ViewData[Constants.ViewDataKeyName.PageAuthor] = Model.ViewModel.Author;
+	ViewData[Constants.ViewDataKeyName.PageDescription] = Model.ViewModel.Description;
+}
+
+@(Html.Raw(Model.ViewModel.Body))

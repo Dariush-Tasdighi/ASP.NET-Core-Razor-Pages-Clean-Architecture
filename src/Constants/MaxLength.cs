@@ -27,6 +27,7 @@ public static class MaxLength : object
 	public const int EmailAddress = 254;
 	public const int CellPhoneNumber = 14;
 
+	public const int MetaTitle = 70;
 	public const int MetaDescription = 155;
 
 	public const int CellPhoneNumberVerificationKey = 10;

@@ -12,4 +12,16 @@
 	}
 }
 
-<meta name="author" content="Mr. Dariush Tasdighi" />
+@{
+	var pageAuthor =
+		ViewData[Constants.ViewDataKeyName.PageAuthor] as string;
+
+	if (string.IsNullOrWhiteSpace(value: pageAuthor) == false)
+	{
+		<meta name="author" content="@(pageAuthor)" />
+	}
+	else
+	{
+		<meta name="author" content="Dariush Tasdighi - داریوش تصدیقی" />
+	}
+}

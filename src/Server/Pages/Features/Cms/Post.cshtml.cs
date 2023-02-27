@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Server.Pages.Features.Cms;
 
-public class PageModel :
+public class PostModel :
 	Infrastructure.BasePageModelWithDatabaseContext
 {
 	#region Constructor
-	public PageModel
+	public PostModel
 		(Persistence.DatabaseContext databaseContext) :
 		base(databaseContext: databaseContext)
 	{
@@ -17,7 +17,7 @@ public class PageModel :
 	#endregion /Constructor
 
 	#region Properties
-	public ViewModels.Pages.Features.Cms.PageViewModel ViewModel { get; set; }
+	public ViewModels.Pages.Features.Cms.PostViewModel ViewModel { get; set; }
 	#endregion /Properties
 
 	#region Methods
@@ -25,7 +25,7 @@ public class PageModel :
 	#region OnGetAsync()
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync
-		(string? culture = null, string? name = null)
+		(string? culture = null, string? id = null)
 	{
 		// **************************************************
 		culture =
@@ -42,17 +42,30 @@ public class PageModel :
 		// **************************************************
 
 		// **************************************************
-		name =
-			name.Fix();
+		id =
+			id.Fix();
 
-		if (name is null)
+		if (id is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.BadRequest);
 		}
 
-		name = name.Replace
+		id = id.Replace
 			(oldValue: " ", newValue: string.Empty);
+
+		System.Guid? idGuid = null;
+
+		try
+		{
+			idGuid =
+				new System.Guid(g: id);
+		}
+		catch
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.BadRequest);
+		}
 		// **************************************************
 
 		// **************************************************
@@ -80,25 +93,73 @@ public class PageModel :
 		// **************************************************
 
 		// **************************************************
-		var foundedPage =
+		var foundedPost =
 			await
-			DatabaseContext.Pages
+			DatabaseContext.Posts
 
-			.Include(current => current.Layout)
+			.Include(current => current.User)
+			.Include(current => current.Category)
 
 			.Where(current => current.Culture != null
 				&& current.Culture.Id == foundedCulture.Id)
-			.Where(current => current.Name.ToLower() == name.ToLower())
+
+			.Where(current => current.Id == idGuid.Value)
 
 			.FirstOrDefaultAsync();
 
-		if (foundedPage is null)
+		if (foundedPost is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
 
-		if (foundedPage.IsActive == false)
+		if (foundedPost.IsDraft)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (foundedPost.IsDeleted)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (foundedPost.IsActive == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+
+
+		if (foundedPost.Category is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (foundedPost.Category.IsActive == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+
+
+		if (foundedPost.User is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (foundedPost.User.IsDeleted)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (foundedPost.User.IsActive == false)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
@@ -106,23 +167,36 @@ public class PageModel :
 		// **************************************************
 
 		// **************************************************
-		foundedPage.Hits++;
+		foundedPost.Hits++;
 
 		await DatabaseContext.SaveChangesAsync();
 		// **************************************************
 
 		// **************************************************
 		ViewModel =
-			new ViewModels.Pages.Features.Cms.PageViewModel
+			new ViewModels.Pages.Features.Cms.PostViewModel
 			{
-				Body = foundedPage.Body,
-				Title = foundedPage.Title,
+				Id = foundedPost.Id,
+				UserId = foundedPost.UserId,
+				CategoryId = foundedPost.CategoryId,
 
-				LayoutName = foundedPage.Layout!.Name,
-				//LayoutName = foundedPage.Layout.Name,
+				Hits = foundedPost.Hits,
+				CommentCount = foundedPost.Comments.Count,
 
-				Description = foundedPage.Description,
-				UpdateDateTime = foundedPage.UpdateDateTime,
+				Body = foundedPost.Body,
+				Title = foundedPost.Title,
+				Author = foundedPost.Author,
+				ImageUrl = foundedPost.ImageUrl,
+				Description = foundedPost.Description,
+				CategoryName = foundedPost.Category.Name,
+
+				InsertDateTime = foundedPost.InsertDateTime,
+				UpdateDateTime = foundedPost.UpdateDateTime,
+
+				IsFeatured = foundedPost.IsFeatured,
+				IsCommentingEnabled = foundedPost.IsCommentingEnabled,
+				DoesSearchEnginesIndexIt = foundedPost.DoesSearchEnginesIndexIt,
+				DoesSearchEnginesFollowIt = foundedPost.DoesSearchEnginesFollowIt,
 			};
 		// **************************************************
 

@@ -3,6 +3,7 @@
 public class User :
 	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
 	Dtat.Seedwork.Abstractions.IEntityHasIsSystemic,
 	Dtat.Seedwork.Abstractions.IEntityHasIsUndeletable,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
@@ -105,6 +106,16 @@ public class User :
 		Name = nameof(Resources.DataDictionary.IsProfilePublic))]
 	public bool IsProfilePublic { get; set; }
 	#endregion /public bool IsProfilePublic { get; set; }
+
+	#region public bool IsDeleted { get; private set; }
+	/// <summary>
+	/// آیا به طور مجازی حذف شده؟
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsDeleted))]
+	public bool IsDeleted { get; private set; }
+	#endregion /public bool IsDeleted { get; private set; }
 
 	#region public bool IsNationalCodeVerified { get; set; }
 	/// <summary>
@@ -328,9 +339,41 @@ public class User :
 	public System.DateTimeOffset UpdateDateTime { get; private set; }
 	#endregion /public System.DateTimeOffset UpdateDateTime { get; private set; }
 
+	#region public System.DateTimeOffset? DeleteDateTime { get; private set; }
+	/// <summary>
+	/// زمان حذف مجازی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.DeleteDateTime))]
+
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.DateTimeOffset? DeleteDateTime { get; private set; }
+	#endregion /public System.DateTimeOffset? DeleteDateTime { get; private set; }
+
 	#endregion /Properties
 
 	#region Methods
+
+	#region Delete()
+	public void Delete()
+	{
+		IsDeleted = true;
+
+		DeleteDateTime =
+			Dtat.DateTime.Now;
+	}
+	#endregion /Delete()
+
+	#region Undelete()
+	public void Undelete()
+	{
+		IsDeleted = false;
+
+		DeleteDateTime = null;
+	}
+	#endregion /Undelete()
 
 	#region SetUpdateDateTime()
 	public void SetUpdateDateTime()

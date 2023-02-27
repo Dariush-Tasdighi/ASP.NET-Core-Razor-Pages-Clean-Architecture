@@ -40,5 +40,5 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 	public System.DateTimeOffset UpdateDateTime { get; set; }
 	#endregion /public System.DateTimeOffset UpdateDateTime { get; set; }
 
-	#endregion Properties
+	#endregion /Properties
 }

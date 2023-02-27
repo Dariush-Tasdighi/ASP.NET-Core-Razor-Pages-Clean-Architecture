@@ -1,0 +1,70 @@
+﻿@page
+@model Server.Pages.Features.Cms.Admin.Posts.CreateModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.CreateOf} {Resources.DataDictionary.Post}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<section-form>
+		<fieldset>
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsDraft" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsActive" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsFeatured" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsDeleted" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsCommentingEnabled" />
+
+			<dtat-full-checkbox asp-for="ViewModel.DisplayCommentsAfterVerification" />
+
+			<dtat-full-checkbox asp-for="ViewModel.DoesSearchEnginesIndexIt" />
+
+			<dtat-full-checkbox asp-for="ViewModel.DoesSearchEnginesFollowIt" />
+
+			<dtat-full-select asp-for="ViewModel.CategoryId" asp-items="@(Model.PostCategoriesSelectList)" />
+
+			<dtat-full-input asp-for="ViewModel.Title" />
+
+			<dtat-full-input asp-for="ViewModel.Description" />
+
+			<dtat-full-input asp-for="ViewModel.Author" />
+
+			<dtat-full-input asp-for="ViewModel.ImageUrl" dir="ltr" />
+
+			<dtat-full-textarea asp-for="ViewModel.Introduction" />
+
+			<dtat-full-textarea asp-for="ViewModel.Body" />
+
+			<dtat-full-input asp-for="ViewModel.AdminDescription" />
+
+			<dtat-full-input asp-for="ViewModel.Hits" />
+
+			<dtat-full-input asp-for="ViewModel.Ordering" />
+		</fieldset>
+
+		<section-form-buttons>
+			<button-create />
+			<button-reset />
+		</section-form-buttons>
+
+		<section-form-footer>
+			<a asp-page="Index">
+				@(Html.DtatGetLinkCaptionForList())
+			</a>
+		</section-form-footer>
+	</section-form>
+
+</form>

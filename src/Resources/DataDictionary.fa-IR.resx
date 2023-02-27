@@ -136,7 +136,7 @@
     <value>وبلاگ</value>
   </data>
   <data name="Body" xml:space="preserve">
-    <value>بدنه</value>
+    <value>متن اصلی</value>
   </data>
   <data name="Bottom" xml:space="preserve">
     <value>پایین</value>
@@ -214,7 +214,7 @@
     <value>پیوست داشتن</value>
   </data>
   <data name="Hits" xml:space="preserve">
-    <value>تعداد بازدید</value>
+    <value>بازدید</value>
   </data>
   <data name="Icon" xml:space="preserve">
     <value>آیکون</value>
@@ -241,7 +241,7 @@
     <value>شماره تلفن همراه تایید شده است</value>
   </data>
   <data name="IsCommentingEnabled" xml:space="preserve">
-    <value>فعال بودن اظهار نظر در صفحه</value>
+    <value>امکان نظردهی</value>
   </data>
   <data name="IsDefault" xml:space="preserve">
     <value>رکورد پیش فرض</value>
@@ -256,7 +256,7 @@
     <value>پست الکترونیکی تایید شده است</value>
   </data>
   <data name="IsFeatured" xml:space="preserve">
-    <value>ویژه بودن صفحه</value>
+    <value>ویژه</value>
   </data>
   <data name="IsProfilePublic" xml:space="preserve">
     <value>پروفایل عمومی است</value>
@@ -626,5 +626,14 @@
   </data>
   <data name="IdentityAdminSettings" xml:space="preserve">
     <value>تنظیمات مدیریتی کاربران</value>
+  </data>
+  <data name="DisplayCommentsAfterVerification" xml:space="preserve">
+    <value>نمایش کامنت‌ها بعد از تایید</value>
+  </data>
+  <data name="IsDraft" xml:space="preserve">
+    <value>پیش‌نویس</value>
+  </data>
+  <data name="CommentCount" xml:space="preserve">
+    <value>نظرات</value>
   </data>
 </root>

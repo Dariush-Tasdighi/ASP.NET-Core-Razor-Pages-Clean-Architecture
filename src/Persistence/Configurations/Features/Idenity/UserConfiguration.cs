@@ -112,7 +112,7 @@ internal sealed class UserConfiguration : object, Microsoft
 		//	.IsRequired(required: true)
 		//	.HasForeignKey(other => other.OwnerUserId)
 		//	.OnDelete(deleteBehavior:
-		//		Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade)
+		//		Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
 		//	;
 		// **************************************************
 
@@ -123,7 +123,7 @@ internal sealed class UserConfiguration : object, Microsoft
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.UserId)
 			.OnDelete(deleteBehavior:
-				Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade)
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
 			;
 		// **************************************************
 
@@ -134,7 +134,7 @@ internal sealed class UserConfiguration : object, Microsoft
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.UserId)
 			.OnDelete(deleteBehavior:
-				Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade)
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
 			;
 		// **************************************************
 
@@ -145,7 +145,7 @@ internal sealed class UserConfiguration : object, Microsoft
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.UserId)
 			.OnDelete(deleteBehavior:
-				Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade)
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
 			;
 		// **************************************************
 
@@ -156,7 +156,7 @@ internal sealed class UserConfiguration : object, Microsoft
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.UserId)
 			.OnDelete(deleteBehavior:
-				Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade)
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
 			;
 		// **************************************************
 		// **************************************************

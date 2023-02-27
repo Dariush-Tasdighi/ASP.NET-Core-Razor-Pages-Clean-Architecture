@@ -18,6 +18,14 @@ public static class ViewDataKeyName : object
 		}
 	}
 
+	public static string PageAuthor
+	{
+		get
+		{
+			return "PageAuthor";
+		}
+	}
+
 	public static string PageDescription
 	{
 		get

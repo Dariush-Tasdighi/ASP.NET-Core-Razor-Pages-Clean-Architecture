@@ -4,7 +4,9 @@ public interface IEntityHasIsDeleted
 {
 	bool IsDeleted { get; }
 
-	System.DateTimeOffset DeleteDateTime { get; }
+	System.DateTimeOffset? DeleteDateTime { get; }
 
-	void DeleteLogical();
+	void Delete();
+
+	void Undelete();
 }

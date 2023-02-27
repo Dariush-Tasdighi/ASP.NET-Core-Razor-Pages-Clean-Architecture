@@ -162,7 +162,7 @@ public class Page :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Constants.MaxLength.Title,
+		(length: Constants.MaxLength.MetaTitle,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 	public string Title { get; set; }

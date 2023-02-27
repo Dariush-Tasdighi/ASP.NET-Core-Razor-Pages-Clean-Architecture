@@ -244,7 +244,7 @@
     <value>Is Cell Phone Number Verified</value>
   </data>
   <data name="IsCommentingEnabled" xml:space="preserve">
-    <value>Is Commenting Enabled</value>
+    <value>Comment Feature</value>
   </data>
   <data name="IsDefault" xml:space="preserve">
     <value>Is Default</value>
@@ -259,7 +259,7 @@
     <value>Is Email Address Verified</value>
   </data>
   <data name="IsFeatured" xml:space="preserve">
-    <value>Is Featured</value>
+    <value>Featured</value>
   </data>
   <data name="IsProfilePublic" xml:space="preserve">
     <value>Profile is Public</value>
@@ -583,7 +583,7 @@
     <value>for</value>
   </data>
   <data name="CommentCount" xml:space="preserve">
-    <value>Comment Count</value>
+    <value>Comments</value>
   </data>
   <data name="Inactive" xml:space="preserve">
     <value>Inactive</value>
@@ -593,5 +593,14 @@
   </data>
   <data name="IdentityAdminSettings" xml:space="preserve">
     <value>Identity Admin Settings</value>
+  </data>
+  <data name="DisplayCommentsAfterVerification" xml:space="preserve">
+    <value>Display Comments After Verification</value>
+  </data>
+  <data name="IsDraft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="UserFullName" xml:space="preserve">
+    <value>Full Name</value>
   </data>
 </root>
