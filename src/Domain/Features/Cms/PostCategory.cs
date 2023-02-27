@@ -63,6 +63,16 @@ public class PostCategory :
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
 
+	#region public bool DisplayInHomePage { get; set; }
+	/// <summary>
+	/// نمایش در صفحه اول / خانه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.DisplayInHomePage))]
+	public bool DisplayInHomePage { get; set; }
+	#endregion /public bool DisplayInHomePage { get; set; }
+
 	#region public string Name { get; set; }
 	/// <summary>
 	/// نام

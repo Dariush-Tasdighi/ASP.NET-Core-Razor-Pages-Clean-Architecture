@@ -48,6 +48,7 @@ public class UpdateModel :
 				IsActive = current.IsActive,
 				Ordering = current.Ordering,
 				Description = current.Description,
+				DisplayInHomePage = current.DisplayInHomePage,
 			})
 			.FirstOrDefaultAsync();
 
@@ -71,6 +72,23 @@ public class UpdateModel :
 		{
 			return Page();
 		}
+
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.Lcid == currentUICultureLcid)
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.InternalServerError);
+		}
+		// **************************************************
 
 		// **************************************************
 		var foundedItem =
@@ -97,7 +115,12 @@ public class UpdateModel :
 			await
 			DatabaseContext.PostCategories
 			.Where(current => current.Id != ViewModel.Id)
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
+
 			.Where(current => current.Name.ToLower() == ViewModel.Name.ToLower())
+
 			.AnyAsync();
 
 		if (foundedAny)
@@ -124,6 +147,7 @@ public class UpdateModel :
 		foundedItem.Ordering = ViewModel.Ordering;
 		foundedItem.IsActive = ViewModel.IsActive;
 		foundedItem.Description = ViewModel.Description;
+		foundedItem.DisplayInHomePage = ViewModel.DisplayInHomePage;
 		// **************************************************
 
 		var affectedRows =

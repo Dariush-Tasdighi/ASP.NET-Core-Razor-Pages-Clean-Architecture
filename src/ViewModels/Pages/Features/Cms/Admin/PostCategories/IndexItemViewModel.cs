@@ -15,9 +15,11 @@ public class IndexItemViewModel : object
 
 	public bool IsActive { get; set; }
 
+	public string Name { get; set; }
+
 	public int Ordering { get; set; }
 
-	public string Name { get; set; }
+	public bool DisplayInHomePage { get; set; }
 
 	public int PostCount { get; set; }
 

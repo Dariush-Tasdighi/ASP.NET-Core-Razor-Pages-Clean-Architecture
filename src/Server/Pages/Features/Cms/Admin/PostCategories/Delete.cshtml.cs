@@ -51,6 +51,7 @@ public class DeleteModel :
 				Description = current.Description,
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
+				DisplayInHomePage = current.DisplayInHomePage,
 			})
 			.FirstOrDefaultAsync();
 

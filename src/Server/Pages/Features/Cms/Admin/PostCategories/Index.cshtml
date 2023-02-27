@@ -43,6 +43,9 @@
 					@(Resources.DataDictionary.Ordering)
 				</th>
 				<th>
+					@(Resources.DataDictionary.DisplayInHomePage)
+				</th>
+				<th>
 					@(Resources.DataDictionary.PostCount)
 				</th>
 				<th>
@@ -79,6 +82,8 @@
 					@(Html.DtatDisplayStringWithTd(value: item.Name))
 
 					@(Html.DtatDisplayIntegerWithTd(value: item.Ordering))
+
+					@(Html.DtatDisplayBooleanWithTd(value: item.DisplayInHomePage))
 
 					@(Html.DtatDisplayIntegerWithTd(value: item.PostCount))
 

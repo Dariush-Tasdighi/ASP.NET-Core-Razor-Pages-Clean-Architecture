@@ -43,33 +43,6 @@ public class CreateModel :
 			return Page();
 		}
 
-		ViewModel.Name =
-			ViewModel.Name.Fix()!;
-
-		//ViewModel.Name =
-		//	ViewModel.Name.Fix();
-
-		var foundedAny =
-			await
-			DatabaseContext.PostCategories
-
-			.Where(current => current.Name.ToLower() == ViewModel.Name.ToLower())
-
-			.AnyAsync();
-
-		if (foundedAny)
-		{
-			// **************************************************
-			var errorMessage = string.Format
-				(Resources.Messages.Errors.AlreadyExists,
-				Resources.DataDictionary.Name);
-
-			AddPageError(message: errorMessage);
-			// **************************************************
-
-			return Page();
-		}
-
 		// **************************************************
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
@@ -88,15 +61,49 @@ public class CreateModel :
 		// **************************************************
 
 		// **************************************************
+		ViewModel.Name =
+			ViewModel.Name.Fix()!;
+
+		//ViewModel.Name =
+		//	ViewModel.Name.Fix();
+
+		var foundedAny =
+			await
+			DatabaseContext.PostCategories
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
+
+			.Where(current => current.Name.ToLower() == ViewModel.Name.ToLower())
+
+			.AnyAsync();
+
+		if (foundedAny)
+		{
+			// **************************************************
+			var errorMessage = string.Format
+				(Resources.Messages.Errors.AlreadyExists,
+				Resources.DataDictionary.Name);
+
+			AddPageError(message: errorMessage);
+			// **************************************************
+
+			return Page();
+		}
+		// **************************************************
+
+		// **************************************************
 		ViewModel.Description =
 			ViewModel.Description.Fix();
 
 		var newEntity =
-			new Domain.Features.Cms.PostCategory(cultureId: currentCulture.Id, name: ViewModel.Name)
+			new Domain.Features.Cms.PostCategory
+			(cultureId: currentCulture.Id, name: ViewModel.Name)
 			{
 				Ordering = ViewModel.Ordering,
 				IsActive = ViewModel.IsActive,
 				Description = ViewModel.Description,
+				DisplayInHomePage = ViewModel.DisplayInHomePage,
 			};
 
 		var entityEntry =

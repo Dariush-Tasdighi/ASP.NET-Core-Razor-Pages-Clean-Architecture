@@ -609,4 +609,7 @@
   <data name="Scores" xml:space="preserve">
     <value>Scores</value>
   </data>
+  <data name="DisplayInHomePage" xml:space="preserve">
+    <value>Display in Home Page</value>
+  </data>
 </root>

@@ -24,13 +24,17 @@
 
 		<dtat-readonly-input asp-for="ViewModel.Ordering" />
 
+		<dtat-readonly-checkbox asp-for="ViewModel.DisplayInHomePage" />
+
 		<dtat-readonly-input asp-for="ViewModel.PostCount" />
 
 		<dtat-readonly-input asp-for="ViewModel.InsertDateTime" />
 
 		<dtat-readonly-input asp-for="ViewModel.UpdateDateTime" />
 
-		<dtat-readonly-textarea asp-for="ViewModel.Description" />
+		<hr />
+
+		@(Html.Raw(value: Model.ViewModel.Description))
 	</fieldset>
 
 	<section-form-footer>

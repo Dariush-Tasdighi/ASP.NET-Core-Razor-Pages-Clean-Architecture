@@ -394,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display in Home Page.
+        /// </summary>
+        public static string DisplayInHomePage {
+            get {
+                return ResourceManager.GetString("DisplayInHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display Profile.
         /// </summary>
         public static string DisplayProfile {

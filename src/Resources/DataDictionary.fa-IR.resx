@@ -642,4 +642,7 @@
   <data name="Scores" xml:space="preserve">
     <value>امتیازات</value>
   </data>
+  <data name="DisplayInHomePage" xml:space="preserve">
+    <value>نمایش در خانه</value>
+  </data>
 </root>

@@ -47,13 +47,15 @@ public class IndexModel :
 				Id = current.Id,
 				Name = current.Name,
 
-				IsActive = current.IsActive,
 				Ordering = current.Ordering,
 
 				PostCount = current.Posts.Count,
 
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
+
+				IsActive = current.IsActive,
+				DisplayInHomePage = current.DisplayInHomePage,
 			})
 			.ToListAsync()
 			;
