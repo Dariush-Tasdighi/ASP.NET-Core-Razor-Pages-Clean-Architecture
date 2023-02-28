@@ -40,6 +40,7 @@ public class IndexModel :
 
 			.OrderByDescending(current => current.IsActive)
 			.ThenBy(current => current.Ordering)
+			.ThenBy(current => current.Title)
 
 			.Select(current => new ViewModels.Pages.Features.Cms.Admin.Slides.IndexItemViewModel
 			{

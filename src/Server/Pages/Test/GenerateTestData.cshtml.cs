@@ -1,6 +1,7 @@
 ﻿using Dtat;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Server.Pages.Test;
 
@@ -26,6 +27,26 @@ public class GenerateTestDataModel :
 		}
 
 		hasAny =
+			DatabaseContext.Slides
+			.Where(current => current.IsTestData)
+			.Any();
+
+		if (hasAny)
+		{
+			return;
+		}
+
+		hasAny =
+			DatabaseContext.MenuItems
+			.Where(current => current.IsTestData)
+			.Any();
+
+		if (hasAny)
+		{
+			return;
+		}
+
+		hasAny =
 			DatabaseContext.PostCategories
 			.Where(current => current.IsTestData)
 			.Any();
@@ -35,8 +56,258 @@ public class GenerateTestDataModel :
 			return;
 		}
 
+		await CreatePersianSlidesAsync();
+		await CreateEnglishSlidesAsync();
+
+		await CreatePersianMenuItemsAsync();
+		await CreateEnglishMenuItemsAsync();
+
 		await CreatePersianPostCategoriesAsync();
 		await CreateEnglishPostCategoriesAsync();
+	}
+
+	private async System.Threading.Tasks.Task CreatePersianSlidesAsync()
+	{
+		var persianCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.CultureName.ToLower() == "fa-ir")
+			.FirstOrDefaultAsync();
+
+		if (persianCulture == null)
+		{
+			return;
+		}
+
+		var slideCaptionTemplate = "سلام زندگی";
+		var slideTitleTemplate = "عنوان اسلاید";
+
+		for (var slideIndex = 1; slideIndex <= 6; slideIndex++)
+		{
+			var slideIndexString =
+				slideIndex
+				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+				.ConvertDigitsToUnicode();
+
+			var slideTitle =
+				$"{slideTitleTemplate} {slideIndexString}";
+
+			var slideCaption =
+				$"{slideCaptionTemplate} {slideIndexString}";
+
+			var imageUrl =
+				$"/images/slides/slide_{slideIndex}.jpg";
+
+			var slide =
+				new Domain.Features.Cms.Slide
+				(cultureId: persianCulture.Id, title: slideTitle, imageUrl: imageUrl)
+				{
+					IsTestData = true,
+					IsActive = (slideIndex % 2 == 0),
+					Interval = slideIndex * 1000,
+					OpenUrlInNewWindow = slideIndex % 4 == 0 ? true : false,
+					Caption = (slideIndex % 2 == 0) ? slideCaption : null,
+					NavigationUrl = slideIndex % 2 == 0 ? "http://date2date.ir" : null,
+				};
+
+			await DatabaseContext.AddAsync(entity: slide);
+		}
+
+		await DatabaseContext.SaveChangesAsync();
+	}
+
+	private async System.Threading.Tasks.Task CreateEnglishSlidesAsync()
+	{
+		var persianCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.CultureName.ToLower() == "en-us")
+			.FirstOrDefaultAsync();
+
+		if (persianCulture == null)
+		{
+			return;
+		}
+
+		var slideCaptionTemplate = "Hello, World!";
+		var slideTitleTemplate = "Slide Tite";
+
+		for (var slideIndex = 7; slideIndex <= 11; slideIndex++)
+		{
+			var slideIndexString =
+				slideIndex
+				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+				.ConvertDigitsToUnicode();
+
+			var slideTitle =
+				$"{slideTitleTemplate} {slideIndexString}";
+
+			var slideCaption =
+				$"{slideCaptionTemplate} {slideIndexString}";
+
+			var imageUrl =
+				$"/images/slides/slide_{slideIndex}.jpg";
+
+			var slide =
+				new Domain.Features.Cms.Slide
+				(cultureId: persianCulture.Id, title: slideTitle, imageUrl: imageUrl)
+				{
+					IsTestData = true,
+					IsActive = (slideIndex % 2 == 0),
+					Interval = slideIndex * 1000,
+					OpenUrlInNewWindow = slideIndex % 4 == 0 ? true : false,
+					Caption = (slideIndex % 2 == 0) ? slideCaption : null,
+					NavigationUrl = slideIndex % 2 == 0 ? "http://date2date.ir" : null,
+				};
+
+			await DatabaseContext.AddAsync(entity: slide);
+		}
+
+		await DatabaseContext.SaveChangesAsync();
+	}
+
+	private async System.Threading.Tasks.Task CreatePersianMenuItemsAsync()
+	{
+		var persianCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.CultureName.ToLower() == "fa-ir")
+			.FirstOrDefaultAsync();
+
+		if (persianCulture == null)
+		{
+			return;
+		}
+
+		var menuItemTitleTemplate = "آیتم منو";
+		var subMenuItemTitleTemplate = "آیتم زیر منو";
+
+		for (var menuItemIndex = 1; menuItemIndex <= 9; menuItemIndex++)
+		{
+			var menuItemIndexString =
+				menuItemIndex
+				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+				.ConvertDigitsToUnicode();
+
+			var menuItemTitle =
+				$"{menuItemTitleTemplate} {menuItemIndexString}";
+
+			var menuItem =
+				new Domain.Features.Cms.MenuItem
+				(cultureId: persianCulture.Id, title: menuItemTitle)
+				{
+					IsTestData = true,
+					IsDisabled = (menuItemIndex == 1 || menuItemIndex == 4 || menuItemIndex == 8) ? true : false,
+					NavigationUrl = (menuItemIndex == 1 || menuItemIndex == 3 || menuItemIndex == 7 || menuItemIndex == 9) ? null : "http://date2date.ir",
+					IsVisible = (menuItemIndex == 1 || menuItemIndex == 2 || menuItemIndex == 4 || menuItemIndex == 5 || menuItemIndex == 7 || menuItemIndex == 8 || menuItemIndex == 9) ? true : false,
+				};
+
+			await DatabaseContext.AddAsync(entity: menuItem);
+
+			if (string.IsNullOrWhiteSpace(value: menuItem.NavigationUrl) == false)
+			{
+				continue;
+			}
+
+			for (var subMenuItemIndex = 1; subMenuItemIndex <= 5; subMenuItemIndex++)
+			{
+				var subMenuItemIndexString =
+					subMenuItemIndex
+					.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+					.ConvertDigitsToUnicode();
+
+				var subMenuItemTitle =
+					$"{subMenuItemTitleTemplate} {menuItemIndexString} {subMenuItemIndexString}";
+
+				var subMenuItem =
+					new Domain.Features.Cms.MenuItem
+					(cultureId: persianCulture.Id, title: subMenuItemTitle)
+					{
+						IsTestData = true,
+						IsVisible = (subMenuItemIndex % 3 != 0),
+						NavigationUrl = (subMenuItemIndex % 2 == 0) ? "http://date2date.ir" : null,
+						IsDisabled = (subMenuItemIndex == 0 || subMenuItemIndex == 7) ? true : false,
+					};
+
+				subMenuItem.ParentId = menuItem.Id;
+
+				await DatabaseContext.AddAsync(entity: subMenuItem);
+			}
+		}
+
+		await DatabaseContext.SaveChangesAsync();
+	}
+
+	private async System.Threading.Tasks.Task CreateEnglishMenuItemsAsync()
+	{
+		var englishCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.CultureName.ToLower() == "en-us")
+			.FirstOrDefaultAsync();
+
+		if (englishCulture == null)
+		{
+			return;
+		}
+
+		var menuItemTitleTemplate = "Menu Item";
+		var subMenuItemTitleTemplate = "Sub Menu Item";
+
+		for (var menuItemIndex = 1; menuItemIndex <= 9; menuItemIndex++)
+		{
+			var menuItemIndexString =
+				menuItemIndex
+				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+				.ConvertDigitsToUnicode();
+
+			var menuItemTitle =
+				$"{menuItemTitleTemplate} {menuItemIndexString}";
+
+			var menuItem =
+				new Domain.Features.Cms.MenuItem
+				(cultureId: englishCulture.Id, title: menuItemTitle)
+				{
+					IsTestData = true,
+					IsDisabled = (menuItemIndex == 1 || menuItemIndex == 4 || menuItemIndex == 8) ? true : false,
+					NavigationUrl = (menuItemIndex == 1 || menuItemIndex == 3 || menuItemIndex == 7 || menuItemIndex == 9) ? null : "http://date2date.ir",
+					IsVisible = (menuItemIndex == 1 || menuItemIndex == 2 || menuItemIndex == 4 || menuItemIndex == 5 || menuItemIndex == 7 || menuItemIndex == 8 || menuItemIndex == 9) ? true : false,
+				};
+
+			await DatabaseContext.AddAsync(entity: menuItem);
+
+			if (string.IsNullOrWhiteSpace(value: menuItem.NavigationUrl) == false)
+			{
+				continue;
+			}
+
+			for (var subMenuItemIndex = 1; subMenuItemIndex <= 5; subMenuItemIndex++)
+			{
+				var subMenuItemIndexString =
+					subMenuItemIndex
+					.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+					.ConvertDigitsToUnicode();
+
+				var subMenuItemTitle =
+					$"{subMenuItemTitleTemplate} {menuItemIndexString} {subMenuItemIndexString}";
+
+				var subMenuItem =
+					new Domain.Features.Cms.MenuItem
+					(cultureId: englishCulture.Id, title: subMenuItemTitle)
+					{
+						IsTestData = true,
+						IsVisible = (subMenuItemIndex % 3 != 0),
+						NavigationUrl = (subMenuItemIndex % 2 == 0) ? "http://date2date.ir" : null,
+						IsDisabled = (subMenuItemIndex == 0 || subMenuItemIndex == 7) ? true : false,
+					};
+
+				subMenuItem.ParentId = menuItem.Id;
+
+				await DatabaseContext.AddAsync(entity: subMenuItem);
+			}
+		}
+
+		await DatabaseContext.SaveChangesAsync();
 	}
 
 	private async System.Threading.Tasks.Task CreatePersianPostCategoriesAsync()
