@@ -1,4 +1,5 @@
-﻿using Persistence.Extensions;
+﻿using System.Linq;
+using Persistence.Extensions;
 
 namespace Persistence;
 
@@ -54,6 +55,34 @@ public class DatabaseContext :
 	{
 		modelBuilder.ApplyConfigurationsFromAssembly
 			(assembly: typeof(DatabaseContext).Assembly);
+
+		if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+		{
+			// SQLite does not have proper support for DateTimeOffset via Entity Framework Core, see the limitations
+			// here: https://docs.microsoft.com/en-us/ef/core/providers/sqlite/limitations#query-limitations
+			// To work around this, when the Sqlite database provider is used, all model properties of type DateTimeOffset
+			// use the DateTimeOffsetToBinaryConverter
+			// Based on: https://github.com/aspnet/EntityFrameworkCore/issues/10784#issuecomment-415769754
+			// This only supports millisecond precision, but should be sufficient for most use cases.
+			foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+			{
+				var properties =
+					entityType.ClrType.GetProperties()
+					.Where(current =>
+						current.PropertyType == typeof(System.DateTimeOffset) ||
+						current.PropertyType == typeof(System.DateTimeOffset?));
+
+				foreach (var property in properties)
+				{
+					modelBuilder
+						.Entity(name: entityType.Name)
+						.Property(propertyName: property.Name)
+						.HasConversion(converter:
+							new Microsoft.EntityFrameworkCore
+							.Storage.ValueConversion.DateTimeOffsetToBinaryConverter());
+				}
+			}
+		}
 
 		modelBuilder.Seed();
 	}

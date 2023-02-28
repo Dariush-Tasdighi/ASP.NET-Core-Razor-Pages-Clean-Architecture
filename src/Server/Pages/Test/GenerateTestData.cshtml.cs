@@ -314,6 +314,9 @@ public class GenerateTestDataModel :
 
 	private async System.Threading.Tasks.Task CreatePersianPostCategoriesAsync()
 	{
+		var maxPostCategories = 12;
+		var maxPostsPerPostCategory = 24;
+
 		var persianCulture =
 			await
 			DatabaseContext.Cultures
@@ -328,7 +331,7 @@ public class GenerateTestDataModel :
 		var dariushUser =
 			await
 			DatabaseContext.Users
-			.Where(current => current.EmailAddress.ToLower() == "DariushT@GMail.com")
+			.Where(current => current.EmailAddress.ToLower() == "DariushT@GMail.com".ToLower())
 			.FirstOrDefaultAsync();
 
 		if (dariushUser == null)
@@ -342,7 +345,7 @@ public class GenerateTestDataModel :
 		var postCategoryNameTemplate = "Category";
 		var postCategoryTitleTemplate = "طبقه‌بندی مطلب";
 
-		for (var postCategoryIndex = 1; postCategoryIndex <= 12; postCategoryIndex++)
+		for (var postCategoryIndex = 1; postCategoryIndex <= maxPostCategories; postCategoryIndex++)
 		{
 			var postCategoryIndexString =
 				postCategoryIndex
@@ -367,7 +370,7 @@ public class GenerateTestDataModel :
 
 			await DatabaseContext.AddAsync(entity: postCategory);
 
-			for (var postIndex = 1; postIndex <= 24; postIndex++)
+			for (var postIndex = 1; postIndex <= maxPostsPerPostCategory; postIndex++)
 			{
 				var postIndexString =
 					postIndex
@@ -414,6 +417,9 @@ public class GenerateTestDataModel :
 
 	private async System.Threading.Tasks.Task CreateEnglishPostCategoriesAsync()
 	{
+		var maxPostCategories = 12;
+		var maxPostsPerPostCategory = 24;
+
 		var englishCulture =
 			await
 			DatabaseContext.Cultures
@@ -428,7 +434,7 @@ public class GenerateTestDataModel :
 		var dariushUser =
 			await
 			DatabaseContext.Users
-			.Where(current => current.EmailAddress.ToLower() == "DariushT@GMail.com")
+			.Where(current => current.EmailAddress.ToLower() == "DariushT@GMail.com".ToLower())
 			.FirstOrDefaultAsync();
 
 		if (dariushUser == null)
@@ -442,7 +448,7 @@ public class GenerateTestDataModel :
 		var postCategoryNameTemplate = "Category";
 		var postCategoryTitleTemplate = "Category";
 
-		for (var postCategoryIndex = 1; postCategoryIndex <= 12; postCategoryIndex++)
+		for (var postCategoryIndex = 1; postCategoryIndex <= maxPostCategories; postCategoryIndex++)
 		{
 			var postCategoryIndexString =
 				postCategoryIndex
@@ -467,7 +473,7 @@ public class GenerateTestDataModel :
 
 			await DatabaseContext.AddAsync(entity: postCategory);
 
-			for (var postIndex = 1; postIndex <= 24; postIndex++)
+			for (var postIndex = 1; postIndex <= maxPostsPerPostCategory; postIndex++)
 			{
 				var postIndexString =
 					postIndex

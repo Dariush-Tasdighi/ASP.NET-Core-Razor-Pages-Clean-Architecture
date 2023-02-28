@@ -46,17 +46,27 @@
 		.Where(current => current.User != null &&
 			current.User.IsDeleted == false)
 
-		.OrderBy(current => System.Guid.NewGuid())
+		.OrderByDescending(current => current.IsFeatured)
+		.ThenByDescending(current => current.UpdateDateTime)
 
 		.Skip(count: 0)
-		.Take(count: 6)
-
-		.ToList()
-
-		.OrderByDescending(current => current.IsFeatured)
+		.Take(count: 12)
 
 		.ToList()
 		;
+
+		// کار نمی‌کند SQLite متاسفانه در
+		//.OrderBy(current => System.Guid.NewGuid())
+
+		//.Skip(count: 0)
+		//.Take(count: 6)
+
+		//.ToList()
+
+		//.OrderByDescending(current => current.IsFeatured)
+
+		//.ToList()
+		//;
 
 	if (posts.Count == 0)
 	{
