@@ -618,4 +618,7 @@
   <data name="Genders" xml:space="preserve">
     <value>Genders</value>
   </data>
+  <data name="Watch" xml:space="preserve">
+    <value>Watch</value>
+  </data>
 </root>

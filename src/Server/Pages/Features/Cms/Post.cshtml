@@ -8,13 +8,25 @@
 	ViewData[Constants.ViewDataKeyName.PageDescription] = Model.ViewModel.Description;
 }
 
-@(Html.Raw(Model.ViewModel.Body))
+<div class="row">
+	<div class="col-lg-9">
+		<h1>
+			تست
+		</h1>
 
-@if (Model.ViewModel.Score > 0)
-{
-	<hr />
+		@(Html.Raw(Model.ViewModel.Body))
 
-	@(Resources.DataDictionary.Score)
-	<text>:</text>
-	@(Html.DtatDisplayInteger(value: Model.ViewModel.Score))
-}
+		@if (Model.ViewModel.Score > 0)
+		{
+			<hr />
+
+			@(Resources.DataDictionary.Score)
+			<text>:</text>
+			@(Html.DtatDisplayInteger(value: Model.ViewModel.Score))
+		}
+	</div>
+
+	<div class="col-lg-3">
+		<partial name="Features/Cms/PartialViews/_DisplayRelatedPosts" model="@(Model.ViewModel.Id)" />
+	</div>
+</div>

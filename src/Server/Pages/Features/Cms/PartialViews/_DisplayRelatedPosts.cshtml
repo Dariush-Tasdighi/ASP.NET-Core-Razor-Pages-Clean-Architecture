@@ -1,0 +1,104 @@
+﻿@model System.Guid?
+
+@inject Persistence.DatabaseContext DatabaseContext
+
+@using Microsoft.EntityFrameworkCore
+
+@{
+	if (Model == null)
+	{
+		return;
+	}
+
+	var currentPost =
+		await
+		DatabaseContext.Posts
+		.Where(current => current.Id == Model)
+		.FirstOrDefaultAsync();
+
+	if (currentPost is null)
+	{
+		return;
+	}
+
+	var currentUICultureLcid =
+		Domain.Features.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+	var posts =
+		DatabaseContext.Posts
+
+		.Where(current => current.CategoryId == currentPost.CategoryId)
+
+		.Where(current => current.Culture != null &&
+			current.Culture.Lcid == currentUICultureLcid)
+
+		.Where(current => current.IsActive)
+		.Where(current => current.IsDraft == false)
+		.Where(current => current.IsDeleted == false)
+
+		.Where(current => current.Category != null
+			&& current.Category.IsActive)
+
+		.Where(current => current.User != null &&
+			current.User.IsActive)
+
+		.Where(current => current.User != null &&
+			current.User.IsDeleted == false)
+
+		.OrderBy(current => System.Guid.NewGuid())
+
+		.Skip(count: 0)
+		.Take(count: 6)
+
+		.ToList()
+		
+		.OrderByDescending(current => current.IsFeatured)
+
+		.ToList()
+		;
+
+	if (posts.Count == 0)
+	{
+		return;
+	}
+
+	var currentUICultureName = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureName();
+}
+
+<div class="row row-cols-1 g-4">
+
+	@for (var index = 0; index <= posts.Count - 1; index++)
+	{
+		var post = posts[index];
+
+		var textBackground = "text-bg-light";
+		if (post.IsFeatured)
+		{
+			textBackground = "text-bg-warning";
+		}
+
+		<div class="col">
+			<div class="card @(textBackground) h-100">
+				<img src="@(post.ImageUrl)" class="card-img-top" alt="@(post.Title)">
+
+				<div class="card-body">
+					<h5 class="card-title">
+						@(post.Title)
+					</h5>
+
+					<p class="card-text">
+						@(post.Description)
+					</p>
+				</div>
+
+				<div class="card-footer d-grid">
+					<a href="/post/@(currentUICultureName)/@(post.Id)" class="btn btn-primary btn-sm">
+						@(Resources.DataDictionary.Watch)
+					</a>
+				</div>
+			</div>
+		</div>
+	}
+
+</div>

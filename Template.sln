@@ -26,9 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "src\Server\Server.csproj", "{734D0D37-87CC-4E45-9950-747CF128D9CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "src\Persistence\Persistence.csproj", "{D18CD4C9-89A4-4C21-AFEC-970E18D0CDA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "src\Persistence\Persistence.csproj", "{D18CD4C9-89A4-4C21-AFEC-970E18D0CDA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{3ED8E672-55E0-48FC-885E-17E315C3333B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{3ED8E672-55E0-48FC-885E-17E315C3333B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtat", "src\Framework\Dtat\Dtat.csproj", "{35A5ADC8-D49E-4F05-AFAE-06D85E207AEB}"
 EndProject
@@ -38,7 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtat.StateMachine", "src\Fr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtat.StateMachine.Abstractions", "src\Framework\Dtat.StateMachine.Abstractions\Dtat.StateMachine.Abstractions.csproj", "{D5535B69-81E5-4D5F-9B38-23795F805847}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Application\Application.csproj", "{E31E48E5-6902-4F97-A5FA-DF746C2003BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\Application.csproj", "{E31E48E5-6902-4F97-A5FA-DF746C2003BF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{E93999E1-FE8C-428A-80BC-C79A3B6A8A1C}"
 EndProject
