@@ -1,20 +1,19 @@
 ﻿namespace Domain.Features.Identity;
 
 public class Gender :
-	Seedwork.Entity,
+	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
 	public Gender(System.Guid cultureId,
-		Enums.GenderEnum code, string title) : base()
+		Enums.GenderEnum code, string title) : base(cultureId: cultureId)
 	{
-		UpdateDateTime =
-			InsertDateTime;
-
 		Code = code;
 		Title = title;
-		CultureId = cultureId;
+
+		UpdateDateTime =
+			InsertDateTime;
 
 		UserProfiles =
 			new System.Collections.Generic.List<UserProfile>();
@@ -22,36 +21,6 @@ public class Gender :
 	#endregion /Constructor
 
 	#region Properties
-
-	#region public System.Guid CultureId { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public System.Guid CultureId { get; set; }
-	#endregion /public System.Guid CultureId { get; set; }
-
-	#region public virtual Common.Culture? Culture { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public virtual Common.Culture? Culture { get; set; }
-	#endregion /public virtual Common.Culture? Culture { get; set; }
 
 	#region public bool IsActive { get; set; }
 	/// <summary>

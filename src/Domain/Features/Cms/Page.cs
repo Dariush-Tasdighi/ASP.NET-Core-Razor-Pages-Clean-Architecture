@@ -3,55 +3,23 @@
 namespace Domain.Features.Cms;
 
 public class Page :
-	Seedwork.Entity,
+	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
 	public Page(System.Guid cultureId,
-		System.Guid layoutId, string name, string title) : base()
+		System.Guid layoutId, string name, string title) : base(cultureId: cultureId)
 	{
-		UpdateDateTime =
-			InsertDateTime;
-
 		Name = name;
 		Title = title;
 		LayoutId = layoutId;
-		CultureId = cultureId;
+
+		UpdateDateTime = InsertDateTime;
 	}
 	#endregion /Constructor
 
 	#region Properties
-
-	#region public System.Guid CultureId { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public System.Guid CultureId { get; set; }
-	#endregion /public System.Guid CultureId { get; set; }
-
-	#region public virtual Culture? Culture { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public virtual Culture? Culture { get; set; }
-	#endregion /public virtual Culture? Culture { get; set; }
 
 	#region public System.Guid LayoutId { get; set; }
 	/// <summary>

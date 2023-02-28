@@ -11,8 +11,7 @@ public class CmsSettings :
 	#region Constructor
 	public CmsSettings() : base()
 	{
-		UpdateDateTime =
-			InsertDateTime;
+		UpdateDateTime = InsertDateTime;
 	}
 	#endregion /Constructor
 

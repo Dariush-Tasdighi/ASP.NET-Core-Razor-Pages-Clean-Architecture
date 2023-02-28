@@ -1,20 +1,19 @@
 ﻿namespace Domain.Features.Identity;
 
 public class UserProfile :
-	Seedwork.Entity,
+	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
 	public UserProfile
 		(System.Guid cultureId, System.Guid userId,
-		System.Guid genderId, string firstName, string lastName) : base()
+		System.Guid genderId, string firstName, string lastName) : base(cultureId: cultureId)
 	{
 		UpdateDateTime =
 			InsertDateTime;
 
 		UserId = userId;
 		GenderId = genderId;
-		CultureId = cultureId;
 
 		LastName = lastName;
 		FirstName = firstName;
@@ -82,36 +81,6 @@ public class UserProfile :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public virtual Gender? Gender { get; set; }
 	#endregion /public virtual Gender? Gender { get; set; }
-
-	#region public System.Guid CultureId { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public System.Guid CultureId { get; set; }
-	#endregion /public System.Guid CultureId { get; set; }
-
-	#region public virtual Common.Culture? Culture { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public virtual Common.Culture? Culture { get; set; }
-	#endregion /public virtual Common.Culture? Culture { get; set; }
 
 
 

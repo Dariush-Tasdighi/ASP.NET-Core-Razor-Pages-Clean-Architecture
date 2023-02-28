@@ -3,61 +3,23 @@
 namespace Domain.Features.Cms;
 
 public class Slide :
-	Seedwork.Entity,
+	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
-	#region Constants
-
-	public const int TitleMaxLength = Constants.MaxLength.Title;
-
-	#endregion /Constants
-
 	#region Constructor
-	public Slide(System.Guid cultureId, string title, string imageUrl) : base()
+	public Slide(System.Guid cultureId, string title, string imageUrl) : base(cultureId: cultureId)
 	{
 		Interval = 4_000;
 
-		UpdateDateTime =
-			InsertDateTime;
-
 		Title = title;
 		ImageUrl = imageUrl;
-		CultureId= cultureId;
+
+		UpdateDateTime = InsertDateTime;
 	}
 	#endregion /Constructor
 
 	#region Properties
-
-	#region public System.Guid CultureId { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public System.Guid CultureId { get; set; }
-	#endregion /public System.Guid CultureId { get; set; }
-
-	#region public virtual Culture? Culture { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public virtual Culture? Culture { get; set; }
-	#endregion /public virtual Culture? Culture { get; set; }
 
 	#region public bool IsActive { get; set; }
 	/// <summary>
@@ -79,6 +41,8 @@ public class Slide :
 	public bool OpenUrlInNewWindow { get; set; }
 	#endregion /public bool OpenUrlInNewWindow { get; set; }
 
+
+
 	#region public int Interval { get; set; }
 	/// <summary>
 	/// فاصله زمانی نمایش
@@ -94,6 +58,8 @@ public class Slide :
 	public int Interval { get; set; }
 	#endregion /public int Interval { get; set; }
 
+
+
 	#region public string Title { get; set; }
 	/// <summary>
 	/// عنوان
@@ -108,7 +74,7 @@ public class Slide :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: TitleMaxLength,
+		(length: Constants.MaxLength.Title,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 	public string Title { get; set; }
@@ -158,6 +124,8 @@ public class Slide :
 		Name = nameof(Resources.DataDictionary.NavigationUrl))]
 	public string? NavigationUrl { get; set; }
 	#endregion /public string? NavigationUrl { get; set; }
+
+
 
 	#region public System.DateTimeOffset? PublishStartDateTime { get; set; }
 	/// <summary>

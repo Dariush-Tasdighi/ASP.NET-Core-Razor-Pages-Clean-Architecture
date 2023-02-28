@@ -3,10 +3,6 @@
 public class PostComment : Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive
 {
-	#region Constants
-	public const int NameMaxLength = Constants.MaxLength.Name;
-	#endregion /Constants
-
 	#region Constructor
 	public PostComment(System.Guid postId, System.Guid userId, string description) : base()
 	{
@@ -78,6 +74,8 @@ public class PostComment : Seedwork.Entity,
 	public virtual Identity.User? User { get; set; }
 	#endregion /public virtual User? User { get; set; }
 
+
+
 	#region public bool IsActive { get; set; }
 	/// <summary>
 	/// وضعیت
@@ -87,6 +85,8 @@ public class PostComment : Seedwork.Entity,
 		Name = nameof(Resources.DataDictionary.IsActive))]
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
+
+
 
 	#region public string Description { get; set; }
 	/// <summary>

@@ -93,16 +93,13 @@ public class CreateModel :
 		// **************************************************
 
 		// **************************************************
-		ViewModel.Description =
-			ViewModel.Description.Fix();
-
 		var newEntity =
 			new Domain.Features.Cms.PostCategory
 			(cultureId: currentCulture.Id, name: ViewModel.Name)
 			{
 				Ordering = ViewModel.Ordering,
 				IsActive = ViewModel.IsActive,
-				Description = ViewModel.Description,
+				Description = ViewModel.Description.Fix(),
 				DisplayInHomePage = ViewModel.DisplayInHomePage,
 			};
 

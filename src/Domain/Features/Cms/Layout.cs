@@ -5,21 +5,13 @@ public class Layout :
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
-	#region Constants
-
-	public const int NameMaxLength = Constants.MaxLength.Name;
-	public const int TitleMaxLength = Constants.MaxLength.Title;
-
-	#endregion /Constants
-
 	#region Constructor
 	public Layout(string name, string title) : base()
 	{
 		Name = name;
 		Title = title;
 
-		UpdateDateTime =
-			InsertDateTime;
+		UpdateDateTime = InsertDateTime;
 
 		Pages =
 			new System.Collections.Generic.List<Page>();
@@ -52,7 +44,7 @@ public class Layout :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: NameMaxLength,
+		(length: Constants.MaxLength.Name,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 
@@ -77,7 +69,7 @@ public class Layout :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: TitleMaxLength,
+		(length: Constants.MaxLength.Title,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 	public string Title { get; set; }

@@ -1,52 +1,22 @@
 ﻿namespace Domain.Features.Cms;
 
 public class MenuItem :
-	Seedwork.Entity,
+	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public MenuItem(System.Guid cultureId, string title) : base()
+	public MenuItem(System.Guid cultureId, string title) : base(cultureId: cultureId)
 	{
-		UpdateDateTime =
-			InsertDateTime;
-
 		Title = title;
-		CultureId = cultureId;
+
+		UpdateDateTime = InsertDateTime;
 
 		Children =
 			new System.Collections.Generic.List<MenuItem>();
 	}
 	#endregion /Constructor
 
-	#region public System.Guid CultureId { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public System.Guid CultureId { get; set; }
-	#endregion /public System.Guid CultureId { get; set; }
-
-	#region public virtual Common.Culture? Culture { get; set; }
-	/// <summary>
-	/// زبان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Culture))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public virtual Common.Culture? Culture { get; set; }
-	#endregion /public virtual Common.Culture? Culture { get; set; }
+	#region Properties
 
 	#region public System.Guid? ParentId { get; set; }
 	[System.ComponentModel.DataAnnotations.Display
@@ -61,6 +31,8 @@ public class MenuItem :
 		ResourceType = typeof(Resources.DataDictionary))]
 	public virtual MenuItem? Parent { get; set; }
 	#endregion /public virtual MenuItem? Parent { get; set; }
+
+
 
 	#region public bool IsVisible { get; set; }
 	/// <summary>
@@ -92,6 +64,8 @@ public class MenuItem :
 	public bool OpenUrlInNewWindow { get; set; }
 	#endregion /public bool OpenUrlInNewWindow { get; set; }
 
+
+
 	#region public string Title { get; set; }
 	/// <summary>
 	/// عنوان
@@ -112,6 +86,16 @@ public class MenuItem :
 	public string Title { get; set; }
 	#endregion /public string Title { get; set; }
 
+	#region public string? Description { get; set; }
+	/// <summary>
+	/// توضیحات
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Description))]
+	public string? Description { get; set; }
+	#endregion /public string? Description { get; set; }
+
 	#region public string? NavigationUrl { get; set; }
 	/// <summary>
 	/// لینک مقصد
@@ -122,15 +106,7 @@ public class MenuItem :
 	public string? NavigationUrl { get; set; }
 	#endregion /public string? NavigationUrl { get; set; }
 
-	#region public string? Description { get; set; }
-	/// <summary>
-	/// توضیحات
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Description))]
-	public string? Description { get; set; }
-	#endregion /public string? Description { get; set; }
+
 
 	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
 	/// <summary>
@@ -144,6 +120,8 @@ public class MenuItem :
 		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
 	public System.DateTimeOffset UpdateDateTime { get; private set; }
 	#endregion /public System.DateTimeOffset UpdateDateTime { get; private set; }
+
+	#endregion /Properties
 
 	#region Methods
 

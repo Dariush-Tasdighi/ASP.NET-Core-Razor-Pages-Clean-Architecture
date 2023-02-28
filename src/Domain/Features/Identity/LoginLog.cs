@@ -2,15 +2,20 @@
 
 public class LoginLog : Seedwork.Entity
 {
+	#region Constructor
 	public LoginLog(System.Guid userId, string userIP) : base()
 	{
 		UserIP = userIP;
 		UserId = userId;
 	}
+	#endregion /Constructor
 
-	// **********
-	// **********
-	// **********
+	#region Properties
+
+	#region public System.Guid UserId { get; set; }
+	/// <summary>
+	/// کاربر
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.User))]
@@ -20,18 +25,29 @@ public class LoginLog : Seedwork.Entity
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public System.Guid UserId { get; set; }
-	// **********
+	#endregion /public System.Guid UserId { get; set; }
 
-	// **********
+	#region public virtual User? User { get; set; }
+	/// <summary>
+	/// کاربر
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.User))]
-	public virtual User? User { get; set; }
-	// **********
-	// **********
-	// **********
 
-	// **********
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public virtual User? User { get; set; }
+	#endregion /public virtual User? User { get; set; }
+
+
+
+	#region public string UserIP { get; set; }
+	/// <summary>
+	/// آی‌پی کاربر
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.IP))]
@@ -51,5 +67,7 @@ public class LoginLog : Seedwork.Entity
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.IP))]
 	public string UserIP { get; set; }
-	// **********
+	#endregion /public string UserIP { get; set; }
+
+	#endregion /Properties
 }
