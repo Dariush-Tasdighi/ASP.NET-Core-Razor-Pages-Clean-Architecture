@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualBasic;
-using System;
-
 namespace Dtat;
 
 public static class String : object

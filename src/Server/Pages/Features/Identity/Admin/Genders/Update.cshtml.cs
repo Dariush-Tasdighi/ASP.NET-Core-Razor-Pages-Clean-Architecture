@@ -2,7 +2,7 @@ using Dtat;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Server.Pages.Features.Identity.Admin.Roles;
+namespace Server.Pages.Features.Identity.Admin.Genders;
 
 [Microsoft.AspNetCore.Authorization
 	.Authorize(Roles = Constants.Role.Administrator)]
@@ -21,7 +21,7 @@ public class UpdateModel :
 	#region Properties
 
 	[Microsoft.AspNetCore.Mvc.BindProperty]
-	public ViewModels.Pages.Features.Identity.Admin.Roles.UpdateViewModel ViewModel { get; set; }
+	public ViewModels.Pages.Features.Identity.Admin.Genders.UpdateViewModel ViewModel { get; set; }
 
 	#endregion /Properties
 
@@ -39,15 +39,16 @@ public class UpdateModel :
 
 		var result =
 			await
-			DatabaseContext.Roles
+			DatabaseContext.Genders
 
 			.Where(current => current.Id == id.Value)
 
 			.Select(current => new ViewModels.Pages
-				.Features.Identity.Admin.Roles.UpdateViewModel()
+				.Features.Identity.Admin.Genders.UpdateViewModel()
 			{
 				Id = current.Id,
 				Title = current.Title,
+				Prefix = current.Prefix,
 				IsActive = current.IsActive,
 				Ordering = current.Ordering,
 				Description = current.Description,
@@ -78,7 +79,7 @@ public class UpdateModel :
 		// **************************************************
 		var foundedItem =
 			await
-			DatabaseContext.Roles
+			DatabaseContext.Genders
 			.Where(current => current.Id == ViewModel.Id)
 			.FirstOrDefaultAsync();
 
@@ -89,6 +90,9 @@ public class UpdateModel :
 		}
 		// **************************************************
 
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
 		// **************************************************
 		ViewModel.Title =
 			ViewModel.Title.Fix()!;
@@ -98,9 +102,12 @@ public class UpdateModel :
 
 		var foundedAny =
 			await
-			DatabaseContext.Roles
+			DatabaseContext.Genders
 
 			.Where(current => current.Id != ViewModel.Id)
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
 
 			.Where(current => current.Title.ToLower() == ViewModel.Title.ToLower())
 
@@ -126,6 +133,7 @@ public class UpdateModel :
 		foundedItem.Title = ViewModel.Title;
 		foundedItem.Ordering = ViewModel.Ordering;
 		foundedItem.IsActive = ViewModel.IsActive;
+		foundedItem.Prefix = ViewModel.Prefix.Fix();
 		foundedItem.Description = ViewModel.Description.Fix();
 		// **************************************************
 
@@ -136,7 +144,7 @@ public class UpdateModel :
 		// **************************************************
 		var successMessage = string.Format
 			(format: Resources.Messages.Successes.Updated,
-			arg0: Resources.DataDictionary.Role);
+			arg0: Resources.DataDictionary.Gender);
 
 		AddToastSuccess(message: successMessage);
 		// **************************************************

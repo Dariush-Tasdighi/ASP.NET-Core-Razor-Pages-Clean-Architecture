@@ -1,4 +1,4 @@
-﻿namespace ViewModels.Pages.Features.Identity.Admin.Roles;
+﻿namespace ViewModels.Pages.Features.Identity.Admin.Genders;
 
 public class DetailsOrDeleteViewModel : UpdateViewModel
 {
@@ -9,27 +9,6 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 	#endregion /Constructor
 
 	#region Properties
-
-	#region public string? Name { get; set; }
-	/// <summary>
-	/// نام
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Name))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Constants.MaxLength.Name,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string? Name { get; set; }
-	//public string Name { get; set; }
-	#endregion /public string? Name { get; set; }
 
 	#region public int UserCount { get; set; }
 	/// <summary>
@@ -61,15 +40,15 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 	public System.DateTimeOffset UpdateDateTime { get; set; }
 	#endregion /public System.DateTimeOffset UpdateDateTime { get; set; }
 
-	#region public Domain.Features.Identity.Enums.RoleEnum Code { get; set; }
+	#region public Domain.Features.Identity.Enums.GenderEnum Code { get; set; }
 	/// <summary>
 	/// کد
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.Code))]
-	public Domain.Features.Identity.Enums.RoleEnum Code { get; set; }
-	#endregion /public Domain.Features.Identity.Enums.RoleEnum Code { get; set; }
+	public Domain.Features.Identity.Enums.GenderEnum Code { get; set; }
+	#endregion /public Domain.Features.Identity.Enums.GenderEnum Code { get; set; }
 
 	#endregion Properties
 }

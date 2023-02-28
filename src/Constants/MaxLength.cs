@@ -10,6 +10,7 @@ public static class MaxLength : object
 
 	public const int Name = 100;
 	public const int Title = 100;
+	public const int Prefix = 100;
 
 	public const int NativeName = 50;
 	public const int CultureName = 5;

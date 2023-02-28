@@ -9,12 +9,12 @@ public class Gender :
 	public Gender(System.Guid cultureId,
 		Enums.GenderEnum code, string title) : base()
 	{
+		UpdateDateTime =
+			InsertDateTime;
+
 		Code = code;
 		Title = title;
 		CultureId = cultureId;
-
-		UpdateDateTime =
-			InsertDateTime;
 
 		UserProfiles =
 			new System.Collections.Generic.List<UserProfile>();
@@ -75,7 +75,7 @@ public class Gender :
 
 	#region public string Title { get; set; }
 	/// <summary>
-	/// عنوان
+	/// عنوان - خانم / آقا
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
@@ -92,6 +92,21 @@ public class Gender :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 	public string Title { get; set; }
 	#endregion /public string Title { get; set; }
+
+	#region public string? Prefix { get; set; }
+	/// <summary>
+	/// پیشوند - خانم / آقای
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Prefix))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.Prefix,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? Prefix { get; set; }
+	#endregion /public string? Prefix { get; set; }
 
 	#region public string? Description { get; set; }
 	/// <summary>

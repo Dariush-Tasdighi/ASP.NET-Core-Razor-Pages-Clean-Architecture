@@ -1,4 +1,4 @@
-﻿namespace ViewModels.Pages.Features.Identity.Admin.Roles;
+﻿namespace ViewModels.Pages.Features.Identity.Admin.Genders;
 
 public class CreateViewModel : object
 {
@@ -56,6 +56,21 @@ public class CreateViewModel : object
 	public string? Title { get; set; }
 	//public string Title { get; set; }
 	#endregion /public string? Title { get; set; }
+
+	#region public string? Prefix { get; set; }
+	/// <summary>
+	/// پیشوند - خانم / آقای
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Prefix))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.Prefix,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? Prefix { get; set; }
+	#endregion /public string? Prefix { get; set; }
 
 	#region public string? Description { get; set; }
 	/// <summary>

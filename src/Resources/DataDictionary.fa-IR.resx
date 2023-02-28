@@ -645,4 +645,10 @@
   <data name="DisplayInHomePage" xml:space="preserve">
     <value>نمایش در خانه</value>
   </data>
+  <data name="Prefix" xml:space="preserve">
+    <value>پیشوند</value>
+  </data>
+  <data name="Genders" xml:space="preserve">
+    <value>جنسیت‌ها</value>
+  </data>
 </root>

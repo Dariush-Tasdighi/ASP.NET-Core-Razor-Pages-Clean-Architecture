@@ -90,6 +90,7 @@ public static class ModelBuilderExtensions : object
 				//InsertDateTime,
 				//UpdateDateTime,
 
+				Prefix = null,
 				IsActive = true,
 				Ordering = 10_000,
 				Description = null,
@@ -112,6 +113,7 @@ public static class ModelBuilderExtensions : object
 				//InsertDateTime,
 				//UpdateDateTime,
 
+				Prefix = "آقای",
 				IsActive = true,
 				Ordering = 10_000,
 				Description = null,
@@ -134,6 +136,7 @@ public static class ModelBuilderExtensions : object
 				//InsertDateTime,
 				//UpdateDateTime,
 
+				Prefix = "خانم",
 				IsActive = true,
 				Ordering = 10_000,
 				Description = null,
@@ -156,6 +159,7 @@ public static class ModelBuilderExtensions : object
 				//InsertDateTime,
 				//UpdateDateTime,
 
+				Prefix = null,
 				IsActive = true,
 				Ordering = 10_000,
 				Description = null,
@@ -178,6 +182,7 @@ public static class ModelBuilderExtensions : object
 				//InsertDateTime,
 				//UpdateDateTime,
 
+				Prefix = "Mr.",
 				IsActive = true,
 				Ordering = 10_000,
 				Description = null,
@@ -200,6 +205,7 @@ public static class ModelBuilderExtensions : object
 				//InsertDateTime,
 				//UpdateDateTime,
 
+				Prefix = "Ms.",
 				IsActive = true,
 				Ordering = 10_000,
 				Description = null,
