@@ -129,15 +129,15 @@ public class GenerateTestDataModel :
 			return;
 		}
 
-		var slideCaptionTemplate = "Hello, World!";
 		var slideTitleTemplate = "Slide Tite";
+		var slideCaptionTemplate = "Hello, World!";
 
 		for (var slideIndex = 7; slideIndex <= 11; slideIndex++)
 		{
 			var slideIndexString =
 				slideIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-				.ConvertDigitsToUnicode();
+				;
 
 			var slideTitle =
 				$"{slideTitleTemplate} {slideIndexString}";
@@ -187,7 +187,8 @@ public class GenerateTestDataModel :
 			var menuItemIndexString =
 				menuItemIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-				.ConvertDigitsToUnicode();
+				.ConvertDigitsToUnicode()
+				;
 
 			var menuItemTitle =
 				$"{menuItemTitleTemplate} {menuItemIndexString}";
@@ -214,7 +215,8 @@ public class GenerateTestDataModel :
 				var subMenuItemIndexString =
 					subMenuItemIndex
 					.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-					.ConvertDigitsToUnicode();
+					.ConvertDigitsToUnicode()
+					;
 
 				var subMenuItemTitle =
 					$"{subMenuItemTitleTemplate} {menuItemIndexString} {subMenuItemIndexString}";
@@ -259,7 +261,7 @@ public class GenerateTestDataModel :
 			var menuItemIndexString =
 				menuItemIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-				.ConvertDigitsToUnicode();
+				;
 
 			var menuItemTitle =
 				$"{menuItemTitleTemplate} {menuItemIndexString}";
@@ -286,7 +288,7 @@ public class GenerateTestDataModel :
 				var subMenuItemIndexString =
 					subMenuItemIndex
 					.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-					.ConvertDigitsToUnicode();
+					;
 
 				var subMenuItemTitle =
 					$"{subMenuItemTitleTemplate} {menuItemIndexString} {subMenuItemIndexString}";
@@ -336,9 +338,11 @@ public class GenerateTestDataModel :
 
 		var postTitleTemplate = "عنوان مطلب";
 		var postDescriptionTemplate = "توضیحات مطلب";
-		var postCategoryNameTemplate = "طبقه‌بندی مطلب";
 
-		for (var postCategoryIndex = 1; postCategoryIndex <= 10; postCategoryIndex++)
+		var postCategoryNameTemplate = "Category";
+		var postCategoryTitleTemplate = "طبقه‌بندی مطلب";
+
+		for (var postCategoryIndex = 1; postCategoryIndex <= 12; postCategoryIndex++)
 		{
 			var postCategoryIndexString =
 				postCategoryIndex
@@ -346,11 +350,15 @@ public class GenerateTestDataModel :
 				.ConvertDigitsToUnicode();
 
 			var postCategoryName =
-				$"{postCategoryNameTemplate} {postCategoryIndexString}";
+				$"{postCategoryNameTemplate}_{postCategoryIndex}";
+
+			var postCategoryTitle =
+				$"{postCategoryTitleTemplate} {postCategoryIndexString}";
 
 			var postCategory =
 				new Domain.Features.Cms.PostCategory
-				(cultureId: persianCulture.Id, name: postCategoryName)
+				(cultureId: persianCulture.Id,
+				name: postCategoryName, title: postCategoryTitle)
 				{
 					IsTestData = true,
 					IsActive = (postCategoryIndex % 2 == 0),
@@ -359,7 +367,7 @@ public class GenerateTestDataModel :
 
 			await DatabaseContext.AddAsync(entity: postCategory);
 
-			for (var postIndex = 1; postIndex <= 10; postIndex++)
+			for (var postIndex = 1; postIndex <= 24; postIndex++)
 			{
 				var postIndexString =
 					postIndex
@@ -430,21 +438,27 @@ public class GenerateTestDataModel :
 
 		var postTitleTemplate = "Title";
 		var postDescriptionTemplate = "Description";
-		var postCategoryNameTemplate = "Category";
 
-		for (var postCategoryIndex = 1; postCategoryIndex <= 10; postCategoryIndex++)
+		var postCategoryNameTemplate = "Category";
+		var postCategoryTitleTemplate = "Category";
+
+		for (var postCategoryIndex = 1; postCategoryIndex <= 12; postCategoryIndex++)
 		{
 			var postCategoryIndexString =
 				postCategoryIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-				.ConvertDigitsToUnicode();
+				;
 
 			var postCategoryName =
-				$"{postCategoryNameTemplate} {postCategoryIndexString}";
+				$"{postCategoryNameTemplate}_{postCategoryIndexString}";
+
+			var postCategoryTitle =
+				$"{postCategoryTitleTemplate} {postCategoryIndexString}";
 
 			var postCategory =
 				new Domain.Features.Cms.PostCategory
-				(cultureId: englishCulture.Id, name: postCategoryName)
+				(cultureId: englishCulture.Id,
+				name: postCategoryName, title: postCategoryTitle)
 				{
 					IsTestData = true,
 					IsActive = (postCategoryIndex % 2 == 0),
@@ -453,12 +467,12 @@ public class GenerateTestDataModel :
 
 			await DatabaseContext.AddAsync(entity: postCategory);
 
-			for (var postIndex = 1; postIndex <= 10; postIndex++)
+			for (var postIndex = 1; postIndex <= 24; postIndex++)
 			{
 				var postIndexString =
 					postIndex
 					.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-					.ConvertDigitsToUnicode();
+					;
 
 				var postTitle =
 					$"{postTitleTemplate} {postIndexString}";

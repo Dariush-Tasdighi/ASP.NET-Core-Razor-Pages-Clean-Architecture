@@ -624,4 +624,7 @@
   <data name="IsTestData" xml:space="preserve">
     <value>Test Data</value>
   </data>
+  <data name="MaxDisplayPostCount" xml:space="preserve">
+    <value>Max Post Count</value>
+  </data>
 </root>

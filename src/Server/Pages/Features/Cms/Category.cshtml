@@ -1,26 +1,18 @@
-﻿@model System.Guid?
+﻿@page "/category/{culture?}/{name?}"
+@model Server.Pages.Features.Cms.CategoryModel
 
 @inject Persistence.DatabaseContext DatabaseContext
 
 @using Microsoft.EntityFrameworkCore
 
 @{
-	if (Model == null)
-	{
-		return;
-	}
+	ViewData[Constants.ViewDataKeyName.PageTitle] = Model.ViewModel.Title;
+	ViewData[Constants.ViewDataKeyName.PageDescription] = Model.ViewModel.Description;
+}
 
-	var currentPost =
-		await
-		DatabaseContext.Posts
-		.Where(current => current.Id == Model)
-		.FirstOrDefaultAsync();
+@(Html.Raw(Model.ViewModel.Body))
 
-	if (currentPost is null)
-	{
-		return;
-	}
-
+@{
 	var currentUICultureLcid = Domain.Features
 		.Common.CultureEnumHelper.GetCurrentUICultureLcid();
 
@@ -28,35 +20,28 @@
 	var posts =
 		DatabaseContext.Posts
 
-		.Where(current => current.CategoryId == currentPost.CategoryId)
-
 		.Where(current => current.Culture != null &&
 			current.Culture.Lcid == currentUICultureLcid)
+
+		.Where(current => current.CategoryId == Model.ViewModel.Id)
 
 		.Where(current => current.IsActive)
 		.Where(current => current.IsDraft == false)
 		.Where(current => current.IsDeleted == false)
 
-		.Where(current => current.Category != null
-			&& current.Category.IsActive)
+		.Where(current => current.Category != null && current.Category.IsActive)
 
-		.Where(current => current.User != null &&
-			current.User.IsActive)
+		.Where(current => current.User != null && current.User.IsActive)
 
-		.Where(current => current.User != null &&
-			current.User.IsDeleted == false)
-
-		.OrderBy(current => System.Guid.NewGuid())
-
-		.Skip(count: 0)
-		.Take(count: 6)
-
-		.ToList()
+		.Where(current => current.User != null && current.User.IsDeleted == false)
 
 		.OrderByDescending(current => current.IsFeatured)
+		.ThenByDescending(current => current.UpdateDateTime)
 
-		.ToList()
-		;
+		.Skip(count: 0)
+		.Take(count: Model.ViewModel.MaxDisplayPostCount)
+
+		.ToList();
 
 	if (posts.Count == 0)
 	{
@@ -67,7 +52,7 @@
 		.Common.CultureEnumHelper.GetCurrentUICultureName();
 }
 
-<div class="row row-cols-sm-1 g-4">
+<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
 
 	@for (var index = 0; index <= posts.Count - 1; index++)
 	{
@@ -93,8 +78,8 @@
 					</p>
 				</div>
 
-				<div class="card-footer d-grid">
-					<a href="/post/@(currentUICultureName)/@(post.Id)" class="btn btn-primary btn-sm">
+				<div class="card-footer">
+					<a href="/post/@(currentUICultureName)/@(post.Id)" class="btn btn-primary">
 						@(Resources.DataDictionary.Watch)
 					</a>
 				</div>

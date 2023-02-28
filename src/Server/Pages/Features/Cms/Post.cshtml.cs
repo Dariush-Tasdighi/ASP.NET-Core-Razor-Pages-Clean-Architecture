@@ -70,8 +70,10 @@ public class PostModel :
 
 		// **************************************************
 		// دارد SEO‌ روش و نگاه ذیل مشکل
+		// **************************************************
 		//var currentUICulture =
 		//	System.Globalization.CultureInfo.CurrentUICulture;
+		// **************************************************
 
 		var foundedCulture =
 			await

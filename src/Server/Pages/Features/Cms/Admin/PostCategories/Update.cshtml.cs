@@ -41,14 +41,19 @@ public class UpdateModel :
 			await
 			DatabaseContext.PostCategories
 			.Where(current => current.Id == id.Value)
-			.Select(current => new ViewModels.Pages.Features.Cms.Admin.PostCategories.UpdateViewModel()
+			.Select(current => new ViewModels.Pages
+				.Features.Cms.Admin.PostCategories.UpdateViewModel()
 			{
 				Id = current.Id,
+				Body = current.Body,
+				Hits = current.Hits,
 				Name = current.Name,
+				Title = current.Title,
 				IsActive = current.IsActive,
 				Ordering = current.Ordering,
 				Description = current.Description,
 				DisplayInHomePage = current.DisplayInHomePage,
+				MaxDisplayPostCount = current.MaxDisplayPostCount,
 			})
 			.FirstOrDefaultAsync();
 
@@ -108,9 +113,6 @@ public class UpdateModel :
 		ViewModel.Name =
 			ViewModel.Name.Fix()!;
 
-		//ViewModel.Name =
-		//	ViewModel.Name.Fix();
-
 		var foundedAny =
 			await
 			DatabaseContext.PostCategories
@@ -138,16 +140,47 @@ public class UpdateModel :
 		// **************************************************
 
 		// **************************************************
-		ViewModel.Description =
-			ViewModel.Description.Fix();
+		ViewModel.Title =
+			ViewModel.Title.Fix()!;
 
+		foundedAny =
+			await
+			DatabaseContext.PostCategories
+			.Where(current => current.Id != ViewModel.Id)
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
+
+			.Where(current => current.Title.ToLower() == ViewModel.Title.ToLower())
+
+			.AnyAsync();
+
+		if (foundedAny)
+		{
+			// **************************************************
+			var errorMessage = string.Format
+				(format: Resources.Messages.Errors.AlreadyExists,
+				arg0: Resources.DataDictionary.Title);
+
+			AddPageError(message: errorMessage);
+			// **************************************************
+
+			return Page();
+		}
+		// **************************************************
+
+		// **************************************************
 		foundedItem.SetUpdateDateTime();
 
+		foundedItem.Hits = ViewModel.Hits;
 		foundedItem.Name = ViewModel.Name;
+		foundedItem.Title = ViewModel.Title;
+		foundedItem.Body = ViewModel.Body.Fix();
 		foundedItem.Ordering = ViewModel.Ordering;
 		foundedItem.IsActive = ViewModel.IsActive;
-		foundedItem.Description = ViewModel.Description;
+		foundedItem.Description = ViewModel.Description.Fix();
 		foundedItem.DisplayInHomePage = ViewModel.DisplayInHomePage;
+		foundedItem.MaxDisplayPostCount = ViewModel.MaxDisplayPostCount;
 		// **************************************************
 
 		var affectedRows =

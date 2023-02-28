@@ -970,6 +970,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max Post Count.
+        /// </summary>
+        public static string MaxDisplayPostCount {
+            get {
+                return ResourceManager.GetString("MaxDisplayPostCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MenuItem.
         /// </summary>
         public static string MenuItem {

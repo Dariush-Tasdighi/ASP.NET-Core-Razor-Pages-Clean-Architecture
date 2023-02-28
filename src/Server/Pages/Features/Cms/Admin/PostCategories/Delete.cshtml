@@ -20,7 +20,11 @@
 
 		<dtat-readonly-checkbox asp-for="ViewModel.IsActive" />
 
-		<dtat-readonly-input asp-for="ViewModel.Name" />
+		<dtat-readonly-input asp-for="ViewModel.Name" dir="ltr" />
+
+		<dtat-readonly-input asp-for="ViewModel.Title" />
+
+		<dtat-readonly-input asp-for="ViewModel.Description" />
 
 		<dtat-readonly-input asp-for="ViewModel.Ordering" />
 
@@ -28,13 +32,17 @@
 
 		<dtat-readonly-input asp-for="ViewModel.PostCount" />
 
+		<dtat-readonly-input asp-for="ViewModel.MaxDisplayPostCount" />
+
+		<dtat-readonly-input asp-for="ViewModel.Hits" />
+
 		<dtat-readonly-input asp-for="ViewModel.InsertDateTime" />
 
 		<dtat-readonly-input asp-for="ViewModel.UpdateDateTime" />
 
 		<hr />
 
-		@(Html.Raw(value: Model.ViewModel.Description))
+		@(Html.Raw(value: Model.ViewModel.Body))
 	</fieldset>
 
 	<form method="post">

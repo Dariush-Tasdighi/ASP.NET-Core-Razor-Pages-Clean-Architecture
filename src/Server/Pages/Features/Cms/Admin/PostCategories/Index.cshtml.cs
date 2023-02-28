@@ -45,17 +45,20 @@ public class IndexModel :
 				.Features.Cms.Admin.PostCategories.IndexItemViewModel
 			{
 				Id = current.Id,
+
 				Name = current.Name,
-
-				Ordering = current.Ordering,
-
-				PostCount = current.Posts.Count,
+				Title = current.Title,
 
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
 
 				IsActive = current.IsActive,
 				DisplayInHomePage = current.DisplayInHomePage,
+
+				Hits = current.Hits,
+				Ordering = current.Ordering,
+				PostCount = current.Posts.Count,
+				MaxDisplayPostCount = current.MaxDisplayPostCount,
 			})
 			.ToListAsync()
 			;

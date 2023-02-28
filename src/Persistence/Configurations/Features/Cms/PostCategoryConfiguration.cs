@@ -18,6 +18,13 @@ internal sealed class PostCategoryConfiguration : object, Microsoft
 			.IsUnique(unique: true)
 			;
 		// **************************************************
+
+		// **************************************************
+		builder
+			.HasIndex(current => new { current.CultureId, current.Title })
+			.IsUnique(unique: true)
+			;
+		// **************************************************
 		// **************************************************
 		// **************************************************
 

@@ -53,9 +53,50 @@ public class CreateViewModel : object
 		(length: Constants.MaxLength.Name,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+
+	[System.ComponentModel.DataAnnotations.RegularExpression
+		(pattern: Constants.RegularExpression.AToZDigitsUnderline,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Name))]
 	public string? Name { get; set; }
 	//public string Name { get; set; }
 	#endregion /public string? Name { get; set; }
+
+	#region public string? Title { get; set; }
+	/// <summary>
+	/// عنوان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Title))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.Title,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? Title { get; set; }
+	//public string Title { get; set; }
+	#endregion /public string? Title { get; set; }
+
+	#region public string? Description { get; set; }
+	/// <summary>
+	/// توضیحات
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Description))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.MetaDescription,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? Description { get; set; }
+	#endregion /public string? Description { get; set; }
 
 	#region public bool DisplayInHomePage { get; set; }
 	/// <summary>
@@ -67,15 +108,35 @@ public class CreateViewModel : object
 	public bool DisplayInHomePage { get; set; }
 	#endregion /public bool DisplayInHomePage { get; set; }
 
-	#region public string? Description { get; set; }
+	#region public int MaxDisplayPostCount { get; set; }
 	/// <summary>
-	/// توضیحات
+	/// حداکثر تعداد مطالب در زمان نمایش
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Description))]
-	public string? Description { get; set; }
-	#endregion /public string? Description { get; set; }
+		Name = nameof(Resources.DataDictionary.MaxDisplayPostCount))]
+	public int MaxDisplayPostCount { get; set; }
+	#endregion /public int MaxDisplayPostCount { get; set; }
+
+	#region public int Hits { get; set; }
+	/// <summary>
+	/// تعداد دفعات بازدید
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Hits))]
+	public int Hits { get; set; }
+	#endregion /public int Hits { get; set; }
+
+	#region public string? Body { get; set; }
+	/// <summary>
+	/// متن اصلی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Body))]
+	public string? Body { get; set; }
+	#endregion /public string? Body { get; set; }
 
 	#endregion /Properties
 }

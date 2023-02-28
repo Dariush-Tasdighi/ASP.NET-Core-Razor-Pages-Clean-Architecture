@@ -15,13 +15,19 @@ public class IndexItemViewModel : object
 
 	public bool IsActive { get; set; }
 
+	public int Ordering { get; set; }
+
 	public string Name { get; set; }
 
-	public int Ordering { get; set; }
+	public string Title { get; set; }
 
 	public bool DisplayInHomePage { get; set; }
 
 	public int PostCount { get; set; }
+
+	public int Hits { get; set; }
+
+	public int MaxDisplayPostCount { get; set; }
 
 	public System.DateTimeOffset InsertDateTime { get; set; }
 

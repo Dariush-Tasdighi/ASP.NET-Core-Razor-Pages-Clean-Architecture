@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Server.Pages.Features.Cms;
 
-public class PageModel :
+public class CategoryModel :
 	Infrastructure.BasePageModelWithDatabaseContext
 {
 	#region Constructor
-	public PageModel
+	public CategoryModel
 		(Persistence.DatabaseContext databaseContext) :
 		base(databaseContext: databaseContext)
 	{
@@ -17,7 +17,7 @@ public class PageModel :
 	#endregion /Constructor
 
 	#region Properties
-	public ViewModels.Pages.Features.Cms.PageViewModel ViewModel { get; set; }
+	public ViewModels.Pages.Features.Cms.CategoryViewModel ViewModel { get; set; }
 	#endregion /Properties
 
 	#region Methods
@@ -84,12 +84,11 @@ public class PageModel :
 		// **************************************************
 		var foundedPage =
 			await
-			DatabaseContext.Pages
-
-			.Include(current => current.Layout)
+			DatabaseContext.PostCategories
 
 			.Where(current => current.Culture != null
 				&& current.Culture.Id == foundedCulture.Id)
+
 			.Where(current => current.Name.ToLower() == name.ToLower())
 
 			.FirstOrDefaultAsync();
@@ -115,16 +114,15 @@ public class PageModel :
 
 		// **************************************************
 		ViewModel =
-			new ViewModels.Pages.Features.Cms.PageViewModel
+			new ViewModels.Pages.Features.Cms.CategoryViewModel
 			{
+				Id = foundedPage.Id,
+
+				Name = foundedPage.Name,
 				Body = foundedPage.Body,
 				Title = foundedPage.Title,
-
-				LayoutName = foundedPage.Layout!.Name,
-				//LayoutName = foundedPage.Layout.Name,
-
 				Description = foundedPage.Description,
-				UpdateDateTime = foundedPage.UpdateDateTime,
+				MaxDisplayPostCount = foundedPage.MaxDisplayPostCount,
 			};
 		// **************************************************
 

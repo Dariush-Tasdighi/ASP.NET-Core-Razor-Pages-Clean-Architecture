@@ -657,4 +657,7 @@
   <data name="IsTestData" xml:space="preserve">
     <value>داده تستی</value>
   </data>
+  <data name="MaxDisplayPostCount" xml:space="preserve">
+    <value>حداکثر تعداد مطالب</value>
+  </data>
 </root>

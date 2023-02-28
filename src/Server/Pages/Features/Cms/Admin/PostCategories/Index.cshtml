@@ -37,10 +37,13 @@
 					@(Resources.DataDictionary.IsActive)
 				</th>
 				<th>
+					@(Resources.DataDictionary.Ordering)
+				</th>
+				<th>
 					@(Resources.DataDictionary.Name)
 				</th>
 				<th>
-					@(Resources.DataDictionary.Ordering)
+					@(Resources.DataDictionary.Title)
 				</th>
 				<th>
 					@(Resources.DataDictionary.DisplayInHomePage)
@@ -49,8 +52,12 @@
 					@(Resources.DataDictionary.PostCount)
 				</th>
 				<th>
-					@(Resources.DataDictionary.InsertDateTime)
+					@(Resources.DataDictionary.MaxDisplayPostCount)
 				</th>
+				<th>
+					@(Resources.DataDictionary.Hits)
+				</th>
+				@*<th>@(Resources.DataDictionary.InsertDateTime)</th>*@
 				<th>
 					@(Resources.DataDictionary.UpdateDateTime)
 				</th>
@@ -79,15 +86,21 @@
 
 					@(Html.DtatDisplayBooleanWithTd(value: item.IsActive))
 
-					@(Html.DtatDisplayStringWithTd(value: item.Name))
-
 					@(Html.DtatDisplayIntegerWithTd(value: item.Ordering))
+
+					@(Html.DtatDisplayStringWithTd(value: item.Name, isLeftToRight: true))
+
+					@(Html.DtatDisplayStringWithTd(value: item.Title))
 
 					@(Html.DtatDisplayBooleanWithTd(value: item.DisplayInHomePage))
 
 					@(Html.DtatDisplayIntegerWithTd(value: item.PostCount))
 
-					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.InsertDateTime))
+					@(Html.DtatDisplayIntegerWithTd(value: item.MaxDisplayPostCount))
+
+					@(Html.DtatDisplayIntegerWithTd(value: item.Hits))
+
+					@*@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.UpdateDateTime))*@
 
 					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.UpdateDateTime))
 				</tr>

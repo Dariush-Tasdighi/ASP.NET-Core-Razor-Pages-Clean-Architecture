@@ -3,9 +3,10 @@
 @using Microsoft.EntityFrameworkCore
 
 @{
-	var currentUICultureLcid =
-		Domain.Features.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+	var currentUICultureLcid = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureLcid();
 
+	// TODO -> Convert To ViewModel for Better Performance
 	var posts =
 		DatabaseContext.Posts
 		.Include(current => current.Category)
@@ -17,20 +18,17 @@
 		.Where(current => current.IsDraft == false)
 		.Where(current => current.IsDeleted == false)
 
-		.Where(current => current.Category != null
-			&& current.Category.IsActive)
+		.Where(current => current.Category != null && current.Category.IsActive)
 
-		.Where(current => current.User != null &&
-			current.User.IsActive)
+		.Where(current => current.User != null && current.User.IsActive)
 
-		.Where(current => current.User != null &&
-			current.User.IsDeleted == false)
+		.Where(current => current.User != null && current.User.IsDeleted == false)
 
 		.OrderByDescending(current => current.IsFeatured)
 		.ThenByDescending(current => current.UpdateDateTime)
 
 		.Skip(count: 0)
-		.Take(count: 60)
+		.Take(count: 24)
 
 		.ToList();
 
@@ -76,8 +74,8 @@
 
 					@if (post.Category is not null)
 					{
-						<a href="/postCategory/@(currentUICultureName)/@(post.CategoryId)" class="btn btn-primary">
-							@(post.Category.Name)
+						<a href="/Category/@(currentUICultureName)/@(post.Category.Name)" class="btn btn-primary">
+							@(post.Category.Title)
 						</a>
 					}
 				</div>

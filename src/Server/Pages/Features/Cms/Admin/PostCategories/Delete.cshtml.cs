@@ -44,7 +44,10 @@ public class DeleteModel :
 			.Cms.Admin.PostCategories.DetailsOrDeleteViewModel
 			{
 				Id = current.Id,
+				Body = current.Body,
+				Hits = current.Hits,
 				Name = current.Name,
+				Title = current.Title,
 				IsActive = current.IsActive,
 				Ordering = current.Ordering,
 				PostCount = current.Posts.Count,
@@ -52,6 +55,7 @@ public class DeleteModel :
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
 				DisplayInHomePage = current.DisplayInHomePage,
+				MaxDisplayPostCount = current.MaxDisplayPostCount,
 			})
 			.FirstOrDefaultAsync();
 

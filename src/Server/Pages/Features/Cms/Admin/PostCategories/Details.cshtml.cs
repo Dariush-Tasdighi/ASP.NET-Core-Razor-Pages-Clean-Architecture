@@ -42,7 +42,10 @@ public class DetailsModel :
 			.Select(current => new ViewModels.Pages.Features.Cms.Admin.PostCategories.DetailsOrDeleteViewModel()
 			{
 				Id = current.Id,
+				Body = current.Body,
+				Hits = current.Hits,
 				Name = current.Name,
+				Title = current.Title,
 				IsActive = current.IsActive,
 				Ordering = current.Ordering,
 				PostCount = current.Posts.Count,
@@ -50,6 +53,7 @@ public class DetailsModel :
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
 				DisplayInHomePage = current.DisplayInHomePage,
+				MaxDisplayPostCount = current.MaxDisplayPostCount,
 			})
 			.FirstOrDefaultAsync();
 

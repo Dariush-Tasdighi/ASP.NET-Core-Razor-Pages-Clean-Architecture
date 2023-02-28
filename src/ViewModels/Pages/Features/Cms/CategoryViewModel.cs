@@ -1,23 +1,24 @@
 ﻿namespace ViewModels.Pages.Features.Cms;
 
-public class PageViewModel : object
+public class CategoryViewModel : object
 {
 	#region Constructor
-	public PageViewModel() : base()
+	public CategoryViewModel() : base()
 	{
+		Name = Resources.DataDictionary.DefaultNullValue;
 		Title = Resources.DataDictionary.DefaultNullValue;
-		LayoutName = Resources.DataDictionary.DefaultNullValue;
 	}
 	#endregion /Constructor
 
 	#region Properties
 
+	public System.Guid Id { get; set; }
+
+	public string Name { get; set; }
 	public string? Body { get; set; }
 	public string Title { get; set; }
-	public string LayoutName { get; set; }
 	public string? Description { get; set; }
-
-	public System.DateTimeOffset UpdateDateTime { get; set; }
+	public int MaxDisplayPostCount { get; set; }
 
 	#endregion /Properties
 }

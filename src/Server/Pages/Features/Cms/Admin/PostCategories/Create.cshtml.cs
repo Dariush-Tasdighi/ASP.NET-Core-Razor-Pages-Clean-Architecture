@@ -64,9 +64,6 @@ public class CreateModel :
 		ViewModel.Name =
 			ViewModel.Name.Fix()!;
 
-		//ViewModel.Name =
-		//	ViewModel.Name.Fix();
-
 		var foundedAny =
 			await
 			DatabaseContext.PostCategories
@@ -93,14 +90,47 @@ public class CreateModel :
 		// **************************************************
 
 		// **************************************************
+		ViewModel.Title =
+			ViewModel.Title.Fix()!;
+
+		foundedAny =
+			await
+			DatabaseContext.PostCategories
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
+
+			.Where(current => current.Title.ToLower() == ViewModel.Title.ToLower())
+
+			.AnyAsync();
+
+		if (foundedAny)
+		{
+			// **************************************************
+			var errorMessage = string.Format
+				(Resources.Messages.Errors.AlreadyExists,
+				Resources.DataDictionary.Title);
+
+			AddPageError(message: errorMessage);
+			// **************************************************
+
+			return Page();
+		}
+		// **************************************************
+
+		// **************************************************
 		var newEntity =
 			new Domain.Features.Cms.PostCategory
-			(cultureId: currentCulture.Id, name: ViewModel.Name)
+			(cultureId: currentCulture.Id,
+			name: ViewModel.Name, title: ViewModel.Title)
 			{
-				Ordering = ViewModel.Ordering,
+				Hits = ViewModel.Hits,
+				Body = ViewModel.Body.Fix(),
 				IsActive = ViewModel.IsActive,
+				Ordering = ViewModel.Ordering,
 				Description = ViewModel.Description.Fix(),
 				DisplayInHomePage = ViewModel.DisplayInHomePage,
+				MaxDisplayPostCount = ViewModel.MaxDisplayPostCount,
 			};
 
 		var entityEntry =
