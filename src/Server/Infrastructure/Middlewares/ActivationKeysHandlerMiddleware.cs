@@ -76,6 +76,8 @@ public class ActivationKeysHandlerMiddleware : object
 			httpContext.Request.Host.Value;
 
 		//domain = "dtat.ir";
+		//domain = "aysantaremi.ir";
+		domain = "iranianexperts.ir";
 		//domain = "temp.webdownloader.ir";
 
 		var validActivationKey =
