@@ -1,10 +1,9 @@
-﻿using Domain.Features.Common;
-
-namespace Domain.Features.Cms;
+﻿namespace Domain.Features.Cms;
 
 public class PostCategory :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
@@ -30,6 +29,16 @@ public class PostCategory :
 		Name = nameof(Resources.DataDictionary.IsActive))]
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
+
+	#region public bool IsTestData { get; set; }
+	/// <summary>
+	/// داده تستی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsTestData))]
+	public bool IsTestData { get; set; }
+	#endregion /public bool IsTestData { get; set; }
 
 	#region public bool DisplayInHomePage { get; set; }
 	/// <summary>

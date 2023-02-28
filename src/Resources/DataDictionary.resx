@@ -621,4 +621,7 @@
   <data name="Watch" xml:space="preserve">
     <value>Watch</value>
   </data>
+  <data name="IsTestData" xml:space="preserve">
+    <value>Test Data</value>
+  </data>
 </root>

@@ -654,4 +654,7 @@
   <data name="Watch" xml:space="preserve">
     <value>نمایش</value>
   </data>
+  <data name="IsTestData" xml:space="preserve">
+    <value>داده تستی</value>
+  </data>
 </root>

@@ -4,6 +4,7 @@ public class Post :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
+	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
@@ -114,6 +115,16 @@ public class Post :
 		Name = nameof(Resources.DataDictionary.IsFeatured))]
 	public bool IsFeatured { get; set; }
 	#endregion /public bool IsFeatured { get; set; }
+
+	#region public bool IsTestData { get; set; }
+	/// <summary>
+	/// داده تستی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsTestData))]
+	public bool IsTestData { get; set; }
+	#endregion /public bool IsTestData { get; set; }
 
 	#region public bool IsDeleted { get; private set; }
 	/// <summary>

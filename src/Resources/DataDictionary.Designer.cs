@@ -781,6 +781,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test Data.
+        /// </summary>
+        public static string IsTestData {
+            get {
+                return ResourceManager.GetString("IsTestData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undeletable.
         /// </summary>
         public static string IsUndeletable {

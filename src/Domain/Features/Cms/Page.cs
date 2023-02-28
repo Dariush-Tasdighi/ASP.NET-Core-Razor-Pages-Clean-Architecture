@@ -1,6 +1,4 @@
-﻿using Domain.Features.Common;
-
-namespace Domain.Features.Cms;
+﻿namespace Domain.Features.Cms;
 
 public class Page :
 	Seedwork.LocalizedEntity,

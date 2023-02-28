@@ -2,6 +2,7 @@
 
 public class MenuItem :
 	Seedwork.LocalizedEntity,
+	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
@@ -53,6 +54,16 @@ public class MenuItem :
 		Name = nameof(Resources.DataDictionary.IsDisabled))]
 	public bool IsDisabled { get; set; }
 	#endregion /public bool IsDisabled { get; set; }
+
+	#region public bool IsTestData { get; set; }
+	/// <summary>
+	/// داده تستی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsTestData))]
+	public bool IsTestData { get; set; }
+	#endregion /public bool IsTestData { get; set; }
 
 	#region public bool OpenUrlInNewWindow { get; set; }
 	/// <summary>

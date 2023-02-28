@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Server.Pages.Test;
 
-public class GenerateTestDataModel : Infrastructure.BasePageModelWithDatabaseContext
+public class GenerateTestDataModel :
+	Infrastructure.BasePageModelWithDatabaseContext
 {
 	public GenerateTestDataModel
 		(Persistence.DatabaseContext databaseContext) :
@@ -14,6 +15,26 @@ public class GenerateTestDataModel : Infrastructure.BasePageModelWithDatabaseCon
 
 	public async System.Threading.Tasks.Task OnGet()
 	{
+		var hasAny =
+			DatabaseContext.Posts
+			.Where(current => current.IsTestData)
+			.Any();
+
+		if (hasAny)
+		{
+			return;
+		}
+
+		hasAny =
+			DatabaseContext.PostCategories
+			.Where(current => current.IsTestData)
+			.Any();
+
+		if (hasAny)
+		{
+			return;
+		}
+
 		await CreatePersianPostCategoriesAsync();
 		await CreateEnglishPostCategoriesAsync();
 	}
@@ -60,6 +81,7 @@ public class GenerateTestDataModel : Infrastructure.BasePageModelWithDatabaseCon
 				new Domain.Features.Cms.PostCategory
 				(cultureId: persianCulture.Id, name: postCategoryName)
 				{
+					IsTestData = true,
 					IsActive = (postCategoryIndex % 2 == 0),
 					DisplayInHomePage = (postCategoryIndex % 3 == 0),
 				};
@@ -84,6 +106,8 @@ public class GenerateTestDataModel : Infrastructure.BasePageModelWithDatabaseCon
 					(cultureId: persianCulture.Id, userId: dariushUser.Id,
 					categoryId: postCategory.Id, title: postTitle)
 					{
+						IsTestData = true,
+
 						IsActive = (postIndex % 2 == 0),
 
 						IsDraft = false,
@@ -151,6 +175,7 @@ public class GenerateTestDataModel : Infrastructure.BasePageModelWithDatabaseCon
 				new Domain.Features.Cms.PostCategory
 				(cultureId: englishCulture.Id, name: postCategoryName)
 				{
+					IsTestData = true,
 					IsActive = (postCategoryIndex % 2 == 0),
 					DisplayInHomePage = (postCategoryIndex % 3 == 0),
 				};
@@ -175,6 +200,8 @@ public class GenerateTestDataModel : Infrastructure.BasePageModelWithDatabaseCon
 					(cultureId: englishCulture.Id, userId: dariushUser.Id,
 					categoryId: postCategory.Id, title: postTitle)
 					{
+						IsTestData = true,
+
 						IsActive = (postIndex % 2 == 0),
 
 						IsDraft = false,
