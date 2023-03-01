@@ -61,19 +61,19 @@ public class ActivationKeysHandlerMiddleware : object
 		var errorMessage =
 			"No Activation Key!";
 
+		var domain =
+			httpContext.Request.Host.Value.ToLower();
+
 		if (applicationSettings is null ||
 			applicationSettings.ActivationKeys is null ||
 			applicationSettings.ActivationKeys.Length == 0)
 		{
 			// using Microsoft.AspNetCore.Http;
 			await httpContext.Response
-				.WriteAsync(text: "1. " + errorMessage);
+				.WriteAsync(text: "1. " + domain + " - " + errorMessage);
 
 			return;
 		}
-
-		var domain =
-			httpContext.Request.Host.Value.ToLower();
 
 		//domain = "dtat.ir";
 		//domain = "rekotec.se";
@@ -88,7 +88,7 @@ public class ActivationKeysHandlerMiddleware : object
 		{
 			// using Microsoft.AspNetCore.Http;
 			await httpContext.Response
-				.WriteAsync(text: "2. " + errorMessage);
+				.WriteAsync(text: "2. " + domain + " - " + errorMessage);
 
 			return;
 		}
@@ -102,7 +102,7 @@ public class ActivationKeysHandlerMiddleware : object
 		{
 			// using Microsoft.AspNetCore.Http;
 			await httpContext.Response
-				.WriteAsync(text: "3. " + errorMessage);
+				.WriteAsync(text: "3. " + domain + " - " + errorMessage);
 
 			return;
 		}
