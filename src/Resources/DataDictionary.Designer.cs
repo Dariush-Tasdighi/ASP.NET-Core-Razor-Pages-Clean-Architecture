@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mobile.
+        /// </summary>
+        public static string CellPhoneNumberInBrief {
+            get {
+                return ResourceManager.GetString("CellPhoneNumberInBrief", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cell Phone Number Verification Key.
         /// </summary>
         public static string CellPhoneNumberVerificationKey {
@@ -448,6 +457,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string EmailAddressInBrief {
+            get {
+                return ResourceManager.GetString("EmailAddressInBrief", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email Address Verification Key.
         /// </summary>
         public static string EmailAddressVerificationKey {
@@ -700,6 +718,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deleted.
+        /// </summary>
+        public static string IsDeletedInBrief {
+            get {
+                return ResourceManager.GetString("IsDeletedInBrief", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabled.
         /// </summary>
         public static string IsDisabled {
@@ -813,6 +840,15 @@ namespace Resources {
         public static string IsVerified {
             get {
                 return ResourceManager.GetString("IsVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verified.
+        /// </summary>
+        public static string IsVerifiedInBrief {
+            get {
+                return ResourceManager.GetString("IsVerifiedInBrief", resourceCulture);
             }
         }
         

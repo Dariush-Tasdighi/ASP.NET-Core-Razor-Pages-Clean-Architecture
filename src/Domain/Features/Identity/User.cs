@@ -4,7 +4,6 @@ public class User :
 	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
-	Dtat.Seedwork.Abstractions.IEntityHasIsSystemic,
 	Dtat.Seedwork.Abstractions.IEntityHasIsUndeletable,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
@@ -76,15 +75,15 @@ public class User :
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
 
-	#region public bool IsSystemic { get; set; }
+	#region public bool IsVerified { get; set; }
 	/// <summary>
-	/// سیستمی
+	/// وضعیت
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.IsSystemic))]
-	public bool IsSystemic { get; set; }
-	#endregion /public bool IsSystemic { get; set; }
+		Name = nameof(Resources.DataDictionary.IsVerified))]
+	public bool IsVerified { get; set; }
+	#endregion /public bool IsVerified { get; set; }
 
 	#region public bool IsUndeletable { get; set; }
 	/// <summary>

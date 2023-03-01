@@ -165,7 +165,13 @@
   <data name="UserAccountIsNotActive" xml:space="preserve">
     <value>Your account is not active!</value>
   </data>
+  <data name="UserIsNotActive" xml:space="preserve">
+    <value>You can not login right now!</value>
+  </data>
   <data name="UsernameAndOrPasswordIsNotCorrect" xml:space="preserve">
     <value>Username and/or password is not correct!</value>
+  </data>
+  <data name="YourRoleIsNotActive" xml:space="preserve">
+    <value>You can not login with this role right now!</value>
   </data>
 </root>

@@ -1,19 +1,20 @@
-﻿namespace ViewModels.Pages.Admin.Users;
+﻿namespace ViewModels.Pages.Features.Identity.Admin.Users;
 
 public class CreateViewModel : CommonViewModel
 {
 	#region Constructor
 	public CreateViewModel() : base()
 	{
-		Ordering = 10_000;
-
 		Password = Resources.DataDictionary.DefaultNullValue;
 	}
 	#endregion /Constructor
 
 	#region Properties
 
-	#region public string Password { get; set; }
+	#region public string? Password { get; set; }
+	/// <summary>
+	/// گذرواژه
+	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(Name = nameof(Resources.DataDictionary.Password),
 		ResourceType = typeof(Resources.DataDictionary))]
@@ -33,10 +34,11 @@ public class CreateViewModel : CommonViewModel
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Password))]
 
-	//[System.ComponentModel.DataAnnotations.DataType
-	//	(dataType: System.ComponentModel.DataAnnotations.DataType.Password)]
-	public string Password { get; set; }
-	#endregion /public string Password { get; set; }
+	[System.ComponentModel.DataAnnotations.DataType
+		(dataType: System.ComponentModel.DataAnnotations.DataType.Password)]
+	public string? Password { get; set; }
+	//public string Password { get; set; }
+	#endregion /public string? Password { get; set; }
 
 	#endregion /Properties
 }

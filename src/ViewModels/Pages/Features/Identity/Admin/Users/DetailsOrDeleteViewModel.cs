@@ -1,4 +1,4 @@
-﻿namespace ViewModels.Pages.Admin.Users;
+﻿namespace ViewModels.Pages.Features.Identity.Admin.Users;
 
 public class DetailsOrDeleteViewModel : UpdateViewModel
 {

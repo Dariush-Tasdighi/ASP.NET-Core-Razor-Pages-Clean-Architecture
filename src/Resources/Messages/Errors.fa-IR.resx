@@ -133,7 +133,7 @@
     <value>گذرواژه جاری صحیح نمی‌باشد!</value>
   </data>
   <data name="EmailAddressIsNotVerified" xml:space="preserve">
-    <value>نشانی پست الکترونیکی هنوز تایید نشده است!</value>
+    <value>نشانی پست الکترونیکی شما هنوز تایید نشده است!</value>
   </data>
   <data name="IdIsNull" xml:space="preserve">
     <value>شناسه اطلاعات باید مشخص شده باشد!</value>
@@ -165,7 +165,13 @@
   <data name="UserAccountIsNotActive" xml:space="preserve">
     <value>دسترسی شما به سامانه تا اطلاع ثانوی مسدود می‌باشد!</value>
   </data>
+  <data name="UserIsNotActive" xml:space="preserve">
+    <value>متاسفانه تا اطلاع ثانویه، امکان ورود به سامانه، برای شما مقدور نمی‌باشد!</value>
+  </data>
   <data name="UsernameAndOrPasswordIsNotCorrect" xml:space="preserve">
     <value>شناسه‌کاربری و/یا گذرواژه صحیح نمی‌باشد!</value>
+  </data>
+  <data name="YourRoleIsNotActive" xml:space="preserve">
+    <value>متاسفانه تا اطلاع ثانویه، امکان ورود به سامانه، برای شما مقدور نمی‌باشد!</value>
   </data>
 </root>

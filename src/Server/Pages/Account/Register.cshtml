@@ -13,14 +13,15 @@
 <form method="post">
 
 	<div class="container my-0 my-sm-1 my-md-3 my-lg-5">
+
 		<div class="row">
+
 			<div class="col-12 p-3 col-md-8 offset-md-2 p-md-4   col-lg-6 offset-lg-3 p-lg-5   bg-light border border-2 rounded-3 shadow-lg">
+
 				<fieldset>
 					<legend>
 						@(pageTitle)
 					</legend>
-
-					<hr />
 
 					<partial name="PartialViews/_DisplayPageMessages" />
 
@@ -69,8 +70,12 @@
 					</div>
 
 					<div class="mb-3">
-						<button type="submit" class="btn btn-primary">@(Resources.ButtonCaptions.Register)</button>
-						<button type="reset" class="btn btn-secondary">@(Resources.ButtonCaptions.Reset)</button>
+						<button type="submit" class="btn btn-primary">
+							@(Resources.ButtonCaptions.Register)
+						</button>
+						<button type="reset" class="btn btn-secondary">
+							@(Resources.ButtonCaptions.Reset)
+						</button>
 					</div>
 				</fieldset>
 
@@ -81,8 +86,11 @@
 					|
 					<a href="/">@(Resources.ButtonCaptions.Home)</a>
 				</div>
+
 			</div>
+
 		</div>
+
 	</div>
 
 </form>

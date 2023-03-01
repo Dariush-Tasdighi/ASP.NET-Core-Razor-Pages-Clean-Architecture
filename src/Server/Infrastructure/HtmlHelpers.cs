@@ -59,6 +59,34 @@ public static class HtmlHelpers : object
 		return td;
 	}
 
+	public static Microsoft.AspNetCore.Html.IHtmlContent DtatDisplayInlineBoolean
+		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, bool? value)
+	{
+		if (html is null)
+		{
+			throw new System
+				.ArgumentNullException(paramName: nameof(html));
+		}
+
+		var input =
+			new Microsoft.AspNetCore.Mvc
+			.Rendering.TagBuilder(tagName: "input");
+
+		input.Attributes.Add
+			(key: "type", value: "checkbox");
+
+		input.Attributes.Add
+			(key: "disabled", value: "disabled");
+
+		if (value is not null && value.Value)
+		{
+			input.Attributes.Add
+				(key: "checked", value: "checked");
+		}
+
+		return input;
+	}
+
 	public static Microsoft.AspNetCore.Html.IHtmlContent DtatDisplayBoolean
 		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, bool? value)
 	{

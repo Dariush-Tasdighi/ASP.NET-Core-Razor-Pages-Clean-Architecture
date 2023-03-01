@@ -630,4 +630,16 @@
   <data name="Slide" xml:space="preserve">
     <value>Slide</value>
   </data>
+  <data name="CellPhoneNumberInBrief" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="EmailAddressInBrief" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="IsDeletedInBrief" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="IsVerifiedInBrief" xml:space="preserve">
+    <value>Verified</value>
+  </data>
 </root>

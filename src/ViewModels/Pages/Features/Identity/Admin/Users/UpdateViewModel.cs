@@ -1,4 +1,4 @@
-﻿namespace ViewModels.Pages.Admin.Users;
+﻿namespace ViewModels.Pages.Features.Identity.Admin.Users;
 
 public class UpdateViewModel : CommonViewModel
 {
@@ -8,7 +8,9 @@ public class UpdateViewModel : CommonViewModel
 	}
 	#endregion /Constructor
 
-	#region Id Property
+	#region Properties
+
+	#region public System.Guid Id { get; set; }
 	/// <summary>
 	/// شناسه
 	/// </summary>
@@ -16,5 +18,7 @@ public class UpdateViewModel : CommonViewModel
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.Id))]
 	public System.Guid Id { get; set; }
-	#endregion /Id Property
+	#endregion /public System.Guid Id { get; set; }
+
+	#endregion /Properties
 }

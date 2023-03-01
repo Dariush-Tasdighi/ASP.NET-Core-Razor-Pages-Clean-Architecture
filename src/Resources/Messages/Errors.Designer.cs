@@ -205,11 +205,29 @@ namespace Resources.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can not login right now!.
+        /// </summary>
+        public static string UserIsNotActive {
+            get {
+                return ResourceManager.GetString("UserIsNotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username and/or password is not correct!.
         /// </summary>
         public static string UsernameAndOrPasswordIsNotCorrect {
             get {
                 return ResourceManager.GetString("UsernameAndOrPasswordIsNotCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can not login with this role right now!.
+        /// </summary>
+        public static string YourRoleIsNotActive {
+            get {
+                return ResourceManager.GetString("YourRoleIsNotActive", resourceCulture);
             }
         }
     }

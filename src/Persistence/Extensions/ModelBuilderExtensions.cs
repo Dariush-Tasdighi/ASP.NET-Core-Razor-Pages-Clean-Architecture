@@ -412,7 +412,7 @@ public static class ModelBuilderExtensions : object
 				Ordering = 1,
 
 				IsActive = true,
-				IsSystemic = true,
+				IsVerified = true,
 				IsUndeletable = true,
 				IsProfilePublic = true,
 				IsEmailAddressVerified = true,

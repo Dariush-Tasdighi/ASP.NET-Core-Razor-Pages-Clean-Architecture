@@ -1,6 +1,5 @@
 ﻿using Dtat;
 using System.Linq;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 
 namespace Server.Pages.Account;
@@ -26,8 +25,61 @@ public class RegisterModel :
 
 	#region Methods
 
-	public void OnGet()
+	public async System.Threading.Tasks.Task
+		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync()
 	{
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+
+			.Where(current => current.Lcid == currentUICultureLcid)
+
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (currentCulture.IsActive == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
+		// **************************************************
+		var simpleUserRole =
+			await
+			DatabaseContext.Roles
+
+			.Where(current => current.Culture != null
+				&& current.Culture.Lcid == currentUICultureLcid)
+
+			.Where(current => current.Code ==
+				Domain.Features.Identity.Enums.RoleEnum.SimpleUser)
+
+			.FirstOrDefaultAsync();
+
+		if (simpleUserRole is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (simpleUserRole.IsActive == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
+		return Page();
 	}
 
 	public async System.Threading.Tasks.Task
@@ -39,40 +91,65 @@ public class RegisterModel :
 		}
 
 		// **************************************************
-		// در این صفحه خاص نیازی به دستورات ذیل نمی‌باشد
-		// **************************************************
-		var fixedUsername =
-			ViewModel.Username.Fix()!
-			.ToLower();
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
 
-		//var fixedUsername =
-		//	ViewModel.Username.Fix()
-		//	.ToLower();
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
 
-		var fixedEmailAddress =
-			ViewModel.EmailAddress.Fix()!
-			.ToLower();
+			.Where(current => current.Lcid == currentUICultureLcid)
 
-		//var fixedEmailAddress =
-		//	ViewModel.EmailAddress.Fix()
-		//	.ToLower();
+			.FirstOrDefaultAsync();
 
-		var fixedPassword =
-			ViewModel.Password.Fix()!;
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
 
-		//var fixedPassword =
-		//	ViewModel.Password.Fix();
-
-		var fixedConfirmPassword =
-			ViewModel.ConfirmPassword.Fix();
+		if (currentCulture.IsActive == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
 		// **************************************************
 
 		// **************************************************
+		var simpleUserRole =
+			await
+			DatabaseContext.Roles
+
+			.Where(current => current.Culture != null
+				&& current.Culture.Lcid == currentUICultureLcid)
+
+			.Where(current => current.Code ==
+				Domain.Features.Identity.Enums.RoleEnum.SimpleUser)
+
+			.FirstOrDefaultAsync();
+
+		if (simpleUserRole is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (simpleUserRole.IsActive == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
+		// **************************************************
+		var username =
+			ViewModel.Username.Fix()!.ToLower();
+
 		var isUsernameFound =
 			await
 			DatabaseContext.Users
 			.Where(current => current.Username != null
-				&& current.Username.ToLower() == fixedUsername)
+				&& current.Username.ToLower() == username)
 			.AnyAsync()
 			;
 
@@ -87,10 +164,13 @@ public class RegisterModel :
 		// **************************************************
 
 		// **************************************************
+		var emailAddress =
+			ViewModel.EmailAddress.Fix()!.ToLower();
+
 		var isEmailAddressFound =
 			await
 			DatabaseContext.Users
-			.Where(current => current.EmailAddress.ToLower() == fixedEmailAddress)
+			.Where(current => current.EmailAddress.ToLower() == emailAddress)
 			.AnyAsync();
 
 		if (isEmailAddressFound)
@@ -109,44 +189,25 @@ public class RegisterModel :
 		}
 
 		// **************************************************
-		var simpleUserRole =
-			await
-			DatabaseContext.Roles
-			.Where(current => current.Code ==
-				Domain.Features.Identity.Enums.RoleEnum.SimpleUser)
-			.FirstOrDefaultAsync();
+		var password =
+			ViewModel.Password.Fix()!;
 
-		if (simpleUserRole is null)
-		{
-			AddPageError(message: Resources
-				.Messages.Errors.UnexpectedError);
-
-			return Page();
-		}
-
-		if (simpleUserRole.IsActive == false)
-		{
-			AddPageError(message: Resources
-				.Messages.Errors.UnexpectedError);
-
-			return Page();
-		}
-		// **************************************************
-
-		// **************************************************
 		var user =
 			new Domain.Features.Identity.User
-			(emailAddress: fixedEmailAddress,
-			roleId: simpleUserRole.Id)
+			(emailAddress: emailAddress, roleId: simpleUserRole.Id)
 			{
-				Username = fixedUsername,
+				Username = username,
 				Password = Dtat.Security
-				.Hashing.GetSha256(text: fixedPassword),
+					.Hashing.GetSha256(text: password),
 			};
 
-		await DatabaseContext.AddAsync(entity: user);
+		var entityEntry =
+			await
+			DatabaseContext.AddAsync(entity: user);
 
-		await DatabaseContext.SaveChangesAsync();
+		var affectedRows =
+			await
+			DatabaseContext.SaveChangesAsync();
 		// **************************************************
 
 		AddToastSuccess(message: Resources
@@ -157,7 +218,7 @@ public class RegisterModel :
 		// **************************************************
 
 		return RedirectToPage
-			(pageName: "/Account/Login");
+			(pageName: Constants.CommonRouting.Login);
 	}
 
 	#endregion /Methods

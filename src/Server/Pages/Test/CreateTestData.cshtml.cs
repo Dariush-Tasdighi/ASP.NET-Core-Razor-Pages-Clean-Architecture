@@ -1,14 +1,13 @@
 ﻿using Dtat;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Server.Pages.Test;
 
-public class GenerateTestDataModel :
+public class CreateTestDataModel :
 	Infrastructure.BasePageModelWithDatabaseContext
 {
-	public GenerateTestDataModel
+	public CreateTestDataModel
 		(Persistence.DatabaseContext databaseContext) :
 		base(databaseContext: databaseContext)
 	{

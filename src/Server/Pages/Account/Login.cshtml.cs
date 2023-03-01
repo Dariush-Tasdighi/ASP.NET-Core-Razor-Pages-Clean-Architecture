@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
-using Domain.Features.Common;
 
 namespace Server.Pages.Account;
 
@@ -27,38 +26,76 @@ public class LoginModel :
 
 	#region Methods
 
-	public void OnGet(string? returnUrl)
+	public async System.Threading.Tasks.Task
+		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync(string? returnUrl)
 	{
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+
+			.Where(current => current.Lcid == currentUICultureLcid)
+
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (currentCulture.IsActive == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
 		ViewModel.ReturnUrl = returnUrl;
+
+		return Page();
 	}
 
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+
+			.Where(current => current.Lcid == currentUICultureLcid)
+
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (currentCulture.IsActive == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
 		if (ModelState.IsValid == false)
 		{
 			return Page();
 		}
 
 		// **************************************************
-		// در این صفحه خاص نیازی به دستورات ذیل نمی‌باشد
-		// **************************************************
-		var fixedUsername =
-			ViewModel.Username.Fix()!
-			.ToLower();
+		var username =
+			ViewModel.Username.Fix()!.ToLower();
 
-		//var fixedUsername =
-		//	ViewModel.Username.Fix()
-		//	.ToLower();
-
-		var fixedPassword =
-			ViewModel.Password.Fix()!;
-
-		//var fixedPassword =
-		//	ViewModel.Password.Fix();
-		// **************************************************
-
-		// **************************************************
 		var foundedUser =
 			await
 			DatabaseContext.Users
@@ -68,7 +105,7 @@ public class LoginModel :
 			.ThenInclude(current => current.Culture)
 
 			.Where(current => current.Username != null
-				&& current.Username.ToLower() == fixedUsername)
+				&& current.Username.ToLower() == username)
 
 			.FirstOrDefaultAsync()
 			;
@@ -91,8 +128,11 @@ public class LoginModel :
 		// **************************************************
 
 		// **************************************************
+		var password =
+			ViewModel.Password.Fix()!;
+
 		var passwordHash =
-			Dtat.Security.Hashing.GetSha256(text: fixedPassword);
+			Dtat.Security.Hashing.GetSha256(text: password);
 
 		if (string.Compare(strA: foundedUser.Password,
 			strB: passwordHash, ignoreCase: false) != 0)
@@ -110,31 +150,48 @@ public class LoginModel :
 		// **************************************************
 		if (foundedUser.Role is null)
 		{
-			// TODO
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		if (foundedUser.IsEmailAddressVerified == false)
+		{
+			var errorMessage =
+				string.Format(format:
+				Resources.Messages.Errors.EmailAddressIsNotVerified);
+
+			AddPageError(message: errorMessage);
 
 			return Page();
 		}
 
 		if (foundedUser.Role.IsActive == false)
 		{
-			// TODO
+			var errorMessage =
+				string.Format(format:
+				Resources.Messages.Errors.YourRoleIsNotActive);
 
-			return Page();
-		}
-
-		if (foundedUser.IsEmailAddressVerified == false)
-		{
-			// TODO
+			AddPageError(message: errorMessage);
 
 			return Page();
 		}
 
 		if (foundedUser.IsActive == false)
 		{
-			// TODO
+			var errorMessage =
+				string.Format(format:
+				Resources.Messages.Errors.UserIsNotActive);
+
+			AddPageError(message: errorMessage);
 
 			return Page();
 		}
+		// **************************************************
+
+		// **************************************************
+		foundedUser.LastLoginDateTime = Dtat.DateTime.Now;
+
+		await DatabaseContext.SaveChangesAsync();
 		// **************************************************
 
 		// **************************************************
@@ -146,13 +203,12 @@ public class LoginModel :
 
 		System.Security.Claims.Claim claim;
 
-		var getCurrentUICultureLcid =
-			CultureEnumHelper.GetCurrentUICultureLcid();
-
 		var userProfile =
 			foundedUser.Profiles
+
 			.Where(current => current.Culture != null
-				&& current.Culture.Lcid == getCurrentUICultureLcid)
+				&& current.Culture.Lcid == currentUICultureLcid)
+
 			.FirstOrDefault();
 
 		if (userProfile is not null)
@@ -234,6 +290,10 @@ public class LoginModel :
 		// **************************************************
 		// **************************************************
 		// **************************************************
+		// دستور ذیل غلط است و کار نمی‌کند
+		//var claimsIdentity =
+		//	new System.Security.Claims.ClaimsIdentity(claims: claims);
+
 		var claimsIdentity =
 			new System.Security.Claims.ClaimsIdentity(claims: claims,
 			authenticationType: Infrastructure.Security.Constants.DefaultScheme);

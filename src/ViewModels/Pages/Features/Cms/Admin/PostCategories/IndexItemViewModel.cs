@@ -6,6 +6,7 @@ public class IndexItemViewModel : object
 	public IndexItemViewModel() : base()
 	{
 		Name = Resources.DataDictionary.DefaultNullValue;
+		Title = Resources.DataDictionary.DefaultNullValue;
 	}
 	#endregion /Constructor
 
