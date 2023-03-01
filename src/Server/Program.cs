@@ -144,7 +144,7 @@ builder.Services.AddDbContext<Persistence.DatabaseContext>
 			.UseLazyLoadingProxies();
 
 		options
-			.UseSqlite(connectionString: "Data Source=LocalDatabase.db");
+			.UseSqlite(connectionString: "Data Source=Database\\MySQLite.db");
 	});
 // **************************************************
 // *** /Use Sqlite **********************************

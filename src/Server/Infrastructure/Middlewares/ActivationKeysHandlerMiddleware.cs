@@ -80,6 +80,7 @@ public class ActivationKeysHandlerMiddleware : object
 		//domain = "aysantaremi.ir";
 		//domain = "iranianexperts.ir";
 		//domain = "temp.webdownloader.ir";
+		//domain = "www.iranianexperts.ir";
 
 		var validActivationKey =
 			GetValidActivationKeyByDomain(domain: domain);

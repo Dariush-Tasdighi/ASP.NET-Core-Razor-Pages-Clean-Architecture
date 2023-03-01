@@ -123,6 +123,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>{0} با موفقیت حذف گردید.</value>
   </data>
+  <data name="PasswordChanged" xml:space="preserve">
+    <value>گذرواژه شما با موفقیت تغییر پیدا کرد.</value>
+  </data>
   <data name="RegistrationDone" xml:space="preserve">
     <value>ثبت‌نام شما با موفقیت انجام شد.</value>
   </data>

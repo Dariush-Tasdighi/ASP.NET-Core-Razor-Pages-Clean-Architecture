@@ -111,7 +111,8 @@ public class UpdateProfileModel :
 			return Page();
 		}
 
-		var userEmailAddress = User.Identity.Name;
+		var userEmailAddress =
+			User.Identity.Name.ToLower();
 
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
@@ -119,15 +120,18 @@ public class UpdateProfileModel :
 		var foundedUser =
 			await
 			DatabaseContext.Users
+
 			.Include(current => current.Profiles)
 			.ThenInclude(current => current.Culture)
-			.Where(current => current.EmailAddress.ToLower() == userEmailAddress.ToLower())
+
+			.Where(current => current.EmailAddress.ToLower() == userEmailAddress)
+
 			.FirstOrDefaultAsync();
 
 		if (foundedUser is null)
 		{
 			return RedirectToPage(pageName:
-				Constants.CommonRouting.NotFound);
+				Constants.CommonRouting.Logout);
 		}
 
 		foundedUser.NationalCode = ViewModel.NationalCode;

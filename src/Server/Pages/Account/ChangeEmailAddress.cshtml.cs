@@ -1,3 +1,5 @@
+using ViewModels.Pages.Account;
+
 namespace Server.Pages.Account;
 
 [Microsoft.AspNetCore.Authorization.Authorize]
@@ -9,7 +11,7 @@ public class ChangeEmailAddressModel : Infrastructure.BasePageModel
 	}
 
 	[Microsoft.AspNetCore.Mvc.BindProperty]
-	public ViewModels.Pages.Account.Users.ChangeEmailAddressViewModel ViewModel { get; set; }
+	public ChangeEmailAddressViewModel ViewModel { get; set; }
 
 	public void OnGet()
 	{

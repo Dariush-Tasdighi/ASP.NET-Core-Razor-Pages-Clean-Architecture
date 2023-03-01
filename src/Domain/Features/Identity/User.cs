@@ -178,6 +178,8 @@ public class User :
 	#endregion /public string? Username { get; set; }
 
 	#region public string? Password { get; set; }
+	private string? _password;
+
 	/// <summary>
 	/// گذرواژه
 	/// </summary>
@@ -194,7 +196,22 @@ public class User :
 		(length: Constants.FixedLength.DatabasePassword,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string? Password { get; set; }
+	public string? Password
+	{
+		get
+		{
+			return _password;
+		}
+		set
+		{
+			if(_password != value)
+			{
+				_password = value;
+
+				LastChangePasswordDateTime = Dtat.DateTime.Now;
+			}
+		}
+	}
 	#endregion /public string? Password { get; set; }
 
 	#region public string EmailAddress { get; set; }
@@ -323,6 +340,19 @@ public class User :
 		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
 	public System.DateTimeOffset? LastLoginDateTime { get; set; }
 	#endregion /System.DateTimeOffset? LastLoginDateTime { get; set; }
+
+	#region System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
+	/// <summary>
+	/// آخرین زمان تغییر گذرواژه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.LastLoginDateTime))]
+
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
+	#endregion /System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
 
 	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
 	/// <summary>
