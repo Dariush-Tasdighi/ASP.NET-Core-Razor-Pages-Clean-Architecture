@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/Server/LocalDatabase.db
+/src/Server/LocalDatabase.db-shm
+/src/Server/LocalDatabase.db-wal
