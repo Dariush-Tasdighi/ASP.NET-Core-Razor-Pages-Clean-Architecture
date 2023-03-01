@@ -27,9 +27,4 @@
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.3" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Pages\Admin\" />
-	  <Folder Include="wwwroot\themes\darkly\" />
-	</ItemGroup>
-
 </Project>

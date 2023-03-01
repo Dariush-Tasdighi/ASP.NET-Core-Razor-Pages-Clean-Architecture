@@ -1,4 +1,4 @@
-﻿namespace ViewModels.Pages.Features.Common.Cultures;
+﻿namespace ViewModels.Pages.Features.Common.Admin.Cultures;
 
 public class IndexItemViewModel : object
 {

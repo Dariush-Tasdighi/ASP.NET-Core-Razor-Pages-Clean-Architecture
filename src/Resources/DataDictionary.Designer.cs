@@ -286,6 +286,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Test Data.
+        /// </summary>
+        public static string CreateTestData {
+            get {
+                return ResourceManager.GetString("CreateTestData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creator User.
         /// </summary>
         public static string CreatorUser {
@@ -363,6 +372,15 @@ namespace Resources {
         public static string DeleteOf {
             get {
                 return ResourceManager.GetString("DeleteOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Test Data.
+        /// </summary>
+        public static string DeleteTestData {
+            get {
+                return ResourceManager.GetString("DeleteTestData", resourceCulture);
             }
         }
         

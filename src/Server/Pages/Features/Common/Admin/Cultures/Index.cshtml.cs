@@ -19,7 +19,7 @@ public class IndexModel :
 
 	#region Properties
 
-	public System.Collections.Generic.List<ViewModels.Pages.Features.Common.Cultures.IndexItemViewModel> ViewModel { get; set; }
+	public System.Collections.Generic.List<ViewModels.Pages.Features.Common.Admin.Cultures.IndexItemViewModel> ViewModel { get; set; }
 
 	#endregion /Properties
 
@@ -34,7 +34,8 @@ public class IndexModel :
 
 			.OrderByDescending(current => current.UpdateDateTime)
 
-			.Select(current => new ViewModels.Pages.Features.Common.Cultures.IndexItemViewModel
+			.Select(current => new ViewModels.Pages
+				.Features.Common.Admin.Cultures.IndexItemViewModel
 			{
 				Id = current.Id,
 				Lcid = current.Lcid,

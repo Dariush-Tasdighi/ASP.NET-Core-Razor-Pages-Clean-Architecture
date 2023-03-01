@@ -675,4 +675,10 @@
   <data name="IsVerifiedInBrief" xml:space="preserve">
     <value>تایید</value>
   </data>
+  <data name="CreateTestData" xml:space="preserve">
+    <value>ایجاد اطلاعات تستی</value>
+  </data>
+  <data name="DeleteTestData" xml:space="preserve">
+    <value>حذف اطلاعات تستی</value>
+  </data>
 </root>

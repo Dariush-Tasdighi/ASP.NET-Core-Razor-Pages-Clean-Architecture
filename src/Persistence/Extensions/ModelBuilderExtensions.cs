@@ -46,7 +46,7 @@ public static class ModelBuilderExtensions : object
 			cultureName: englishCultureInfo.Name,
 			nativeName: englishCultureInfo.NativeName)
 			{
-				IsActive = true,
+				IsActive = false,
 				Ordering = 10_100,
 				Description = null,
 			};

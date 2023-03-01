@@ -642,4 +642,10 @@
   <data name="IsVerifiedInBrief" xml:space="preserve">
     <value>Verified</value>
   </data>
+  <data name="CreateTestData" xml:space="preserve">
+    <value>Create Test Data</value>
+  </data>
+  <data name="DeleteTestData" xml:space="preserve">
+    <value>Delete Test Data</value>
+  </data>
 </root>
