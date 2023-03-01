@@ -165,6 +165,30 @@ public class PostCategory :
 
 	#endregion /Properties
 
+	#region Read Only Properties
+
+	public string DisplayName
+	{
+		get
+		{
+			var status =
+				Resources.DataDictionary.Inactive;
+
+			if (IsActive)
+			{
+				status =
+					Resources.DataDictionary.Active;
+			}
+
+			var result =
+				$"{Title} ({Name}) ({status})";
+
+			return result;
+		}
+	}
+
+	#endregion /Read Only Properties
+
 	#region Methods
 
 	#region SetUpdateDateTime()

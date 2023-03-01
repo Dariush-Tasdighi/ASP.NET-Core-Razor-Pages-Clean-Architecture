@@ -627,4 +627,7 @@
   <data name="MaxDisplayPostCount" xml:space="preserve">
     <value>Max Post Count</value>
   </data>
+  <data name="Slide" xml:space="preserve">
+    <value>Slide</value>
+  </data>
 </root>

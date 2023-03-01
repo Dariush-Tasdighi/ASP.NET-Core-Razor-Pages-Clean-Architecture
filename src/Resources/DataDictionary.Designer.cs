@@ -1375,6 +1375,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slide.
+        /// </summary>
+        public static string Slide {
+            get {
+                return ResourceManager.GetString("Slide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Slides.
         /// </summary>
         public static string Slides {

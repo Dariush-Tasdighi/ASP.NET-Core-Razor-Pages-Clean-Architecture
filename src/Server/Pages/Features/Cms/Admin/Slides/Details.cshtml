@@ -1,0 +1,59 @@
+﻿@page
+@model Server.Pages.Features.Cms.Admin.Slides.DetailsModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.DetailsOf} {Resources.DataDictionary.Slide}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<section-form>
+	<fieldset>
+		<section-form-header>
+			@(pageTitle)
+		</section-form-header>
+
+		<partial name="PartialViews/_DisplayPageMessages" />
+
+		<dtat-readonly-input asp-for="ViewModel.Id" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.IsActive" />
+
+		<dtat-readonly-input asp-for="ViewModel.Ordering" />
+
+		<dtat-readonly-input asp-for="ViewModel.Title" />
+
+		<dtat-readonly-input asp-for="ViewModel.Interval" />
+
+		<dtat-readonly-input asp-for="ViewModel.ImageUrl" dir="ltr" />
+
+		<dtat-readonly-input asp-for="ViewModel.NavigationUrl" dir="ltr" />
+
+		<dtat-readonly-checkbox asp-for="ViewModel.OpenUrlInNewWindow" />
+
+		<dtat-readonly-input asp-for="ViewModel.InsertDateTime" />
+
+		<dtat-readonly-input asp-for="ViewModel.UpdateDateTime" />
+
+		<hr />
+
+		@(Html.Raw(value: Model.ViewModel.Caption))
+
+		<hr />
+
+		@(Html.Raw(value: Model.ViewModel.Description))
+	</fieldset>
+
+	<section-form-footer>
+		<a asp-page="Index">
+			@(Html.DtatGetLinkCaptionForList())
+		</a>
+		<a asp-page="Update" asp-route-id="@(Model.ViewModel.Id)">
+			@(Html.DtatGetLinkCaptionForUpdate())
+		</a>
+		<a asp-page="Delete" asp-route-id="@(Model.ViewModel.Id)">
+			@(Html.DtatGetLinkCaptionForDelete())
+		</a>
+	</section-form-footer>
+</section-form>

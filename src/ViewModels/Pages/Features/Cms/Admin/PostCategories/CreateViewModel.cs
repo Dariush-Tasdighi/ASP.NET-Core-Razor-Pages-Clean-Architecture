@@ -6,6 +6,7 @@ public class CreateViewModel : object
 	public CreateViewModel() : base()
 	{
 		Ordering = 10_000;
+		MaxDisplayPostCount = 48;
 	}
 	#endregion /Constructor
 

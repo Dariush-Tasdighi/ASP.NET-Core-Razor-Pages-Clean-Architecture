@@ -1,20 +1,12 @@
-﻿namespace Domain.Features.Cms;
+﻿namespace ViewModels.Pages.Features.Cms.Admin.Slides;
 
-public class Slide :
-	Seedwork.LocalizedEntity,
-	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
-	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
-	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
+public class CreateViewModel : object
 {
 	#region Constructor
-	public Slide(System.Guid cultureId, string title, string imageUrl) : base(cultureId: cultureId)
+	public CreateViewModel() : base()
 	{
 		Interval = 5_000;
-
-		Title = title;
-		ImageUrl = imageUrl;
-
-		UpdateDateTime = InsertDateTime;
+		Ordering = 10_000;
 	}
 	#endregion /Constructor
 
@@ -22,7 +14,7 @@ public class Slide :
 
 	#region public bool IsActive { get; set; }
 	/// <summary>
-	/// وضعیت
+	/// وضعیت صفحه
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
@@ -30,46 +22,22 @@ public class Slide :
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
 
-	#region public bool IsTestData { get; set; }
+	#region public int Ordering { get; set; }
 	/// <summary>
-	/// داده تستی
+	/// چیدمان
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.IsTestData))]
-	public bool IsTestData { get; set; }
-	#endregion /public bool IsTestData { get; set; }
-
-	#region public bool OpenUrlInNewWindow { get; set; }
-	/// <summary>
-	/// وضعیت
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.OpenUrlInNewWindow))]
-	public bool OpenUrlInNewWindow { get; set; }
-	#endregion /public bool OpenUrlInNewWindow { get; set; }
-
-
-
-	#region public int Interval { get; set; }
-	/// <summary>
-	/// فاصله زمانی نمایش
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Interval))]
+		Name = nameof(Resources.DataDictionary.Ordering))]
 
 	[System.ComponentModel.DataAnnotations.Range
-		(minimum: 100, maximum: 60_000,
+		(minimum: 1, maximum: 100_000,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
-	public int Interval { get; set; }
-	#endregion /public int Interval { get; set; }
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
 
-
-
-	#region public string Title { get; set; }
+	#region public string? Title { get; set; }
 	/// <summary>
 	/// عنوان
 	/// </summary>
@@ -86,20 +54,26 @@ public class Slide :
 		(length: Constants.MaxLength.Title,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string Title { get; set; }
-	#endregion /public string Title { get; set; }
+	public string? Title { get; set; }
+	//public string Title { get; set; }
+	#endregion /public string? Title { get; set; }
 
-	#region public string? Caption { get; set; }
+	#region public int Interval { get; set; }
 	/// <summary>
-	/// توضیحات
+	/// فاصله زمانی نمایش
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Caption))]
-	public string? Caption { get; set; }
-	#endregion /public string? Caption { get; set; }
+		Name = nameof(Resources.DataDictionary.Interval))]
 
-	#region public string ImageUrl { get; set; }
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 100, maximum: 60_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Interval { get; set; }
+	#endregion /public int Interval { get; set; }
+
+	#region public string? ImageUrl { get; set; }
 	/// <summary>
 	/// لینک تصویر اسلاید
 	/// </summary>
@@ -111,18 +85,9 @@ public class Slide :
 		(AllowEmptyStrings = false,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public string ImageUrl { get; set; }
-	#endregion /public string ImageUrl { get; set; }
-
-	#region public string? Description { get; set; }
-	/// <summary>
-	/// توضیحات
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Description))]
-	public string? Description { get; set; }
-	#endregion /public string? Description { get; set; }
+	public string? ImageUrl { get; set; }
+	//public string ImageUrl { get; set; }
+	#endregion /public string? ImageUrl { get; set; }
 
 	#region public string? NavigationUrl { get; set; }
 	/// <summary>
@@ -134,7 +99,15 @@ public class Slide :
 	public string? NavigationUrl { get; set; }
 	#endregion /public string? NavigationUrl { get; set; }
 
-
+	#region public bool OpenUrlInNewWindow { get; set; }
+	/// <summary>
+	/// وضعیت
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.OpenUrlInNewWindow))]
+	public bool OpenUrlInNewWindow { get; set; }
+	#endregion /public bool OpenUrlInNewWindow { get; set; }
 
 	#region public System.DateTimeOffset? PublishStartDateTime { get; set; }
 	/// <summary>
@@ -156,30 +129,30 @@ public class Slide :
 	public System.DateTimeOffset? PublishFinishDateTime { get; set; }
 	#endregion /public System.DateTimeOffset? PublishFinishDateTime { get; set; }
 
-	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
+	#region public string? Caption { get; set; }
 	/// <summary>
-	/// زمان ویرایش
+	/// توضیحات
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.UpdateDateTime))]
+		Name = nameof(Resources.DataDictionary.Caption))]
+	public string? Caption { get; set; }
+	#endregion /public string? Caption { get; set; }
 
-	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
-		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-	public System.DateTimeOffset UpdateDateTime { get; private set; }
-	#endregion /public System.DateTimeOffset UpdateDateTime { get; private set; }
+	#region public string? Description { get; set; }
+	/// <summary>
+	/// توضیحات
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Description))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.MetaDescription,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? Description { get; set; }
+	#endregion /public string? Description { get; set; }
 
 	#endregion /Properties
-
-	#region Methods
-
-	#region SetUpdateDateTime()
-	public void SetUpdateDateTime()
-	{
-		UpdateDateTime =
-			Dtat.DateTime.Now;
-	}
-	#endregion /SetUpdateDateTime()
-
-	#endregion /Methods
 }

@@ -142,7 +142,7 @@ public static class SelectLists : object
 			.Select(current => new ViewModels.Shared.KeyValueViewModel
 			{
 				Id = current.Id,
-				Name = current.Name,
+				Name = current.DisplayName,
 			})
 			.ToListAsync()
 			;

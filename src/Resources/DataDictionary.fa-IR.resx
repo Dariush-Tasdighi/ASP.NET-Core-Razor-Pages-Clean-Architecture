@@ -660,4 +660,7 @@
   <data name="MaxDisplayPostCount" xml:space="preserve">
     <value>حداکثر تعداد مطالب</value>
   </data>
+  <data name="Slide" xml:space="preserve">
+    <value>اسلاید</value>
+  </data>
 </root>

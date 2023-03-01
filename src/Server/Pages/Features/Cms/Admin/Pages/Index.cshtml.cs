@@ -43,17 +43,18 @@ public class IndexModel :
 			.Select(current => new ViewModels.Pages.Features.Cms.Admin.Pages.IndexItemViewModel
 			{
 				Id = current.Id,
+
 				Hits = current.Hits,
 				IsActive = current.IsActive,
 
 				Name = current.Name,
 				Title = current.Title,
 
-				LayoutName = current.Layout!.Name,
-				//LayoutName = current.Layout.Name,
-
 				UpdateDateTime = current.UpdateDateTime,
 				InsertDateTime = current.InsertDateTime,
+
+				LayoutName =
+					current.Layout != null ? current.Layout.Name : string.Empty,
 			})
 			.ToListAsync()
 			;
