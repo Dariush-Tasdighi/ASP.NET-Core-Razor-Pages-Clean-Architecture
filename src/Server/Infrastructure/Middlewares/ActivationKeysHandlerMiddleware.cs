@@ -67,15 +67,16 @@ public class ActivationKeysHandlerMiddleware : object
 		{
 			// using Microsoft.AspNetCore.Http;
 			await httpContext.Response
-				.WriteAsync(text: errorMessage);
+				.WriteAsync(text: "1. " + errorMessage);
 
 			return;
 		}
 
 		var domain =
-			httpContext.Request.Host.Value;
+			httpContext.Request.Host.Value.ToLower();
 
 		//domain = "dtat.ir";
+		//domain = "rekotec.se";
 		//domain = "aysantaremi.ir";
 		//domain = "iranianexperts.ir";
 		//domain = "temp.webdownloader.ir";
@@ -87,7 +88,7 @@ public class ActivationKeysHandlerMiddleware : object
 		{
 			// using Microsoft.AspNetCore.Http;
 			await httpContext.Response
-				.WriteAsync(text: errorMessage);
+				.WriteAsync(text: "2. " + errorMessage);
 
 			return;
 		}
@@ -101,7 +102,7 @@ public class ActivationKeysHandlerMiddleware : object
 		{
 			// using Microsoft.AspNetCore.Http;
 			await httpContext.Response
-				.WriteAsync(text: errorMessage);
+				.WriteAsync(text: "3. " + errorMessage);
 
 			return;
 		}
