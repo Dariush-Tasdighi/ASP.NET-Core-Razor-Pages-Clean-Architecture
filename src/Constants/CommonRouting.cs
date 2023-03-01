@@ -19,22 +19,22 @@ public static class CommonRouting : object
 	/// <summary>
 	/// Error 400
 	/// </summary>
-	public const string BadRequest = "/Error/Error400";
+	public const string BadRequest = "/Errors/Error400";
 
 	/// <summary>
 	/// Error 403
 	/// </summary>
-	public const string Forbidden = "/Error/Error403";
+	public const string Forbidden = "/Errors/Error403";
 
 	/// <summary>
-	/// Error 403
+	/// Error 404
 	/// </summary>
-	public const string NotFound = "/Error/Error403";
+	public const string NotFound = "/Errors/Error404";
 
 	/// <summary>
 	/// Error 500
 	/// </summary>
-	public const string InternalServerError = "/Error/Error500";
+	public const string InternalServerError = "/Errors/Error500";
 
 	/// <summary>
 	/// Login

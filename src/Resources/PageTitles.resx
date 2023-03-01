@@ -162,6 +162,9 @@
   <data name="Error400" xml:space="preserve">
     <value>Bad Request!</value>
   </data>
+  <data name="Error403" xml:space="preserve">
+    <value>Forbidden! / Access Denied!</value>
+  </data>
   <data name="Error404" xml:space="preserve">
     <value>Page Not Found!</value>
   </data>

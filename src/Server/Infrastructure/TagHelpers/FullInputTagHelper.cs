@@ -21,9 +21,6 @@ public class FullInputTagHelper :
 	[Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeName(name: "asp-for")]
 	public Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression? For { get; set; }
 
-	[Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeName(name: "read-only")]
-	public bool ReadOnly { get; set; }
-
 	public override async System.Threading.Tasks.Task ProcessAsync
 		(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context,
 		Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output)
@@ -81,9 +78,8 @@ public class FullInputTagHelper :
 		// **************************************************
 		var textBox =
 			await
-			Utility.GenerateTextBoxAsync
-			(generator: Generator, viewContext: ViewContext,
-			@for: For, dir: dirString, readOnly: ReadOnly);
+			Utility.GenerateTextBoxAsync(generator: Generator,
+			viewContext: ViewContext, @for: For, dir: dirString);
 
 		div.InnerHtml.AppendHtml(encoded: textBox);
 		// **************************************************

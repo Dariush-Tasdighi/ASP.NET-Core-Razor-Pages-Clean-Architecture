@@ -162,6 +162,9 @@
   <data name="Error400" xml:space="preserve">
     <value>درخواست شما معتبر نمی‌باشد!</value>
   </data>
+  <data name="Error403" xml:space="preserve">
+    <value>شما به این صفحه دسترسی ندارید!</value>
+  </data>
   <data name="Error404" xml:space="preserve">
     <value>صفحه ی مورد نظر یافت نشد!</value>
   </data>

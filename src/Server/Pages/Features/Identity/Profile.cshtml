@@ -17,15 +17,18 @@
 
 		<partial name="PartialViews/_DisplayPageMessages" />
 
-		<dtat-full-input asp-for="ViewModel.CellPhoneNumber" dir="ltr" read-only=true />
+		<dtat-readonly-input asp-for="ViewModel.FirstName" />
 
-		<dtat-full-input asp-for="ViewModel.EmailAddress" dir="ltr" read-only=true />
+		<dtat-readonly-input asp-for="ViewModel.LastName" />
 
-		<dtat-full-input asp-for="ViewModel.Hits" dir="ltr" read-only=true />
+		<dtat-readonly-input asp-for="ViewModel.CellPhoneNumber" dir="ltr" />
+
+		<dtat-readonly-input asp-for="ViewModel.EmailAddress" dir="ltr" />
+
+		<dtat-readonly-input asp-for="ViewModel.Hits" dir="ltr" />
 
 		<hr />
 
 		@(Html.Raw(Model.ViewModel.Description))
 	</fieldset>
 </section-form>
-

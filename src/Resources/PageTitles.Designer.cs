@@ -196,6 +196,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forbidden! / Access Denied!.
+        /// </summary>
+        public static string Error403 {
+            get {
+                return ResourceManager.GetString("Error403", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page Not Found!.
         /// </summary>
         public static string Error404 {
