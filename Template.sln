@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{8E662AB1-4F6C-4758-A313-83DE86C2DBEF}"
 	ProjectSection(SolutionItems) = preProject
 		docs\ReadMe.docx = docs\ReadMe.docx
+		docs\ReadMe.txt = docs\ReadMe.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LICENSE", "LICENSE", "{3FCC0A93-F743-48D8-89BF-1278AC818D5E}"

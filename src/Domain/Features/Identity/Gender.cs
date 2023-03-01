@@ -1,4 +1,6 @@
-﻿namespace Domain.Features.Identity;
+﻿using System.Xml.Linq;
+
+namespace Domain.Features.Identity;
 
 public class Gender :
 	Seedwork.LocalizedEntity,
@@ -100,6 +102,29 @@ public class Gender :
 	#endregion /public System.DateTimeOffset UpdateDateTime { get; private set; }
 
 	#endregion /Properties
+
+	#region Read Only Properties
+
+	public string DisplayName
+	{
+		get
+		{
+			var status =
+				Resources.DataDictionary.Inactive;
+
+			if (IsActive)
+			{
+				status =
+					Resources.DataDictionary.Active;
+			}
+			var result =
+				$"{Title} ({status})";
+
+			return result;
+		}
+	}
+
+	#endregion /Read Only Properties
 
 	#region Methods
 

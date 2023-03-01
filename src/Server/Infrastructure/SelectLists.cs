@@ -9,6 +9,7 @@ public static class SelectLists : object
 	{
 	}
 
+	#region GetRolesAsync()
 	public static async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetRolesAsync
 		(Persistence.DatabaseContext databaseContext, object? selectedValue = null)
@@ -43,7 +44,9 @@ public static class SelectLists : object
 
 		return result;
 	}
+	#endregion /GetRolesAsync()
 
+	#region GetLayoutsAsync()
 	public static async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetLayoutsAsync
 		(Persistence.DatabaseContext databaseContext, object? selectedValue = null)
@@ -78,9 +81,11 @@ public static class SelectLists : object
 
 		return result;
 	}
+	#endregion /GetLayoutsAsync()
 
+	#region GetGendersForUserAsync()
 	public static async System.Threading.Tasks.Task
-		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetGendersAsync
+		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetGendersForUserAsync
 		(Persistence.DatabaseContext databaseContext, object? selectedValue = null)
 	{
 		var currentUICultureLcid = Domain.Features
@@ -89,6 +94,8 @@ public static class SelectLists : object
 		var list =
 			await
 			databaseContext.Genders
+
+			.Where(current => current.IsActive)
 
 			.Where(current => current.Culture != null &&
 				current.Culture.Lcid == currentUICultureLcid)
@@ -121,6 +128,52 @@ public static class SelectLists : object
 
 		return result;
 	}
+	#endregion /GetGendersForUserAsync()
+
+	#region GetGendersForAdminAsync()
+	public static async System.Threading.Tasks.Task
+		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetGendersForAdminAsync
+		(Persistence.DatabaseContext databaseContext, object? selectedValue = null)
+	{
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var list =
+			await
+			databaseContext.Genders
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
+
+			.OrderBy(current => current.Ordering)
+			.ThenBy(current => current.Title)
+
+			.Select(current => new ViewModels.Shared.KeyValueViewModel
+			{
+				Id = current.Id,
+				Name = current.DisplayName,
+			})
+			.ToListAsync()
+			;
+
+		// **************************************************
+		var emptyItem =
+			new ViewModels.Shared.KeyValueViewModel
+			(id: null, name: Resources.DataDictionary.SelectAnItem);
+
+		list.Insert(index: 0, item: emptyItem);
+		// **************************************************
+
+		var result =
+			new Microsoft.AspNetCore.Mvc.Rendering
+			.SelectList(items: list,
+			dataValueField: nameof(ViewModels.Shared.KeyValueViewModel.Id),
+			dataTextField: nameof(ViewModels.Shared.KeyValueViewModel.Name),
+			selectedValue: selectedValue);
+
+		return result;
+	}
+	#endregion /GetGendersForAdminAsync()
 
 	public static async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetPostCategoriesAsync

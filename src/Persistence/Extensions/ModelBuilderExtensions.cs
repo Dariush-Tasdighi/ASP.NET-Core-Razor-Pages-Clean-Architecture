@@ -66,7 +66,7 @@ public static class ModelBuilderExtensions : object
 			code: Domain.Features.Identity.Enums.GenderEnum.Unspecified, title: "نامشخص")
 			{
 				Prefix = null,
-				IsActive = true,
+				IsActive = false,
 				Ordering = 10_000,
 				Description = null,
 			};
@@ -105,6 +105,22 @@ public static class ModelBuilderExtensions : object
 
 		modelBuilder.Entity<Domain.Features
 			.Identity.Gender>().HasData(data: femalePersian);
+		// **************************************************
+
+		// **************************************************
+		var trancePersian =
+			new Domain.Features.Identity.Gender
+			(cultureId: culturePersian.Id,
+			code: Domain.Features.Identity.Enums.GenderEnum.Trance, title: "ترنس")
+			{
+				Prefix = null,
+				IsActive = false,
+				Ordering = 10_000,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: trancePersian);
 		// **************************************************
 
 		// **************************************************
@@ -153,6 +169,22 @@ public static class ModelBuilderExtensions : object
 
 		modelBuilder.Entity<Domain.Features
 			.Identity.Gender>().HasData(data: femaleEnglish);
+		// **************************************************
+
+		// **************************************************
+		var tranceEnglish =
+			new Domain.Features.Identity.Gender
+			(cultureId: cultureEnglish.Id,
+			code: Domain.Features.Identity.Enums.GenderEnum.Trance, title: "Trance")
+			{
+				Prefix = null,
+				IsActive = true,
+				Ordering = 10_000,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: tranceEnglish);
 		// **************************************************
 		// *** /Genders *************************************
 		// **************************************************

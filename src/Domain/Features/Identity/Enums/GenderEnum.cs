@@ -5,4 +5,5 @@ public enum GenderEnum : int
 	Unspecified = 0,
 	Male = 1,
 	Female = 2,
+	Trance = 3,
 }

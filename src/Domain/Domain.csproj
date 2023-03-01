@@ -7,10 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="SharedKernel\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Constants\Constants.csproj" />
 		<ProjectReference Include="..\Resources\Resources.csproj" />
 

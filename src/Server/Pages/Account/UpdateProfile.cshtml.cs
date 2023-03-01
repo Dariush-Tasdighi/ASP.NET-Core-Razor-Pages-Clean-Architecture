@@ -62,7 +62,7 @@ public class UpdateProfileModel :
 
 		GendersSelectList =
 			await
-			Infrastructure.SelectLists.GetGendersAsync
+			Infrastructure.SelectLists.GetGendersForUserAsync
 			(databaseContext: DatabaseContext, selectedValue: null);
 
 		ViewModel.NationalCode = foundedUser.NationalCode;
@@ -105,7 +105,7 @@ public class UpdateProfileModel :
 		{
 			GendersSelectList =
 				await
-				Infrastructure.SelectLists.GetGendersAsync
+				Infrastructure.SelectLists.GetGendersForUserAsync
 				(databaseContext: DatabaseContext, selectedValue: null);
 
 			return Page();
@@ -185,7 +185,7 @@ public class UpdateProfileModel :
 
 		GendersSelectList =
 			await
-			Infrastructure.SelectLists.GetGendersAsync
+			Infrastructure.SelectLists.GetGendersForUserAsync
 			(databaseContext: DatabaseContext, selectedValue: null);
 
 		// **************************************************
