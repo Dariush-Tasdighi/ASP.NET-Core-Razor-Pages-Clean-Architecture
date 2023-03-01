@@ -364,3 +364,6 @@ FodyWeavers.xsd
 /src/Server/LocalDatabase.db
 /src/Server/LocalDatabase.db-shm
 /src/Server/LocalDatabase.db-wal
+/src/Server/Database/MySQLite.db
+/src/Server/Database/MySQLite.db-shm
+/src/Server/Database/MySQLite.db-wal
