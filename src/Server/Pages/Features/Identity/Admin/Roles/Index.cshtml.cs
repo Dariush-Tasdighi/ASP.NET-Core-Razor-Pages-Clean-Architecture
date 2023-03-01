@@ -28,9 +28,15 @@ public class IndexModel :
 	#region OnGetAsync()
 	public async System.Threading.Tasks.Task OnGetAsync()
 	{
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
 		ViewModel =
 			await
 			DatabaseContext.Roles
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
 
 			.OrderBy(current => current.Ordering)
 			.ThenBy(current => current.Code)

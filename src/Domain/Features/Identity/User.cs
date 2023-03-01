@@ -13,8 +13,7 @@ public class User :
 	{
 		RoleId = roleId;
 
-		UpdateDateTime =
-			InsertDateTime;
+		UpdateDateTime = InsertDateTime;
 
 		EmailAddress = emailAddress;
 		EmailAddressVerificationKey = System.Guid.NewGuid();
@@ -378,8 +377,7 @@ public class User :
 	#region SetUpdateDateTime()
 	public void SetUpdateDateTime()
 	{
-		UpdateDateTime =
-			Dtat.DateTime.Now;
+		UpdateDateTime = Dtat.DateTime.Now;
 	}
 	#endregion /SetUpdateDateTime()
 

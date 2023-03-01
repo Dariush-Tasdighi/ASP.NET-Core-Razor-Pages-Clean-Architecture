@@ -12,8 +12,7 @@ public class Gender :
 		Code = code;
 		Title = title;
 
-		UpdateDateTime =
-			InsertDateTime;
+		UpdateDateTime = InsertDateTime;
 
 		UserProfiles =
 			new System.Collections.Generic.List<UserProfile>();
@@ -107,8 +106,7 @@ public class Gender :
 	#region SetUpdateDateTime()
 	public void SetUpdateDateTime()
 	{
-		UpdateDateTime =
-			Dtat.DateTime.Now;
+		UpdateDateTime = Dtat.DateTime.Now;
 	}
 	#endregion /SetUpdateDateTime()
 

@@ -1,4 +1,4 @@
-using Dtat;
+﻿using Dtat;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
@@ -89,18 +89,21 @@ public class UpdateModel :
 		}
 		// **************************************************
 
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
 		// **************************************************
 		ViewModel.Title =
 			ViewModel.Title.Fix()!;
-
-		//ViewModel.Title =
-		//	ViewModel.Title.Fix();
 
 		var foundedAny =
 			await
 			DatabaseContext.Roles
 
 			.Where(current => current.Id != ViewModel.Id)
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
 
 			.Where(current => current.Title.ToLower() == ViewModel.Title.ToLower())
 
@@ -122,6 +125,9 @@ public class UpdateModel :
 
 		// **************************************************
 		foundedItem.SetUpdateDateTime();
+
+		// دقت کنید که دستور ذیل نباید نوشته شود
+		//foundedItem.Name = ViewModel.Name.Fix()!;
 
 		foundedItem.Title = ViewModel.Title;
 		foundedItem.Ordering = ViewModel.Ordering;

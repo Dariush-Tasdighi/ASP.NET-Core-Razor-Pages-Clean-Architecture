@@ -1,19 +1,19 @@
 ﻿namespace Domain.Features.Identity;
 
 public class Role :
-	Seedwork.Entity,
+	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public Role(Enums.RoleEnum code, string name, string title) : base()
+	public Role(System.Guid cultureId,
+		Enums.RoleEnum code, string name, string title) : base(cultureId: cultureId)
 	{
-		Name = name;
 		Code = code;
+		Name = name;
 		Title = title;
 
-		UpdateDateTime =
-			InsertDateTime;
+		UpdateDateTime = InsertDateTime;
 
 		Users =
 			new System.Collections.Generic.List<User>();
@@ -117,8 +117,7 @@ public class Role :
 	#region SetUpdateDateTime()
 	public void SetUpdateDateTime()
 	{
-		UpdateDateTime =
-			Dtat.DateTime.Now;
+		UpdateDateTime = Dtat.DateTime.Now;
 	}
 	#endregion /SetUpdateDateTime()
 

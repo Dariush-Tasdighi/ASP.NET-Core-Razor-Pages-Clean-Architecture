@@ -105,7 +105,7 @@ public class GenerateTestDataModel :
 					IsTestData = true,
 					IsActive = (slideIndex % 2 == 0),
 					Interval = slideIndex * 1000,
-					OpenUrlInNewWindow = slideIndex % 4 == 0 ? true : false,
+					OpenUrlInNewWindow = slideIndex % 4 == 0,
 					Caption = (slideIndex % 2 == 0) ? slideCaption : null,
 					NavigationUrl = slideIndex % 2 == 0 ? "http://date2date.ir" : null,
 				};
@@ -155,7 +155,7 @@ public class GenerateTestDataModel :
 					IsTestData = true,
 					IsActive = (slideIndex % 2 == 0),
 					Interval = slideIndex * 1000,
-					OpenUrlInNewWindow = slideIndex % 4 == 0 ? true : false,
+					OpenUrlInNewWindow = slideIndex % 4 == 0,
 					Caption = (slideIndex % 2 == 0) ? slideCaption : null,
 					NavigationUrl = slideIndex % 2 == 0 ? "http://date2date.ir" : null,
 				};
@@ -198,9 +198,9 @@ public class GenerateTestDataModel :
 				(cultureId: persianCulture.Id, title: menuItemTitle)
 				{
 					IsTestData = true,
-					IsDisabled = (menuItemIndex == 1 || menuItemIndex == 4 || menuItemIndex == 8) ? true : false,
+					IsDisabled = (menuItemIndex == 1 || menuItemIndex == 4 || menuItemIndex == 8),
 					NavigationUrl = (menuItemIndex == 1 || menuItemIndex == 3 || menuItemIndex == 7 || menuItemIndex == 9) ? null : "http://date2date.ir",
-					IsVisible = (menuItemIndex == 1 || menuItemIndex == 2 || menuItemIndex == 4 || menuItemIndex == 5 || menuItemIndex == 7 || menuItemIndex == 8 || menuItemIndex == 9) ? true : false,
+					IsVisible = (menuItemIndex == 1 || menuItemIndex == 2 || menuItemIndex == 4 || menuItemIndex == 5 || menuItemIndex == 7 || menuItemIndex == 8 || menuItemIndex == 9),
 				};
 
 			await DatabaseContext.AddAsync(entity: menuItem);
@@ -226,12 +226,11 @@ public class GenerateTestDataModel :
 					(cultureId: persianCulture.Id, title: subMenuItemTitle)
 					{
 						IsTestData = true,
+						ParentId = menuItem.Id,
 						IsVisible = (subMenuItemIndex % 3 != 0),
 						NavigationUrl = (subMenuItemIndex % 2 == 0) ? "http://date2date.ir" : null,
-						IsDisabled = (subMenuItemIndex == 0 || subMenuItemIndex == 7) ? true : false,
+						IsDisabled = (subMenuItemIndex == 0 || subMenuItemIndex == 7),
 					};
-
-				subMenuItem.ParentId = menuItem.Id;
 
 				await DatabaseContext.AddAsync(entity: subMenuItem);
 			}
@@ -271,9 +270,9 @@ public class GenerateTestDataModel :
 				(cultureId: englishCulture.Id, title: menuItemTitle)
 				{
 					IsTestData = true,
-					IsDisabled = (menuItemIndex == 1 || menuItemIndex == 4 || menuItemIndex == 8) ? true : false,
+					IsDisabled = (menuItemIndex == 1 || menuItemIndex == 4 || menuItemIndex == 8),
 					NavigationUrl = (menuItemIndex == 1 || menuItemIndex == 3 || menuItemIndex == 7 || menuItemIndex == 9) ? null : "http://date2date.ir",
-					IsVisible = (menuItemIndex == 1 || menuItemIndex == 2 || menuItemIndex == 4 || menuItemIndex == 5 || menuItemIndex == 7 || menuItemIndex == 8 || menuItemIndex == 9) ? true : false,
+					IsVisible = (menuItemIndex == 1 || menuItemIndex == 2 || menuItemIndex == 4 || menuItemIndex == 5 || menuItemIndex == 7 || menuItemIndex == 8 || menuItemIndex == 9),
 				};
 
 			await DatabaseContext.AddAsync(entity: menuItem);
@@ -298,12 +297,11 @@ public class GenerateTestDataModel :
 					(cultureId: englishCulture.Id, title: subMenuItemTitle)
 					{
 						IsTestData = true,
+						ParentId = menuItem.Id,
 						IsVisible = (subMenuItemIndex % 3 != 0),
 						NavigationUrl = (subMenuItemIndex % 2 == 0) ? "http://date2date.ir" : null,
-						IsDisabled = (subMenuItemIndex == 0 || subMenuItemIndex == 7) ? true : false,
+						IsDisabled = (subMenuItemIndex == 0 || subMenuItemIndex == 7),
 					};
-
-				subMenuItem.ParentId = menuItem.Id;
 
 				await DatabaseContext.AddAsync(entity: subMenuItem);
 			}

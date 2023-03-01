@@ -9,12 +9,11 @@ public class Culture :
 	public Culture(Enums.CultureEnum lcid,
 		string cultureName, string nativeName) : base()
 	{
-		UpdateDateTime =
-			InsertDateTime;
-
 		Lcid = lcid;
 		NativeName = nativeName;
 		CultureName = cultureName;
+
+		UpdateDateTime = InsertDateTime;
 
 		Pages =
 			new System.Collections.Generic.List<Cms.Page>();
@@ -131,8 +130,7 @@ public class Culture :
 	#region SetUpdateDateTime()
 	public void SetUpdateDateTime()
 	{
-		UpdateDateTime =
-			Dtat.DateTime.Now;
+		UpdateDateTime = Dtat.DateTime.Now;
 	}
 	#endregion /SetUpdateDateTime()
 

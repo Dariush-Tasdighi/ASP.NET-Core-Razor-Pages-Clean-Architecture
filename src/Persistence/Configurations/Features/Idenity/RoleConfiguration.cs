@@ -18,32 +18,22 @@ internal sealed class RoleConfiguration : object, Microsoft
 			.IsUnicode(unicode: false)
 			;
 
-		//builder
-		//	.HasIndex(current => current.Name)
-		//	.IsUnique(unique: true)
-		//	;
-
 		builder
-			.HasIndex(current => new { current.Name })
-			.IsUnique(unique: true)
-			;
-
-		//builder
-		//	.HasIndex(current => new { current.IsActive, current.Name })
-		//	.IsUnique(unique: true)
-		//	;
-		// **************************************************
-
-		// **************************************************
-		builder
-			.HasIndex(current => new { current.Code })
+			.HasIndex(current => new { current.CultureId, current.Name })
 			.IsUnique(unique: true)
 			;
 		// **************************************************
 
 		// **************************************************
 		builder
-			.HasIndex(current => new { current.Title })
+			.HasIndex(current => new { current.CultureId, current.Code })
+			.IsUnique(unique: true)
+			;
+		// **************************************************
+
+		// **************************************************
+		builder
+			.HasIndex(current => new { current.CultureId, current.Title })
 			.IsUnique(unique: true)
 			;
 		// **************************************************

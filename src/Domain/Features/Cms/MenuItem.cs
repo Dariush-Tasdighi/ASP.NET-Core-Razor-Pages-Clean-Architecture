@@ -139,8 +139,7 @@ public class MenuItem :
 	#region SetUpdateDateTime()
 	public void SetUpdateDateTime()
 	{
-		UpdateDateTime =
-			Dtat.DateTime.Now;
+		UpdateDateTime = Dtat.DateTime.Now;
 	}
 	#endregion /SetUpdateDateTime()
 

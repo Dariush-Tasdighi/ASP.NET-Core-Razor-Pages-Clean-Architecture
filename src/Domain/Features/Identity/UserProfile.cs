@@ -9,14 +9,13 @@ public class UserProfile :
 		(System.Guid cultureId, System.Guid userId,
 		System.Guid genderId, string firstName, string lastName) : base(cultureId: cultureId)
 	{
-		UpdateDateTime =
-			InsertDateTime;
-
 		UserId = userId;
 		GenderId = genderId;
 
 		LastName = lastName;
 		FirstName = firstName;
+
+		UpdateDateTime = InsertDateTime;
 	}
 	#endregion /Constructor
 
@@ -180,8 +179,7 @@ public class UserProfile :
 	#region SetUpdateDateTime()
 	public void SetUpdateDateTime()
 	{
-		UpdateDateTime =
-			Dtat.DateTime.Now;
+		UpdateDateTime = Dtat.DateTime.Now;
 	}
 	#endregion /SetUpdateDateTime()
 

@@ -97,9 +97,6 @@ public class UpdateModel :
 		ViewModel.Title =
 			ViewModel.Title.Fix()!;
 
-		//ViewModel.Title =
-		//	ViewModel.Title.Fix();
-
 		var foundedAny =
 			await
 			DatabaseContext.Genders
