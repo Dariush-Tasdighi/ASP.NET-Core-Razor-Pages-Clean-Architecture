@@ -84,6 +84,7 @@ public class UpdateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
+		// **************************************************
 		if (ModelState.IsValid == false)
 		{
 			LayoutsSelectList =
@@ -93,6 +94,24 @@ public class UpdateModel :
 
 			return Page();
 		}
+		// **************************************************
+
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.Lcid == currentUICultureLcid)
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
 
 		// **************************************************
 		var foundedItem =
@@ -109,17 +128,20 @@ public class UpdateModel :
 		// **************************************************
 
 		// **************************************************
-		ViewModel.Name =
-			ViewModel.Name.Fix()!;
-
-		//ViewModel.Name =
-		//	ViewModel.Name.Fix();
+		var name =
+			ViewModel.Name.Fix()!.ToLower();
 
 		var foundedAny =
 			await
 			DatabaseContext.Pages
+
 			.Where(current => current.Id != ViewModel.Id)
-			.Where(current => current.Name.ToLower() == ViewModel.Name.ToLower())
+
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
+
+			.Where(current => current.Name.ToLower() == name)
+
 			.AnyAsync();
 
 		if (foundedAny)
@@ -142,24 +164,21 @@ public class UpdateModel :
 		// **************************************************
 
 		// **************************************************
-		ViewModel.Title =
-			ViewModel.Title.Fix()!;
-
-		//ViewModel.Title =
-		//	ViewModel.Title.Fix();
-
 		ViewModel.Description =
 			ViewModel.Description.Fix();
 
 		foundedItem.SetUpdateDateTime();
 
-		foundedItem.Body = ViewModel.Body;
-		foundedItem.Name = ViewModel.Name;
-		foundedItem.Title = ViewModel.Title;
 		foundedItem.LayoutId = ViewModel.LayoutId;
 		foundedItem.Ordering = ViewModel.Ordering;
 		foundedItem.IsActive = ViewModel.IsActive;
-		foundedItem.Description = ViewModel.Description;
+
+		foundedItem.Name = name;
+		foundedItem.Title = ViewModel.Title.Fix()!;
+
+		foundedItem.Body = ViewModel.Body.Fix();
+		foundedItem.Description = ViewModel.Description.Fix();
+
 		foundedItem.DoesSearchEnginesIndexIt = ViewModel.DoesSearchEnginesIndexIt;
 		foundedItem.DoesSearchEnginesFollowIt = ViewModel.DoesSearchEnginesFollowIt;
 		// **************************************************

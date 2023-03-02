@@ -40,9 +40,11 @@ public class UpdateModel :
 		var result =
 			await
 			DatabaseContext.MenuItems
+
 			.Where(current => current.Id == id.Value)
+
 			.Select(current => new ViewModels.Pages
-			.Features.Cms.Admin.MenuItems.UpdateViewModel()
+				.Features.Cms.Admin.MenuItems.UpdateViewModel()
 			{
 				Id = current.Id,
 				Title = current.Title,
@@ -80,7 +82,9 @@ public class UpdateModel :
 		var foundedItem =
 			await
 			DatabaseContext.MenuItems
+
 			.Where(current => current.Id == ViewModel.Id)
+
 			.FirstOrDefaultAsync();
 
 		if (foundedItem is null)

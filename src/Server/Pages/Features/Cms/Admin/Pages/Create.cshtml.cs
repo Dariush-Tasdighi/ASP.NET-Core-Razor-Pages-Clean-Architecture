@@ -45,32 +45,17 @@ public class CreateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
+		// **************************************************
 		if (ModelState.IsValid == false)
 		{
-			return Page();
-		}
-
-		ViewModel.Name =
-			ViewModel.Name.Fix()!;
-
-		var foundedAny =
-			await
-			DatabaseContext.Pages
-			.Where(current => current.Name.ToLower() == ViewModel.Name.ToLower())
-			.AnyAsync();
-
-		if (foundedAny)
-		{
-			// **************************************************
-			var errorMessage = string.Format
-				(Resources.Messages.Errors.AlreadyExists,
-				Resources.DataDictionary.Name);
-
-			AddPageError(message: errorMessage);
-			// **************************************************
+			LayoutsSelectList =
+				await
+				Infrastructure.SelectLists.GetLayoutsAsync
+				(databaseContext: DatabaseContext, selectedValue: null);
 
 			return Page();
 		}
+		// **************************************************
 
 		// **************************************************
 		var currentUICultureLcid = Domain.Features
@@ -85,32 +70,54 @@ public class CreateModel :
 		if (currentCulture is null)
 		{
 			return RedirectToPage(pageName:
-				Constants.CommonRouting.InternalServerError);
+				Constants.CommonRouting.NotFound);
 		}
 		// **************************************************
 
 		// **************************************************
-		ViewModel.Body =
-			ViewModel.Body.Fix();
+		var name =
+			ViewModel.Name.Fix()!.ToLower();
 
-		ViewModel.Title =
-			ViewModel.Title.Fix()!;
+		var foundedAny =
+			await
+			DatabaseContext.Pages
 
-		//ViewModel.Title =
-		//	ViewModel.Title.Fix();
+			.Where(current => current.Culture != null &&
+				current.Culture.Lcid == currentUICultureLcid)
 
-		ViewModel.Description =
-			ViewModel.Description.Fix();
+			.Where(current => current.Name.ToLower() == name)
 
+			.AnyAsync();
+
+		if (foundedAny)
+		{
+			// **************************************************
+			var errorMessage = string.Format
+				(format: Resources.Messages.Errors.AlreadyExists,
+				arg0: Resources.DataDictionary.Name);
+
+			AddPageError(message: errorMessage);
+			// **************************************************
+
+			LayoutsSelectList =
+				await
+				Infrastructure.SelectLists.GetLayoutsAsync
+				(databaseContext: DatabaseContext, selectedValue: null);
+
+			return Page();
+		}
+		// **************************************************
+
+		// **************************************************
 		var newEntity =
 			new Domain.Features.Cms.Page(cultureId: currentCulture.Id,
-			layoutId: ViewModel.LayoutId, name: ViewModel.Name, title: ViewModel.Title)
+			layoutId: ViewModel.LayoutId, name: name, title: ViewModel.Title.Fix()!)
 			{
 				Ordering = ViewModel.Ordering,
 				IsActive = ViewModel.IsActive,
 
-				Body = ViewModel.Body,
-				Description = ViewModel.Description,
+				Body = ViewModel.Body.Fix(),
+				Description = ViewModel.Description.Fix(),
 
 				DoesSearchEnginesIndexIt = ViewModel.DoesSearchEnginesIndexIt,
 				DoesSearchEnginesFollowIt = ViewModel.DoesSearchEnginesFollowIt,

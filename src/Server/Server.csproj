@@ -8,6 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Pages\About.cshtml.BAK" />
+	  <None Remove="Pages\Contact.cshtml.BAK" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 		<ProjectReference Include="..\Constants\Constants.csproj" />
 		<ProjectReference Include="..\Framework\Dtat\Dtat.csproj" />

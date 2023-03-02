@@ -3,7 +3,9 @@
 @{
 	var isUserAuthenticated = true;
 
-	if (User is null || User.Identity is null || User.Identity.IsAuthenticated == false)
+	if (User is null ||
+		User.Identity is null ||
+		User.Identity.IsAuthenticated == false)
 	{
 		isUserAuthenticated = false;
 	}
@@ -26,12 +28,6 @@
 			<div class="collapse navbar-collapse" id="navbarMain">
 
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-					<li class="nav-item">
-						<a class="nav-link text-dark" asp-page="/Contact">
-							@(Resources.PageTitles.Contact)
-						</a>
-					</li>
 
 					@if (isUserAuthenticated)
 					{
