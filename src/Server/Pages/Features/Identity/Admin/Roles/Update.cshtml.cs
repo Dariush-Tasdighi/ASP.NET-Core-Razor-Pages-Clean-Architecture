@@ -139,7 +139,7 @@ public class UpdateModel :
 			await
 			DatabaseContext.LocalizedRoles
 
-			.Where(current => current.Id != ViewModel.Id)
+			.Where(current => current.RoleId != ViewModel.Id)
 			.Where(current => current.CultureId == currentCulture.Id)
 			.Where(current => current.Title.ToLower() == title.ToLower())
 

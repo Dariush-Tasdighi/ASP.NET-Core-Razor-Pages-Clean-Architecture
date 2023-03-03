@@ -142,7 +142,7 @@ public class UpdateModel :
 			await
 			DatabaseContext.LocalizedGenders
 
-			.Where(current => current.Id != ViewModel.Id)
+			.Where(current => current.GenderId != ViewModel.Id)
 			.Where(current => current.CultureId == currentCulture.Id)
 			.Where(current => current.Title.ToLower() == title.ToLower())
 
