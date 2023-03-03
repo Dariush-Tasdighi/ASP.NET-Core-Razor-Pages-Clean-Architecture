@@ -7,14 +7,51 @@ namespace Server.Pages.Test;
 public class CreateTestDataModel :
 	Infrastructure.BasePageModelWithDatabaseContext
 {
+	#region Constructor
 	public CreateTestDataModel
-		(Persistence.DatabaseContext databaseContext) :
+		(Persistence.DatabaseContext databaseContext,
+		Microsoft.Extensions.Hosting.IHostEnvironment hostEnvironment,
+		Services.ColorService colorService) :
 		base(databaseContext: databaseContext)
 	{
+		ColorService = colorService;
+		HostEnvironment = hostEnvironment;
+	}
+	#endregion /Constructor
+
+	#region Properties
+
+	private Services.ColorService ColorService { get; }
+
+	private Microsoft.Extensions.Hosting.IHostEnvironment HostEnvironment { get; }
+
+	#endregion /Properties
+
+	#region Methods
+
+	private int GetRandomNumber()
+	{
+		var byteArray =
+			System.Guid.NewGuid().ToByteArray();
+
+		var seed = System.BitConverter
+			.ToInt32(value: byteArray, startIndex: 0);
+
+		var random = new System.Random(Seed: seed);
+
+		var value = random.Next
+			(minValue: 0, ColorService.Colors.Count);
+
+		return value;
 	}
 
 	public async System.Threading.Tasks.Task OnGet()
 	{
+		CreatePredefinedFoldersAsync();
+
+		CreatePostImagesAsync();
+		CreateSlideImagesAsync();
+
 		var hasAny =
 			DatabaseContext.Posts
 			.Where(current => current.IsTestData)
@@ -78,10 +115,11 @@ public class CreateTestDataModel :
 			return;
 		}
 
+		var slideCount = 20;
 		var slideCaptionTemplate = "سلام زندگی";
 		var slideTitleTemplate = "عنوان اسلاید";
 
-		for (var slideIndex = 1; slideIndex <= 6; slideIndex++)
+		for (var slideIndex = 1; slideIndex <= slideCount; slideIndex++)
 		{
 			var slideIndexString =
 				slideIndex
@@ -95,7 +133,7 @@ public class CreateTestDataModel :
 				$"{slideCaptionTemplate} {slideIndexString}";
 
 			var imageUrl =
-				$"/images/slides/slide_{slideIndex}.jpg";
+				$"/images/predefined_slides/slide_{GetRandomNumber()}.png";
 
 			var slide =
 				new Domain.Features.Cms.Slide
@@ -128,10 +166,11 @@ public class CreateTestDataModel :
 			return;
 		}
 
+		var slideCount = 20;
 		var slideTitleTemplate = "Slide Tite";
 		var slideCaptionTemplate = "Hello, World!";
 
-		for (var slideIndex = 7; slideIndex <= 11; slideIndex++)
+		for (var slideIndex = 1; slideIndex <= slideCount; slideIndex++)
 		{
 			var slideIndexString =
 				slideIndex
@@ -145,7 +184,7 @@ public class CreateTestDataModel :
 				$"{slideCaptionTemplate} {slideIndexString}";
 
 			var imageUrl =
-				$"/images/slides/slide_{slideIndex}.jpg";
+				$"/images/predefined_slides/slide_{GetRandomNumber()}.png";
 
 			var slide =
 				new Domain.Features.Cms.Slide
@@ -397,7 +436,7 @@ public class CreateTestDataModel :
 						Description = postDescription,
 
 						ImageUrl =
-							$"/images/post_images/pic_{postIndex % 8 + 1}.jpg",
+							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
 					};
 
 				//if(postIndex % 5 == 0)
@@ -500,7 +539,7 @@ public class CreateTestDataModel :
 						Description = postDescription,
 
 						ImageUrl =
-							$"/images/post_images/pic_{postIndex % 8 + 1}.jpg",
+							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
 					};
 
 				//if (postIndex % 5 == 0)
@@ -514,4 +553,173 @@ public class CreateTestDataModel :
 
 		await DatabaseContext.SaveChangesAsync();
 	}
+
+	private void CreatePredefinedFoldersAsync()
+	{
+		var path =
+			$"{HostEnvironment.ContentRootPath}\\wwwroot\\images";
+
+		if (System.IO.Directory.Exists(path: path) == false)
+		{
+			System.IO.Directory.CreateDirectory(path: path);
+		}
+
+		var postsPath =
+			$"{path}\\posts";
+
+		if (System.IO.Directory.Exists(path: postsPath) == false)
+		{
+			System.IO.Directory.CreateDirectory(path: postsPath);
+		}
+
+		var slidesPath =
+			$"{path}\\slides";
+
+		if (System.IO.Directory.Exists(path: slidesPath) == false)
+		{
+			System.IO.Directory.CreateDirectory(path: slidesPath);
+		}
+
+		var predefinedPostsPath =
+			$"{path}\\predefined_posts";
+
+		if (System.IO.Directory.Exists(path: predefinedPostsPath) == false)
+		{
+			System.IO.Directory.CreateDirectory(path: predefinedPostsPath);
+		}
+
+		var predefinedSlidesPath =
+			$"{path}\\predefined_slides";
+
+		if (System.IO.Directory.Exists(path: predefinedSlidesPath) == false)
+		{
+			System.IO.Directory.CreateDirectory(path: predefinedSlidesPath);
+		}
+	}
+
+	private void CreatePostImagesAsync()
+	{
+		var width = 915;
+		var height = 580;
+
+		var path =
+			$"{HostEnvironment.ContentRootPath}\\wwwroot\\images\\predefined_posts";
+
+#pragma warning disable CA1416
+
+		//var format =
+		//	System.Drawing.Imaging.PixelFormat.Format32bppArgb;
+
+		var format =
+			System.Drawing.Imaging.PixelFormat.Format24bppRgb;
+
+		for (var index = 0; index <= ColorService.Colors.Count - 1; index++)
+		{
+			var pathName =
+				$"{path}\\post_{index}.png";
+
+			if (System.IO.File.Exists(path: pathName))
+			{
+				continue;
+			}
+
+			var bitmap =
+				new System.Drawing.Bitmap
+				(width: width, height: height, format: format);
+
+			var graphics = System.Drawing
+				.Graphics.FromImage(image: bitmap);
+
+			graphics.PageUnit =
+				System.Drawing.GraphicsUnit.Pixel;
+
+			graphics.PixelOffsetMode =
+				System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+			graphics.CompositingQuality =
+				System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+
+			var backgroundColor =
+				ColorService.Colors[index];
+
+			var backgroundBrush = new System
+				.Drawing.SolidBrush(color: backgroundColor);
+
+			var rectangle =
+				new System.Drawing.Rectangle
+				(x: 0, y: 0, width: width, height: height);
+
+			graphics.FillRectangle
+				(brush: backgroundBrush, rect: rectangle);
+
+			bitmap.Save(filename: pathName,
+				format: System.Drawing.Imaging.ImageFormat.Png);
+		}
+
+#pragma warning restore CA1416
+	}
+
+	private void CreateSlideImagesAsync()
+	{
+		var width = 2880;
+		var height = 600;
+
+		var path =
+			$"{HostEnvironment.ContentRootPath}\\wwwroot\\images\\predefined_slides";
+
+#pragma warning disable CA1416
+
+		//var format =
+		//	System.Drawing.Imaging.PixelFormat.Format32bppArgb;
+
+		var format =
+			System.Drawing.Imaging.PixelFormat.Format24bppRgb;
+
+		for (var index = 0; index <= ColorService.Colors.Count - 1; index++)
+		{
+			var pathName =
+				$"{path}\\slide_{index}.png";
+
+			if (System.IO.File.Exists(path: pathName))
+			{
+				continue;
+			}
+
+			var bitmap =
+				new System.Drawing.Bitmap
+				(width: width, height: height, format: format);
+
+			var graphics = System.Drawing
+				.Graphics.FromImage(image: bitmap);
+
+			graphics.PageUnit =
+				System.Drawing.GraphicsUnit.Pixel;
+
+			graphics.PixelOffsetMode =
+				System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
+			graphics.CompositingQuality =
+				System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+
+			var backgroundColor =
+				ColorService.Colors[index];
+
+			var backgroundBrush = new System
+				.Drawing.SolidBrush(color: backgroundColor);
+
+			var rectangle =
+				new System.Drawing.Rectangle
+				(x: 0, y: 0, width: width, height: height);
+
+			graphics.FillRectangle
+				(brush: backgroundBrush, rect: rectangle);
+
+			bitmap.Save(filename: pathName,
+				format: System.Drawing.Imaging.ImageFormat.Png);
+		}
+
+#pragma warning restore CA1416
+	}
+
+	#endregion /Methods
 }

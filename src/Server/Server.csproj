@@ -8,8 +8,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Pages\About.cshtml.BAK" />
-	  <None Remove="Pages\Contact.cshtml.BAK" />
+		<None Remove="Pages\About.cshtml.BAK" />
+		<None Remove="Pages\Contact.cshtml.BAK" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Database\" />
+		<Folder Include="Database\" />
 	</ItemGroup>
 
 </Project>

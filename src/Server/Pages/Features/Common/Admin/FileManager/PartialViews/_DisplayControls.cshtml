@@ -1,45 +1,30 @@
 ﻿@model Server.Pages.Features.Common.Admin.FileManager.IndexModel;
 
-@inject Infrastructure.Settings.ApplicationSettings applicationSettings
-
 @if (Model is null)
-{
-	return;
-}
-
-@if (applicationSettings.FileManagerSettings is null)
 {
 	return;
 }
 
 <div class="row gy-2 gx-3 align-items-center mb-3">
 
-	@if (applicationSettings.FileManagerSettings.DeleteItemsEnabled)
-	{
-		<div class="col-auto">
-			<button asp-page-handler="DeleteItems" type="submit" class="btn btn-danger btn-sm">Delete</button>
-		</div>
-	}
+	<div class="col-auto">
+		<button asp-page-handler="DeleteItems" type="submit" class="btn btn-danger btn-sm">Delete</button>
+	</div>
 
-	@if (applicationSettings.FileManagerSettings.CreateDirectoryEnabled)
-	{
-		<div class="col-auto">
-			<input type="text" id="directoryName" name="directoryName" class="form-control" placeholder="Directory Name" aria-label="Directory Name" />
-		</div>
+	<div class="col-auto">
+		<input type="text" id="directoryName" name="directoryName" class="form-control" placeholder="Directory Name" aria-label="Directory Name" />
+	</div>
 
-		<div class="col-auto">
-			<button asp-page-handler="CreateDirectory" type="submit" class="btn btn-primary btn-sm">Create Directory</button>
-		</div>
-	}
+	<div class="col-auto">
+		<button asp-page-handler="CreateDirectory" type="submit" class="btn btn-primary btn-sm">Create Directory</button>
+	</div>
 
-	@if (applicationSettings.FileManagerSettings.UploadFilesEnabled)
-	{
-		<div class="col-auto">
-			<input type="file" id="files" name="files" class="form-control" placeholder="Select Files" aria-label="Select Files" multiple />
-		</div>
+	<div class="col-auto">
+		<input type="file" id="files" name="files" class="form-control" placeholder="Select Files" aria-label="Select Files" multiple />
+	</div>
 
-		<div class="col-auto">
-			<button asp-page-handler="UploadFiles" type="submit" class="btn btn-primary btn-sm">Upload Files</button>
-		</div>
-	}
+	<div class="col-auto">
+		<button asp-page-handler="UploadFiles" type="submit" class="btn btn-primary btn-sm">Upload Files</button>
+	</div>
+
 </div>

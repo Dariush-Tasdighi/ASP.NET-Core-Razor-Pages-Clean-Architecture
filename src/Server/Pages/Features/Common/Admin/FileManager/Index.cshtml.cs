@@ -74,12 +74,6 @@ public class IndexModel :
 		{
 			CheckPathAndSetCurrentPath(path: path);
 
-			if (ApplicationSettings.FileManagerSettings.DeleteItemsEnabled == false)
-			{
-				SetDirectoriesAndFiles();
-				return;
-			}
-
 			if (items is null || items.Count == 0)
 			{
 				var errorMessage =
@@ -155,13 +149,7 @@ public class IndexModel :
 		{
 			CheckPathAndSetCurrentPath(path: path);
 
-			if (ApplicationSettings.FileManagerSettings.CreateDirectoryEnabled == false)
-			{
-				SetDirectoriesAndFiles();
-				return;
-			}
-
-			if (string.IsNullOrWhiteSpace(directoryName))
+			if (string.IsNullOrWhiteSpace(value: directoryName))
 			{
 				SetDirectoriesAndFiles();
 				return;
@@ -219,12 +207,6 @@ public class IndexModel :
 		try
 		{
 			CheckPathAndSetCurrentPath(path: path);
-
-			if (ApplicationSettings.FileManagerSettings.UploadFilesEnabled == false)
-			{
-				SetDirectoriesAndFiles();
-				return;
-			}
 
 			if (files is null || files.Count == 0)
 			{
