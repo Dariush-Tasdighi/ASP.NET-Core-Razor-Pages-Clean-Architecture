@@ -1,44 +1,51 @@
-﻿namespace ViewModels.Pages.Features.Identity.Admin.Roles;
+﻿namespace Domain.Features.Identity;
 
-public class CreateViewModel : object
+public class LocalizedRole : Seedwork.LocalizedEntity
 {
 	#region Constructor
-	public CreateViewModel() : base()
+	public LocalizedRole
+		(System.Guid cultureId, System.Guid roleId, string title) : base(cultureId: cultureId)
 	{
-		Ordering = 10_000;
+		Title = title;
+		RoleId = roleId;
 	}
 	#endregion /Constructor
 
 	#region Properties
 
-	#region public bool IsActive { get; set; }
+	#region public System.Guid RoleId { get; set; }
 	/// <summary>
-	/// وضعیت
+	/// نقش کاربر
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.IsActive))]
-	public bool IsActive { get; set; }
-	#endregion /public bool IsActive { get; set; }
+		Name = nameof(Resources.DataDictionary.Role))]
 
-	#region public int Ordering { get; set; }
-	/// <summary>
-	/// چیدمان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Ordering))]
-
-	[System.ComponentModel.DataAnnotations.Range
-		(minimum: 1, maximum: 100_000,
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
-	public int Ordering { get; set; }
-	#endregion /public int Ordering { get; set; }
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid RoleId { get; set; }
+	#endregion /public System.Guid RoleId { get; set; }
 
-	#region public string? Title { get; set; }
+	#region public virtual Role? Role { get; set; }
 	/// <summary>
-	/// نام
+	/// نقش کاربر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.User))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public virtual Role? Role { get; set; }
+	#endregion /public virtual Role? Role { get; set; }
+
+	#region public string Title { get; set; }
+	/// <summary>
+	/// عنوان
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
@@ -53,9 +60,8 @@ public class CreateViewModel : object
 		(length: Constants.MaxLength.Title,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string? Title { get; set; }
-	//public string Title { get; set; }
-	#endregion /public string? Title { get; set; }
+	public string Title { get; set; }
+	#endregion /public string Title { get; set; }
 
 	#region public string? Description { get; set; }
 	/// <summary>

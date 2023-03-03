@@ -1,6 +1,7 @@
 ﻿using Dtat;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace Server.Pages.Features.Identity.Admin.Roles;
 
@@ -31,6 +32,23 @@ public class UpdateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync(System.Guid? id)
 	{
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.Lcid == currentUICultureLcid)
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
 		if (id is null)
 		{
 			return RedirectToPage(pageName:
@@ -47,10 +65,20 @@ public class UpdateModel :
 				.Features.Identity.Admin.Roles.UpdateViewModel()
 			{
 				Id = current.Id,
-				Title = current.Title,
 				IsActive = current.IsActive,
 				Ordering = current.Ordering,
-				Description = current.Description,
+
+#pragma warning disable CS8602
+
+				Title = current.LocalizedRoles
+					.FirstOrDefault(current => current.Culture != null
+						&& current.Culture.Lcid == currentUICultureLcid).Title,
+
+				Description = current.LocalizedRoles
+					.FirstOrDefault(current => current.Culture != null
+						&& current.Culture.Lcid == currentUICultureLcid).Description,
+
+#pragma warning restore CS8602
 			})
 			.FirstOrDefaultAsync();
 
@@ -70,6 +98,23 @@ public class UpdateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.Lcid == currentUICultureLcid)
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
 		if (ModelState.IsValid == false)
 		{
 			return Page();
@@ -89,23 +134,16 @@ public class UpdateModel :
 		}
 		// **************************************************
 
-		var currentUICultureLcid = Domain.Features
-			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
-
 		// **************************************************
-		ViewModel.Title =
-			ViewModel.Title.Fix()!;
+		var title = ViewModel.Title.Fix()!;
 
 		var foundedAny =
 			await
-			DatabaseContext.Roles
+			DatabaseContext.LocalizedRoles
 
 			.Where(current => current.Id != ViewModel.Id)
-
-			.Where(current => current.Culture != null &&
-				current.Culture.Lcid == currentUICultureLcid)
-
-			.Where(current => current.Title.ToLower() == ViewModel.Title.ToLower())
+			.Where(current => current.CultureId == currentCulture.Id)
+			.Where(current => current.Title.ToLower() == title.ToLower())
 
 			.AnyAsync();
 
@@ -129,10 +167,34 @@ public class UpdateModel :
 		// دقت کنید که دستور ذیل نباید نوشته شود
 		//foundedItem.Name = ViewModel.Name.Fix()!;
 
-		foundedItem.Title = ViewModel.Title;
 		foundedItem.Ordering = ViewModel.Ordering;
 		foundedItem.IsActive = ViewModel.IsActive;
-		foundedItem.Description = ViewModel.Description.Fix();
+		// **************************************************
+
+		// **************************************************
+		var localizedItem =
+			await
+			DatabaseContext.LocalizedRoles
+			.Where(current => current.RoleId == foundedItem.Id)
+			.Where(current => current.CultureId == currentCulture.Id)
+			.FirstOrDefaultAsync();
+
+		if (localizedItem is not null)
+		{
+			localizedItem.Title = title;
+			localizedItem.Description = ViewModel.Description.Fix();
+		}
+		else
+		{
+			localizedItem =
+				new Domain.Features.Identity.LocalizedRole
+				(cultureId: currentCulture.Id, roleId: foundedItem.Id, title: title)
+				{
+					Description = ViewModel.Description.Fix(),
+				};
+
+			await DatabaseContext.AddAsync(entity: localizedItem);
+		}
 		// **************************************************
 
 		var affectedRows =

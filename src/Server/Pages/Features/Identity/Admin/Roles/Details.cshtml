@@ -1,4 +1,5 @@
 ﻿@page
+
 @model Server.Pages.Features.Identity.Admin.Roles.DetailsModel
 
 @{
@@ -20,9 +21,9 @@
 
 		<dtat-readonly-checkbox asp-for="ViewModel.IsActive" />
 
-		<dtat-readonly-input asp-for="ViewModel.Name" dir="ltr" />
-
 		<dtat-readonly-input asp-for="ViewModel.Code" />
+
+		<dtat-readonly-input asp-for="ViewModel.Name" dir="ltr" />
 
 		<dtat-readonly-input asp-for="ViewModel.Ordering" />
 
@@ -37,8 +38,6 @@
 		<hr />
 
 		@(Html.Raw(value: Model.ViewModel.Description))
-
-		@*<dtat-readonly-textarea asp-for="ViewModel.Description" />*@
 	</fieldset>
 
 	<section-form-footer>

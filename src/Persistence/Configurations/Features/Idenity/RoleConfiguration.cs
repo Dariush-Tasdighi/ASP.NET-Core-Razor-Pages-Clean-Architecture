@@ -19,21 +19,14 @@ internal sealed class RoleConfiguration : object, Microsoft
 			;
 
 		builder
-			.HasIndex(current => new { current.CultureId, current.Name })
+			.HasIndex(current => new { current.Name })
 			.IsUnique(unique: true)
 			;
 		// **************************************************
 
 		// **************************************************
 		builder
-			.HasIndex(current => new { current.CultureId, current.Code })
-			.IsUnique(unique: true)
-			;
-		// **************************************************
-
-		// **************************************************
-		builder
-			.HasIndex(current => new { current.CultureId, current.Title })
+			.HasIndex(current => new { current.Code })
 			.IsUnique(unique: true)
 			;
 		// **************************************************
@@ -45,6 +38,17 @@ internal sealed class RoleConfiguration : object, Microsoft
 		// **************************************************
 		builder
 			.HasMany(current => current.Users)
+			.WithOne(other => other.Role)
+			.IsRequired(required: true)
+			.HasForeignKey(other => other.RoleId)
+			.OnDelete(deleteBehavior:
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
+			;
+		// **************************************************
+
+		// **************************************************
+		builder
+			.HasMany(current => current.LocalizedRoles)
 			.WithOne(other => other.Role)
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.RoleId)

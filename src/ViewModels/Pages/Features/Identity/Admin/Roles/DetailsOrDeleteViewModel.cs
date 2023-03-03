@@ -5,35 +5,25 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 	#region Constructor
 	public DetailsOrDeleteViewModel() : base()
 	{
+		Name = Resources.DataDictionary.DefaultNullValue;
 	}
 	#endregion /Constructor
 
 	#region Properties
 
-	#region public string? Name { get; set; }
+	#region public string Name { get; set; }
 	/// <summary>
 	/// نام
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.Name))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Constants.MaxLength.Name,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string? Name { get; set; }
-	//public string Name { get; set; }
-	#endregion /public string? Name { get; set; }
+	public string Name { get; set; }
+	#endregion /public string Name { get; set; }
 
 	#region public int UserCount { get; set; }
 	/// <summary>
-	/// تعداد مطالب
+	/// تعداد کاربران
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),

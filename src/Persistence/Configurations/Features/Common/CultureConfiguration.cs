@@ -106,6 +106,17 @@ internal sealed class CultureConfiguration : object, Microsoft
 				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
 			;
 		// **************************************************
+
+		// **************************************************
+		builder
+			.HasMany(current => current.LocalizedRoles)
+			.WithOne(other => other.Culture)
+			.IsRequired(required: true)
+			.HasForeignKey(other => other.CultureId)
+			.OnDelete(deleteBehavior:
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
+			;
+		// **************************************************
 		// **************************************************
 		// **************************************************
 	}

@@ -192,207 +192,87 @@ public static class ModelBuilderExtensions : object
 		// **************************************************
 		// *** Roles ****************************************
 		// **************************************************
-		var simpleUserPersian =
+		var simpleUser =
 			new Domain.Features.Identity.Role
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.SimpleUser,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SimpleUser),
-			title: "کاربر")
+			(code: Domain.Features.Identity.Enums.RoleEnum.SimpleUser,
+			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SimpleUser))
 			{
 				IsActive = true,
 				Ordering = 10_000,
-				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: simpleUserPersian);
+			.Identity.Role>().HasData(data: simpleUser);
 		// **************************************************
 
 		// **************************************************
-		var specialUserPersian =
+		var specialUser =
 			new Domain.Features.Identity.Role
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.SpecialUser,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SpecialUser),
-			title: "کاربر ویژه")
+			(code: Domain.Features.Identity.Enums.RoleEnum.SpecialUser,
+			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SpecialUser))
 			{
 				IsActive = true,
 				Ordering = 10_100,
-				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: specialUserPersian);
+			.Identity.Role>().HasData(data: specialUser);
 		// **************************************************
 
 		// **************************************************
-		var supervisorPersian =
+		var supervisor =
 			new Domain.Features.Identity.Role
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.Supervisor,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Supervisor),
-			title: "مسئول پایگاه")
+			(code: Domain.Features.Identity.Enums.RoleEnum.Supervisor,
+			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Supervisor))
 			{
 				IsActive = true,
 				Ordering = 10_200,
-				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: supervisorPersian);
+			.Identity.Role>().HasData(data: supervisor);
 		// **************************************************
 
 		// **************************************************
-		var administratorPersian =
+		var administrator =
 			new Domain.Features.Identity.Role
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.Administrator,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Administrator),
-			title: "مدیر پایگاه")
+			(code: Domain.Features.Identity.Enums.RoleEnum.Administrator,
+			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Administrator))
 			{
 				IsActive = true,
 				Ordering = 10_300,
-				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: administratorPersian);
+			.Identity.Role>().HasData(data: administrator);
 		// **************************************************
 
 		// **************************************************
-		var applicationOwnerPersian =
+		var applicationOwner =
 			new Domain.Features.Identity.Role
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner),
-			title: "مالک پایگاه")
+			(code: Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner,
+			name: nameof(Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner))
 			{
 				IsActive = true,
 				Ordering = 10_400,
-				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: applicationOwnerPersian);
+			.Identity.Role>().HasData(data: applicationOwner);
 		// **************************************************
 
 		// **************************************************
 		var programmerPersian =
 			new Domain.Features.Identity.Role
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.Programmer,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Programmer),
-			title: "برنامه‌نویس")
+			(code: Domain.Features.Identity.Enums.RoleEnum.Programmer,
+			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Programmer))
 			{
 				IsActive = true,
 				Ordering = 10_500,
-				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
 			.Identity.Role>().HasData(data: programmerPersian);
-		// **************************************************
-
-		// **************************************************
-		var simpleUserEnglish =
-			new Domain.Features.Identity.Role
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.SimpleUser,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SimpleUser),
-			title: "Simple User")
-			{
-				IsActive = true,
-				Ordering = 10_000,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: simpleUserEnglish);
-		// **************************************************
-
-		// **************************************************
-		var specialUserEnglish =
-			new Domain.Features.Identity.Role
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.SpecialUser,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SpecialUser),
-			title: "VIP User")
-			{
-				IsActive = true,
-				Ordering = 10_100,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: specialUserEnglish);
-		// **************************************************
-
-		// **************************************************
-		var supervisorEnglish =
-			new Domain.Features.Identity.Role
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.Supervisor,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Supervisor),
-			title: "Supervisor")
-			{
-				IsActive = true,
-				Ordering = 10_200,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: supervisorEnglish);
-		// **************************************************
-
-		// **************************************************
-		var administratorEnglish =
-			new Domain.Features.Identity.Role
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.Administrator,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Administrator),
-			title: "Administrator")
-			{
-				IsActive = true,
-				Ordering = 10_300,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: administratorEnglish);
-		// **************************************************
-
-		// **************************************************
-		var applicationOwnerEnglish =
-			new Domain.Features.Identity.Role
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner),
-			title: "Application Owner")
-			{
-				IsActive = true,
-				Ordering = 10_400,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: applicationOwnerEnglish);
-		// **************************************************
-
-		// **************************************************
-		var programmerEnglish =
-			new Domain.Features.Identity.Role
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.RoleEnum.Programmer,
-			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Programmer),
-			title: "Programmer")
-			{
-				IsActive = true,
-				Ordering = 10_500,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: programmerEnglish);
 		// **************************************************
 		// *** /Roles ****************************************
 		// **************************************************
@@ -407,7 +287,7 @@ public static class ModelBuilderExtensions : object
 
 		var user =
 			new Domain.Features.Identity.User
-			(emailAddress: "DariushT@GMail.com", roleId: administratorPersian.Id)
+			(emailAddress: "DariushT@GMail.com", roleId: administrator.Id)
 			{
 				Ordering = 1,
 

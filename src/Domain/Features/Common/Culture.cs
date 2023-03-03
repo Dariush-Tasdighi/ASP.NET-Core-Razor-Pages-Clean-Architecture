@@ -35,6 +35,9 @@ public class Culture :
 
 		UserProfiles =
 			new System.Collections.Generic.List<Identity.UserProfile>();
+
+		LocalizedRoles =
+			new System.Collections.Generic.List<Identity.LocalizedRole>();
 	}
 	#endregion /Constructor
 
@@ -146,6 +149,7 @@ public class Culture :
 
 	public virtual System.Collections.Generic.IList<Identity.Gender> Genders { get; private set; }
 	public virtual System.Collections.Generic.IList<Identity.UserProfile> UserProfiles { get; private set; }
+	public virtual System.Collections.Generic.IList<Identity.LocalizedRole> LocalizedRoles { get; private set; }
 
 	#endregion /Collections
 }

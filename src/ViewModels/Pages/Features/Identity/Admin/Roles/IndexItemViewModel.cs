@@ -5,8 +5,6 @@ public class IndexItemViewModel : object
 	#region Constructor
 	public IndexItemViewModel() : base()
 	{
-		Name = Resources.DataDictionary.DefaultNullValue;
-		Title = Resources.DataDictionary.DefaultNullValue;
 	}
 	#endregion /Constructor
 
@@ -16,13 +14,13 @@ public class IndexItemViewModel : object
 
 	public bool IsActive { get; set; }
 
-	public string Name { get; set; }
-
 	public Domain.Features.Identity.Enums.RoleEnum Code { get; set; }
+
+	public string? Name { get; set; }
 
 	public int Ordering { get; set; }
 
-	public string Title { get; set; }
+	public string? Title { get; set; }
 
 	public int UserCount { get; set; }
 

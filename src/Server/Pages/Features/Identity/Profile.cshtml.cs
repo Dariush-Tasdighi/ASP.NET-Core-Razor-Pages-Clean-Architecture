@@ -59,6 +59,7 @@ public class ProfileModel :
 		// دارد SEO‌ روش و نگاه ذیل مشکل
 		//var currentUICulture =
 		//	System.Globalization.CultureInfo.CurrentUICulture;
+		// **************************************************
 
 		var foundedCulture =
 			await
@@ -69,7 +70,7 @@ public class ProfileModel :
 		if (foundedCulture is null)
 		{
 			return RedirectToPage(pageName:
-				Constants.CommonRouting.InternalServerError);
+				Constants.CommonRouting.NotFound);
 		}
 
 		if (foundedCulture.IsActive == false)
@@ -83,8 +84,9 @@ public class ProfileModel :
 		var foundedUserProfile =
 			await
 			DatabaseContext.UserProfiles
-
 			.Include(current => current.User)
+			.ThenInclude(user => user!.Role)
+			.ThenInclude(role => role!.LocalizedRoles)
 
 			.Where(current => current.Culture != null
 				&& current.Culture.Id == foundedCulture.Id)
@@ -126,18 +128,26 @@ public class ProfileModel :
 		await DatabaseContext.SaveChangesAsync();
 		// **************************************************
 
+		var roleTitle =
+			foundedUserProfile.User?.Role?.LocalizedRoles
+			.Where(current => current.CultureId == foundedCulture.Id)
+			.FirstOrDefault()?.Title;
+
 		// **************************************************
 		ViewModel =
 			new ViewModels.Pages.Features.Identity.ProfileViewModel
 			{
+				RoleTitle = roleTitle,
 				Hits = foundedUserProfile.Hits,
 				LastName = foundedUserProfile.LastName,
 				FirstName = foundedUserProfile.FirstName,
 				Description = foundedUserProfile.Description,
+
+				InsertDateTime = foundedUserProfile.InsertDateTime,
 				UpdateDateTime = foundedUserProfile.UpdateDateTime,
 
-				EmailAddress = foundedUserProfile.User.EmailAddress,
-				CellPhoneNumber = foundedUserProfile.User.CellPhoneNumber,
+				EmailAddress = foundedUserProfile.User!.EmailAddress,
+				CellPhoneNumber = foundedUserProfile.User!.CellPhoneNumber,
 			};
 		// **************************************************
 

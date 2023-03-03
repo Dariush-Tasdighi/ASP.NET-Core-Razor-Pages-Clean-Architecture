@@ -1,22 +1,23 @@
 ﻿namespace Domain.Features.Identity;
 
 public class Role :
-	Seedwork.LocalizedEntity,
+	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public Role(System.Guid cultureId,
-		Enums.RoleEnum code, string name, string title) : base(cultureId: cultureId)
+	public Role(Enums.RoleEnum code, string name) : base()
 	{
 		Code = code;
 		Name = name;
-		Title = title;
 
 		UpdateDateTime = InsertDateTime;
 
 		Users =
 			new System.Collections.Generic.List<User>();
+
+		LocalizedRoles =
+			new System.Collections.Generic.List<LocalizedRole>();
 	}
 	#endregion /Constructor
 
@@ -67,36 +68,6 @@ public class Role :
 	public string Name { get; set; }
 	#endregion /public string Name { get; set; }
 
-	#region public string Title { get; set; }
-	/// <summary>
-	/// عنوان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Title))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-
-	[System.ComponentModel.DataAnnotations.MaxLength
-		(length: Constants.MaxLength.Title,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string Title { get; set; }
-	#endregion /public string Title { get; set; }
-
-	#region public string? Description { get; set; }
-	/// <summary>
-	/// توضیحات
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Description))]
-	public string? Description { get; set; }
-	#endregion /public string? Description { get; set; }
-
 	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
 	/// <summary>
 	/// زمان ویرایش
@@ -126,6 +97,8 @@ public class Role :
 	#region Collections
 
 	public virtual System.Collections.Generic.IList<User> Users { get; private set; }
+
+	public virtual System.Collections.Generic.IList<LocalizedRole> LocalizedRoles { get; private set; }
 
 	#endregion /Collections
 }

@@ -29,6 +29,23 @@ public class DetailsModel :
 	public async System.Threading.Tasks.Task
 	<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync(System.Guid? id)
 	{
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.Lcid == currentUICultureLcid)
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
 		if (id is null)
 		{
 			return RedirectToPage(pageName:
@@ -41,19 +58,33 @@ public class DetailsModel :
 
 			.Where(current => current.Id == id.Value)
 
-			.Select(current => new ViewModels.Pages.Features
-				.Identity.Admin.Roles.DetailsOrDeleteViewModel()
+			.Select(current => new ViewModels.Pages
+				.Features.Identity.Admin.Roles.DetailsOrDeleteViewModel()
 			{
 				Id = current.Id,
+
 				Name = current.Name,
-				Code = current.Code,
-				Title = current.Title,
+
 				IsActive = current.IsActive,
+
+				Code = current.Code,
 				Ordering = current.Ordering,
 				UserCount = current.Users.Count,
-				Description = current.Description,
+
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
+
+#pragma warning disable CS8602
+
+				Title = current.LocalizedRoles
+					.FirstOrDefault(current => current.Culture != null
+						&& current.Culture.Lcid == currentUICultureLcid).Title,
+
+				Description = current.LocalizedRoles
+					.FirstOrDefault(current => current.Culture != null
+						&& current.Culture.Lcid == currentUICultureLcid).Description,
+
+#pragma warning restore CS8602
 			})
 			.FirstOrDefaultAsync();
 

@@ -71,7 +71,27 @@ public class ProfileViewModel : object
 	public string? CellPhoneNumber { get; set; }
 	#endregion /public string? CellPhoneNumber { get; set; }
 
-	#region System.DateTimeOffset UpdateDateTime { get; set; }
+	#region public string? RoleTitle { get; set; }
+	/// <summary>
+	/// نام
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.UserRoleTitle))]
+	public string? RoleTitle { get; set; }
+	#endregion /public string? RoleTitle { get; set; }
+
+	#region public System.DateTimeOffset InsertDateTime { get; set; }
+	/// <summary>
+	/// زمان ویرایش
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.UpdateDateTime))]
+	public System.DateTimeOffset InsertDateTime { get; set; }
+	#endregion /public System.DateTimeOffset InsertDateTime { get; set; }
+
+	#region public System.DateTimeOffset UpdateDateTime { get; set; }
 	/// <summary>
 	/// زمان ویرایش
 	/// </summary>
@@ -79,7 +99,7 @@ public class ProfileViewModel : object
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.UpdateDateTime))]
 	public System.DateTimeOffset UpdateDateTime { get; set; }
-	#endregion /System.DateTimeOffset UpdateDateTime { get; set; }
+	#endregion /public System.DateTimeOffset UpdateDateTime { get; set; }
 
 	#endregion /Properties
 }

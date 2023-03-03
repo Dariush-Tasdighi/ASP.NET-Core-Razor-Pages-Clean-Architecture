@@ -690,4 +690,7 @@
   <data name="NewPassword" xml:space="preserve">
     <value>گذرواژه جدید</value>
   </data>
+  <data name="UserRoleTitle" xml:space="preserve">
+    <value>نقش کاربر در سامانه</value>
+  </data>
 </root>

@@ -1618,6 +1618,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Role Title.
+        /// </summary>
+        public static string UserRoleTitle {
+            get {
+                return ResourceManager.GetString("UserRoleTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
         public static string Users {

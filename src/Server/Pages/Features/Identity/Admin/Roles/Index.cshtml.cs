@@ -35,9 +35,6 @@ public class IndexModel :
 			await
 			DatabaseContext.Roles
 
-			.Where(current => current.Culture != null &&
-				current.Culture.Lcid == currentUICultureLcid)
-
 			.OrderBy(current => current.Ordering)
 			.ThenBy(current => current.Code)
 
@@ -47,17 +44,24 @@ public class IndexModel :
 				Id = current.Id,
 
 				Name = current.Name,
-				Title = current.Title,
-
-				IsActive = current.IsActive,
 
 				Code = current.Code,
-				Ordering = current.Ordering,
+				IsActive = current.IsActive,
 
+				Ordering = current.Ordering,
 				UserCount = current.Users.Count,
 
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
+
+#pragma warning disable CS8602
+
+				Title = current.LocalizedRoles
+					.FirstOrDefault(current => current.Culture != null
+						&& current.Culture.Lcid == currentUICultureLcid).Title,
+
+#pragma warning restore CS8602
+
 			})
 			.ToListAsync()
 			;

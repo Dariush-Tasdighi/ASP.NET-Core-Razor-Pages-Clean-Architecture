@@ -657,4 +657,7 @@
   <data name="NewPassword" xml:space="preserve">
     <value>New Password</value>
   </data>
+  <data name="UserRoleTitle" xml:space="preserve">
+    <value>User Role Title</value>
+  </data>
 </root>

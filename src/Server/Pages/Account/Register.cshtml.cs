@@ -58,8 +58,8 @@ public class RegisterModel :
 			await
 			DatabaseContext.Roles
 
-			.Where(current => current.Culture != null
-				&& current.Culture.Lcid == currentUICultureLcid)
+			//.Where(current => current.Culture != null
+			//	&& current.Culture.Lcid == currentUICultureLcid)
 
 			.Where(current => current.Code ==
 				Domain.Features.Identity.Enums.RoleEnum.SimpleUser)
@@ -120,8 +120,8 @@ public class RegisterModel :
 			await
 			DatabaseContext.Roles
 
-			.Where(current => current.Culture != null
-				&& current.Culture.Lcid == currentUICultureLcid)
+			//.Where(current => current.Culture != null
+			//	&& current.Culture.Lcid == currentUICultureLcid)
 
 			.Where(current => current.Code ==
 				Domain.Features.Identity.Enums.RoleEnum.SimpleUser)
