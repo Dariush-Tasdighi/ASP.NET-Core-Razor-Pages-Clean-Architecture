@@ -5,7 +5,6 @@ public class CreateViewModel : CommonViewModel
 	#region Constructor
 	public CreateViewModel() : base()
 	{
-		Password = Resources.DataDictionary.DefaultNullValue;
 	}
 	#endregion /Constructor
 

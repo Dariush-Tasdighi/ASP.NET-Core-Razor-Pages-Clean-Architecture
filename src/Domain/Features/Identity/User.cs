@@ -319,11 +319,6 @@ public class User :
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.CellPhoneNumber))]
 
-	[System.ComponentModel.DataAnnotations.MinLength
-		(length: Constants.MinLength.CellPhoneNumber,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-
 	[System.ComponentModel.DataAnnotations.MaxLength
 		(length: Constants.MaxLength.CellPhoneNumber,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),

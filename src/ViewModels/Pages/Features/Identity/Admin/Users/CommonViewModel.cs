@@ -31,15 +31,15 @@ public class CommonViewModel : object
 	public bool IsVerified { get; set; }
 	#endregion /public bool IsVerified { get; set; }
 
-	#region public bool IsDeleted { get; private set; }
+	#region public bool IsDeleted { get; set; }
 	/// <summary>
 	/// آیا به طور مجازی حذف شده؟
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.IsDeleted))]
-	public bool IsDeleted { get; private set; }
-	#endregion /public bool IsDeleted { get; private set; }
+	public bool IsDeleted { get; set; }
+	#endregion /public bool IsDeleted { get; set; }
 
 
 
@@ -102,15 +102,15 @@ public class CommonViewModel : object
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.Username))]
 
-	//[System.ComponentModel.DataAnnotations.MaxLength
-	//	(length: 20,
-	//	ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-	//	ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-
 	[System.ComponentModel.DataAnnotations.MaxLength
 		(length: Constants.MaxLength.Username,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+
+	[System.ComponentModel.DataAnnotations.RegularExpression
+		(pattern: Constants.RegularExpression.Username,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Username))]
 	public string? Username { get; set; }
 	#endregion /public string? Username { get; set; }
 
@@ -155,11 +155,6 @@ public class CommonViewModel : object
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.CellPhoneNumber))]
-
-	[System.ComponentModel.DataAnnotations.MinLength
-		(length: Constants.MinLength.CellPhoneNumber,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
 		(length: Constants.MaxLength.CellPhoneNumber,

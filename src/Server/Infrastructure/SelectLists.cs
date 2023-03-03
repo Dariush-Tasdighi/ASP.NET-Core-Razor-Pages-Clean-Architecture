@@ -14,15 +14,27 @@ public static class SelectLists : object
 		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetRolesAsync
 		(Persistence.DatabaseContext databaseContext, object? selectedValue = null)
 	{
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
 		var list =
 			await
 			databaseContext.Roles
+
 			.OrderBy(current => current.Ordering)
-			.ThenBy(current => current.Name)
+			.ThenBy(current => current.Code)
+
 			.Select(current => new ViewModels.Shared.KeyValueViewModel
 			{
 				Id = current.Id,
-				Name = current.Name,
+
+#pragma warning disable CS8602
+
+				Name = current.LocalizedRoles.FirstOrDefault
+					(other => other.Culture != null &&
+					other.Culture.Lcid == currentUICultureLcid).Title,
+
+#pragma warning restore CS8602
 			})
 			.ToListAsync()
 			;
@@ -146,6 +158,7 @@ public static class SelectLists : object
 			databaseContext.Genders
 
 			.OrderBy(current => current.Ordering)
+			.ThenBy(current => current.Code)
 
 			.Select(current => new ViewModels.Shared.KeyValueViewModel
 			{
@@ -154,7 +167,8 @@ public static class SelectLists : object
 #pragma warning disable CS8602
 
 				Name = current.LocalizedGenders.FirstOrDefault
-				(other => other.Culture != null && other.Culture.Lcid == currentUICultureLcid).Title,
+					(other => other.Culture != null &&
+					other.Culture.Lcid == currentUICultureLcid).Title,
 
 #pragma warning restore CS8602
 

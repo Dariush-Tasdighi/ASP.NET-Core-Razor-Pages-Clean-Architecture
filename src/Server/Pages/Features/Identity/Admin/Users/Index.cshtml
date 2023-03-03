@@ -62,9 +62,7 @@
 				<th>
 					@(Resources.DataDictionary.UpdateDateTime)
 				</th>
-				<th>
-					@(Resources.DataDictionary.LastLoginDateTime)
-				</th>
+				@*<th>@(Resources.DataDictionary.LastLoginDateTime)</th>*@
 			</tr>
 		</thead>
 
@@ -123,7 +121,7 @@
 
 					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.UpdateDateTime))
 
-					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.LastLoginDateTime))
+					@*@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.LastLoginDateTime))*@
 				</tr>
 			}
 		</tbody>

@@ -1,0 +1,79 @@
+﻿@page
+
+@model Server.Pages.Features.Identity.Admin.Users.CreateModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.CreateOf} {Resources.DataDictionary.User}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<section-form>
+		<fieldset>
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsActive" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsVerified" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsDeleted" />
+
+			<dtat-full-select asp-for="ViewModel.RoleId" asp-items="@(Model.RolesSelectList)" />
+
+			<dtat-full-input asp-for="ViewModel.EmailAddress" dir="ltr" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsEmailAddressVerified" />
+
+			<dtat-full-input asp-for="ViewModel.Username" dir="ltr" />
+
+			<dtat-full-input asp-for="ViewModel.Password" dir="ltr" />
+
+			<dtat-full-input asp-for="ViewModel.NationalCode" dir="ltr" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsNationalCodeVerified" />
+
+			<dtat-full-input asp-for="ViewModel.CellPhoneNumber" dir="ltr" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsCellPhoneNumberVerified" />
+
+			<dtat-full-select asp-for="ViewModel.GenderId" asp-items="@(Model.GendersSelectList)" />
+
+			<dtat-full-input asp-for="ViewModel.FirstName" />
+
+			<dtat-full-input asp-for="ViewModel.LastName" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsProfilePublic" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsVisibleInContactUsPage" />
+
+			<dtat-full-input asp-for="ViewModel.TitleInContactUsPage" />
+
+			<dtat-full-input asp-for="ViewModel.Hits" />
+
+			<dtat-full-input asp-for="ViewModel.Ordering" />
+
+			<dtat-full-textarea asp-for="ViewModel.Description" />
+
+			<dtat-full-textarea asp-for="ViewModel.AdminDescription" />
+		</fieldset>
+
+		<section-form-buttons>
+			<button-create />
+			<button-reset />
+		</section-form-buttons>
+
+		<section-form-footer>
+			<a asp-page="Index">
+				@(Html.DtatGetLinkCaptionForList())
+			</a>
+		</section-form-footer>
+	</section-form>
+
+</form>
