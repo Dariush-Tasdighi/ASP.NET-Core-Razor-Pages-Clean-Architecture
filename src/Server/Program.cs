@@ -114,22 +114,22 @@ builder.Services
 // *** Use Sql Server *******************************
 // **************************************************
 // using Microsoft.Extensions.Configuration;
-var connectionString =
-	builder.Configuration
-	.GetConnectionString(name: "ConnectionString");
+//var connectionString =
+//	builder.Configuration
+//	.GetConnectionString(name: "ConnectionString");
 
-// using Microsoft.Extensions.DependencyInjection;
-builder.Services.AddDbContext<Persistence.DatabaseContext>
-	(optionsAction: options =>
-	{
-		// using Microsoft.EntityFrameworkCore;
-		options
-			.UseLazyLoadingProxies();
+//// using Microsoft.Extensions.DependencyInjection;
+//builder.Services.AddDbContext<Persistence.DatabaseContext>
+//	(optionsAction: options =>
+//	{
+//		// using Microsoft.EntityFrameworkCore;
+//		options
+//			.UseLazyLoadingProxies();
 
-		// using Microsoft.EntityFrameworkCore;
-		options
-			.UseSqlServer(connectionString: connectionString);
-	});
+//		// using Microsoft.EntityFrameworkCore;
+//		options
+//			.UseSqlServer(connectionString: connectionString);
+//	});
 // **************************************************
 // *** /Use Sql Server ******************************
 // **************************************************
@@ -137,15 +137,15 @@ builder.Services.AddDbContext<Persistence.DatabaseContext>
 // **************************************************
 // *** Use Sqlite ***********************************
 // **************************************************
-//builder.Services.AddDbContext<Persistence.DatabaseContext>
-//	(optionsAction: options =>
-//	{
-//		options
-//			.UseLazyLoadingProxies();
+builder.Services.AddDbContext<Persistence.DatabaseContext>
+	(optionsAction: options =>
+	{
+		options
+			.UseLazyLoadingProxies();
 
-//		options
-//			.UseSqlite(connectionString: "Data Source=Database\\MySQLite.db");
-//	});
+		options
+			.UseSqlite(connectionString: "Data Source=Database\\MySQLite.db");
+	});
 // **************************************************
 // *** /Use Sqlite **********************************
 // **************************************************

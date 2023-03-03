@@ -2,6 +2,7 @@
 
 public class MenuItem :
 	Seedwork.LocalizedEntity,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
@@ -9,6 +10,7 @@ public class MenuItem :
 	public MenuItem(System.Guid cultureId, string title) : base(cultureId: cultureId)
 	{
 		Title = title;
+		Ordering = 10_000;
 
 		UpdateDateTime = InsertDateTime;
 
@@ -74,6 +76,23 @@ public class MenuItem :
 		Name = nameof(Resources.DataDictionary.OpenUrlInNewWindow))]
 	public bool OpenUrlInNewWindow { get; set; }
 	#endregion /public bool OpenUrlInNewWindow { get; set; }
+
+
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
 
 
 

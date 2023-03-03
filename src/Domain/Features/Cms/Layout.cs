@@ -3,6 +3,7 @@
 public class Layout :
 	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
@@ -29,6 +30,25 @@ public class Layout :
 		Name = nameof(Resources.DataDictionary.IsActive))]
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
+
+
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
+
+
 
 	#region public string Name { get; set; }
 	/// <summary>
@@ -84,6 +104,8 @@ public class Layout :
 		Name = nameof(Resources.DataDictionary.Description))]
 	public string? Description { get; set; }
 	#endregion /public string? Description { get; set; }
+
+
 
 	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
 	/// <summary>

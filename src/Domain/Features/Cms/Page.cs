@@ -3,6 +3,7 @@
 public class Page :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
@@ -12,6 +13,8 @@ public class Page :
 	{
 		Name = name;
 		Title = title;
+		Ordering = 10_000;
+
 		LayoutId = layoutId;
 
 		UpdateDateTime = InsertDateTime;
@@ -49,18 +52,6 @@ public class Page :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public virtual Layout? Layout { get; set; }
 	#endregion /public virtual Layout? Layout { get; set; }
-
-
-
-	#region public int Hits { get; set; }
-	/// <summary>
-	/// تعداد دفعات بازدید
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Hits))]
-	public int Hits { get; set; }
-	#endregion /public int Hits { get; set; }
 
 
 
@@ -103,6 +94,33 @@ public class Page :
 		Name = nameof(Resources.DataDictionary.DoesSearchEnginesFollowIt))]
 	public bool DoesSearchEnginesFollowIt { get; set; }
 	#endregion /public bool DoesSearchEnginesFollowIt { get; set; }
+
+
+
+	#region public int Hits { get; set; }
+	/// <summary>
+	/// تعداد دفعات بازدید
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Hits))]
+	public int Hits { get; set; }
+	#endregion /public int Hits { get; set; }
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
 
 
 

@@ -5,6 +5,7 @@ namespace Domain.Features.Identity;
 public class Gender :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
@@ -13,6 +14,8 @@ public class Gender :
 	{
 		Code = code;
 		Title = title;
+
+		Ordering = 10_000;
 
 		UpdateDateTime = InsertDateTime;
 
@@ -33,6 +36,23 @@ public class Gender :
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
 
+
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
+
 	#region public Enums.GenderEnum Code { get; set; }
 	/// <summary>
 	/// کد
@@ -42,6 +62,8 @@ public class Gender :
 		Name = nameof(Resources.DataDictionary.Code))]
 	public Enums.GenderEnum Code { get; set; }
 	#endregion /public Enums.GenderEnum Code { get; set; }
+
+
 
 	#region public string Title { get; set; }
 	/// <summary>
@@ -87,6 +109,8 @@ public class Gender :
 		Name = nameof(Resources.DataDictionary.Description))]
 	public string? Description { get; set; }
 	#endregion /public string? Description { get; set; }
+
+
 
 	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
 	/// <summary>

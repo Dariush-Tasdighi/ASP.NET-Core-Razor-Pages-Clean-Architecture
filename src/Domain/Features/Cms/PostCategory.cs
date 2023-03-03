@@ -3,6 +3,7 @@
 public class PostCategory :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
@@ -13,6 +14,7 @@ public class PostCategory :
 		Name = name;
 		Title = title;
 
+		Ordering = 10_000;
 		MaxDisplayPostCount = 48;
 
 		UpdateDateTime = InsertDateTime;
@@ -65,6 +67,21 @@ public class PostCategory :
 		Name = nameof(Resources.DataDictionary.Hits))]
 	public int Hits { get; set; }
 	#endregion /public int Hits { get; set; }
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
 
 	#region public int MaxDisplayPostCount { get; set; }
 	/// <summary>

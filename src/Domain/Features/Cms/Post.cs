@@ -3,6 +3,7 @@
 public class Post :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
 	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
@@ -12,6 +13,8 @@ public class Post :
 		System.Guid userId, System.Guid categoryId, string title) : base(cultureId: cultureId)
 	{
 		Title = title;
+		Ordering = 10_000;
+
 		UserId = userId;
 		CategoryId = categoryId;
 
@@ -197,6 +200,21 @@ public class Post :
 		Name = nameof(Resources.DataDictionary.Score))]
 	public int Score { get; set; }
 	#endregion /public int Score { get; set; }
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
 
 
 

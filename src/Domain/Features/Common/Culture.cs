@@ -3,6 +3,7 @@
 public class Culture :
 	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
@@ -10,6 +11,8 @@ public class Culture :
 		string cultureName, string nativeName) : base()
 	{
 		Lcid = lcid;
+		Ordering = 10_000;
+
 		NativeName = nativeName;
 		CultureName = cultureName;
 
@@ -53,6 +56,23 @@ public class Culture :
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
 
+
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
+
 	#region public Enums.CultureEnum Lcid { get; set; }
 	/// <summary>
 	/// کد زبان
@@ -62,6 +82,8 @@ public class Culture :
 		Name = nameof(Resources.DataDictionary.Lcid))]
 	public Enums.CultureEnum Lcid { get; set; }
 	#endregion /public Enums.CultureEnum Lcid { get; set; }
+
+
 
 	#region public string CultureName { get; set; }
 	/// <summary>
@@ -112,6 +134,8 @@ public class Culture :
 		Name = nameof(Resources.DataDictionary.Description))]
 	public string? Description { get; set; }
 	#endregion /public string? Description { get; set; }
+
+
 
 	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
 	/// <summary>

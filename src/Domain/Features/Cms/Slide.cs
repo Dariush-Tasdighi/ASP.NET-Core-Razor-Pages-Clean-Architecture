@@ -3,6 +3,7 @@
 public class Slide :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
@@ -10,6 +11,7 @@ public class Slide :
 	public Slide(System.Guid cultureId, string title, string imageUrl) : base(cultureId: cultureId)
 	{
 		Interval = 5_000;
+		Ordering = 10_000;
 
 		Title = title;
 		ImageUrl = imageUrl;
@@ -66,6 +68,21 @@ public class Slide :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
 	public int Interval { get; set; }
 	#endregion /public int Interval { get; set; }
+
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
 
 
 

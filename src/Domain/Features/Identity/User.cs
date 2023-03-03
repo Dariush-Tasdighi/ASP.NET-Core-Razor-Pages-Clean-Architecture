@@ -3,6 +3,7 @@
 public class User :
 	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
+	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
 	Dtat.Seedwork.Abstractions.IEntityHasIsUndeletable,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
@@ -11,6 +12,8 @@ public class User :
 	public User(string emailAddress, System.Guid roleId) : base()
 	{
 		RoleId = roleId;
+
+		Ordering = 10_000;
 
 		UpdateDateTime = InsertDateTime;
 
@@ -157,6 +160,23 @@ public class User :
 
 
 
+	#region public int Ordering { get; set; }
+	/// <summary>
+	/// چیدمان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Ordering))]
+
+	[System.ComponentModel.DataAnnotations.Range
+		(minimum: 1, maximum: 100_000,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
+	public int Ordering { get; set; }
+	#endregion /public int Ordering { get; set; }
+
+
+
 	#region public string? Username { get; set; }
 	/// <summary>
 	/// شناسه کاربری
@@ -204,7 +224,7 @@ public class User :
 		}
 		set
 		{
-			if(_password != value)
+			if (_password != value)
 			{
 				_password = value;
 
@@ -328,7 +348,7 @@ public class User :
 
 
 
-	#region System.DateTimeOffset? LastLoginDateTime { get; set; }
+	#region public System.DateTimeOffset? LastLoginDateTime { get; set; }
 	/// <summary>
 	/// آخرین زمان ورود به سامانه
 	/// </summary>
@@ -339,20 +359,7 @@ public class User :
 	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
 		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
 	public System.DateTimeOffset? LastLoginDateTime { get; set; }
-	#endregion /System.DateTimeOffset? LastLoginDateTime { get; set; }
-
-	#region System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
-	/// <summary>
-	/// آخرین زمان تغییر گذرواژه
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.LastLoginDateTime))]
-
-	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
-		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
-	public System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
-	#endregion /System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
+	#endregion /public System.DateTimeOffset? LastLoginDateTime { get; set; }
 
 	#region public System.DateTimeOffset UpdateDateTime { get; private set; }
 	/// <summary>
@@ -379,6 +386,19 @@ public class User :
 		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
 	public System.DateTimeOffset? DeleteDateTime { get; private set; }
 	#endregion /public System.DateTimeOffset? DeleteDateTime { get; private set; }
+
+	#region public System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
+	/// <summary>
+	/// آخرین زمان تغییر گذرواژه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.LastLoginDateTime))]
+
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
+	#endregion /public System.DateTimeOffset? LastChangePasswordDateTime { get; private set; }
 
 	#endregion /Properties
 
