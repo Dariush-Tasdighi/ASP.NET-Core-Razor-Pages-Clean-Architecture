@@ -81,9 +81,9 @@ public class ProfileModel :
 		// **************************************************
 
 		// **************************************************
-		var foundedUserProfile =
+		var foundedLocalizedUser =
 			await
-			DatabaseContext.UserProfiles
+			DatabaseContext.LocalizedUsers
 			.Include(current => current.User)
 			.ThenInclude(user => user!.Role)
 			.ThenInclude(role => role!.LocalizedRoles)
@@ -97,25 +97,25 @@ public class ProfileModel :
 
 			.FirstOrDefaultAsync();
 
-		if (foundedUserProfile is null)
+		if (foundedLocalizedUser is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
 
-		if (foundedUserProfile.User is null)
+		if (foundedLocalizedUser.User is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
 
-		if (foundedUserProfile.User.IsActive == false)
+		if (foundedLocalizedUser.User.IsActive == false)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
 
-		if (foundedUserProfile.User.IsProfilePublic == false)
+		if (foundedLocalizedUser.User.IsProfilePublic == false)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
@@ -123,13 +123,13 @@ public class ProfileModel :
 		// **************************************************
 
 		// **************************************************
-		foundedUserProfile.Hits++;
+		foundedLocalizedUser.Hits++;
 
 		await DatabaseContext.SaveChangesAsync();
 		// **************************************************
 
 		var roleTitle =
-			foundedUserProfile.User?.Role?.LocalizedRoles
+			foundedLocalizedUser.User?.Role?.LocalizedRoles
 			.Where(current => current.CultureId == foundedCulture.Id)
 			.FirstOrDefault()?.Title;
 
@@ -138,16 +138,16 @@ public class ProfileModel :
 			new ViewModels.Pages.Features.Identity.ProfileViewModel
 			{
 				RoleTitle = roleTitle,
-				Hits = foundedUserProfile.Hits,
-				LastName = foundedUserProfile.LastName,
-				FirstName = foundedUserProfile.FirstName,
-				Description = foundedUserProfile.Description,
+				Hits = foundedLocalizedUser.Hits,
+				LastName = foundedLocalizedUser.LastName,
+				FirstName = foundedLocalizedUser.FirstName,
+				Description = foundedLocalizedUser.Description,
 
-				InsertDateTime = foundedUserProfile.InsertDateTime,
-				UpdateDateTime = foundedUserProfile.UpdateDateTime,
+				InsertDateTime = foundedLocalizedUser.InsertDateTime,
+				UpdateDateTime = foundedLocalizedUser.UpdateDateTime,
 
-				EmailAddress = foundedUserProfile.User!.EmailAddress,
-				CellPhoneNumber = foundedUserProfile.User!.CellPhoneNumber,
+				EmailAddress = foundedLocalizedUser.User!.EmailAddress,
+				CellPhoneNumber = foundedLocalizedUser.User!.CellPhoneNumber,
 			};
 		// **************************************************
 

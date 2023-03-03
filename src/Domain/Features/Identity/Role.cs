@@ -121,7 +121,6 @@ public class Role :
 	#region Collections
 
 	public virtual System.Collections.Generic.IList<User> Users { get; private set; }
-
 	public virtual System.Collections.Generic.IList<LocalizedRole> LocalizedRoles { get; private set; }
 
 	#endregion /Collections

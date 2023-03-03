@@ -2,7 +2,6 @@
 
 public class Post :
 	Seedwork.LocalizedEntity,
-	Dtat.Seedwork.Abstractions.IEntityHasCode,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
@@ -216,19 +215,6 @@ public class Post :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
 	public int Ordering { get; set; }
 	#endregion /public int Ordering { get; set; }
-
-	#region public int Code { get; private set; }
-	/// <summary>
-	/// کد
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Code))]
-
-	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(databaseGeneratedOption:
-		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
-	public int Code { get; private set; }
-	#endregion /public int Code { get; private set; }
 
 
 

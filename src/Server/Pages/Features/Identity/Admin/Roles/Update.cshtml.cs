@@ -1,7 +1,6 @@
 ﻿using Dtat;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Numerics;
 
 namespace Server.Pages.Features.Identity.Admin.Roles;
 
@@ -71,14 +70,13 @@ public class UpdateModel :
 #pragma warning disable CS8602
 
 				Title = current.LocalizedRoles
-					.FirstOrDefault(current => current.Culture != null
-						&& current.Culture.Lcid == currentUICultureLcid).Title,
+					.FirstOrDefault(other => other.CultureId == currentCulture.Id).Title,
 
 				Description = current.LocalizedRoles
-					.FirstOrDefault(current => current.Culture != null
-						&& current.Culture.Lcid == currentUICultureLcid).Description,
+					.FirstOrDefault(other => other.CultureId == currentCulture.Id).Description,
 
 #pragma warning restore CS8602
+
 			})
 			.FirstOrDefaultAsync();
 
@@ -167,8 +165,8 @@ public class UpdateModel :
 		// دقت کنید که دستور ذیل نباید نوشته شود
 		//foundedItem.Name = ViewModel.Name.Fix()!;
 
-		foundedItem.Ordering = ViewModel.Ordering;
 		foundedItem.IsActive = ViewModel.IsActive;
+		foundedItem.Ordering = ViewModel.Ordering;
 		// **************************************************
 
 		// **************************************************

@@ -41,8 +41,9 @@ public class DatabaseContext :
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Identity.User> Users { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Identity.Gender> Genders { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Identity.LoginLog> LoginLogs { get; set; }
-	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Identity.UserProfile> UserProfiles { get; set; }
+	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Identity.LocalizedUser> LocalizedUsers { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Identity.LocalizedRole> LocalizedRoles { get; set; }
+	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Identity.LocalizedGender> LocalizedGenders { get; set; }
 
 	#endregion /Identity Feature
 

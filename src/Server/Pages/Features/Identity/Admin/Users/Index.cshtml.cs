@@ -78,38 +78,30 @@ public class IndexModel :
 				IsVisibleInContactUsPage = current.IsVisibleInContactUsPage,
 				IsCellPhoneNumberVerified = current.IsCellPhoneNumberVerified,
 
-				RoleId = current.Role != null ? current.Role.Id : default,
+				RoleId = current.RoleId,
+				GenderId = current.GenderId,
 
 #pragma warning disable CS8602
 
 				Hits =
-					current.Profiles
-					.FirstOrDefault(other => other.Culture != null
-						&& other.Culture.Lcid == currentUICultureLcid).Hits,
+					current.LocalizedUsers.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Hits,
 
 				LastName =
-					current.Profiles
-					.FirstOrDefault(other => other.Culture != null
-						&& other.Culture.Lcid == currentUICultureLcid).LastName,
+					current.LocalizedUsers.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).LastName,
 
 				FirstName =
-					current.Profiles
-					.FirstOrDefault(other => other.Culture != null
-						&& other.Culture.Lcid == currentUICultureLcid).FirstName,
+					current.LocalizedUsers.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).FirstName,
 
-				GenderId =
-					current.Profiles
-					.FirstOrDefault(other => other.Culture != null
-						&& other.Culture.Lcid == currentUICultureLcid).Gender.Id,
+				RoleTitle =
+					current.Role.LocalizedRoles.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Title,
 
 				GenderPrefix =
-					current.Profiles
-					.FirstOrDefault(other => other.Culture != null
-						&& other.Culture.Lcid == currentUICultureLcid).Gender.Prefix,
-
-				RoleTitle = current.Role == null ? default :
-					current.Role.LocalizedRoles
-					.FirstOrDefault(x => x.CultureId == currentCulture.Id).Title,
+					current.Gender.LocalizedGenders.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Prefix,
 
 #pragma warning restore CS8602
 

@@ -101,7 +101,7 @@ public class LoginModel :
 			DatabaseContext.Users
 
 			.Include(current => current.Role)
-			.Include(current => current.Profiles)
+			.Include(current => current.LocalizedUsers)
 			.ThenInclude(current => current.Culture)
 
 			.Where(current => current.Username != null
@@ -203,20 +203,20 @@ public class LoginModel :
 
 		System.Security.Claims.Claim claim;
 
-		var userProfile =
-			foundedUser.Profiles
+		var localizedUser =
+			foundedUser.LocalizedUsers
 
 			.Where(current => current.Culture != null
 				&& current.Culture.Lcid == currentUICultureLcid)
 
 			.FirstOrDefault();
 
-		if (userProfile is not null)
+		if (localizedUser is not null)
 		{
 			// **************************************************
 			claim =
 				new System.Security.Claims.Claim
-				(type: "FirstName", value: userProfile.FirstName);
+				(type: "FirstName", value: localizedUser.FirstName);
 
 			claims.Add(item: claim);
 			// **************************************************
@@ -224,7 +224,7 @@ public class LoginModel :
 			// **************************************************
 			claim =
 				new System.Security.Claims.Claim
-				(type: "LastName", value: userProfile.LastName);
+				(type: "LastName", value: localizedUser.LastName);
 
 			claims.Add(item: claim);
 			// **************************************************

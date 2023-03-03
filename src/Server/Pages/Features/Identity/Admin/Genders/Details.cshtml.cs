@@ -29,6 +29,23 @@ public class DetailsModel :
 	public async System.Threading.Tasks.Task
 	<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync(System.Guid? id)
 	{
+		// **************************************************
+		var currentUICultureLcid = Domain.Features
+			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.Lcid == currentUICultureLcid)
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
 		if (id is null)
 		{
 			return RedirectToPage(pageName:
@@ -45,15 +62,29 @@ public class DetailsModel :
 				.Identity.Admin.Genders.DetailsOrDeleteViewModel()
 			{
 				Id = current.Id,
-				Code = current.Code,
-				Title = current.Title,
-				Prefix = current.Prefix,
+
 				IsActive = current.IsActive,
+
+				Code = current.Code,
 				Ordering = current.Ordering,
-				Description = current.Description,
-				UserCount = current.UserProfiles.Count,
+				UserCount = current.Users.Count,
+
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
+
+#pragma warning disable CS8602
+
+				Title = current.LocalizedGenders.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Title,
+
+				Prefix = current.LocalizedGenders.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Prefix,
+
+				Description = current.LocalizedGenders.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Description,
+
+#pragma warning restore CS8602
+
 			})
 			.FirstOrDefaultAsync();
 

@@ -1,16 +1,15 @@
 ﻿namespace Domain.Features.Identity;
 
-public class UserProfile :
+public class LocalizedUser :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public UserProfile
+	public LocalizedUser
 		(System.Guid cultureId, System.Guid userId,
-		System.Guid genderId, string firstName, string lastName) : base(cultureId: cultureId)
+		string firstName, string lastName) : base(cultureId: cultureId)
 	{
 		UserId = userId;
-		GenderId = genderId;
 
 		LastName = lastName;
 		FirstName = firstName;
@@ -50,36 +49,6 @@ public class UserProfile :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public virtual User? User { get; set; }
 	#endregion /public virtual User? User { get; set; }
-
-	#region public System.Guid GenderId { get; set; }
-	/// <summary>
-	/// جنسیت
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Gender))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public System.Guid GenderId { get; set; }
-	#endregion /public System.Guid GenderId { get; set; }
-
-	#region public virtual Gender? Gender { get; set; }
-	/// <summary>
-	/// جنسیت
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Gender))]
-
-	[System.ComponentModel.DataAnnotations.Required
-		(AllowEmptyStrings = false,
-		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
-	public virtual Gender? Gender { get; set; }
-	#endregion /public virtual Gender? Gender { get; set; }
 
 
 

@@ -14,14 +14,7 @@ internal sealed class GenderConfiguration : object, Microsoft
 		// **************************************************
 		// **************************************************
 		builder
-			.HasIndex(current => new { current.CultureId, current.Code })
-			.IsUnique(unique: true)
-			;
-		// **************************************************
-
-		// **************************************************
-		builder
-			.HasIndex(current => new { current.CultureId, current.Title })
+			.HasIndex(current => new { current.Code })
 			.IsUnique(unique: true)
 			;
 		// **************************************************
@@ -32,7 +25,18 @@ internal sealed class GenderConfiguration : object, Microsoft
 		// **************************************************
 		// **************************************************
 		builder
-			.HasMany(current => current.UserProfiles)
+			.HasMany(current => current.Users)
+			.WithOne(other => other.Gender)
+			.IsRequired(required: true)
+			.HasForeignKey(other => other.GenderId)
+			.OnDelete(deleteBehavior:
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
+			;
+		// **************************************************
+
+		// **************************************************
+		builder
+			.HasMany(current => current.LocalizedGenders)
 			.WithOne(other => other.Gender)
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.GenderId)

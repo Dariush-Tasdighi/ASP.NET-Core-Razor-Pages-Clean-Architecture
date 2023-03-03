@@ -76,15 +76,14 @@ public class DetailsModel :
 
 #pragma warning disable CS8602
 
-				Title = current.LocalizedRoles
-					.FirstOrDefault(current => current.Culture != null
-						&& current.Culture.Lcid == currentUICultureLcid).Title,
+				Title = current.LocalizedRoles.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Title,
 
-				Description = current.LocalizedRoles
-					.FirstOrDefault(current => current.Culture != null
-						&& current.Culture.Lcid == currentUICultureLcid).Description,
+				Description = current.LocalizedRoles.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Description,
 
 #pragma warning restore CS8602
+
 			})
 			.FirstOrDefaultAsync();
 

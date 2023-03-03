@@ -3,8 +3,8 @@
 public class LocalizedRole : Seedwork.LocalizedEntity
 {
 	#region Constructor
-	public LocalizedRole
-		(System.Guid cultureId, System.Guid roleId, string title) : base(cultureId: cultureId)
+	public LocalizedRole(System.Guid cultureId,
+		System.Guid roleId, string title) : base(cultureId: cultureId)
 	{
 		Title = title;
 		RoleId = roleId;

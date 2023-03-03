@@ -97,16 +97,19 @@ public static class SelectLists : object
 
 			.Where(current => current.IsActive)
 
-			.Where(current => current.Culture != null &&
-				current.Culture.Lcid == currentUICultureLcid)
-
 			.OrderBy(current => current.Ordering)
-			.ThenBy(current => current.Title)
 
 			.Select(current => new ViewModels.Shared.KeyValueViewModel
 			{
 				Id = current.Id,
-				Name = current.Title,
+
+#pragma warning disable CS8602
+
+				Name = current.LocalizedGenders.FirstOrDefault
+				(other => other.Culture != null && other.Culture.Lcid == currentUICultureLcid).Title,
+
+#pragma warning restore CS8602
+
 			})
 			.ToListAsync()
 			;
@@ -142,16 +145,19 @@ public static class SelectLists : object
 			await
 			databaseContext.Genders
 
-			.Where(current => current.Culture != null &&
-				current.Culture.Lcid == currentUICultureLcid)
-
 			.OrderBy(current => current.Ordering)
-			.ThenBy(current => current.Title)
 
 			.Select(current => new ViewModels.Shared.KeyValueViewModel
 			{
 				Id = current.Id,
-				Name = current.DisplayName,
+
+#pragma warning disable CS8602
+
+				Name = current.LocalizedGenders.FirstOrDefault
+				(other => other.Culture != null && other.Culture.Lcid == currentUICultureLcid).Title,
+
+#pragma warning restore CS8602
+
 			})
 			.ToListAsync()
 			;

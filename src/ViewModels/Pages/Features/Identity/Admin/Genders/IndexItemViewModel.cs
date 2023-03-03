@@ -5,7 +5,6 @@ public class IndexItemViewModel : object
 	#region Constructor
 	public IndexItemViewModel() : base()
 	{
-		Title = Resources.DataDictionary.DefaultNullValue;
 	}
 	#endregion /Constructor
 
@@ -19,7 +18,7 @@ public class IndexItemViewModel : object
 
 	public int Ordering { get; set; }
 
-	public string Title { get; set; }
+	public string? Title { get; set; }
 
 	public string? Prefix { get; set; }
 

@@ -87,7 +87,7 @@ internal sealed class CultureConfiguration : object, Microsoft
 
 		// **************************************************
 		builder
-			.HasMany(current => current.Genders)
+			.HasMany(current => current.LocalizedGenders)
 			.WithOne(other => other.Culture)
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.CultureId)
@@ -98,7 +98,7 @@ internal sealed class CultureConfiguration : object, Microsoft
 
 		// **************************************************
 		builder
-			.HasMany(current => current.UserProfiles)
+			.HasMany(current => current.LocalizedUsers)
 			.WithOne(other => other.Culture)
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.CultureId)

@@ -87,7 +87,7 @@ public class ProfileViewModel : object
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.UpdateDateTime))]
+		Name = nameof(Resources.DataDictionary.RegisterDateTime))]
 	public System.DateTimeOffset InsertDateTime { get; set; }
 	#endregion /public System.DateTimeOffset InsertDateTime { get; set; }
 
@@ -97,7 +97,7 @@ public class ProfileViewModel : object
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.UpdateDateTime))]
+		Name = nameof(Resources.DataDictionary.UpdateProfileDateTime))]
 	public System.DateTimeOffset UpdateDateTime { get; set; }
 	#endregion /public System.DateTimeOffset UpdateDateTime { get; set; }
 

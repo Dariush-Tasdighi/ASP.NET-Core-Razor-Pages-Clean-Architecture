@@ -26,10 +26,25 @@ public class IndexModel :
 	#region Methods
 
 	#region OnGetAsync()
-	public async System.Threading.Tasks.Task OnGetAsync()
+	public async System.Threading.Tasks.Task
+		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync()
 	{
+		// **************************************************
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
+
+		var currentCulture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.Lcid == currentUICultureLcid)
+			.FirstOrDefaultAsync();
+
+		if (currentCulture is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
 
 		ViewModel =
 			await
@@ -45,9 +60,9 @@ public class IndexModel :
 
 				Name = current.Name,
 
-				Code = current.Code,
 				IsActive = current.IsActive,
 
+				Code = current.Code,
 				Ordering = current.Ordering,
 				UserCount = current.Users.Count,
 
@@ -56,15 +71,16 @@ public class IndexModel :
 
 #pragma warning disable CS8602
 
-				Title = current.LocalizedRoles
-					.FirstOrDefault(current => current.Culture != null
-						&& current.Culture.Lcid == currentUICultureLcid).Title,
+				Title = current.LocalizedRoles.FirstOrDefault
+					(other => other.CultureId == currentCulture.Id).Title,
 
 #pragma warning restore CS8602
 
 			})
 			.ToListAsync()
 			;
+
+		return Page();
 	}
 	#endregion /OnGetAsync()
 

@@ -454,7 +454,7 @@
     <value>#</value>
   </data>
   <data name="LastLoginDateTime" xml:space="preserve">
-    <value>Last Login Date Time</value>
+    <value>Last Login Time</value>
   </data>
   <data name="SelectAnItem" xml:space="preserve">
     <value>Select An Item</value>
@@ -659,5 +659,11 @@
   </data>
   <data name="UserRoleTitle" xml:space="preserve">
     <value>User Role Title</value>
+  </data>
+  <data name="RegisterDateTime" xml:space="preserve">
+    <value>Register Time</value>
+  </data>
+  <data name="UpdateProfileDateTime" xml:space="preserve">
+    <value>Update Profile Time</value>
   </data>
 </root>

@@ -120,9 +120,6 @@ public class RegisterModel :
 			await
 			DatabaseContext.Roles
 
-			//.Where(current => current.Culture != null
-			//	&& current.Culture.Lcid == currentUICultureLcid)
-
 			.Where(current => current.Code ==
 				Domain.Features.Identity.Enums.RoleEnum.SimpleUser)
 
@@ -139,6 +136,30 @@ public class RegisterModel :
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
+		// **************************************************
+
+		// **************************************************
+		var unspecifiedGender =
+			await
+			DatabaseContext.Genders
+
+			.Where(current => current.Code ==
+				Domain.Features.Identity.Enums.GenderEnum.Unspecified)
+
+			.FirstOrDefaultAsync();
+
+		if (unspecifiedGender is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+
+		// دستور ذیل نباید نوشته شود
+		//if (unspecifiedGender.IsActive == false)
+		//{
+		//	return RedirectToPage(pageName:
+		//		Constants.CommonRouting.NotFound);
+		//}
 		// **************************************************
 
 		// **************************************************
@@ -193,8 +214,8 @@ public class RegisterModel :
 			ViewModel.Password.Fix()!;
 
 		var user =
-			new Domain.Features.Identity.User
-			(emailAddress: emailAddress, roleId: simpleUserRole.Id)
+			new Domain.Features.Identity.User(emailAddress: emailAddress,
+			roleId: simpleUserRole.Id, genderId: unspecifiedGender.Id)
 			{
 				Username = username,
 				Password = Dtat.Security

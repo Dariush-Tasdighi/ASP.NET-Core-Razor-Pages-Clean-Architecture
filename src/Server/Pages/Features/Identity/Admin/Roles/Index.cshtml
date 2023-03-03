@@ -32,10 +32,10 @@
 					@(Resources.DataDictionary.IsActive)
 				</th>
 				<th>
-					@(Resources.DataDictionary.Name)
+					@(Resources.DataDictionary.Code)
 				</th>
 				<th>
-					@(Resources.DataDictionary.Code)
+					@(Resources.DataDictionary.Name)
 				</th>
 				<th>
 					@(Resources.DataDictionary.Ordering)
@@ -74,10 +74,10 @@
 
 					@(Html.DtatDisplayBooleanWithTd(value: item.IsActive))
 
+					@(Html.DtatDisplayIntegerWithTd(value: (int)item.Code))
+
 					@(Html.DtatDisplayStringWithTd
 						(value: item.Name, isLeftToRight: true))
-
-					@(Html.DtatDisplayIntegerWithTd(value: (int)item.Code))
 
 					@(Html.DtatDisplayIntegerWithTd(value: item.Ordering))
 

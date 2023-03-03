@@ -106,17 +106,6 @@ internal sealed class UserConfiguration : object, Microsoft
 		// **************************************************
 		// **************************************************
 		// **************************************************
-		//builder
-		//	.HasMany(current => current.CreatedPages)
-		//	.WithOne(other => other.OwnerUser)
-		//	.IsRequired(required: true)
-		//	.HasForeignKey(other => other.OwnerUserId)
-		//	.OnDelete(deleteBehavior:
-		//		Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
-		//	;
-		// **************************************************
-
-		// **************************************************
 		builder
 			.HasMany(current => current.LoginLogs)
 			.WithOne(other => other.User)
@@ -129,7 +118,7 @@ internal sealed class UserConfiguration : object, Microsoft
 
 		// **************************************************
 		builder
-			.HasMany(current => current.Profiles)
+			.HasMany(current => current.LocalizedUsers)
 			.WithOne(other => other.User)
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.UserId)

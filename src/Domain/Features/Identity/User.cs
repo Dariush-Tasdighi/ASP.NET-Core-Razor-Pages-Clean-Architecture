@@ -2,7 +2,6 @@
 
 public class User :
 	Seedwork.Entity,
-	Dtat.Seedwork.Abstractions.IEntityHasCode,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
@@ -10,11 +9,13 @@ public class User :
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public User(string emailAddress, System.Guid roleId) : base()
+	public User(string emailAddress,
+		System.Guid roleId, System.Guid genderId) : base()
 	{
-		RoleId = roleId;
-
 		Ordering = 10_000;
+
+		RoleId = roleId;
+		GenderId = genderId;
 
 		UpdateDateTime = InsertDateTime;
 
@@ -24,8 +25,8 @@ public class User :
 		LoginLogs =
 			new System.Collections.Generic.List<LoginLog>();
 
-		Profiles =
-			new System.Collections.Generic.List<UserProfile>();
+		LocalizedUsers =
+			new System.Collections.Generic.List<LocalizedUser>();
 
 		Posts =
 			new System.Collections.Generic.List<Cms.Post>();
@@ -66,6 +67,36 @@ public class User :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public virtual Role? Role { get; set; }
 	#endregion /public virtual Role? Role { get; set; }
+
+	#region public System.Guid GenderId { get; set; }
+	/// <summary>
+	/// جنسیت
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Gender))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid GenderId { get; set; }
+	#endregion /public System.Guid GenderId { get; set; }
+
+	#region public virtual Gender? Gender { get; set; }
+	/// <summary>
+	/// جنسیت
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Gender))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public virtual Gender? Gender { get; set; }
+	#endregion /public virtual Gender? Gender { get; set; }
 
 
 
@@ -175,19 +206,6 @@ public class User :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
 	public int Ordering { get; set; }
 	#endregion /public int Ordering { get; set; }
-
-	#region public int Code { get; private set; }
-	/// <summary>
-	/// کد
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Code))]
-
-	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(databaseGeneratedOption:
-		System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
-	public int Code { get; private set; }
-	#endregion /public int Code { get; private set; }
 
 
 
@@ -449,7 +467,7 @@ public class User :
 	#region Collections
 
 	public virtual System.Collections.Generic.IList<LoginLog> LoginLogs { get; private set; }
-	public virtual System.Collections.Generic.IList<UserProfile> Profiles { get; private set; }
+	public virtual System.Collections.Generic.IList<LocalizedUser> LocalizedUsers { get; private set; }
 
 	public virtual System.Collections.Generic.IList<Cms.Post> Posts { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.PostComment> PostComments { get; private set; }

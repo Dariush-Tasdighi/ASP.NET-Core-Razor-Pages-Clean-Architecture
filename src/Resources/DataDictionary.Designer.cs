@@ -943,7 +943,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Last Login Date Time.
+        ///   Looks up a localized string similar to Last Login Time.
         /// </summary>
         public static string LastLoginDateTime {
             get {
@@ -1303,6 +1303,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register Time.
+        /// </summary>
+        public static string RegisterDateTime {
+            get {
+                return ResourceManager.GetString("RegisterDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remember Me.
         /// </summary>
         public static string RememberMe {
@@ -1560,6 +1569,15 @@ namespace Resources {
         public static string UpdateProfile {
             get {
                 return ResourceManager.GetString("UpdateProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Profile Time.
+        /// </summary>
+        public static string UpdateProfileDateTime {
+            get {
+                return ResourceManager.GetString("UpdateProfileDateTime", resourceCulture);
             }
         }
         

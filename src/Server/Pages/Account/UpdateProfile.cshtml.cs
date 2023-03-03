@@ -49,7 +49,7 @@ public class UpdateProfileModel :
 		var foundedUser =
 			await
 			DatabaseContext.Users
-			.Include(current => current.Profiles)
+			.Include(current => current.LocalizedUsers)
 			.ThenInclude(current => current.Culture)
 			.Where(current => current.EmailAddress.ToLower() == userEmailAddress.ToLower())
 			.FirstOrDefaultAsync();
@@ -65,24 +65,24 @@ public class UpdateProfileModel :
 			Infrastructure.SelectLists.GetGendersForUserAsync
 			(databaseContext: DatabaseContext, selectedValue: null);
 
+		ViewModel.GenderId = foundedUser.GenderId;
 		ViewModel.NationalCode = foundedUser.NationalCode;
 		ViewModel.IsProfilePublic = foundedUser.IsProfilePublic;
 
-		var foundedUserProfile =
-			foundedUser.Profiles
+		var foundedLocalizedUser =
+			foundedUser.LocalizedUsers
 			.Where(current => current.Culture is not null &&
 				current.Culture.Lcid == currentUICultureLcid)
 			.FirstOrDefault();
 
-		if (foundedUserProfile is null)
+		if (foundedLocalizedUser is null)
 		{
 			return Page();
 		}
 
-		ViewModel.GenderId = foundedUserProfile.GenderId;
-		ViewModel.LastName = foundedUserProfile.LastName;
-		ViewModel.FirstName = foundedUserProfile.FirstName;
-		ViewModel.Description = foundedUserProfile.Description;
+		ViewModel.LastName = foundedLocalizedUser.LastName;
+		ViewModel.FirstName = foundedLocalizedUser.FirstName;
+		ViewModel.Description = foundedLocalizedUser.Description;
 
 		return Page();
 	}
@@ -121,7 +121,7 @@ public class UpdateProfileModel :
 			await
 			DatabaseContext.Users
 
-			.Include(current => current.Profiles)
+			.Include(current => current.LocalizedUsers)
 			.ThenInclude(current => current.Culture)
 
 			.Where(current => current.EmailAddress.ToLower() == userEmailAddress)
@@ -134,25 +134,21 @@ public class UpdateProfileModel :
 				Constants.CommonRouting.Logout);
 		}
 
+		foundedUser.GenderId = ViewModel.GenderId;
 		foundedUser.NationalCode = ViewModel.NationalCode;
 		foundedUser.IsProfilePublic = ViewModel.IsProfilePublic;
 
-		var foundedUserProfile =
-			foundedUser.Profiles
+		var foundedLocalizedUser =
+			foundedUser.LocalizedUsers
 			.Where(current => current.Culture != null &&
 				current.Culture.Lcid == currentUICultureLcid)
 			.FirstOrDefault();
 
-		if (foundedUserProfile is not null)
+		if (foundedLocalizedUser is not null)
 		{
-			foundedUserProfile.GenderId = ViewModel.GenderId;
-			foundedUserProfile.LastName = ViewModel.LastName.Fix()!;
-			foundedUserProfile.FirstName = ViewModel.FirstName.Fix()!;
-
-			//foundedUserProfile.LastName = ViewModel.LastName.Fix();
-			//foundedUserProfile.FirstName = ViewModel.FirstName.Fix();
-
-			foundedUserProfile.Description = ViewModel.Description.Fix();
+			foundedLocalizedUser.LastName = ViewModel.LastName.Fix()!;
+			foundedLocalizedUser.FirstName = ViewModel.FirstName.Fix()!;
+			foundedLocalizedUser.Description = ViewModel.Description.Fix();
 		}
 		else
 		{
@@ -168,21 +164,15 @@ public class UpdateProfileModel :
 					Constants.CommonRouting.InternalServerError);
 			}
 
-			var userProfile =
-				new Domain.Features.Identity.UserProfile
-				(cultureId: currentCulture.Id,
-				userId: foundedUser.Id,
-				genderId: ViewModel.GenderId,
-				firstName: ViewModel.FirstName.Fix()!,
-				lastName: ViewModel.LastName.Fix()!)
-
-				//firstName: ViewModel.FirstName.Fix(),
-				//lastName: ViewModel.LastName.Fix())
+			var localizedUser =
+				new Domain.Features.Identity.LocalizedUser
+				(cultureId: currentCulture.Id, userId: foundedUser.Id,
+				firstName: ViewModel.FirstName.Fix()!, lastName: ViewModel.LastName.Fix()!)
 				{
 					Description = ViewModel.Description.Fix(),
 				};
 
-			await DatabaseContext.AddAsync(entity: userProfile);
+			await DatabaseContext.AddAsync(entity: localizedUser);
 		}
 
 		await DatabaseContext.SaveChangesAsync();

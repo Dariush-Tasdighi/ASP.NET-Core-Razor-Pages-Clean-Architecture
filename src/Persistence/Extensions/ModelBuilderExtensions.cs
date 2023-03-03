@@ -60,131 +60,149 @@ public static class ModelBuilderExtensions : object
 		// **************************************************
 		// *** Genders **************************************
 		// **************************************************
-		var unspecifiedPersian =
+
+		// **************************************************
+		Domain.Features.Identity.LocalizedGender localizedGender;
+		// **************************************************
+
+		// **************************************************
+		var genderUnspecified =
 			new Domain.Features.Identity.Gender
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.GenderEnum.Unspecified, title: "نامشخص")
+			(code: Domain.Features.Identity.Enums.GenderEnum.Unspecified)
+			{
+				IsActive = true,
+				Ordering = 10_000,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: genderUnspecified);
+
+		localizedGender =
+			new Domain.Features.Identity.LocalizedGender
+			(cultureId: culturePersian.Id, genderId: genderUnspecified.Id, title: "مشخص نشده")
 			{
 				Prefix = null,
-				IsActive = false,
-				Ordering = 10_000,
 				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Gender>().HasData(data: unspecifiedPersian);
+			.Identity.LocalizedGender>().HasData(data: localizedGender);
+
+		localizedGender =
+			new Domain.Features.Identity.LocalizedGender
+			(cultureId: cultureEnglish.Id, genderId: genderUnspecified.Id, title: "Unspecified")
+			{
+				Prefix = null,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedGender>().HasData(data: localizedGender);
 		// **************************************************
 
 		// **************************************************
-		var malePersian =
+		var genderMale =
 			new Domain.Features.Identity.Gender
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.GenderEnum.Male, title: "آقا")
+			(code: Domain.Features.Identity.Enums.GenderEnum.Male)
+			{
+				IsActive = true,
+				Ordering = 10_000,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: genderMale);
+
+		localizedGender =
+			new Domain.Features.Identity.LocalizedGender
+			(cultureId: culturePersian.Id, genderId: genderMale.Id, title: "آقا")
 			{
 				Prefix = "آقای",
-				IsActive = true,
-				Ordering = 10_000,
 				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Gender>().HasData(data: malePersian);
-		// **************************************************
+			.Identity.LocalizedGender>().HasData(data: localizedGender);
 
-		// **************************************************
-		var femalePersian =
-			new Domain.Features.Identity.Gender
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.GenderEnum.Female, title: "خانم")
-			{
-				Prefix = "خانم",
-				IsActive = true,
-				Ordering = 10_000,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Gender>().HasData(data: femalePersian);
-		// **************************************************
-
-		// **************************************************
-		var trancePersian =
-			new Domain.Features.Identity.Gender
-			(cultureId: culturePersian.Id,
-			code: Domain.Features.Identity.Enums.GenderEnum.Trance, title: "ترنس")
-			{
-				Prefix = null,
-				IsActive = false,
-				Ordering = 10_000,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Gender>().HasData(data: trancePersian);
-		// **************************************************
-
-		// **************************************************
-		var unspecifiedEnglish =
-			new Domain.Features.Identity.Gender
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.GenderEnum.Unspecified, title: "Unspecified")
-			{
-				Prefix = null,
-				IsActive = true,
-				Ordering = 10_000,
-				Description = null,
-			};
-
-		modelBuilder.Entity<Domain.Features
-			.Identity.Gender>().HasData(data: unspecifiedEnglish);
-		// **************************************************
-
-		// **************************************************
-		var maleEnglish =
-			new Domain.Features.Identity.Gender
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.GenderEnum.Male, title: "Male")
+		localizedGender =
+			new Domain.Features.Identity.LocalizedGender
+			(cultureId: cultureEnglish.Id, genderId: genderMale.Id, title: "Male")
 			{
 				Prefix = "Mr.",
-				IsActive = true,
-				Ordering = 10_000,
 				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Gender>().HasData(data: maleEnglish);
+			.Identity.LocalizedGender>().HasData(data: localizedGender);
 		// **************************************************
 
 		// **************************************************
-		var femaleEnglish =
+		var genderFemale =
 			new Domain.Features.Identity.Gender
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.GenderEnum.Female, title: "Female")
+			(code: Domain.Features.Identity.Enums.GenderEnum.Female)
+			{
+				IsActive = true,
+				Ordering = 10_000,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: genderFemale);
+
+		localizedGender =
+			new Domain.Features.Identity.LocalizedGender
+			(cultureId: culturePersian.Id, genderId: genderFemale.Id, title: "خانم")
+			{
+				Prefix = "خانم",
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedGender>().HasData(data: localizedGender);
+
+		localizedGender =
+			new Domain.Features.Identity.LocalizedGender
+			(cultureId: cultureEnglish.Id, genderId: genderFemale.Id, title: "Female")
 			{
 				Prefix = "Ms.",
-				IsActive = true,
-				Ordering = 10_000,
 				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Gender>().HasData(data: femaleEnglish);
+			.Identity.LocalizedGender>().HasData(data: localizedGender);
 		// **************************************************
 
 		// **************************************************
-		var tranceEnglish =
+		var genderTrance =
 			new Domain.Features.Identity.Gender
-			(cultureId: cultureEnglish.Id,
-			code: Domain.Features.Identity.Enums.GenderEnum.Trance, title: "Trance")
+			(code: Domain.Features.Identity.Enums.GenderEnum.Trance)
+			{
+				IsActive = false,
+				Ordering = 10_000,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.Gender>().HasData(data: genderTrance);
+
+		localizedGender =
+			new Domain.Features.Identity.LocalizedGender
+			(cultureId: culturePersian.Id, genderId: genderTrance.Id, title: "ترنس")
 			{
 				Prefix = null,
-				IsActive = true,
-				Ordering = 10_000,
 				Description = null,
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Gender>().HasData(data: tranceEnglish);
+			.Identity.LocalizedGender>().HasData(data: localizedGender);
+
+		localizedGender =
+			new Domain.Features.Identity.LocalizedGender
+			(cultureId: cultureEnglish.Id, genderId: genderTrance.Id, title: "Trance")
+			{
+				Prefix = null,
+				Description = null,
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedGender>().HasData(data: localizedGender);
 		// **************************************************
 		// *** /Genders *************************************
 		// **************************************************
@@ -192,7 +210,13 @@ public static class ModelBuilderExtensions : object
 		// **************************************************
 		// *** Roles ****************************************
 		// **************************************************
-		var simpleUser =
+
+		// **************************************************
+		Domain.Features.Identity.LocalizedRole localizedRole;
+		// **************************************************
+
+		// **************************************************
+		var roleSimpleUser =
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.SimpleUser,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SimpleUser))
@@ -202,11 +226,29 @@ public static class ModelBuilderExtensions : object
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: simpleUser);
+			.Identity.Role>().HasData(data: roleSimpleUser);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: culturePersian.Id, roleId: roleSimpleUser.Id, title: "کاربر")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: cultureEnglish.Id, roleId: roleSimpleUser.Id, title: "User")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
 		// **************************************************
 
 		// **************************************************
-		var specialUser =
+		var roleSpecialUser =
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.SpecialUser,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.SpecialUser))
@@ -216,11 +258,29 @@ public static class ModelBuilderExtensions : object
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: specialUser);
+			.Identity.Role>().HasData(data: roleSpecialUser);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: culturePersian.Id, roleId: roleSpecialUser.Id, title: "کاربر ویژه")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: cultureEnglish.Id, roleId: roleSpecialUser.Id, title: "VIP User")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
 		// **************************************************
 
 		// **************************************************
-		var supervisor =
+		var roleSupervisor =
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.Supervisor,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Supervisor))
@@ -230,11 +290,29 @@ public static class ModelBuilderExtensions : object
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: supervisor);
+			.Identity.Role>().HasData(data: roleSupervisor);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: culturePersian.Id, roleId: roleSupervisor.Id, title: "مسئول پایگاه")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: cultureEnglish.Id, roleId: roleSupervisor.Id, title: "Supervisor")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
 		// **************************************************
 
 		// **************************************************
-		var administrator =
+		var roleAdministrator =
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.Administrator,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Administrator))
@@ -244,11 +322,29 @@ public static class ModelBuilderExtensions : object
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: administrator);
+			.Identity.Role>().HasData(data: roleAdministrator);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: culturePersian.Id, roleId: roleAdministrator.Id, title: "مدیر پایگاه")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: cultureEnglish.Id, roleId: roleAdministrator.Id, title: "Administrator")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
 		// **************************************************
 
 		// **************************************************
-		var applicationOwner =
+		var roleApplicationOwner =
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.ApplicationOwner))
@@ -258,11 +354,29 @@ public static class ModelBuilderExtensions : object
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: applicationOwner);
+			.Identity.Role>().HasData(data: roleApplicationOwner);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: culturePersian.Id, roleId: roleApplicationOwner.Id, title: "مالک پایگاه")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: cultureEnglish.Id, roleId: roleApplicationOwner.Id, title: "Application Owner")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
 		// **************************************************
 
 		// **************************************************
-		var programmerPersian =
+		var roleProgrammer =
 			new Domain.Features.Identity.Role
 			(code: Domain.Features.Identity.Enums.RoleEnum.Programmer,
 			name: nameof(Domain.Features.Identity.Enums.RoleEnum.Programmer))
@@ -272,7 +386,25 @@ public static class ModelBuilderExtensions : object
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.Role>().HasData(data: programmerPersian);
+			.Identity.Role>().HasData(data: roleProgrammer);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: culturePersian.Id, roleId: roleProgrammer.Id, title: "برنامه‌نویس")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
+
+		localizedRole = new Domain.Features.Identity.LocalizedRole
+			(cultureId: cultureEnglish.Id, roleId: roleProgrammer.Id, title: "Programmer")
+		{
+			Description = null,
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedRole>().HasData(data: localizedRole);
 		// **************************************************
 		// *** /Roles ****************************************
 		// **************************************************
@@ -286,8 +418,8 @@ public static class ModelBuilderExtensions : object
 		//	(emailAddress: "DariushT@GMail.com", roleId: programmer.Id)
 
 		var user =
-			new Domain.Features.Identity.User
-			(emailAddress: "DariushT@GMail.com", roleId: administrator.Id)
+			new Domain.Features.Identity.User(emailAddress: "DariushT@GMail.com",
+			roleId: roleAdministrator.Id, genderId: genderMale.Id)
 			{
 				Ordering = 1,
 
@@ -314,27 +446,27 @@ public static class ModelBuilderExtensions : object
 		modelBuilder.Entity<Domain.Features
 			.Identity.User>().HasData(data: user);
 
-		var persianUserProfile =
-			new Domain.Features.Identity.UserProfile
-			(cultureId: culturePersian.Id, userId: user.Id,
-			genderId: malePersian.Id, firstName: "داریوش", lastName: "تصدیقی")
+		Domain.Features.Identity.LocalizedUser localizedUser;
+
+		localizedUser =
+			new Domain.Features.Identity.LocalizedUser(cultureId: culturePersian.Id,
+			userId: user.Id, firstName: "داریوش", lastName: "تصدیقی")
 			{
 				TitleInContactUsPage = "مالک پایگاه",
 			};
 
 		modelBuilder.Entity<Domain.Features
-			.Identity.UserProfile>().HasData(data: persianUserProfile);
+			.Identity.LocalizedUser>().HasData(data: localizedUser);
 
-		//var englishUserProfile =
-		//	new Domain.Features.Identity.UserProfile
-		//	(userId: user.Id, cultureId: englishCulture.Id,
-		//	firstName: "Dariush", lastName: "Tasdighi")
-		//	{
-		//		TitleInContactUsPage = "Site Owner",
-		//	};
+		localizedUser =
+			new Domain.Features.Identity.LocalizedUser(cultureId: cultureEnglish.Id,
+			userId: user.Id, firstName: "Dariush", lastName: "Tasdighi")
+			{
+				TitleInContactUsPage = "Site Owner",
+			};
 
-		//modelBuilder.Entity<Domain.Features
-		//	.Identity.UserProfile>().HasData(data: englishUserProfile);
+		modelBuilder.Entity<Domain.Features
+			.Identity.LocalizedUser>().HasData(data: localizedUser);
 		// **************************************************
 		// *** /Users ****************************************
 		// **************************************************

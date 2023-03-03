@@ -693,4 +693,10 @@
   <data name="UserRoleTitle" xml:space="preserve">
     <value>نقش کاربر در سامانه</value>
   </data>
+  <data name="RegisterDateTime" xml:space="preserve">
+    <value>زمان ثبت‌نام</value>
+  </data>
+  <data name="UpdateProfileDateTime" xml:space="preserve">
+    <value>زمان ویرایش مشخصات</value>
+  </data>
 </root>

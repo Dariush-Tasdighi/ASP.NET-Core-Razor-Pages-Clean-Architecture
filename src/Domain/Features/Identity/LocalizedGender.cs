@@ -1,44 +1,51 @@
-﻿namespace ViewModels.Pages.Features.Identity.Admin.Genders;
+﻿namespace Domain.Features.Identity;
 
-public class CreateViewModel : object
+public class LocalizedGender : Seedwork.LocalizedEntity
 {
 	#region Constructor
-	public CreateViewModel() : base()
+	public LocalizedGender(System.Guid cultureId,
+		System.Guid genderId, string title) : base(cultureId: cultureId)
 	{
-		Ordering = 10_000;
+		Title = title;
+		GenderId = genderId;
 	}
 	#endregion /Constructor
 
 	#region Properties
 
-	#region public bool IsActive { get; set; }
+	#region public System.Guid GenderId { get; set; }
 	/// <summary>
-	/// وضعیت
+	/// جنیست
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.IsActive))]
-	public bool IsActive { get; set; }
-	#endregion /public bool IsActive { get; set; }
+		Name = nameof(Resources.DataDictionary.Gender))]
 
-	#region public int Ordering { get; set; }
-	/// <summary>
-	/// چیدمان
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Ordering))]
-
-	[System.ComponentModel.DataAnnotations.Range
-		(minimum: 1, maximum: 100_000,
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
-		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Range))]
-	public int Ordering { get; set; }
-	#endregion /public int Ordering { get; set; }
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid GenderId { get; set; }
+	#endregion /public System.Guid GenderId { get; set; }
 
-	#region public string? Title { get; set; }
+	#region public virtual Gender? Gender { get; set; }
 	/// <summary>
-	/// نام
+	/// جنیست
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.User))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public virtual Gender? Gender { get; set; }
+	#endregion /public virtual Gender? Gender { get; set; }
+
+	#region public string Title { get; set; }
+	/// <summary>
+	/// عنوان
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
@@ -53,9 +60,8 @@ public class CreateViewModel : object
 		(length: Constants.MaxLength.Title,
 		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
-	public string? Title { get; set; }
-	//public string Title { get; set; }
-	#endregion /public string? Title { get; set; }
+	public string Title { get; set; }
+	#endregion /public string Title { get; set; }
 
 	#region public string? Prefix { get; set; }
 	/// <summary>

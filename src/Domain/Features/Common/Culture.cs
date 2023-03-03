@@ -33,14 +33,16 @@ public class Culture :
 		PostCategories =
 			new System.Collections.Generic.List<Cms.PostCategory>();
 
-		Genders =
-			new System.Collections.Generic.List<Identity.Gender>();
 
-		UserProfiles =
-			new System.Collections.Generic.List<Identity.UserProfile>();
 
 		LocalizedRoles =
 			new System.Collections.Generic.List<Identity.LocalizedRole>();
+
+		LocalizedUsers =
+			new System.Collections.Generic.List<Identity.LocalizedUser>();
+
+		LocalizedGenders =
+			new System.Collections.Generic.List<Identity.LocalizedGender>();
 	}
 	#endregion /Constructor
 
@@ -165,15 +167,15 @@ public class Culture :
 
 	#region Collections
 
-	public virtual System.Collections.Generic.IList<Cms.Post> Posts { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.Page> Pages { get; private set; }
+	public virtual System.Collections.Generic.IList<Cms.Post> Posts { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.Slide> Slides { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.MenuItem> MenuItems { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.PostCategory> PostCategories { get; private set; }
 
-	public virtual System.Collections.Generic.IList<Identity.Gender> Genders { get; private set; }
-	public virtual System.Collections.Generic.IList<Identity.UserProfile> UserProfiles { get; private set; }
 	public virtual System.Collections.Generic.IList<Identity.LocalizedRole> LocalizedRoles { get; private set; }
+	public virtual System.Collections.Generic.IList<Identity.LocalizedUser> LocalizedUsers { get; private set; }
+	public virtual System.Collections.Generic.IList<Identity.LocalizedGender> LocalizedGenders { get; private set; }
 
 	#endregion /Collections
 }

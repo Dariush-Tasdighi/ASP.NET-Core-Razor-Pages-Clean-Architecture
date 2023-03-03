@@ -12,7 +12,7 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 
 	#region public int UserCount { get; set; }
 	/// <summary>
-	/// تعداد مطالب
+	/// تعداد کاربران
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
@@ -40,7 +40,7 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 	public System.DateTimeOffset UpdateDateTime { get; set; }
 	#endregion /public System.DateTimeOffset UpdateDateTime { get; set; }
 
-	#region public Domain.Features.Identity.Enums.GenderEnum Code { get; set; }
+	#region Domain.Features.Identity.Enums.GenderEnum Code { get; set; }
 	/// <summary>
 	/// کد
 	/// </summary>
@@ -48,7 +48,7 @@ public class DetailsOrDeleteViewModel : UpdateViewModel
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.Code))]
 	public Domain.Features.Identity.Enums.GenderEnum Code { get; set; }
-	#endregion /public Domain.Features.Identity.Enums.GenderEnum Code { get; set; }
+	#endregion /Domain.Features.Identity.Enums.GenderEnum Code { get; set; }
 
 	#endregion Properties
 }
