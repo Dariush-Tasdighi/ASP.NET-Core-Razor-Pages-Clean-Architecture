@@ -61,6 +61,9 @@ public class UpdateModel :
 
 				Hits = current.Hits,
 
+				Copyright = current.Copyright,
+				ApplicationVersioin = current.ApplicationVersioin,
+
 				NavbarBrandText = current.NavbarBrandText,
 				NavbarBrandImageUrl = current.NavbarBrandImageUrl,
 
@@ -129,6 +132,9 @@ public class UpdateModel :
 		foundedItem.SetUpdateDateTime();
 
 		foundedItem.Hits = ViewModel.Hits;
+
+		foundedItem.Copyright = ViewModel.Copyright.Fix();
+		foundedItem.ApplicationVersioin = ViewModel.ApplicationVersioin.Fix();
 
 		foundedItem.NavbarBrandText = ViewModel.NavbarBrandText.Fix();
 		foundedItem.NavbarBrandImageUrl = ViewModel.NavbarBrandImageUrl.Fix();

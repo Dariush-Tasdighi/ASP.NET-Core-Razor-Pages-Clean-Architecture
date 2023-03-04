@@ -34,6 +34,28 @@ public class UpdateViewModel : object
 
 
 
+	#region public string? Copyright { get; set; }
+	/// <summary>
+	/// کپی‌رایت
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Copyright))]
+	public string? Copyright { get; set; }
+	#endregion /public string? Copyright { get; set; }
+
+	#region public string? ApplicationVersioin { get; set; }
+	/// <summary>
+	/// نسخه سامانه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Version))]
+	public string? ApplicationVersioin { get; set; }
+	#endregion /public string? ApplicationVersioin { get; set; }
+
+
+
 	#region public string? NavbarBrandText { get; set; }
 	/// <summary>
 	/// Navbar Brand Text

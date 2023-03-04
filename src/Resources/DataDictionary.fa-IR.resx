@@ -160,7 +160,7 @@
     <value>تکرار گذرواژه</value>
   </data>
   <data name="Copyright" xml:space="preserve">
-    <value>حق نشر</value>
+    <value>کپی‌رایت</value>
   </data>
   <data name="CreatorUserId" xml:space="preserve">
     <value>کاربر ایجاد کننده</value>
@@ -383,9 +383,6 @@
   </data>
   <data name="Sites" xml:space="preserve">
     <value>سایت‌ها</value>
-  </data>
-  <data name="SiteTitle" xml:space="preserve">
-    <value>متخصصین ایرانی</value>
   </data>
   <data name="SocialNetworks" xml:space="preserve">
     <value>شبکه‌های اجتماعی</value>

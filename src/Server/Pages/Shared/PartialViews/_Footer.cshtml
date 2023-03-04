@@ -1,32 +1,35 @@
-﻿@inject Infrastructure.Settings.ApplicationSettings applicationSettings
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor
+﻿@*@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor*@
+@inject Services.Features.Common.LocalizedApplicationSettingService localizedApplicationSettingService
+
+@{
+	var localizedApplicationSetting =
+		await
+		localizedApplicationSettingService.GetInstance();
+}
 
 <footer class="footer border-top py-3 bg-light text-muted fixed-bottom">
 
 	<div class="container text-muted">
-		|
-		Domain: @(httpContextAccessor.HttpContext?.Request.Host.Value)
+		@*|Domain: @(httpContextAccessor.HttpContext?.Request.Host.Value)*@
 
-		|
 		<environment include="Development" exclude="Production">
 			Development Mode
 		</environment>
 
-		<environment include="Production" exclude="Development">
-			Production Mode
-		</environment>
+		@*<environment include="Production" exclude="Development">Production Mode</environment>*@
 
-		|
-		&copy;2022
-
-		|
-		@(Resources.DataDictionary.SiteTitle)
-
-		@if (applicationSettings is not null && string.IsNullOrWhiteSpace(applicationSettings.Version) == false)
+		@if (string.IsNullOrWhiteSpace(value: localizedApplicationSetting.Copyright) == false)
 		{
-			var version = $"| {Resources.DataDictionary.Version}: {applicationSettings.Version} |";
+			<text>|&nbsp;</text>
 
-			@(version)
+			@(localizedApplicationSetting.Copyright)
+		}
+
+		@if (string.IsNullOrWhiteSpace(value: localizedApplicationSetting.ApplicationVersioin) == false)
+		{
+			<text>|&nbsp;</text>
+
+			@(localizedApplicationSetting.ApplicationVersioin)
 		}
 	</div>
 

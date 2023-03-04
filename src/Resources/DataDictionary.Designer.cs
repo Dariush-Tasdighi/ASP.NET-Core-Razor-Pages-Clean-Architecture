@@ -1474,15 +1474,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Iranian Experts.
-        /// </summary>
-        public static string SiteTitle {
-            get {
-                return ResourceManager.GetString("SiteTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Slide.
         /// </summary>
         public static string Slide {
