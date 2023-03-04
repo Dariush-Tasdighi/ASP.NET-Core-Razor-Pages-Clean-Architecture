@@ -43,6 +43,11 @@ public class Culture :
 
 		LocalizedGenders =
 			new System.Collections.Generic.List<Identity.LocalizedGender>();
+
+
+
+		LocalizedApplicationSettings =
+			new System.Collections.Generic.List<Common.LocalizedApplicationSetting>();
 	}
 	#endregion /Constructor
 
@@ -176,6 +181,8 @@ public class Culture :
 	public virtual System.Collections.Generic.IList<Identity.LocalizedRole> LocalizedRoles { get; private set; }
 	public virtual System.Collections.Generic.IList<Identity.LocalizedUser> LocalizedUsers { get; private set; }
 	public virtual System.Collections.Generic.IList<Identity.LocalizedGender> LocalizedGenders { get; private set; }
+
+	public virtual System.Collections.Generic.IList<Common.LocalizedApplicationSetting> LocalizedApplicationSettings { get; private set; }
 
 	#endregion /Collections
 }

@@ -250,8 +250,7 @@ public class Post :
 
 	#region public string? Author { get; set; }
 	/// <summary>
-	/// نام و نام خانوادگی کاربر
-	/// این فیلد برای جلوگیری از اجرای کوئوری‌های سنگین در نظر گرفته شده است
+	/// نویسنده مطلب
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),

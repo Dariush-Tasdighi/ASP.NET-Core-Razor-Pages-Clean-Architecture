@@ -155,6 +155,11 @@ builder.Services.AddSingleton<Services.ColorService>();
 // **************************************************
 
 // **************************************************
+builder.Services.AddScoped<Services.Features
+	.Common.LocalizedApplicationSettingService>();
+// **************************************************
+
+// **************************************************
 var app =
 	builder.Build();
 // **************************************************

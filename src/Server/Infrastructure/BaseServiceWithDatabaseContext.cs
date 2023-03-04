@@ -1,8 +1,8 @@
 ﻿namespace Infrastructure;
 
-public abstract class BasePageModelWithDatabaseContext : BasePageModel
+public abstract class BaseServiceWithDatabaseContext : BasePageModel
 {
-	public BasePageModelWithDatabaseContext
+	public BaseServiceWithDatabaseContext
 		(Persistence.DatabaseContext databaseContext) : base()
 	{
 		DatabaseContext = databaseContext;
@@ -10,16 +10,8 @@ public abstract class BasePageModelWithDatabaseContext : BasePageModel
 
 	protected Persistence.DatabaseContext DatabaseContext { get; }
 
-	//protected readonly Persistence.DatabaseContext DatabaseContext;
-
 	protected void DisposeDatabaseContext()
 	{
-		//if (DatabaseContext is not null)
-		//{
-		//	DatabaseContext.Dispose();
-		//	//DatabaseContext = null;
-		//}
-
 		DatabaseContext?.Dispose();
 	}
 
@@ -29,7 +21,6 @@ public abstract class BasePageModelWithDatabaseContext : BasePageModel
 		if (DatabaseContext is not null)
 		{
 			await DatabaseContext.DisposeAsync();
-			//DatabaseContext = null;
 		}
 	}
 }

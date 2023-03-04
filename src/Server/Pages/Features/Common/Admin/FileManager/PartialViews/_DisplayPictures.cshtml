@@ -44,10 +44,7 @@
 		{
 		}
 
-		if (image is null)
-		{
-			continue;
-		}
+		@*if (image is null){continue;}*@
 
 		<div class="col">
 			<div class="card h-100 shadow-lg">
@@ -62,17 +59,17 @@
 						<br />
 						<strong>Attributes:</strong> @(item.Attributes)
 						<hr />
-						<strong>Width:</strong> @(image.Width)
+						<strong>Width:</strong> @(image?.Width)
 						<br />
-						<strong>Height:</strong> @(image.Height)
+						<strong>Height:</strong> @(image?.Height)
 						<hr />
-						<strong>Vertical Resolution:</strong> @(image.VerticalResolution)
+						<strong>Vertical Resolution:</strong> @(image?.VerticalResolution)
 						<br />
-						<strong>Horizontal Resolution:</strong> @(image.HorizontalResolution)
+						<strong>Horizontal Resolution:</strong> @(image?.HorizontalResolution)
 						<br />
-						<strong>Pixel Format:</strong> @(image.PixelFormat)
+						<strong>Pixel Format:</strong> @(image?.PixelFormat)
 
-						@if (image.Tag is not null)
+						@if (image?.Tag is not null)
 						{
 							<hr />
 							<strong>Tag:</strong> @(image.Tag)

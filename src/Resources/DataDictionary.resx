@@ -666,4 +666,10 @@
   <data name="UpdateProfileDateTime" xml:space="preserve">
     <value>Update Profile Time</value>
   </data>
+  <data name="Data" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="LocalizedApplicationSetting" xml:space="preserve">
+    <value>Localized Application Settings</value>
+  </data>
 </root>

@@ -349,6 +349,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        public static string Data {
+            get {
+                return ResourceManager.GetString("Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deactive.
         /// </summary>
         public static string Deactive {
@@ -1029,6 +1038,15 @@ namespace Resources {
         public static string ListOfItems {
             get {
                 return ResourceManager.GetString("ListOfItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Localized Application Settings.
+        /// </summary>
+        public static string LocalizedApplicationSetting {
+            get {
+                return ResourceManager.GetString("LocalizedApplicationSetting", resourceCulture);
             }
         }
         

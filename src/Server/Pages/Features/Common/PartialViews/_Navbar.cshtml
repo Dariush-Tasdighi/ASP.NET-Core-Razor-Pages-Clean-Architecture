@@ -7,14 +7,20 @@
 	<ul class="dropdown-menu mt-0">
 
 		<li>
+			<a class="dropdown-item" asp-page="/Features/Common/Admin/Cultures/Index">
+				@(Resources.DataDictionary.Cultures)
+			</a>
+		</li>
+
+		<li>
 			<a class="dropdown-item" asp-page="/Features/Common/Admin/FileManager/Index">
 				@(Resources.PageTitles.Files)
 			</a>
 		</li>
 
 		<li>
-			<a class="dropdown-item" asp-page="/Features/Common/Admin/Cultures/Index">
-				@(Resources.DataDictionary.Cultures)
+			<a class="dropdown-item" asp-page="/Features/Common/Admin/LocalizedApplicationSettings/Update">
+				@(Resources.DataDictionary.LocalizedApplicationSetting)
 			</a>
 		</li>
 

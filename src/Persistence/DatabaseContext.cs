@@ -32,6 +32,7 @@ public class DatabaseContext :
 	#region Common Feature
 
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Common.Culture> Cultures { get; set; }
+	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Common.LocalizedApplicationSetting> LocalizedApplicationSettings { get; set; }
 
 	#endregion /Common Feature
 

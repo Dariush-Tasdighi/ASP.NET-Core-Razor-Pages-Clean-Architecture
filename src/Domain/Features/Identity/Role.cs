@@ -69,9 +69,40 @@ public class Role :
 	/// <summary>
 	/// نام
 	/// </summary>
+	//[System.ComponentModel.DataAnnotations.Display(Name = "نام")]
+
+	//[System.ComponentModel.DataAnnotations.Display
+	//	(Name = "نام")]
+
+	// دستور ذیل یک ایراد بزرگ دارد
+	//[System.ComponentModel.DataAnnotations.Display
+	//	(ResourceType = typeof(Resources.DataDictionary),
+	//	Name = "Name")]
+
+	//[System.ComponentModel.DataAnnotations.Display
+	//	(ResourceType = typeof(Resources.DataDictionary),
+	//	Name = "Neim")]
+
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
 		Name = nameof(Resources.DataDictionary.Name))]
+
+	// "Name is required!"
+	//[System.ComponentModel.DataAnnotations.Required
+	//	(AllowEmptyStrings = false)]
+
+	//[System.ComponentModel.DataAnnotations.Required
+	//	(AllowEmptyStrings = false,
+	//	ErrorMessage = "You did not specify name!")]
+
+	//[System.ComponentModel.DataAnnotations.Required
+	//	(AllowEmptyStrings = false,
+	//	ErrorMessage = "You did not specify {0}!")]
+
+	//[System.ComponentModel.DataAnnotations.Required
+	//	(AllowEmptyStrings = false,
+	//	ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+	//	ErrorMessageResourceName = "Required")]
 
 	[System.ComponentModel.DataAnnotations.Required
 		(AllowEmptyStrings = false,

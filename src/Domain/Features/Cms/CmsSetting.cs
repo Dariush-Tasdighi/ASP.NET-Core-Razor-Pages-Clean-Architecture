@@ -1,6 +1,6 @@
 ﻿namespace Domain.Features.Cms;
 
-public class CmsSettings :
+public class CmsSetting :
 	Seedwork.Entity,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
@@ -9,7 +9,7 @@ public class CmsSettings :
 	#endregion /Constants
 
 	#region Constructor
-	public CmsSettings() : base()
+	public CmsSetting() : base()
 	{
 		UpdateDateTime = InsertDateTime;
 	}

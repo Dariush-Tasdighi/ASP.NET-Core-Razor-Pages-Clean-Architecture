@@ -1,0 +1,60 @@
+﻿@page
+@model Server.Pages.Features.Common.Admin.LocalizedApplicationSettings.UpdateModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.UpdateOf} {Resources.DataDictionary.LocalizedApplicationSetting}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<input type="hidden" asp-for="ViewModel.Id" />
+
+	<section-form>
+
+		<fieldset>
+
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-input asp-for="ViewModel.Hits" />
+
+			<hr />
+
+			<dtat-full-input asp-for="ViewModel.NavbarBrandText" />
+
+			<dtat-full-input asp-for="ViewModel.NavbarBrandImageUrl" dir="ltr" />
+
+			<hr />
+
+			<dtat-full-input asp-for="ViewModel.HomePageTitle" />
+
+			<dtat-full-input asp-for="ViewModel.HomePageAuthor" />
+
+			<dtat-full-input asp-for="ViewModel.HomePageDescription" />
+
+			<dtat-full-input asp-for="ViewModel.HomePageImageUrl" dir="ltr" />
+
+		</fieldset>
+
+		<section-form-buttons>
+			<button-save />
+			<button-reset />
+		</section-form-buttons>
+
+		@*
+		<section-form-footer>
+		<a asp-page="Details">
+		@(Html.DtatGetLinkCaptionForDetails())
+		</a>
+		</section-form-footer>
+		*@
+
+	</section-form>
+
+</form>
