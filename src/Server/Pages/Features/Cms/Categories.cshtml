@@ -1,0 +1,68 @@
+﻿@page "/categories/{culture?}"
+
+@model Server.Pages.Features.Cms.CategoriesModel
+
+@inject Persistence.DatabaseContext DatabaseContext
+
+@using Microsoft.EntityFrameworkCore
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.Categories}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+
+	// TODO -> Convert To ViewModel for Better Performance
+	var items =
+		DatabaseContext.PostCategories
+
+		.Where(current => current.CultureId == Model.CultureId)
+
+		.Where(current => current.IsActive)
+
+		.OrderByDescending(current => current.Ordering)
+		.ThenByDescending(current => current.UpdateDateTime)
+
+		.ToList();
+
+	if (items.Count == 0)
+	{
+		return;
+	}
+
+	var currentUICultureName = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureName();
+}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+
+	@for (var index = 0; index <= items.Count - 1; index++)
+	{
+		var item = items[index];
+
+		var textBackground = "text-bg-light";
+
+		<div class="col">
+			<div class="card @(textBackground) h-100">
+				<img src="@(item.ImageUrl)" class="card-img-top" alt="@(item.Title)">
+
+				<div class="card-body">
+					<h5 class="card-title">
+						@(item.Title)
+					</h5>
+
+					<p class="card-text">
+						@(item.Description)
+					</p>
+				</div>
+
+				<div class="card-footer d-grid">
+					<a href="/category/@(currentUICultureName)/@(item.Name)" class="btn btn-sm btn-primary">
+						@(Resources.DataDictionary.Watch)
+					</a>
+				</div>
+			</div>
+		</div>
+	}
+
+</div>

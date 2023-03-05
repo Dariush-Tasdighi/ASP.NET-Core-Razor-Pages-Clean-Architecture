@@ -669,4 +669,7 @@
   <data name="LocalizedApplicationSetting" xml:space="preserve">
     <value>Localized Application Settings</value>
   </data>
+  <data name="WideImageUrl" xml:space="preserve">
+    <value>Wide Image Url</value>
+  </data>
 </root>

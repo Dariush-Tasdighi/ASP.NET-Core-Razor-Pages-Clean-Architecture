@@ -95,6 +95,28 @@ public class PostCategory :
 
 
 
+	#region public string? ImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.ImageUrl))]
+	public string? ImageUrl { get; set; }
+	#endregion /public string? ImageUrl { get; set; }
+
+	#region public string? WideImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر پهن
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.WideImageUrl))]
+	public string? WideImageUrl { get; set; }
+	#endregion /public string? WideImageUrl { get; set; }
+
+
+
 	#region public string? Body { get; set; }
 	/// <summary>
 	/// متن اصلی

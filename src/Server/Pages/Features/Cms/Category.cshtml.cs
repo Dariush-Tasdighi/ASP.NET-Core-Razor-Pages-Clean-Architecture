@@ -82,7 +82,7 @@ public class CategoryModel :
 		// **************************************************
 
 		// **************************************************
-		var foundedPage =
+		var foundedCategory =
 			await
 			DatabaseContext.PostCategories
 
@@ -93,13 +93,13 @@ public class CategoryModel :
 
 			.FirstOrDefaultAsync();
 
-		if (foundedPage is null)
+		if (foundedCategory is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
 
-		if (foundedPage.IsActive == false)
+		if (foundedCategory.IsActive == false)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
@@ -107,22 +107,44 @@ public class CategoryModel :
 		// **************************************************
 
 		// **************************************************
-		foundedPage.Hits++;
+		foundedCategory.Hits++;
 
 		await DatabaseContext.SaveChangesAsync();
+		// **************************************************
+
+		// **************************************************
+		var postCount =
+			DatabaseContext.Posts
+
+			.Where(current => current.CategoryId == foundedCategory.Id)
+
+			.Where(current => current.IsActive)
+			.Where(current => current.IsDraft == false)
+			.Where(current => current.IsDeleted == false)
+
+			//.Where(current => current.User != null && current.User.IsActive)
+			.Where(current => current.User != null && current.User.IsDeleted == false)
+
+			.Count();
 		// **************************************************
 
 		// **************************************************
 		ViewModel =
 			new ViewModels.Pages.Features.Cms.CategoryViewModel
 			{
-				Id = foundedPage.Id,
+				Id = foundedCategory.Id,
 
-				Name = foundedPage.Name,
-				Body = foundedPage.Body,
-				Title = foundedPage.Title,
-				Description = foundedPage.Description,
-				MaxDisplayPostCount = foundedPage.MaxDisplayPostCount,
+				ImageUrl = foundedCategory.ImageUrl,
+				WideImageUrl = foundedCategory.WideImageUrl,
+
+				Name = foundedCategory.Name,
+				Body = foundedCategory.Body,
+				Title = foundedCategory.Title,
+				Description = foundedCategory.Description,
+
+				PostCount = postCount,
+				Hits = foundedCategory.Hits,
+				MaxDisplayPostCount = foundedCategory.MaxDisplayPostCount,
 			};
 		// **************************************************
 

@@ -258,16 +258,6 @@ public class Post :
 	public string? Author { get; set; }
 	#endregion /public string? Author { get; set; }
 
-	#region public string? ImageUrl { get; set; }
-	/// <summary>
-	/// آدرس تصویر
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.ImageUrl))]
-	public string? ImageUrl { get; set; }
-	#endregion /public string? ImageUrl { get; set; }
-
 	#region public string? Description { get; set; }
 	/// <summary>
 	/// توضیحات
@@ -302,6 +292,28 @@ public class Post :
 		Name = nameof(Resources.DataDictionary.AdminDescription))]
 	public string? AdminDescription { get; set; }
 	#endregion /public string? AdminDescription { get; set; }
+
+
+
+	#region public string? ImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.ImageUrl))]
+	public string? ImageUrl { get; set; }
+	#endregion /public string? ImageUrl { get; set; }
+
+	#region public string? WideImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر پهن
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.WideImageUrl))]
+	public string? WideImageUrl { get; set; }
+	#endregion /public string? WideImageUrl { get; set; }
 
 
 

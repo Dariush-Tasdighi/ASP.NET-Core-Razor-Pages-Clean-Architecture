@@ -226,7 +226,7 @@
     <value>شناسه</value>
   </data>
   <data name="ImageUrl" xml:space="preserve">
-    <value>آدرس تصویر</value>
+    <value>نشانی تصویر</value>
   </data>
   <data name="InsertDateTime" xml:space="preserve">
     <value>زمان ایجاد</value>
@@ -701,5 +701,8 @@
   </data>
   <data name="LocalizedApplicationSetting" xml:space="preserve">
     <value>تنظیمات سامانه برحسب زبان</value>
+  </data>
+  <data name="WideImageUrl" xml:space="preserve">
+    <value>نشانی تصویر پهن</value>
   </data>
 </root>

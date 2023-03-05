@@ -130,7 +130,7 @@ public class CreateTestDataModel :
 				$"{slideTitleTemplate} {slideIndexString}";
 
 			var slideCaption =
-				$"{slideCaptionTemplate} {slideIndexString}";
+				$"<h1>{slideCaptionTemplate} {slideIndexString}</h1>";
 
 			var imageUrl =
 				$"/images/predefined_slides/slide_{GetRandomNumber()}.png";
@@ -181,7 +181,7 @@ public class CreateTestDataModel :
 				$"{slideTitleTemplate} {slideIndexString}";
 
 			var slideCaption =
-				$"{slideCaptionTemplate} {slideIndexString}";
+				$"<h1>{slideCaptionTemplate} {slideIndexString}</h1>";
 
 			var imageUrl =
 				$"/images/predefined_slides/slide_{GetRandomNumber()}.png";
@@ -379,7 +379,8 @@ public class CreateTestDataModel :
 		var postDescriptionTemplate = "توضیحات مطلب";
 
 		var postCategoryNameTemplate = "Category";
-		var postCategoryTitleTemplate = "طبقه‌بندی مطلب";
+		var postCategoryTitleTemplate = "عنوان طبقه‌بندی";
+		var postCategoryDescriptionTemplate = "توضیحات طبقه‌بندی";
 
 		for (var postCategoryIndex = 1; postCategoryIndex <= maxPostCategories; postCategoryIndex++)
 		{
@@ -394,14 +395,25 @@ public class CreateTestDataModel :
 			var postCategoryTitle =
 				$"{postCategoryTitleTemplate} {postCategoryIndexString}";
 
+			var postCategoryDescription =
+				$"{postCategoryDescriptionTemplate} {postCategoryIndexString}";
+
 			var postCategory =
 				new Domain.Features.Cms.PostCategory
 				(cultureId: persianCulture.Id,
 				name: postCategoryName, title: postCategoryTitle)
 				{
 					IsTestData = true,
+					Description = postCategoryDescription,
+
 					IsActive = (postCategoryIndex % 2 == 0),
 					DisplayInHomePage = (postCategoryIndex % 3 == 0),
+
+					ImageUrl =
+							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
+
+					WideImageUrl =
+							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
 				};
 
 			await DatabaseContext.AddAsync(entity: postCategory);
@@ -437,6 +449,9 @@ public class CreateTestDataModel :
 
 						ImageUrl =
 							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
+
+						WideImageUrl =
+							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
 					};
 
 				//if(postIndex % 5 == 0)
@@ -478,11 +493,12 @@ public class CreateTestDataModel :
 			return;
 		}
 
-		var postTitleTemplate = "Title";
-		var postDescriptionTemplate = "Description";
+		var postTitleTemplate = "Post Title";
+		var postDescriptionTemplate = "Post Description";
 
 		var postCategoryNameTemplate = "Category";
-		var postCategoryTitleTemplate = "Category";
+		var postCategoryTitleTemplate = "Category Title";
+		var postCategoryDescriptionTemplate = "Category Description";
 
 		for (var postCategoryIndex = 1; postCategoryIndex <= maxPostCategories; postCategoryIndex++)
 		{
@@ -492,10 +508,13 @@ public class CreateTestDataModel :
 				;
 
 			var postCategoryName =
-				$"{postCategoryNameTemplate}_{postCategoryIndexString}";
+				$"{postCategoryNameTemplate}_{postCategoryIndex}";
 
 			var postCategoryTitle =
 				$"{postCategoryTitleTemplate} {postCategoryIndexString}";
+
+			var postCategoryDescription =
+				$"{postCategoryDescriptionTemplate} {postCategoryIndexString}";
 
 			var postCategory =
 				new Domain.Features.Cms.PostCategory
@@ -503,8 +522,16 @@ public class CreateTestDataModel :
 				name: postCategoryName, title: postCategoryTitle)
 				{
 					IsTestData = true,
+					Description = postCategoryDescription,
+
 					IsActive = (postCategoryIndex % 2 == 0),
 					DisplayInHomePage = (postCategoryIndex % 3 == 0),
+
+					ImageUrl =
+							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
+
+					WideImageUrl =
+							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
 				};
 
 			await DatabaseContext.AddAsync(entity: postCategory);
@@ -540,6 +567,9 @@ public class CreateTestDataModel :
 
 						ImageUrl =
 							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
+
+						WideImageUrl =
+							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
 					};
 
 				//if (postIndex % 5 == 0)

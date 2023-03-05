@@ -157,7 +157,7 @@ public class CreateViewModel : object
 
 	#region public string? ImageUrl { get; set; }
 	/// <summary>
-	/// آدرس تصویر
+	/// نشانی تصویر
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),

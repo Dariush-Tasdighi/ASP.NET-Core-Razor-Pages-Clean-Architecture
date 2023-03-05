@@ -38,11 +38,6 @@ public class CreateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
-		if (ModelState.IsValid == false)
-		{
-			return Page();
-		}
-
 		// **************************************************
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
@@ -56,90 +51,89 @@ public class CreateModel :
 		if (currentCulture is null)
 		{
 			return RedirectToPage(pageName:
-				Constants.CommonRouting.InternalServerError);
+				Constants.CommonRouting.NotFound);
 		}
 		// **************************************************
 
+		if (ModelState.IsValid == false)
+		{
+			return Page();
+		}
+
 		// **************************************************
-		ViewModel.Name =
+		var name =
 			ViewModel.Name.Fix()!;
 
-		var foundedAny =
+		var isNameFound =
 			await
 			DatabaseContext.PostCategories
 
-			.Where(current => current.Culture != null &&
-				current.Culture.Lcid == currentUICultureLcid)
-
-			.Where(current => current.Name.ToLower() == ViewModel.Name.ToLower())
+			.Where(current => current.CultureId == currentCulture.Id)
+			.Where(current => current.Name.ToLower() == name.ToLower())
 
 			.AnyAsync();
 
-		if (foundedAny)
+		if (isNameFound)
 		{
-			// **************************************************
 			var errorMessage = string.Format
 				(Resources.Messages.Errors.AlreadyExists,
 				Resources.DataDictionary.Name);
 
 			AddPageError(message: errorMessage);
-			// **************************************************
-
-			return Page();
 		}
 		// **************************************************
 
 		// **************************************************
-		ViewModel.Title =
+		var title =
 			ViewModel.Title.Fix()!;
 
-		foundedAny =
+		var isTitleFound =
 			await
 			DatabaseContext.PostCategories
 
-			.Where(current => current.Culture != null &&
-				current.Culture.Lcid == currentUICultureLcid)
-
-			.Where(current => current.Title.ToLower() == ViewModel.Title.ToLower())
+			.Where(current => current.CultureId == currentCulture.Id)
+			.Where(current => current.Title.ToLower() == title.ToLower())
 
 			.AnyAsync();
 
-		if (foundedAny)
+		if (isTitleFound)
 		{
-			// **************************************************
 			var errorMessage = string.Format
 				(Resources.Messages.Errors.AlreadyExists,
 				Resources.DataDictionary.Title);
 
 			AddPageError(message: errorMessage);
-			// **************************************************
-
-			return Page();
 		}
 		// **************************************************
+
+		if (isNameFound || isTitleFound)
+		{
+			return Page();
+		}
 
 		// **************************************************
 		var newEntity =
 			new Domain.Features.Cms.PostCategory
 			(cultureId: currentCulture.Id,
-			name: ViewModel.Name, title: ViewModel.Title)
+			name: name, title: title)
 			{
-				Hits = ViewModel.Hits,
 				Body = ViewModel.Body.Fix(),
-				IsActive = ViewModel.IsActive,
-				Ordering = ViewModel.Ordering,
 				Description = ViewModel.Description.Fix(),
+
+				ImageUrl = ViewModel.ImageUrl.Fix(),
+				WideImageUrl = ViewModel.WideImageUrl.Fix(),
+
+				IsActive = ViewModel.IsActive,
 				DisplayInHomePage = ViewModel.DisplayInHomePage,
+
+				Hits = ViewModel.Hits,
+				Ordering = ViewModel.Ordering,
 				MaxDisplayPostCount = ViewModel.MaxDisplayPostCount,
 			};
 
-		var entityEntry =
-			await
-			DatabaseContext.AddAsync(entity: newEntity);
+		await DatabaseContext.AddAsync(entity: newEntity);
 
-		var affectedRows =
-			await
-			DatabaseContext.SaveChangesAsync();
+		await DatabaseContext.SaveChangesAsync();
 		// **************************************************
 
 		// **************************************************

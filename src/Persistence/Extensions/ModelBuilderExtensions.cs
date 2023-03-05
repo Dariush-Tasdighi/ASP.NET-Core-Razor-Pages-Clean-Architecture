@@ -524,15 +524,45 @@ public static class ModelBuilderExtensions : object
 		var aboutPageEnglish =
 			new Domain.Features.Cms.Page
 			(cultureId: cultureEnglish.Id,
-			layoutId: defaultLayout.Id, name: "about", title: "About US")
+			layoutId: defaultLayout.Id, name: "about", title: "About us")
 			{
 				IsActive = true,
 
-				Body = "<h1>About US</h1>",
+				Body = "<h1>About us</h1>",
 			};
 
 		modelBuilder.Entity<Domain.Features
 			.Cms.Page>().HasData(data: aboutPageEnglish);
+		// **************************************************
+
+		// **************************************************
+		var contactPagePersian =
+			new Domain.Features.Cms.Page
+			(cultureId: culturePersian.Id,
+			layoutId: defaultLayout.Id, name: "contact", title: "تماس با ما")
+			{
+				IsActive = true,
+
+				Body = "<h1>تماس با ما</h1>",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.Page>().HasData(data: contactPagePersian);
+		// **************************************************
+
+		// **************************************************
+		var contactPageEnglish =
+			new Domain.Features.Cms.Page
+			(cultureId: cultureEnglish.Id,
+			layoutId: defaultLayout.Id, name: "contact", title: "Contact us")
+			{
+				IsActive = true,
+
+				Body = "<h1>Contact us</h1>",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.Page>().HasData(data: contactPageEnglish);
 		// **************************************************
 
 		// **************************************************
@@ -565,6 +595,130 @@ public static class ModelBuilderExtensions : object
 			.Cms.Page>().HasData(data: helpPageEnglish);
 		// **************************************************
 		// *** /Pages ***************************************
+		// **************************************************
+
+		// **************************************************
+		// *** Menu Items ***********************************
+		// **************************************************
+		var aboutMenuItemPersian =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: culturePersian.Id, title: "درباره ما")
+			{
+				Ordering = 9_000,
+				IsVisible = true,
+				IsDisabled = false,
+				NavigationUrl = "/page/fa-ir/about",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: aboutMenuItemPersian);
+		// **************************************************
+
+		// **************************************************
+		var aboutMenuItemEnglish =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: cultureEnglish.Id, title: "About")
+			{
+				Ordering = 9_000,
+				IsVisible = true,
+				IsDisabled = false,
+				NavigationUrl = "/page/en-us/about",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: aboutMenuItemEnglish);
+		// **************************************************
+
+		// **************************************************
+		var contactMenuItemPersian =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: culturePersian.Id, title: "تماس با ما")
+			{
+				Ordering = 9_100,
+				IsVisible = true,
+				IsDisabled = false,
+				NavigationUrl = "/page/fa-ir/contact",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: contactMenuItemPersian);
+		// **************************************************
+
+		// **************************************************
+		var contactMenuItemEnglish =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: cultureEnglish.Id, title: "Contact")
+			{
+				Ordering = 9_100,
+				IsVisible = true,
+				IsDisabled = false,
+				NavigationUrl = "/page/en-us/about",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: contactMenuItemEnglish);
+		// **************************************************
+
+		// **************************************************
+		var helpMenuItemPersian =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: culturePersian.Id, title: "راهنما")
+			{
+				Ordering = 9_200,
+				IsVisible = true,
+				IsDisabled = true,
+				NavigationUrl = "/page/fa-ir/help",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: helpMenuItemPersian);
+		// **************************************************
+
+		// **************************************************
+		var helpMenuItemEnglish =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: cultureEnglish.Id, title: "Help")
+			{
+				Ordering = 9_200,
+				IsVisible = true,
+				IsDisabled = true,
+				NavigationUrl = "/page/en-us/help",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: helpMenuItemEnglish);
+		// **************************************************
+
+		// **************************************************
+		var categoriesMenuItemPersian =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: culturePersian.Id, title: "طبقه‌بندی‌ها")
+			{
+				Ordering = 9_300,
+				IsVisible = true,
+				IsDisabled = false,
+				NavigationUrl = "/categories/fa-ir/",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: categoriesMenuItemPersian);
+		// **************************************************
+
+		// **************************************************
+		var categoriesMenuItemEnglish =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: cultureEnglish.Id, title: "Categories")
+			{
+				Ordering = 9_300,
+				IsVisible = true,
+				IsDisabled = false,
+				NavigationUrl = "/categories/en-us/",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: categoriesMenuItemEnglish);
+		// **************************************************
+		// *** /Menu Items **********************************
 		// **************************************************
 	}
 }

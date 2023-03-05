@@ -31,7 +31,7 @@
 
 		.Where(current => current.Category != null && current.Category.IsActive)
 
-		.Where(current => current.User != null && current.User.IsActive)
+		//.Where(current => current.User != null && current.User.IsActive)
 
 		.Where(current => current.User != null && current.User.IsDeleted == false)
 
@@ -52,7 +52,25 @@
 		.Common.CultureEnumHelper.GetCurrentUICultureName();
 }
 
-<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+@if(string.IsNullOrWhiteSpace(value: Model.ViewModel.WideImageUrl) == false)
+{
+	<div class="row mb-3">
+		<div class="col">
+			<img src="@(Model.ViewModel.WideImageUrl)" alt="@(Model.ViewModel.Title)" class="img-fluid">
+		</div>
+	</div>
+}
+
+@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.Body) == false)
+{
+	<div class="row mb-3">
+		<div class="col">
+			@(Html.Raw(Model.ViewModel.Body))
+		</div>
+	</div>
+}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
 
 	@for (var index = 0; index <= posts.Count - 1; index++)
 	{
@@ -78,8 +96,8 @@
 					</p>
 				</div>
 
-				<div class="card-footer">
-					<a href="/post/@(currentUICultureName)/@(post.Id)" class="btn btn-primary">
+				<div class="card-footer d-grid">
+					<a href="/post/@(currentUICultureName)/@(post.Id)" class="btn btn-sm btn-primary">
 						@(Resources.DataDictionary.Watch)
 					</a>
 				</div>

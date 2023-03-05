@@ -10,7 +10,7 @@
 <footer class="footer border-top py-3 bg-light text-muted fixed-bottom">
 
 	<div class="container text-muted">
-		@*|Domain: @(httpContextAccessor.HttpContext?.Request.Host.Value)*@
+		@*Domain: @(httpContextAccessor.HttpContext?.Request.Host.Value)*@
 
 		<environment include="Development" exclude="Production">
 			Development Mode
@@ -20,15 +20,11 @@
 
 		@if (string.IsNullOrWhiteSpace(value: localizedApplicationSetting.Copyright) == false)
 		{
-			<text>|&nbsp;</text>
-
 			@(localizedApplicationSetting.Copyright)
 		}
 
 		@if (string.IsNullOrWhiteSpace(value: localizedApplicationSetting.ApplicationVersioin) == false)
 		{
-			<text>|&nbsp;</text>
-
 			@(localizedApplicationSetting.ApplicationVersioin)
 		}
 	</div>

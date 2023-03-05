@@ -5,7 +5,7 @@ public class ProfileViewModel : object
 	#region Constructor
 	public ProfileViewModel()
 	{
-		EmailAddress = Resources.DataDictionary.DefaultNullValue;
+		EmailAddress = string.Empty;
 	}
 	#endregion /Constructor
 
@@ -27,7 +27,7 @@ public class ProfileViewModel : object
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Body))]
+		Name = nameof(Resources.DataDictionary.LastName))]
 	public string? LastName { get; set; }
 	#endregion /public string? LastName { get; set; }
 

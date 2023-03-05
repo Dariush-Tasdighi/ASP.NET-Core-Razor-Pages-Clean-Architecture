@@ -105,7 +105,7 @@ public class UpdateViewModel : object
 
 	#region public string? HomePageImageUrl { get; set; }
 	/// <summary>
-	/// آدرس تصویر صفحه اولیه
+	/// نشانی تصویر صفحه اولیه
 	/// </summary>
 	//[System.ComponentModel.DataAnnotations.Display
 	//	(ResourceType = typeof(Resources.DataDictionary),

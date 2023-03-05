@@ -73,11 +73,6 @@ public class UpdateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
-		if (ModelState.IsValid == false)
-		{
-			return Page();
-		}
-
 		// **************************************************
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
@@ -91,9 +86,14 @@ public class UpdateModel :
 		if (currentCulture is null)
 		{
 			return RedirectToPage(pageName:
-				Constants.CommonRouting.InternalServerError);
+				Constants.CommonRouting.NotFound);
 		}
 		// **************************************************
+
+		if (ModelState.IsValid == false)
+		{
+			return Page();
+		}
 
 		// **************************************************
 		var foundedItem =
@@ -110,82 +110,78 @@ public class UpdateModel :
 		// **************************************************
 
 		// **************************************************
-		ViewModel.Name =
+		var name =
 			ViewModel.Name.Fix()!;
 
-		var foundedAny =
+		var isNameFound =
 			await
 			DatabaseContext.PostCategories
+
 			.Where(current => current.Id != ViewModel.Id)
-
-			.Where(current => current.Culture != null &&
-				current.Culture.Lcid == currentUICultureLcid)
-
-			.Where(current => current.Name.ToLower() == ViewModel.Name.ToLower())
+			.Where(current => current.CultureId == currentCulture.Id)
+			.Where(current => current.Name.ToLower() == name.ToLower())
 
 			.AnyAsync();
 
-		if (foundedAny)
+		if (isNameFound)
 		{
-			// **************************************************
 			var errorMessage = string.Format
-				(format: Resources.Messages.Errors.AlreadyExists,
-				arg0: Resources.DataDictionary.Name);
+				(Resources.Messages.Errors.AlreadyExists,
+				Resources.DataDictionary.Name);
 
 			AddPageError(message: errorMessage);
-			// **************************************************
-
-			return Page();
 		}
 		// **************************************************
 
 		// **************************************************
-		ViewModel.Title =
+		var title =
 			ViewModel.Title.Fix()!;
 
-		foundedAny =
+		var isTitleFound =
 			await
 			DatabaseContext.PostCategories
+
 			.Where(current => current.Id != ViewModel.Id)
-
-			.Where(current => current.Culture != null &&
-				current.Culture.Lcid == currentUICultureLcid)
-
-			.Where(current => current.Title.ToLower() == ViewModel.Title.ToLower())
+			.Where(current => current.CultureId == currentCulture.Id)
+			.Where(current => current.Title.ToLower() == title.ToLower())
 
 			.AnyAsync();
 
-		if (foundedAny)
+		if (isTitleFound)
 		{
-			// **************************************************
 			var errorMessage = string.Format
-				(format: Resources.Messages.Errors.AlreadyExists,
-				arg0: Resources.DataDictionary.Title);
+				(Resources.Messages.Errors.AlreadyExists,
+				Resources.DataDictionary.Title);
 
 			AddPageError(message: errorMessage);
-			// **************************************************
-
-			return Page();
 		}
 		// **************************************************
+
+		if (isNameFound || isTitleFound)
+		{
+			return Page();
+		}
 
 		// **************************************************
 		foundedItem.SetUpdateDateTime();
 
+		foundedItem.Name = name;
+		foundedItem.Title = title;
+
 		foundedItem.Hits = ViewModel.Hits;
-		foundedItem.Name = ViewModel.Name;
-		foundedItem.Title = ViewModel.Title;
-		foundedItem.Body = ViewModel.Body.Fix();
 		foundedItem.Ordering = ViewModel.Ordering;
-		foundedItem.IsActive = ViewModel.IsActive;
+
+		foundedItem.Body = ViewModel.Body.Fix();
+		foundedItem.ImageUrl = ViewModel.ImageUrl.Fix();
 		foundedItem.Description = ViewModel.Description.Fix();
+		foundedItem.WideImageUrl = ViewModel.WideImageUrl.Fix();
+
+		foundedItem.IsActive = ViewModel.IsActive;
 		foundedItem.DisplayInHomePage = ViewModel.DisplayInHomePage;
 		foundedItem.MaxDisplayPostCount = ViewModel.MaxDisplayPostCount;
 		// **************************************************
 
-		var affectedRows =
-			await
-			DatabaseContext.SaveChangesAsync();
+		await DatabaseContext.SaveChangesAsync();
 
 		// **************************************************
 		var successMessage = string.Format

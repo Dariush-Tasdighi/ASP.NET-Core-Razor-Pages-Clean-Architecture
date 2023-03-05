@@ -5,8 +5,8 @@ public class CategoryViewModel : object
 	#region Constructor
 	public CategoryViewModel() : base()
 	{
-		Name = Resources.DataDictionary.DefaultNullValue;
-		Title = Resources.DataDictionary.DefaultNullValue;
+		Name = string.Empty;
+		Title = string.Empty;
 	}
 	#endregion /Constructor
 
@@ -18,6 +18,12 @@ public class CategoryViewModel : object
 	public string? Body { get; set; }
 	public string Title { get; set; }
 	public string? Description { get; set; }
+
+	public string? ImageUrl { get; set; }
+	public string? WideImageUrl { get; set; }
+
+	public int Hits { get; set; }
+	public int PostCount { get; set; }
 	public int MaxDisplayPostCount { get; set; }
 
 	#endregion /Properties

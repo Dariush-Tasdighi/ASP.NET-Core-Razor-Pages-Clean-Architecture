@@ -37,6 +37,8 @@ public class CreateViewModel : object
 	public int Ordering { get; set; }
 	#endregion /public int Ordering { get; set; }
 
+
+
 	#region public string? Name { get; set; }
 	/// <summary>
 	/// نام
@@ -98,6 +100,30 @@ public class CreateViewModel : object
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
 	public string? Description { get; set; }
 	#endregion /public string? Description { get; set; }
+
+
+
+	#region public string? ImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.ImageUrl))]
+	public string? ImageUrl { get; set; }
+	#endregion /public string? ImageUrl { get; set; }
+
+	#region public string? WideImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر پهن
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.WideImageUrl))]
+	public string? WideImageUrl { get; set; }
+	#endregion /public string? WideImageUrl { get; set; }
+
+
 
 	#region public bool DisplayInHomePage { get; set; }
 	/// <summary>

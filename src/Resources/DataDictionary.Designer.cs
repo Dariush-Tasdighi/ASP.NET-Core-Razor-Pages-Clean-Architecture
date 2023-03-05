@@ -1708,6 +1708,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wide Image Url.
+        /// </summary>
+        public static string WideImageUrl {
+            get {
+                return ResourceManager.GetString("WideImageUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Without Role.
         /// </summary>
         public static string WithoutRole {
