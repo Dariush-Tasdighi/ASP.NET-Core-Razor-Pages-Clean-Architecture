@@ -605,7 +605,7 @@ public static class ModelBuilderExtensions : object
 			(cultureId: culturePersian.Id, title: "درباره ما")
 			{
 				Ordering = 9_000,
-				IsVisible = true,
+				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/page/fa-ir/about",
 			};
@@ -620,7 +620,7 @@ public static class ModelBuilderExtensions : object
 			(cultureId: cultureEnglish.Id, title: "About")
 			{
 				Ordering = 9_000,
-				IsVisible = true,
+				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/page/en-us/about",
 			};
@@ -635,7 +635,7 @@ public static class ModelBuilderExtensions : object
 			(cultureId: culturePersian.Id, title: "تماس با ما")
 			{
 				Ordering = 9_100,
-				IsVisible = true,
+				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/page/fa-ir/contact",
 			};
@@ -650,7 +650,7 @@ public static class ModelBuilderExtensions : object
 			(cultureId: cultureEnglish.Id, title: "Contact")
 			{
 				Ordering = 9_100,
-				IsVisible = true,
+				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/page/en-us/about",
 			};
@@ -665,7 +665,7 @@ public static class ModelBuilderExtensions : object
 			(cultureId: culturePersian.Id, title: "راهنما")
 			{
 				Ordering = 9_200,
-				IsVisible = true,
+				IsVisible = false,
 				IsDisabled = true,
 				NavigationUrl = "/page/fa-ir/help",
 			};
@@ -680,7 +680,7 @@ public static class ModelBuilderExtensions : object
 			(cultureId: cultureEnglish.Id, title: "Help")
 			{
 				Ordering = 9_200,
-				IsVisible = true,
+				IsVisible = false,
 				IsDisabled = true,
 				NavigationUrl = "/page/en-us/help",
 			};
@@ -695,7 +695,7 @@ public static class ModelBuilderExtensions : object
 			(cultureId: culturePersian.Id, title: "طبقه‌بندی‌ها")
 			{
 				Ordering = 9_300,
-				IsVisible = true,
+				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/categories/fa-ir/",
 			};
@@ -710,7 +710,7 @@ public static class ModelBuilderExtensions : object
 			(cultureId: cultureEnglish.Id, title: "Categories")
 			{
 				Ordering = 9_300,
-				IsVisible = true,
+				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/categories/en-us/",
 			};

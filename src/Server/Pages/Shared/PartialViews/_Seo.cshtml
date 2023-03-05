@@ -1,4 +1,15 @@
-﻿<title>
+﻿@inject Services.Features.Common.ApplicationSettingService applicationSettingService
+
+@{
+	var applicationSetting =
+		await
+		applicationSettingService.GetInstanceAsync();
+
+	var googleCode =
+		applicationSetting.GoogleCode;
+}
+
+<title>
 	@(ViewData[Constants.ViewDataKeyName.PageTitle])
 </title>
 
@@ -24,4 +35,18 @@
 	{
 		<meta name="author" content="Dariush Tasdighi - داریوش تصدیقی" />
 	}
+}
+
+@if (string.IsNullOrWhiteSpace(value: googleCode) == false)
+{
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=@(googleCode)"></script>
+
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', '@(googleCode)');
+	</script>
 }

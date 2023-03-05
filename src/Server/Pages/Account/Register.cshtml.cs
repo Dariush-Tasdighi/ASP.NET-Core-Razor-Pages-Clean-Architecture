@@ -9,10 +9,13 @@ public class RegisterModel :
 {
 	#region Constructor
 	public RegisterModel
-		(Persistence.DatabaseContext databaseContext) :
+		(Persistence.DatabaseContext databaseContext,
+		Services.Features.Common.ApplicationSettingService applicationSettingService) :
 		base(databaseContext: databaseContext)
 	{
 		ViewModel = new();
+
+		ApplicationSettingService = applicationSettingService;
 	}
 	#endregion /Constructor
 
@@ -21,6 +24,8 @@ public class RegisterModel :
 	[Microsoft.AspNetCore.Mvc.BindProperty]
 	public ViewModels.Pages.Account.RegisterViewModel ViewModel { get; set; }
 
+	private Services.Features.Common.ApplicationSettingService ApplicationSettingService { get; }
+
 	#endregion /Properties
 
 	#region Methods
@@ -28,6 +33,18 @@ public class RegisterModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync()
 	{
+		// **************************************************
+		var applicationSetting =
+			await
+			ApplicationSettingService.GetInstanceAsync();
+
+		if (applicationSetting.IsRegistrationEnabled == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
+		// **************************************************
+
 		// **************************************************
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();

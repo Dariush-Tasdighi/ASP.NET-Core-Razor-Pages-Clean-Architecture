@@ -7,12 +7,13 @@ public class LocalizedApplicationSettingService :
 	Infrastructure.BaseServiceWithDatabaseContext
 {
 	public LocalizedApplicationSettingService
-		(Persistence.DatabaseContext databaseContext) : base(databaseContext: databaseContext)
+		(Persistence.DatabaseContext databaseContext) :
+		base(databaseContext: databaseContext)
 	{
 	}
 
 	public async System.Threading.Tasks.Task
-		<Domain.Features.Common.LocalizedApplicationSetting> GetInstance()
+		<Domain.Features.Common.LocalizedApplicationSetting> GetInstanceAsync()
 	{
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();

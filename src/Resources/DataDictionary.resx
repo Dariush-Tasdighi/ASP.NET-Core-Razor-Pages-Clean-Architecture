@@ -672,4 +672,28 @@
   <data name="WideImageUrl" xml:space="preserve">
     <value>Wide Image Url</value>
   </data>
+  <data name="IsRegistrationEnabled" xml:space="preserve">
+    <value>Registration Enabled</value>
+  </data>
+  <data name="MasterPassword" xml:space="preserve">
+    <value>Master Password</value>
+  </data>
+  <data name="FavoriteUserProfileLevel" xml:space="preserve">
+    <value>Favorite User Profile Level</value>
+  </data>
+  <data name="ProfileLevel" xml:space="preserve">
+    <value>Profile Level</value>
+  </data>
+  <data name="GoogleCode" xml:space="preserve">
+    <value>Google Code</value>
+  </data>
+  <data name="IsLoginVisible" xml:space="preserve">
+    <value>Is Login Visible</value>
+  </data>
+  <data name="IsSslEnabled" xml:space="preserve">
+    <value>SSL Enabled</value>
+  </data>
+  <data name="ApplicationSetting" xml:space="preserve">
+    <value>Application Settings</value>
+  </data>
 </root>

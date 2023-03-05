@@ -4,7 +4,7 @@
 @{
 	var localizedApplicationSetting =
 		await
-		localizedApplicationSettingService.GetInstance();
+		localizedApplicationSettingService.GetInstanceAsync();
 }
 
 <footer class="footer border-top py-3 bg-light text-muted fixed-bottom">
@@ -20,12 +20,13 @@
 
 		@if (string.IsNullOrWhiteSpace(value: localizedApplicationSetting.Copyright) == false)
 		{
-			@(localizedApplicationSetting.Copyright)
+			@(Html.Raw(localizedApplicationSetting.Copyright))
 		}
 
 		@if (string.IsNullOrWhiteSpace(value: localizedApplicationSetting.ApplicationVersioin) == false)
 		{
-			@(localizedApplicationSetting.ApplicationVersioin)
+			@(Html.Raw(localizedApplicationSetting.ApplicationVersioin)
+				)
 		}
 	</div>
 

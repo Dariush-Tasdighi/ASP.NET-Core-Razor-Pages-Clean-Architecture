@@ -1,4 +1,5 @@
-﻿@inject Services.Features.Common.LocalizedApplicationSettingService localizedApplicationSettingService
+﻿@inject Services.Features.Common.ApplicationSettingService applicationSettingService
+@inject Services.Features.Common.LocalizedApplicationSettingService localizedApplicationSettingService
 
 @{
 	var isUserAuthenticated = true;
@@ -10,9 +11,13 @@
 		isUserAuthenticated = false;
 	}
 
+	var applicationSetting =
+		await
+		applicationSettingService.GetInstanceAsync();
+
 	var localizedApplicationSetting =
 		await
-		localizedApplicationSettingService.GetInstance();
+		localizedApplicationSettingService.GetInstanceAsync();
 }
 
 <header>
@@ -79,17 +84,23 @@
 					}
 					else
 					{
-						<li class="nav-item">
-							<a class="nav-link" asp-page="/Account/Register">
-								@(Resources.PageTitles.Register)
-							</a>
-						</li>
+						@if (applicationSetting.IsRegistrationEnabled)
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-page="/Account/Register">
+									@(Resources.PageTitles.Register)
+								</a>
+							</li>
+						}
 
-						<li class="nav-item">
-							<a class="nav-link" asp-page="/Account/Login">
-								@(Resources.PageTitles.Login)
-							</a>
-						</li>
+						@if (applicationSetting.IsLoginVisible)
+						{
+							<li class="nav-item">
+								<a class="nav-link" asp-page="/Account/Login">
+									@(Resources.PageTitles.Login)
+								</a>
+							</li>
+						}
 					}
 
 				</ul>

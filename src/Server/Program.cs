@@ -58,20 +58,20 @@ builder.Services.AddRouting(options =>
 // **************************************************
 
 // **************************************************
-// AddRazorPages() -> using Microsoft.Extensions.DependencyInjection;
+// using Microsoft.Extensions.DependencyInjection;
 builder.Services.AddRazorPages();
 // **************************************************
 
 // **************************************************
-// Configure()-> using Microsoft.Extensions.DependencyInjection;
+// using Microsoft.Extensions.DependencyInjection;
 builder.Services.Configure<Infrastructure.Settings.ApplicationSettings>
 	(builder.Configuration.GetSection(key: Infrastructure.Settings.ApplicationSettings.KeyName))
-	// AddSingleton()-> using Microsoft.Extensions.DependencyInjection;
+	// using Microsoft.Extensions.DependencyInjection;
 	.AddSingleton
 	(implementationFactory: serviceType =>
 	{
 		var result =
-			// GetRequiredService()-> using Microsoft.Extensions.DependencyInjection;
+			// using Microsoft.Extensions.DependencyInjection;
 			serviceType.GetRequiredService
 			<Microsoft.Extensions.Options.IOptions
 			<Infrastructure.Settings.ApplicationSettings>>().Value;
@@ -101,7 +101,7 @@ builder.Services
 //		options.ClientSecret =
 //			builder.Configuration["ApplicationSettings:Authentication:Google:ClientSecret"];
 
-//		// MapJsonKey() -> using Microsoft.AspNetCore.Authentication;
+//		// using Microsoft.AspNetCore.Authentication;
 //		options.ClaimActions.MapJsonKey
 //			(claimType: "urn:google:picture", jsonKey: "picture", valueType: "url");
 //	})
@@ -113,7 +113,7 @@ builder.Services
 // **************************************************
 // *** Use Sql Server *******************************
 // **************************************************
-// using Microsoft.Extensions.Configuration;
+//// using Microsoft.Extensions.Configuration;
 //var connectionString =
 //	builder.Configuration
 //	.GetConnectionString(name: "ConnectionString");
@@ -151,12 +151,15 @@ builder.Services.AddDbContext<Persistence.DatabaseContext>
 // **************************************************
 
 // **************************************************
-builder.Services.AddSingleton<Services.ColorService>();
+builder.Services.AddScoped<Services.Features
+	.Common.ApplicationSettingService>();
+
+builder.Services.AddScoped<Services.Features
+	.Common.LocalizedApplicationSettingService>();
 // **************************************************
 
 // **************************************************
-builder.Services.AddScoped<Services.Features
-	.Common.LocalizedApplicationSettingService>();
+builder.Services.AddSingleton<Services.ColorService>();
 // **************************************************
 
 // **************************************************
@@ -164,23 +167,23 @@ var app =
 	builder.Build();
 // **************************************************
 
-// IsDevelopment() -> using Microsoft.Extensions.Hosting;
+// using Microsoft.Extensions.Hosting;
 if (app.Environment.IsDevelopment())
 {
 	// **************************************************
-	// UseDeveloperExceptionPage() -> using Microsoft.AspNetCore.Builder;
+	// using Microsoft.AspNetCore.Builder;
 	app.UseDeveloperExceptionPage();
 	// **************************************************
 }
 else
 {
 	// **************************************************
-	// UseGlobalException() -> using Infrastructure.Middlewares;
+	// using Infrastructure.Middlewares;
 	app.UseGlobalException();
 	// **************************************************
 
 	// **************************************************
-	// UseExceptionHandler() -> using Microsoft.AspNetCore.Builder;
+	// using Microsoft.AspNetCore.Builder;
 	app.UseExceptionHandler("/Errors/Error");
 	// **************************************************
 
@@ -188,48 +191,49 @@ else
 	// The default HSTS value is 30 days.
 	// You may want to change this for production scenarios,
 	// see https://aka.ms/aspnetcore-hsts
-	// UseHsts() -> using Microsoft.AspNetCore.Builder; 
+	//
+	// using Microsoft.AspNetCore.Builder; 
 	app.UseHsts();
 	// **************************************************
 }
 
 // **************************************************
-// UseHttpsRedirection() -> using Microsoft.AspNetCore.Builder;
+// using Microsoft.AspNetCore.Builder;
 app.UseHttpsRedirection();
 // **************************************************
 
 // **************************************************
-// UseStaticFiles() -> using Microsoft.AspNetCore.Builder;
+// using Microsoft.AspNetCore.Builder;
 app.UseStaticFiles();
 // **************************************************
 
 // **************************************************
-// UseActivationKeys() -> using Infrastructure.Middlewares;
+// using Infrastructure.Middlewares;
 app.UseActivationKeys();
 // **************************************************
 
 // **************************************************
-// UseRouting() -> using Microsoft.AspNetCore.Builder;
+// using Microsoft.AspNetCore.Builder;
 app.UseRouting();
 // **************************************************
 
 // **************************************************
-// UseAuthorization() -> using Microsoft.AspNetCore.Builder;
+// using Microsoft.AspNetCore.Builder;
 app.UseAuthentication();
 // **************************************************
 
 // **************************************************
-// UseAuthorization() -> using Microsoft.AspNetCore.Builder;
+// using Microsoft.AspNetCore.Builder;
 app.UseAuthorization();
 // **************************************************
 
 // **************************************************
-// UseCultureCookie() -> using Infrastructure.Middlewares;
+// using Infrastructure.Middlewares;
 app.UseCultureCookie();
 // **************************************************
 
 // **************************************************
-// MapRazorPages() -> using Microsoft.AspNetCore.Builder;
+// using Microsoft.AspNetCore.Builder;
 app.MapRazorPages();
 // **************************************************
 

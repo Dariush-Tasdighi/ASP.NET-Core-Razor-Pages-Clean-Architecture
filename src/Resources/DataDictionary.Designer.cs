@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application Settings.
+        /// </summary>
+        public static string ApplicationSetting {
+            get {
+                return ResourceManager.GetString("ApplicationSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author.
         /// </summary>
         public static string Author {
@@ -529,6 +538,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Favorite User Profile Level.
+        /// </summary>
+        public static string FavoriteUserProfileLevel {
+            get {
+                return ResourceManager.GetString("FavoriteUserProfileLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Female.
         /// </summary>
         public static string Female {
@@ -588,6 +606,15 @@ namespace Resources {
         public static string Genders {
             get {
                 return ResourceManager.GetString("Genders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Google Code.
+        /// </summary>
+        public static string GoogleCode {
+            get {
+                return ResourceManager.GetString("GoogleCode", resourceCulture);
             }
         }
         
@@ -808,6 +835,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Login Visible.
+        /// </summary>
+        public static string IsLoginVisible {
+            get {
+                return ResourceManager.GetString("IsLoginVisible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to National Code Verified.
         /// </summary>
         public static string IsNationalCodeVerified {
@@ -840,6 +876,24 @@ namespace Resources {
         public static string IsPublic {
             get {
                 return ResourceManager.GetString("IsPublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration Enabled.
+        /// </summary>
+        public static string IsRegistrationEnabled {
+            get {
+                return ResourceManager.GetString("IsRegistrationEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSL Enabled.
+        /// </summary>
+        public static string IsSslEnabled {
+            get {
+                return ResourceManager.GetString("IsSslEnabled", resourceCulture);
             }
         }
         
@@ -1056,6 +1110,15 @@ namespace Resources {
         public static string Male {
             get {
                 return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master Password.
+        /// </summary>
+        public static string MasterPassword {
+            get {
+                return ResourceManager.GetString("MasterPassword", resourceCulture);
             }
         }
         
@@ -1299,6 +1362,15 @@ namespace Resources {
         public static string Preview {
             get {
                 return ResourceManager.GetString("Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile Level.
+        /// </summary>
+        public static string ProfileLevel {
+            get {
+                return ResourceManager.GetString("ProfileLevel", resourceCulture);
             }
         }
         

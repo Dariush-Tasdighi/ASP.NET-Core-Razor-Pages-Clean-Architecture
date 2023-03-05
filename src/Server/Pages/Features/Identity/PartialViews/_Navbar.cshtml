@@ -35,12 +35,6 @@
 			</a>
 		</li>
 
-		<li>
-			<a class="dropdown-item" asp-page="/Account/UpdateProfile">
-				@(Resources.DataDictionary.UpdateProfile)
-			</a>
-		</li>
-
 		@if (string.IsNullOrWhiteSpace(value: username) == false)
 		{
 			<li>
@@ -49,6 +43,12 @@
 				</a>
 			</li>
 		}
+
+		<li>
+			<a class="dropdown-item" asp-page="/Account/UpdateProfile">
+				@(Resources.DataDictionary.UpdateProfile)
+			</a>
+		</li>
 
 	</ul>
 

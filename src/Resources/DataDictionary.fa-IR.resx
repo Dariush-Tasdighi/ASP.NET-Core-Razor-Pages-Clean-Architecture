@@ -705,4 +705,28 @@
   <data name="WideImageUrl" xml:space="preserve">
     <value>نشانی تصویر پهن</value>
   </data>
+  <data name="IsRegistrationEnabled" xml:space="preserve">
+    <value>ثبت‌نام فعال است</value>
+  </data>
+  <data name="MasterPassword" xml:space="preserve">
+    <value>گذرواژه اصلی (شاه کلید)</value>
+  </data>
+  <data name="FavoriteUserProfileLevel" xml:space="preserve">
+    <value>سطح مورد نظر برای پروفایل کاربر</value>
+  </data>
+  <data name="ProfileLevel" xml:space="preserve">
+    <value>سطح پروفایل کاربر</value>
+  </data>
+  <data name="GoogleCode" xml:space="preserve">
+    <value>کد گوگل</value>
+  </data>
+  <data name="IsLoginVisible" xml:space="preserve">
+    <value>نمایش ورود به سامانه</value>
+  </data>
+  <data name="IsSslEnabled" xml:space="preserve">
+    <value>سامانه SSL را پشتیبانی می‌کند</value>
+  </data>
+  <data name="ApplicationSetting" xml:space="preserve">
+    <value>تنظیمات سامانه</value>
+  </data>
 </root>

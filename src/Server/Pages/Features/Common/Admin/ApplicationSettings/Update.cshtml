@@ -1,0 +1,59 @@
+﻿@page
+
+@model Server.Pages.Features.Common.Admin.ApplicationSettings.UpdateModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.UpdateOf} {Resources.DataDictionary.ApplicationSetting}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<input type="hidden" asp-for="ViewModel.Id" />
+
+	<section-form>
+
+		<fieldset>
+
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-input asp-for="ViewModel.FavoriteUserProfileLevel" />
+
+			<hr />
+
+			<dtat-full-input asp-for="ViewModel.GoogleCode" dir="ltr" />
+
+			<dtat-full-input asp-for="ViewModel.MasterPassword" dir="ltr" />
+
+			<hr />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsRegistrationEnabled" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsLoginVisible" />
+
+			<dtat-full-checkbox asp-for="ViewModel.IsSslEnabled" />
+
+		</fieldset>
+
+		<section-form-buttons>
+			<button-save />
+			<button-reset />
+		</section-form-buttons>
+
+		@*
+		<section-form-footer>
+		<a asp-page="Details">
+		@(Html.DtatGetLinkCaptionForDetails())
+		</a>
+		</section-form-footer>
+		*@
+
+	</section-form>
+
+</form>

@@ -49,9 +49,11 @@ public class UpdateModel :
 				Hits = current.Hits,
 				Name = current.Name,
 				Title = current.Title,
+				ImageUrl = current.ImageUrl,
 				IsActive = current.IsActive,
 				Ordering = current.Ordering,
 				Description = current.Description,
+				WideImageUrl = current.WideImageUrl,
 				DisplayInHomePage = current.DisplayInHomePage,
 				MaxDisplayPostCount = current.MaxDisplayPostCount,
 			})
