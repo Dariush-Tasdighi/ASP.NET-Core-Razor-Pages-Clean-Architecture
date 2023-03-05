@@ -79,6 +79,15 @@ namespace Resources.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email Sent Successfully..
+        /// </summary>
+        public static string EmailSentSuccessfully {
+            get {
+                return ResourceManager.GetString("EmailSentSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your password has been changed successfully..
         /// </summary>
         public static string PasswordChanged {

@@ -729,4 +729,16 @@
   <data name="ApplicationSetting" xml:space="preserve">
     <value>تنظیمات سامانه</value>
   </data>
+  <data name="LocalizedMailSetting" xml:space="preserve">
+    <value>تنظیمات ایمیل و Mail Server برحسب زبان</value>
+  </data>
+  <data name="TestOf" xml:space="preserve">
+    <value>تست</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>تست</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>بازگشت</value>
+  </data>
 </root>

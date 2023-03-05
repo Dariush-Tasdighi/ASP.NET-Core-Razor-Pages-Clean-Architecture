@@ -3,34 +3,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Services.Features.Common;
 
-public class LocalizedApplicationSettingService :
+public class LocalizedMailSettingService :
 	Infrastructure.BaseServiceWithDatabaseContext
 {
-	public LocalizedApplicationSettingService
+	public LocalizedMailSettingService
 		(Persistence.DatabaseContext databaseContext) :
 		base(databaseContext: databaseContext)
 	{
 	}
 
 	public async System.Threading.Tasks.Task
-		<Domain.Features.Common.LocalizedApplicationSetting> GetInstanceAsync()
+		<Domain.Features.Common.LocalizedMailSetting> GetInstanceAsync()
 	{
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
 
 		var result =
 			await
-			DatabaseContext.LocalizedApplicationSettings
+			DatabaseContext.LocalizedMailSettings
 			.Where(current => current.Culture != null
 				&& current.Culture.Lcid == currentUICultureLcid)
 			.FirstOrDefaultAsync();
 
 		if (result != null)
 		{
-			result.Hits++;
-
-			await DatabaseContext.SaveChangesAsync();
-
 			return result;
 		}
 
@@ -47,7 +43,7 @@ public class LocalizedApplicationSettingService :
 		}
 
 		result = new Domain.Features.Common
-			.LocalizedApplicationSetting(cultureId: currentCulture.Id);
+			.LocalizedMailSetting(cultureId: currentCulture.Id);
 
 		await DatabaseContext.AddAsync(entity: result);
 

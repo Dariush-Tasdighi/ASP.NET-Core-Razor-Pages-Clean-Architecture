@@ -60,9 +60,8 @@ public class UpdateViewModel : object
 	/// <summary>
 	/// Navbar Brand Text
 	/// </summary>
-	//[System.ComponentModel.DataAnnotations.Display
-	//	(ResourceType = typeof(Resources.DataDictionary),
-	//	Name = nameof(Resources.DataDictionary.NavbarBrandText))]
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = "Navbar Brand Text")]
 	public string? NavbarBrandText { get; set; }
 	#endregion /public string? NavbarBrandText { get; set; }
 
@@ -70,9 +69,8 @@ public class UpdateViewModel : object
 	/// <summary>
 	/// Navbar Brand Image Url
 	/// </summary>
-	//[System.ComponentModel.DataAnnotations.Display
-	//	(ResourceType = typeof(Resources.DataDictionary),
-	//	Name = nameof(Resources.DataDictionary.NavbarBrandText))]
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = "Navbar Brand Image URL")]
 	public string? NavbarBrandImageUrl { get; set; }
 	#endregion /public string? NavbarBrandImageUrl { get; set; }
 
@@ -82,9 +80,8 @@ public class UpdateViewModel : object
 	/// <summary>
 	/// عنوان صفحه اولیه
 	/// </summary>
-	//[System.ComponentModel.DataAnnotations.Display
-	//	(ResourceType = typeof(Resources.DataDictionary),
-	//	Name = nameof(Resources.DataDictionary.HomePageTitle))]
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = "Home Page Title")]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
 		(length: Constants.MaxLength.MetaTitle,
@@ -97,9 +94,8 @@ public class UpdateViewModel : object
 	/// <summary>
 	/// نام و نام خانوادگی مالک پایگاه برای صفحه اولیه
 	/// </summary>
-	//[System.ComponentModel.DataAnnotations.Display
-	//	(ResourceType = typeof(Resources.DataDictionary),
-	//	Name = nameof(Resources.DataDictionary.HomePageAuthor))]
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = "Home Page Author")]
 	public string? HomePageAuthor { get; set; }
 	#endregion /public string? HomePageAuthor { get; set; }
 
@@ -107,9 +103,8 @@ public class UpdateViewModel : object
 	/// <summary>
 	/// نشانی تصویر صفحه اولیه
 	/// </summary>
-	//[System.ComponentModel.DataAnnotations.Display
-	//	(ResourceType = typeof(Resources.DataDictionary),
-	//	Name = nameof(Resources.DataDictionary.HomePageImageUrl))]
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = "Home Page ImageUrl")]
 	public string? HomePageImageUrl { get; set; }
 	#endregion /public string? HomePageImageUrl { get; set; }
 
@@ -117,9 +112,8 @@ public class UpdateViewModel : object
 	/// <summary>
 	/// توضیحات صفحه اولیه
 	/// </summary>
-	//[System.ComponentModel.DataAnnotations.Display
-	//	(ResourceType = typeof(Resources.DataDictionary),
-	//	Name = nameof(Resources.DataDictionary.HomePageDescription))]
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = "Home Page Description")]
 
 	[System.ComponentModel.DataAnnotations.MaxLength
 		(length: Constants.MaxLength.MetaDescription,

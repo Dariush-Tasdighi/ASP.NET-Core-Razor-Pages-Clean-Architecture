@@ -1,0 +1,46 @@
+﻿@page
+
+@model Server.Pages.Features.Common.Admin.LocalizedMailSettings.TestModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.TestOf} {Resources.DataDictionary.LocalizedMailSetting}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+@if (Model.ViewModel is null)
+{
+	<h3>
+		@(Resources.Messages.Successes.EmailSentSuccessfully)
+	</h3>
+}
+else
+{
+	<ul>
+
+		@{
+			var exception = Model.ViewModel;
+
+			while (exception != null)
+			{
+				<li>
+					@(exception.Message)
+				</li>
+
+				exception = exception.InnerException;
+			}
+		}
+
+	</ul>
+}
+
+<hr />
+
+<div class="row">
+	<div class="col">
+		<a asp-page="Update">
+			@(Resources.DataDictionary.Return)
+		</a>
+	</div>
+</div>

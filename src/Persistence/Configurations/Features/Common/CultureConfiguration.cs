@@ -122,6 +122,17 @@ internal sealed class CultureConfiguration : object, Microsoft
 
 		// **************************************************
 		builder
+			.HasMany(current => current.LocalizedMailSettings)
+			.WithOne(other => other.Culture)
+			.IsRequired(required: true)
+			.HasForeignKey(other => other.CultureId)
+			.OnDelete(deleteBehavior:
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
+			;
+		// **************************************************
+
+		// **************************************************
+		builder
 			.HasMany(current => current.LocalizedApplicationSettings)
 			.WithOne(other => other.Culture)
 			.IsRequired(required: true)

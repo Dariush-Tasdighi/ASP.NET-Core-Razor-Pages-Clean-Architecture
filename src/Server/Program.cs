@@ -155,6 +155,9 @@ builder.Services.AddScoped<Services.Features
 	.Common.ApplicationSettingService>();
 
 builder.Services.AddScoped<Services.Features
+	.Common.LocalizedMailSettingService>();
+
+builder.Services.AddScoped<Services.Features
 	.Common.LocalizedApplicationSettingService>();
 // **************************************************
 

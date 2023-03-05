@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Server.Pages.Features.Common.Admin.LocalizedApplicationSettings;
+namespace Server.Pages.Features.Common.Admin.LocalizedMailSettings;
 
 [Microsoft.AspNetCore.Authorization
 	.Authorize(Roles = Constants.Role.Administrator)]
@@ -21,7 +21,7 @@ public class UpdateModel :
 	#region Properties
 
 	[Microsoft.AspNetCore.Mvc.BindProperty]
-	public ViewModels.Pages.Features.Common.Admin.LocalizedApplicationSettings.UpdateViewModel ViewModel { get; set; }
+	public ViewModels.Pages.Features.Common.Admin.LocalizedMailSettings.UpdateViewModel ViewModel { get; set; }
 
 	#endregion /Properties
 
@@ -51,14 +51,14 @@ public class UpdateModel :
 		// **************************************************
 		var foundedItem =
 			await
-			DatabaseContext.LocalizedApplicationSettings
+			DatabaseContext.LocalizedMailSettings
 			.Where(current => current.CultureId == currentCulture.Id)
 			.FirstOrDefaultAsync();
 
 		if (foundedItem is null)
 		{
 			foundedItem = new Domain.Features.Common
-				.LocalizedApplicationSetting(cultureId: currentCulture.Id);
+				.LocalizedMailSetting(cultureId: currentCulture.Id);
 
 			await DatabaseContext.AddAsync(entity: foundedItem);
 
@@ -67,23 +67,28 @@ public class UpdateModel :
 		// **************************************************
 
 		ViewModel =
-			new ViewModels.Pages.Features.Common.Admin
-			.LocalizedApplicationSettings.UpdateViewModel()
+			new ViewModels.Pages.Features.Common
+			.Admin.LocalizedMailSettings.UpdateViewModel()
 			{
 				Id = foundedItem.Id,
 
-				Hits = foundedItem.Hits,
+				Enabled = foundedItem.Enabled,
 
-				Copyright = foundedItem.Copyright,
-				ApplicationVersioin = foundedItem.ApplicationVersioin,
+				SmtpPassword = foundedItem.SmtpPassword,
+				SmtpUsername = foundedItem.SmtpUsername,
 
-				NavbarBrandText = foundedItem.NavbarBrandText,
-				NavbarBrandImageUrl = foundedItem.NavbarBrandImageUrl,
+				SmtpClientTimeout = foundedItem.SmtpClientTimeout,
+				SmtpClientPortNumber = foundedItem.SmtpClientPortNumber,
+				SmtpClientSslEnabled = foundedItem.SmtpClientSslEnabled,
+				SmtpClientHostAddress = foundedItem.SmtpClientHostAddress,
 
-				HomePageTitle = foundedItem.HomePageTitle,
-				HomePageAuthor = foundedItem.HomePageAuthor,
-				HomePageImageUrl = foundedItem.HomePageImageUrl,
-				HomePageDescription = foundedItem.HomePageDescription,
+				BccAddresses = foundedItem.BccAddresses,
+				SenderDisplayName = foundedItem.SenderDisplayName,
+				SenderEmailAddress = foundedItem.SenderEmailAddress,
+				SupportDisplayName = foundedItem.SupportDisplayName,
+				SupportEmailAddress = foundedItem.SupportEmailAddress,
+				EmailSubjectTemplate = foundedItem.EmailSubjectTemplate,
+				UseDefaultCredentials = foundedItem.UseDefaultCredentials,
 			};
 
 		return Page();
@@ -119,7 +124,7 @@ public class UpdateModel :
 		// **************************************************
 		var foundedItem =
 			await
-			DatabaseContext.LocalizedApplicationSettings
+			DatabaseContext.LocalizedMailSettings
 
 			.Where(current => current.CultureId == currentCulture.Id)
 
@@ -135,18 +140,22 @@ public class UpdateModel :
 		// **************************************************
 		foundedItem.SetUpdateDateTime();
 
-		foundedItem.Hits = ViewModel.Hits;
+		foundedItem.SmtpClientTimeout = ViewModel.SmtpClientTimeout;
+		foundedItem.SmtpClientPortNumber = ViewModel.SmtpClientPortNumber;
 
-		foundedItem.Copyright = ViewModel.Copyright.Fix();
-		foundedItem.ApplicationVersioin = ViewModel.ApplicationVersioin.Fix();
+		foundedItem.Enabled = ViewModel.Enabled;
+		foundedItem.SmtpClientSslEnabled = ViewModel.SmtpClientSslEnabled;
+		foundedItem.UseDefaultCredentials = ViewModel.UseDefaultCredentials;
 
-		foundedItem.NavbarBrandText = ViewModel.NavbarBrandText.Fix();
-		foundedItem.NavbarBrandImageUrl = ViewModel.NavbarBrandImageUrl.Fix();
-
-		foundedItem.HomePageTitle = ViewModel.HomePageTitle.Fix();
-		foundedItem.HomePageAuthor = ViewModel.HomePageAuthor.Fix();
-		foundedItem.HomePageImageUrl = ViewModel.HomePageImageUrl.Fix();
-		foundedItem.HomePageDescription = ViewModel.HomePageDescription.Fix();
+		foundedItem.BccAddresses = ViewModel.BccAddresses.Fix();
+		foundedItem.SmtpPassword = ViewModel.SmtpPassword.Fix();
+		foundedItem.SmtpUsername = ViewModel.SmtpUsername.Fix();
+		foundedItem.SenderDisplayName = ViewModel.SenderDisplayName.Fix();
+		foundedItem.SenderEmailAddress = ViewModel.SenderEmailAddress.Fix();
+		foundedItem.SupportDisplayName = ViewModel.SupportDisplayName.Fix();
+		foundedItem.SupportEmailAddress = ViewModel.SupportEmailAddress.Fix();
+		foundedItem.EmailSubjectTemplate = ViewModel.EmailSubjectTemplate.Fix();
+		foundedItem.SmtpClientHostAddress = ViewModel.SmtpClientHostAddress.Fix();
 		// **************************************************
 
 		await DatabaseContext.SaveChangesAsync();

@@ -46,6 +46,9 @@ public class Culture :
 
 
 
+		LocalizedMailSettings =
+			new System.Collections.Generic.List<Common.LocalizedMailSetting>();
+
 		LocalizedApplicationSettings =
 			new System.Collections.Generic.List<Common.LocalizedApplicationSetting>();
 	}
@@ -182,6 +185,7 @@ public class Culture :
 	public virtual System.Collections.Generic.IList<Identity.LocalizedUser> LocalizedUsers { get; private set; }
 	public virtual System.Collections.Generic.IList<Identity.LocalizedGender> LocalizedGenders { get; private set; }
 
+	public virtual System.Collections.Generic.IList<Common.LocalizedMailSetting> LocalizedMailSettings { get; private set; }
 	public virtual System.Collections.Generic.IList<Common.LocalizedApplicationSetting> LocalizedApplicationSettings { get; private set; }
 
 	#endregion /Collections

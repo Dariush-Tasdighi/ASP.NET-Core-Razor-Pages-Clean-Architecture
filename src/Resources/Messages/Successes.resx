@@ -123,6 +123,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>The {0} successfully deleted.</value>
   </data>
+  <data name="EmailSentSuccessfully" xml:space="preserve">
+    <value>Email Sent Successfully.</value>
+  </data>
   <data name="PasswordChanged" xml:space="preserve">
     <value>Your password has been changed successfully.</value>
   </data>

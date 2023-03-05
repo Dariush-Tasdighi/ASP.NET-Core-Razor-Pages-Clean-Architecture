@@ -33,6 +33,7 @@ public class DatabaseContext :
 
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Common.Culture> Cultures { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Common.ApplicationSetting> ApplicationSettings { get; set; }
+	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Common.LocalizedMailSetting> LocalizedMailSettings { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Common.LocalizedApplicationSetting> LocalizedApplicationSettings { get; set; }
 
 	#endregion /Common Feature

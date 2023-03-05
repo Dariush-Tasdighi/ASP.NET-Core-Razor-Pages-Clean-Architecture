@@ -667,7 +667,7 @@
     <value>Data</value>
   </data>
   <data name="LocalizedApplicationSetting" xml:space="preserve">
-    <value>Localized Application Settings</value>
+    <value>Application Settings based on Culture</value>
   </data>
   <data name="WideImageUrl" xml:space="preserve">
     <value>Wide Image Url</value>
@@ -695,5 +695,17 @@
   </data>
   <data name="ApplicationSetting" xml:space="preserve">
     <value>Application Settings</value>
+  </data>
+  <data name="LocalizedMailSetting" xml:space="preserve">
+    <value>Mail Settings based on Culture</value>
+  </data>
+  <data name="TestOf" xml:space="preserve">
+    <value>Test of</value>
+  </data>
+  <data name="Test" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Return</value>
   </data>
 </root>

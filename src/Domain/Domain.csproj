@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Constants\Constants.csproj" />
+		<ProjectReference Include="..\Framework\Dtat.Net.Mail.Abstractions\Dtat.Net.Mail.Abstractions.csproj" />
 		<ProjectReference Include="..\Resources\Resources.csproj" />
 
 		<ProjectReference Include="..\Framework\Dtat\Dtat.csproj" />

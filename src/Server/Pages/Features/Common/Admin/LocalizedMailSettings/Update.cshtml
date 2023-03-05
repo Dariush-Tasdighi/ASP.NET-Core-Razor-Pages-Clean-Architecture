@@ -1,0 +1,84 @@
+﻿@page
+
+@model Server.Pages.Features.Common.Admin.LocalizedMailSettings.UpdateModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.UpdateOf} {Resources.DataDictionary.LocalizedMailSetting}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<input type="hidden" asp-for="ViewModel.Id" />
+
+	<section-form>
+
+		<fieldset>
+
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-checkbox asp-for="ViewModel.Enabled" />
+
+			<hr />
+
+			<dtat-full-input asp-for="ViewModel.EmailSubjectTemplate" />
+
+			<hr />
+
+			<dtat-full-checkbox asp-for="ViewModel.SmtpClientSslEnabled" />
+
+			<dtat-full-input asp-for="ViewModel.SmtpClientTimeout" />
+
+			<dtat-full-input asp-for="ViewModel.SmtpClientPortNumber" />
+
+			<dtat-full-input asp-for="ViewModel.SmtpClientHostAddress" dir="ltr" />
+
+			<hr />
+
+			<dtat-full-checkbox asp-for="ViewModel.UseDefaultCredentials" />
+
+			<dtat-full-input asp-for="ViewModel.SmtpUsername" dir="ltr" />
+
+			<dtat-full-input asp-for="ViewModel.SmtpPassword" dir="ltr" />
+
+			<hr />
+
+			<dtat-full-input asp-for="ViewModel.SenderDisplayName" />
+
+			<dtat-full-input asp-for="ViewModel.SenderEmailAddress" dir="ltr" />
+
+			<hr />
+
+			<dtat-full-input asp-for="ViewModel.SupportDisplayName" />
+
+			<dtat-full-input asp-for="ViewModel.SupportEmailAddress" dir="ltr" />
+
+			<hr />
+
+			<dtat-full-input asp-for="ViewModel.BccAddresses" dir="ltr" />
+
+		</fieldset>
+
+		<section-form-buttons>
+			<button-save />
+			<button-reset />
+		</section-form-buttons>
+
+		<section-form-footer>
+			<a asp-page="Test">
+				@(Resources.DataDictionary.Test)
+			</a>
+			<a asp-page="Details">
+				@(Html.DtatGetLinkCaptionForDetails())
+			</a>
+		</section-form-footer>
+
+	</section-form>
+
+</form>

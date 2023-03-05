@@ -1096,11 +1096,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Localized Application Settings.
+        ///   Looks up a localized string similar to Application Settings based on Culture.
         /// </summary>
         public static string LocalizedApplicationSetting {
             get {
                 return ResourceManager.GetString("LocalizedApplicationSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mail Settings based on Culture.
+        /// </summary>
+        public static string LocalizedMailSetting {
+            get {
+                return ResourceManager.GetString("LocalizedMailSetting", resourceCulture);
             }
         }
         
@@ -1438,6 +1447,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Return.
+        /// </summary>
+        public static string Return {
+            get {
+                return ResourceManager.GetString("Return", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Right.
         /// </summary>
         public static string Right {
@@ -1587,6 +1605,24 @@ namespace Resources {
         public static string SubMenuItems {
             get {
                 return ResourceManager.GetString("SubMenuItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test.
+        /// </summary>
+        public static string Test {
+            get {
+                return ResourceManager.GetString("Test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test of.
+        /// </summary>
+        public static string TestOf {
+            get {
+                return ResourceManager.GetString("TestOf", resourceCulture);
             }
         }
         
