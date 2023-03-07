@@ -61,13 +61,14 @@
 					</div>
 				</fieldset>
 
+				@*
 				<hr class="mt-4" />
-
 				<div class="d-grid gap-2 mb-3">
-					<a asp-page="/Google/Login" class="btn btn-danger">
-						@(Resources.ButtonCaptions.LoginWithGoogle)
-					</a>
+				<a asp-page="/Google/Login" class="btn btn-danger">
+				@(Resources.ButtonCaptions.LoginWithGoogle)
+				</a>
 				</div>
+				*@
 
 				<hr class="mt-4" />
 
@@ -82,17 +83,18 @@
 
 					<br />
 
+					@*
 					<a href="#" class="text-decoration-none">
-						@(Resources.ButtonCaptions.ForgotUsername)
+					@(Resources.ButtonCaptions.ForgotUsername)
 					</a>
 					|
 					<a href="#" class="text-decoration-none">
-						@(Resources.ButtonCaptions.ForgotPassword)
+					@(Resources.ButtonCaptions.ForgotPassword)
 					</a>
-
 					<br />
+					*@
 
-					<a href="#" class="text-decoration-none">
+					<a asp-page="/Account/SendAgainUserEmailAddressVerificationKey" class="text-decoration-none">
 						@(Resources.ButtonCaptions.SendAgainEmailAddressVerificationKey)
 					</a>
 				</div>

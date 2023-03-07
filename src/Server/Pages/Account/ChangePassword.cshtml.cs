@@ -31,8 +31,9 @@ public class ChangePasswordModel :
 	{
 		await System.Threading.Tasks.Task.CompletedTask;
 	}
-
 	#endregion /OnGetAsync()
+
+	#region OnPostAsync()
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
@@ -109,6 +110,7 @@ public class ChangePasswordModel :
 
 		return Page();
 	}
+	#endregion /OnPostAsync()
 
 	#endregion /Methods
 }

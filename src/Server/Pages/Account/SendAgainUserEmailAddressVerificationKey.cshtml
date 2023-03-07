@@ -1,0 +1,31 @@
+﻿@page
+
+@model Server.Pages.Account.SendAgainUserEmailAddressVerificationKeyModel
+
+@{
+	var pageTitle =
+		Resources.PageTitles.SendAgainUserEmailAddressVerificationKey;
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+}
+
+<form method="post">
+
+	<section-form>
+		<fieldset>
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
+
+			<partial name="PartialViews/_DisplayPageMessages" />
+
+			<dtat-full-input asp-for="ViewModel.EmailAddress" dir="ltr" />
+		</fieldset>
+
+		<section-form-buttons>
+			<button-save />
+			<button-reset />
+		</section-form-buttons>
+	</section-form>
+
+</form>

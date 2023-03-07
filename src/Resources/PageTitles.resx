@@ -210,6 +210,9 @@
   <data name="RoleManagement" xml:space="preserve">
     <value>Role Management</value>
   </data>
+  <data name="SendAgainUserEmailAddressVerificationKey" xml:space="preserve">
+    <value>Send Again User Emai lAddress Verification Key</value>
+  </data>
   <data name="TerminateAccount" xml:space="preserve">
     <value>Terminate Account</value>
   </data>

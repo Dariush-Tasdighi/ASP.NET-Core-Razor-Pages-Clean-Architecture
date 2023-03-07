@@ -340,6 +340,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send Again User Emai lAddress Verification Key.
+        /// </summary>
+        public static string SendAgainUserEmailAddressVerificationKey {
+            get {
+                return ResourceManager.GetString("SendAgainUserEmailAddressVerificationKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Terminate Account.
         /// </summary>
         public static string TerminateAccount {

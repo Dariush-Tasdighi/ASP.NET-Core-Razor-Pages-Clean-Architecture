@@ -210,6 +210,9 @@
   <data name="RoleManagement" xml:space="preserve">
     <value>مدیریت نقش ها</value>
   </data>
+  <data name="SendAgainUserEmailAddressVerificationKey" xml:space="preserve">
+    <value>ارسال مجدد کد فعال‌سازی نشانی پست الکترونیکی</value>
+  </data>
   <data name="TerminateAccount" xml:space="preserve">
     <value>حذف حساب کاربری</value>
   </data>
