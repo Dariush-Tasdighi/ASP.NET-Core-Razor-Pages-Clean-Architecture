@@ -223,6 +223,15 @@ namespace Resources.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to YourEmailAddressAlreadyVerified!.
+        /// </summary>
+        public static string YourEmailAddressAlreadyVerified {
+            get {
+                return ResourceManager.GetString("YourEmailAddressAlreadyVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can not login with this role right now!.
         /// </summary>
         public static string YourRoleIsNotActive {

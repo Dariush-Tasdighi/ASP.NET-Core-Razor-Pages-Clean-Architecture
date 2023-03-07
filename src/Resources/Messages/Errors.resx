@@ -171,6 +171,9 @@
   <data name="UsernameAndOrPasswordIsNotCorrect" xml:space="preserve">
     <value>Username and/or password is not correct!</value>
   </data>
+  <data name="YourEmailAddressAlreadyVerified" xml:space="preserve">
+    <value>YourEmailAddressAlreadyVerified!</value>
+  </data>
   <data name="YourRoleIsNotActive" xml:space="preserve">
     <value>You can not login with this role right now!</value>
   </data>

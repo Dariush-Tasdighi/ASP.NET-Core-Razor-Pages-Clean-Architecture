@@ -1,4 +1,6 @@
-﻿namespace Persistence.Extensions;
+﻿using static System.Net.WebRequestMethods;
+
+namespace Persistence.Extensions;
 
 public static class ModelBuilderExtensions : object
 {
@@ -437,6 +439,8 @@ public static class ModelBuilderExtensions : object
 				Username = "Dariush",
 				CellPhoneNumber = "00989121087461",
 
+				ImageUrl = "/images/Dariush.png",
+
 				//Password = "1234512345",
 
 				Password =
@@ -690,11 +694,41 @@ public static class ModelBuilderExtensions : object
 		// **************************************************
 
 		// **************************************************
+		var usersMenuItemPersian =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: culturePersian.Id, title: "کاربران")
+			{
+				Ordering = 9_300,
+				IsVisible = false,
+				IsDisabled = false,
+				NavigationUrl = "/users/fa-ir/",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: usersMenuItemPersian);
+		// **************************************************
+
+		// **************************************************
+		var usersMenuItemEnglish =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: cultureEnglish.Id, title: "users")
+			{
+				Ordering = 9_300,
+				IsVisible = false,
+				IsDisabled = false,
+				NavigationUrl = "/users/en-us/",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: usersMenuItemEnglish);
+		// **************************************************		// **************************************************
+
+		// **************************************************
 		var categoriesMenuItemPersian =
 			new Domain.Features.Cms.MenuItem
 			(cultureId: culturePersian.Id, title: "طبقه‌بندی‌ها")
 			{
-				Ordering = 9_300,
+				Ordering = 9_400,
 				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/categories/fa-ir/",
@@ -709,7 +743,7 @@ public static class ModelBuilderExtensions : object
 			new Domain.Features.Cms.MenuItem
 			(cultureId: cultureEnglish.Id, title: "Categories")
 			{
-				Ordering = 9_300,
+				Ordering = 9_400,
 				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/categories/en-us/",

@@ -152,6 +152,9 @@ builder.Services.AddDbContext<Persistence.DatabaseContext>
 
 // **************************************************
 builder.Services.AddScoped<Services.Features
+	.Identity.UserService>();
+
+builder.Services.AddScoped<Services.Features
 	.Common.ApplicationSettingService>();
 
 builder.Services.AddScoped<Services.Features

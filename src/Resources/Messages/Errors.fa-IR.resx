@@ -171,6 +171,9 @@
   <data name="UsernameAndOrPasswordIsNotCorrect" xml:space="preserve">
     <value>شناسه‌کاربری و/یا گذرواژه صحیح نمی‌باشد!</value>
   </data>
+  <data name="YourEmailAddressAlreadyVerified" xml:space="preserve">
+    <value>نشانی پست الکترونیکی شما قبلا تایید شده است!</value>
+  </data>
   <data name="YourRoleIsNotActive" xml:space="preserve">
     <value>متاسفانه تا اطلاع ثانویه، امکان ورود به سامانه، برای شما مقدور نمی‌باشد!</value>
   </data>

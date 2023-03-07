@@ -1,0 +1,131 @@
+﻿@page "/users/{culture?}"
+
+@model Server.Pages.Features.Identity.UsersModel
+
+@inject Persistence.DatabaseContext DatabaseContext
+
+@using Microsoft.EntityFrameworkCore
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.Users}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+
+	var items =
+		await
+		DatabaseContext.LocalizedUsers
+
+		.Where(current => current.CultureId == Model.CultureId)
+
+		.Where(current => current.User!.IsActive)
+		.Where(current => current.User!.IsProfilePublic)
+		.Where(current => current.User!.IsDeleted == false)
+		.Where(current => string.IsNullOrWhiteSpace(current.User!.Username) == false)
+		//.Where(current => string.IsNullOrWhiteSpace(current.User!.ImageUrl) == false)
+
+		.OrderByDescending(current => current.User!.Role!.Code)
+		.ThenBy(current => current.User!.Ordering)
+		.ThenByDescending(current => current.User!.IsFeatured)
+		.ThenByDescending(current => current.User!.Score)
+
+		.Select(current => new ViewModels.Pages.Features.Identity.UserItemViewModel
+				{
+					Score = current.User!.Score,
+
+					LastName = current.LastName,
+					FirstName = current.FirstName,
+					ImageUrl = current.User!.ImageUrl,
+					Username = current.User!.Username,
+					EmailAddress = current.User!.EmailAddress,
+					CellPhoneNumber = current.User!.CellPhoneNumber,
+
+#pragma warning disable CS8602
+
+					RoleTitle = current.User!.Role!.LocalizedRoles.FirstOrDefault(other => other.CultureId == Model.CultureId).Title,
+					GenderPrefix = current.User!.Gender!.LocalizedGenders.FirstOrDefault(other => other.CultureId == Model.CultureId).Prefix,
+
+#pragma warning restore CS8602
+
+				})
+
+		.ToListAsync();
+
+	if (items.Count == 0)
+	{
+		return;
+	}
+
+	var currentUICultureName = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureName();
+}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+
+	@for (var index = 0; index <= items.Count - 1; index++)
+	{
+		var item = items[index];
+
+		var displayName = item.DisplayName;
+
+		if (string.IsNullOrWhiteSpace(value: displayName))
+		{
+			continue;
+		}
+
+		var textBackground = "text-bg-light";
+
+		<div class="col">
+			<div class="card @(textBackground) h-100">
+				@if(string.IsNullOrWhiteSpace(value: item.ImageUrl) == false)
+				{
+					<img src="@(item.ImageUrl)" class="card-img-top" alt="@(displayName)">
+				}
+
+				<div class="card-body">
+					<h5 class="card-title">
+						@(displayName)
+					</h5>
+
+					<p class="card-text">
+						<div>
+							@(Resources.DataDictionary.Score):
+							@(Html.DtatDisplayInteger(value: item.Score))
+						</div>
+
+						<div>
+							@(Resources.DataDictionary.Role):
+							@(item.RoleTitle)
+						</div>
+
+						@if (string.IsNullOrWhiteSpace(value: item.CellPhoneNumber) == false)
+						{
+							<div dir="ltr">
+								<i class="bi bi-phone-vibrate"></i>
+								<a href="tel:@(item.CellPhoneNumber)">@(item.CellPhoneNumber)</a>
+							</div>
+						}
+
+						@if (string.IsNullOrWhiteSpace(value: item.EmailAddress) == false)
+						{
+							<div dir="ltr">
+								<i class="bi bi-envelope-at"></i>
+								<a href="mailto:@(item.EmailAddress)">@(item.EmailAddress)</a>
+							</div>
+						}
+					</p>
+				</div>
+
+				<div class="card-footer d-grid">
+					@if (string.IsNullOrWhiteSpace(value: item.Username) == false)
+					{
+						<a href="~/profile/@(currentUICultureName)/@(item.Username)" class="btn btn-sm btn-primary">
+							@(Resources.DataDictionary.Watch)
+						</a>
+					}
+				</div>
+			</div>
+		</div>
+	}
+
+</div>

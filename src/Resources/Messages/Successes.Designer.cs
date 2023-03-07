@@ -122,5 +122,14 @@ namespace Resources.Messages {
                 return ResourceManager.GetString("UpdateProfile", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Email Address Verified..
+        /// </summary>
+        public static string YourEmailAddressVerified {
+            get {
+                return ResourceManager.GetString("YourEmailAddressVerified", resourceCulture);
+            }
+        }
     }
 }

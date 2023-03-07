@@ -10,11 +10,13 @@ public class RegisterModel :
 	#region Constructor
 	public RegisterModel
 		(Persistence.DatabaseContext databaseContext,
+		Services.Features.Identity.UserService userService,
 		Services.Features.Common.ApplicationSettingService applicationSettingService) :
 		base(databaseContext: databaseContext)
 	{
 		ViewModel = new();
 
+		UserService = userService;
 		ApplicationSettingService = applicationSettingService;
 	}
 	#endregion /Constructor
@@ -24,6 +26,7 @@ public class RegisterModel :
 	[Microsoft.AspNetCore.Mvc.BindProperty]
 	public ViewModels.Pages.Account.RegisterViewModel ViewModel { get; set; }
 
+	private Services.Features.Identity.UserService UserService { get; }
 	private Services.Features.Common.ApplicationSettingService ApplicationSettingService { get; }
 
 	#endregion /Properties
@@ -247,6 +250,16 @@ public class RegisterModel :
 			await
 			DatabaseContext.SaveChangesAsync();
 		// **************************************************
+
+		try
+		{
+			await UserService
+				.SendUserEmailVerificationKeyAsync(emailAddress: user.EmailAddress);
+
+			await UserService
+				.NotifyAllActiveManagersAfterUserRegistrationAsync(newUser: user);
+		}
+		catch { }
 
 		AddToastSuccess(message: Resources
 			.Messages.Successes.RegistrationDone);

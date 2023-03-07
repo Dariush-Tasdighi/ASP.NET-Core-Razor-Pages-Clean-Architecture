@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModels", "src\ViewModel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtat.Net.Mail", "src\Framework\Dtat.Net.Mail\Dtat.Net.Mail.csproj", "{1FA6C871-8C2C-4F4E-914D-7BC9A06BC2EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dtat.Net.Mail.Abstractions", "src\Framework\Dtat.Net.Mail.Abstractions\Dtat.Net.Mail.Abstractions.csproj", "{B8770E2C-EADC-4D25-AD9E-91F5651FE693}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtat.Net.Mail.Abstractions", "src\Framework\Dtat.Net.Mail.Abstractions\Dtat.Net.Mail.Abstractions.csproj", "{B8770E2C-EADC-4D25-AD9E-91F5651FE693}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

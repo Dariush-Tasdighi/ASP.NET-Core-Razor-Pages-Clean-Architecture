@@ -20,6 +20,21 @@ public class UpdateProfileViewModel : object
 	public bool IsProfilePublic { get; set; }
 	#endregion /public bool IsProfilePublic { get; set; }
 
+	#region public string? Username { get; set; }
+	/// <summary>
+	/// شناسه کاربری
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Username))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.Username,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+	public string? Username { get; set; }
+	#endregion /public string? Username { get; set; }
+
 	#region public System.Guid GenderId { get; set; }
 	/// <summary>
 	/// جنسیت
@@ -84,6 +99,46 @@ public class UpdateProfileViewModel : object
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.NationalCode))]
 	public string? NationalCode { get; set; }
 	#endregion /public string? NationalCode { get; set; }
+
+	#region public string? CellPhoneNumber { get; set; }
+	/// <summary>
+	/// شماره تلفن همراه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.CellPhoneNumber))]
+
+	[System.ComponentModel.DataAnnotations.MaxLength
+		(length: Constants.MaxLength.CellPhoneNumber,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.MaxLength))]
+
+	[System.ComponentModel.DataAnnotations.RegularExpression
+		(pattern: Constants.RegularExpression.CellPhoneNumber,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.CellPhoneNumber))]
+	public string? CellPhoneNumber { get; set; }
+	#endregion /public string? CellPhoneNumber { get; set; }
+
+	#region public string? ImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.ImageUrl))]
+	public string? ImageUrl { get; set; }
+	#endregion /public string? ImageUrl { get; set; }
+
+	#region public string? WideImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر پهن
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.WideImageUrl))]
+	public string? WideImageUrl { get; set; }
+	#endregion /public string? WideImageUrl { get; set; }
 
 	#region public string? Description { get; set; }
 	/// <summary>

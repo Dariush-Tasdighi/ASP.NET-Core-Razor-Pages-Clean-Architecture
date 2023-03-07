@@ -138,4 +138,7 @@
   <data name="UpdateProfile" xml:space="preserve">
     <value>Your profile has been updated successfully.</value>
   </data>
+  <data name="YourEmailAddressVerified" xml:space="preserve">
+    <value>Your Email Address Verified.</value>
+  </data>
 </root>

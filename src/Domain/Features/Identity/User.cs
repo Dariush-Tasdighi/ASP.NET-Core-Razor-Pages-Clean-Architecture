@@ -5,6 +5,7 @@ public class User :
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
 	Dtat.Seedwork.Abstractions.IEntityHasIsDeleted,
+	Dtat.Seedwork.Abstractions.IEntityHasIsTestData,
 	Dtat.Seedwork.Abstractions.IEntityHasIsUndeletable,
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
@@ -120,6 +121,26 @@ public class User :
 	public bool IsVerified { get; set; }
 	#endregion /public bool IsVerified { get; set; }
 
+	#region public bool IsFeatured { get; set; }
+	/// <summary>
+	/// ویژه بودن کاربر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsFeatured))]
+	public bool IsFeatured { get; set; }
+	#endregion /public bool IsFeatured { get; set; }
+
+	#region public bool IsTestData { get; set; }
+	/// <summary>
+	/// داده تستی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsTestData))]
+	public bool IsTestData { get; set; }
+	#endregion /public bool IsTestData { get; set; }
+
 	#region public bool IsUndeletable { get; set; }
 	/// <summary>
 	/// غیر قابل حذف
@@ -191,6 +212,16 @@ public class User :
 	#endregion /public bool IsCellPhoneNumberVerified { get; set; }
 
 
+
+	#region public int Score { get; set; }
+	/// <summary>
+	/// امتیاز کاربر
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Score))]
+	public int Score { get; set; }
+	#endregion /public int Score { get; set; }
 
 	#region public int Ordering { get; set; }
 	/// <summary>

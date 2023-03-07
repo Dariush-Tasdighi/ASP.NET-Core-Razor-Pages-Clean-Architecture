@@ -17,22 +17,26 @@
 }
 else
 {
-	<ul>
+	<div class="row">
+		<div class="col" dir="ltr">
+			<ul>
 
-		@{
-			var exception = Model.ViewModel;
+				@{
+					var exception = Model.ViewModel;
 
-			while (exception != null)
-			{
-				<li>
-					@(exception.Message)
-				</li>
+					while (exception != null)
+					{
+						<li>
+							@(exception.Message)
+						</li>
 
-				exception = exception.InnerException;
-			}
-		}
+						exception = exception.InnerException;
+					}
+				}
 
-	</ul>
+			</ul>
+		</div>
+	</div>
 }
 
 <hr />

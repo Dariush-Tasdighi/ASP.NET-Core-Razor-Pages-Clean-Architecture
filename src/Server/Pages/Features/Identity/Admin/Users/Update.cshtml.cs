@@ -159,12 +159,12 @@ public class UpdateModel :
 			RolesSelectList =
 				await
 				Infrastructure.SelectLists.GetRolesAsync
-				(databaseContext: DatabaseContext, selectedValue: null);
+				(databaseContext: DatabaseContext, selectedValue: ViewModel.RoleId);
 
 			GendersSelectList =
 				await
 				Infrastructure.SelectLists.GetGendersForAdminAsync
-				(databaseContext: DatabaseContext, selectedValue: null);
+				(databaseContext: DatabaseContext, selectedValue: ViewModel.GenderId);
 
 			return Page();
 		}
@@ -234,6 +234,8 @@ public class UpdateModel :
 
 				AddPageError(message: errorMessage);
 			}
+
+			username = username.ToLower();
 		}
 		// **************************************************
 
@@ -295,21 +297,23 @@ public class UpdateModel :
 		}
 		// **************************************************
 
+		// **************************************************
 		if (isUsernameFound || isEmailAddressFound ||
 			isCellPhoneNumberFound || isNationalCodeFound)
 		{
 			RolesSelectList =
 				await
 				Infrastructure.SelectLists.GetRolesAsync
-				(databaseContext: DatabaseContext, selectedValue: null);
+				(databaseContext: DatabaseContext, selectedValue: ViewModel.RoleId);
 
 			GendersSelectList =
 				await
 				Infrastructure.SelectLists.GetGendersForAdminAsync
-				(databaseContext: DatabaseContext, selectedValue: null);
+				(databaseContext: DatabaseContext, selectedValue: ViewModel.GenderId);
 
 			return Page();
 		}
+		// **************************************************
 
 		// **************************************************
 		foundedItem.SetUpdateDateTime();

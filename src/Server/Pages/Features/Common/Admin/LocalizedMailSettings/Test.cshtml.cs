@@ -23,7 +23,6 @@ public class TestModel :
 	public System.Exception? ViewModel { get; set; }
 
 	private Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor { get; }
-
 	private Services.Features.Common.LocalizedMailSettingService LocalizedMailSettingService { get; }
 
 	#endregion /Properties

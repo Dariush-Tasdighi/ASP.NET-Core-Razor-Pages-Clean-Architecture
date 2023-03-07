@@ -28,8 +28,7 @@ public class PageModel :
 		(string? culture = null, string? name = null)
 	{
 		// **************************************************
-		culture =
-			culture.Fix();
+		culture = culture.Fix();
 
 		if (culture is null)
 		{
@@ -42,8 +41,7 @@ public class PageModel :
 		// **************************************************
 
 		// **************************************************
-		name =
-			name.Fix();
+		name = name.Fix();
 
 		if (name is null)
 		{

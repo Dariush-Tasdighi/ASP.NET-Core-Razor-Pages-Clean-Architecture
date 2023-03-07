@@ -19,6 +19,8 @@
 
 			<partial name="PartialViews/_DisplayPageMessages" />
 
+			<dtat-full-input asp-for="ViewModel.Username" dir="ltr" />
+
 			<dtat-full-checkbox asp-for="ViewModel.IsProfilePublic" />
 
 			<dtat-full-select asp-for="ViewModel.GenderId" asp-items="@(Model.GendersSelectList)" />
@@ -28,6 +30,12 @@
 			<dtat-full-input asp-for="ViewModel.LastName" />
 
 			<dtat-full-input asp-for="ViewModel.NationalCode" dir="ltr" />
+
+			<dtat-full-input asp-for="ViewModel.CellPhoneNumber" dir="ltr" />
+
+			<dtat-full-input asp-for="ViewModel.ImageUrl" dir="ltr" />
+
+			<dtat-full-input asp-for="ViewModel.WideImageUrl" dir="ltr" />
 
 			<dtat-full-textarea asp-for="ViewModel.Description" />
 		</fieldset>

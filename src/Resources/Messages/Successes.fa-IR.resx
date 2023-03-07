@@ -138,4 +138,7 @@
   <data name="UpdateProfile" xml:space="preserve">
     <value>اطلاعات شما با موفقیت ذخیره گردید.</value>
   </data>
+  <data name="YourEmailAddressVerified" xml:space="preserve">
+    <value>نشانی پست الکترونیکی شما تایید گردید.</value>
+  </data>
 </root>
