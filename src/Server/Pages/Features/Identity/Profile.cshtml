@@ -25,6 +25,9 @@
 		$"{Model.ViewModel.FirstName} {Model.ViewModel.LastName}".Trim();
 
 	ViewData[Constants.ViewDataKeyName.PageTitle] = fullName;
+
+	Layout =
+		"Layouts/_Profile";
 }
 
 <partial name="PartialViews/_DisplayPageMessages" />
@@ -57,8 +60,7 @@
 		*@
 
 		<h3 class="text-center">
-			@(Model.ViewModel.FirstName)
-			@(Model.ViewModel.LastName)
+			@(fullName)
 		</h3>
 
 		<h5 class="mt-5">
