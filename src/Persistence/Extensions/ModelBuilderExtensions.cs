@@ -439,7 +439,8 @@ public static class ModelBuilderExtensions : object
 				Username = "Dariush",
 				CellPhoneNumber = "00989121087461",
 
-				ImageUrl = "/images/Dariush.png",
+				ImageUrl = "/images/dariush.png",
+				WideImageUrl = "/images/dariush_wide.png",
 
 				//Password = "1234512345",
 
@@ -462,15 +463,15 @@ public static class ModelBuilderExtensions : object
 		modelBuilder.Entity<Domain.Features
 			.Identity.LocalizedUser>().HasData(data: localizedUser);
 
-		localizedUser =
-			new Domain.Features.Identity.LocalizedUser(cultureId: cultureEnglish.Id,
-			userId: user.Id, firstName: "Dariush", lastName: "Tasdighi")
-			{
-				TitleInContactUsPage = "Site Owner",
-			};
+		//localizedUser =
+		//	new Domain.Features.Identity.LocalizedUser(cultureId: cultureEnglish.Id,
+		//	userId: user.Id, firstName: "Dariush", lastName: "Tasdighi")
+		//	{
+		//		TitleInContactUsPage = "Site Owner",
+		//	};
 
-		modelBuilder.Entity<Domain.Features
-			.Identity.LocalizedUser>().HasData(data: localizedUser);
+		//modelBuilder.Entity<Domain.Features
+		//	.Identity.LocalizedUser>().HasData(data: localizedUser);
 		// **************************************************
 		// *** /Users ****************************************
 		// **************************************************
@@ -721,7 +722,7 @@ public static class ModelBuilderExtensions : object
 
 		modelBuilder.Entity<Domain.Features
 			.Cms.MenuItem>().HasData(data: usersMenuItemEnglish);
-		// **************************************************		// **************************************************
+		// **************************************************
 
 		// **************************************************
 		var categoriesMenuItemPersian =

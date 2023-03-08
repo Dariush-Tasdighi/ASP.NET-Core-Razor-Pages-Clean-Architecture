@@ -2,6 +2,24 @@
 
 @model Server.Pages.Features.Identity.ProfileModel
 
+@section StyleSheets
+	{
+	<style>
+		body {
+			color: antiquewhite;
+			background: #333333;
+		}
+
+		a {
+			color: antiquewhite;
+		}
+
+			a:hover {
+				color: antiquewhite;
+			}
+	</style>
+}
+
 @{
 	var fullName =
 		$"{Model.ViewModel.FirstName} {Model.ViewModel.LastName}".Trim();
@@ -9,36 +27,181 @@
 	ViewData[Constants.ViewDataKeyName.PageTitle] = fullName;
 }
 
-<section-form>
+<partial name="PartialViews/_DisplayPageMessages" />
 
-	<fieldset>
+@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.WideImageUrl) == false)
+{
+	<div class="row d-none d-md-block">
+		<div class="col p-0">
+			<img src="@(Model.ViewModel.WideImageUrl)" alt="@(Model.ViewModel.DisplayName)" class="img-fluid" />
+		</div>
+	</div>
+}
 
-		<section-form-header>
-			@(fullName)
-		</section-form-header>
+<div class="row">
+	<div class="col-md-3">
 
-		<partial name="PartialViews/_DisplayPageMessages" />
+		@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.WideImageUrl) == false)
+		{
+			<div class="row p-3">
+				<div class="col">
+					<img src="@(Model.ViewModel.ImageUrl)" alt="@(Model.ViewModel.DisplayName)" class="img-fluid rounded-circle">
+				</div>
+			</div>
+		}
 
-		<dtat-readonly-input asp-for="ViewModel.FirstName" />
+		@*
+		<h3 class="text-center">
+		@(Model.ViewModel.DisplayName)
+		</h3>
+		*@
 
-		<dtat-readonly-input asp-for="ViewModel.LastName" />
+		<h3 class="text-center">
+			@(Model.ViewModel.FirstName)
+			@(Model.ViewModel.LastName)
+		</h3>
 
-		<dtat-readonly-input asp-for="ViewModel.RoleTitle" />
-
-		<dtat-readonly-input asp-for="ViewModel.CellPhoneNumber" dir="ltr" />
-
-		<dtat-readonly-input asp-for="ViewModel.EmailAddress" dir="ltr" />
-
-		<dtat-readonly-input asp-for="ViewModel.Hits" dir="ltr" />
-
-		<dtat-readonly-input asp-for="ViewModel.InsertDateTime" />
-
-		<dtat-readonly-input asp-for="ViewModel.UpdateDateTime" />
+		<h5 class="mt-5">
+			@(Resources.DataDictionary.PersonalInformation)
+		</h5>
 
 		<hr />
 
-		@(Html.Raw(Model.ViewModel.Description))
+		<div class="row">
+			<div class="col">
+				@(Resources.DataDictionary.Gender): @(Model.ViewModel.GenderTitle)
+			</div>
+		</div>
 
-	</fieldset>
+		<div class="row mt-3">
+			<div class="col">
+				@(Resources.DataDictionary.FirstName): @(Model.ViewModel.FirstName)
+			</div>
+		</div>
 
-</section-form>
+		<div class="row mt-3">
+			<div class="col">
+				@(Resources.DataDictionary.LastName): @(Model.ViewModel.LastName)
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col">
+				@(Resources.DataDictionary.EmailAddress)
+
+				@if (Model.ViewModel.IsEmailAddressVerified)
+				{
+					<text>(</text>
+
+					@(Resources.DataDictionary.IsVerified)
+
+					<text>)</text>
+				}
+
+				<br />
+				<div class="mt-1" dir="ltr">
+					<a href="mailto:@(Model.ViewModel.EmailAddress)">
+						<i class="bi bi-envelope-at"></i>
+						@(Model.ViewModel.EmailAddress)
+					</a>
+				</div>
+			</div>
+		</div>
+
+		@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.CellPhoneNumber) == false)
+		{
+			<div class="row mt-3">
+				<div class="col">
+					@(Resources.DataDictionary.CellPhoneNumber)
+
+					@if (Model.ViewModel.IsCellPhoneNumberVerified)
+					{
+						<text>(</text>
+
+						@(Resources.DataDictionary.IsVerified)
+
+						<text>)</text>
+					}
+
+					<br />
+					<div class="mt-1" dir="ltr">
+						<a href="tel:@(Model.ViewModel.CellPhoneNumber)">
+							<i class="bi bi-phone-vibrate"></i>
+							@(Model.ViewModel.CellPhoneNumber)
+						</a>
+					</div>
+				</div>
+			</div>
+		}
+
+		<h5 class="mt-5">
+			@(Resources.DataDictionary.UserInformation)
+		</h5>
+
+		<hr />
+
+		@if (Model.ViewModel.Score > 0)
+		{
+			<div class="row mb-3">
+				<div class="col">
+					@(Resources.DataDictionary.Score):
+					@(Html.DtatDisplayInteger(value: Model.ViewModel.Score))
+				</div>
+			</div>
+		}
+
+		<div class="row">
+			<div class="col">
+				@(Resources.DataDictionary.Hits):
+				@(Html.DtatDisplayInteger(value: Model.ViewModel.Hits))
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col">
+				@(Resources.DataDictionary.Role): @(Model.ViewModel.RoleTitle)
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col">
+				@(Resources.DataDictionary.RegisterDate):
+				@(Html.DtatDisplayDateOffset(value: Model.ViewModel.InsertDateTime))
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="col">
+				@(Resources.DataDictionary.UpdateProfileDate):
+				@(Html.DtatDisplayDateOffset(value: Model.ViewModel.UpdateDateTime))
+			</div>
+		</div>
+
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+
+	</div>
+
+	<div class="col-md-9 bg-light">
+
+		@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.Description) == false)
+		{
+			<h3>
+				@(Resources.DataDictionary.AboutMe)
+			</h3>
+
+			<hr />
+
+			@(Html.Raw(Model.ViewModel.Description))
+		}
+
+	</div>
+</div>

@@ -111,16 +111,6 @@ public class User :
 	public bool IsActive { get; set; }
 	#endregion /public bool IsActive { get; set; }
 
-	#region public bool IsVerified { get; set; }
-	/// <summary>
-	/// وضعیت
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.IsVerified))]
-	public bool IsVerified { get; set; }
-	#endregion /public bool IsVerified { get; set; }
-
 	#region public bool IsFeatured { get; set; }
 	/// <summary>
 	/// ویژه بودن کاربر
@@ -140,6 +130,16 @@ public class User :
 		Name = nameof(Resources.DataDictionary.IsTestData))]
 	public bool IsTestData { get; set; }
 	#endregion /public bool IsTestData { get; set; }
+
+	#region public bool IsVerified { get; set; }
+	/// <summary>
+	/// وضعیت
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsVerified))]
+	public bool IsVerified { get; set; }
+	#endregion /public bool IsVerified { get; set; }
 
 	#region public bool IsUndeletable { get; set; }
 	/// <summary>
@@ -171,16 +171,6 @@ public class User :
 	public bool IsDeleted { get; private set; }
 	#endregion /public bool IsDeleted { get; private set; }
 
-	#region public bool IsNationalCodeVerified { get; set; }
-	/// <summary>
-	/// آیا کد ملی تایید شده است یا خیر؟
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.IsNationalCodeVerified))]
-	public bool IsNationalCodeVerified { get; set; }
-	#endregion /public bool IsNationalCodeVerified { get; set; }
-
 	#region public bool IsEmailAddressVerified { get; set; }
 	/// <summary>
 	/// نشانی پست الکترونیکی تایید شده است
@@ -190,6 +180,16 @@ public class User :
 		Name = nameof(Resources.DataDictionary.IsEmailAddressVerified))]
 	public bool IsEmailAddressVerified { get; set; }
 	#endregion /public bool IsEmailAddressVerified { get; set; }
+
+	#region public bool IsNationalCodeVerified { get; set; }
+	/// <summary>
+	/// آیا کد ملی تایید شده است یا خیر؟
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsNationalCodeVerified))]
+	public bool IsNationalCodeVerified { get; set; }
+	#endregion /public bool IsNationalCodeVerified { get; set; }
 
 	#region public bool IsVisibleInContactUsPage { get; set; }
 	/// <summary>

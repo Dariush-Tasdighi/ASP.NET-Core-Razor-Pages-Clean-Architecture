@@ -86,14 +86,16 @@ public class ProfileModel :
 			DatabaseContext.LocalizedUsers
 
 			.Include(current => current.User)
-			.ThenInclude(user => user!.Role)
-			.ThenInclude(role => role!.LocalizedRoles)
+				.ThenInclude(user => user!.Gender)
+					.ThenInclude(gender => gender!.LocalizedGenders)
 
-			.Where(current => current.Culture != null
-				&& current.Culture.Id == foundedCulture.Id)
+			.Include(current => current.User)
+				.ThenInclude(user => user!.Role)
+					.ThenInclude(role => role!.LocalizedRoles)
 
-			.Where(current => current.User != null
-				&& current.User.Username != null
+			.Where(current => current.CultureId == foundedCulture.Id)
+
+			.Where(current => current.User!.Username != null
 				&& current.User.Username.ToLower() == username.ToLower())
 
 			.FirstOrDefaultAsync();
@@ -121,6 +123,12 @@ public class ProfileModel :
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
+
+		if (foundedLocalizedUser.User.IsEmailAddressVerified == false)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.NotFound);
+		}
 		// **************************************************
 
 		// **************************************************
@@ -129,16 +137,44 @@ public class ProfileModel :
 		await DatabaseContext.SaveChangesAsync();
 		// **************************************************
 
-		var roleTitle =
+		// **************************************************
+		string? roleTitle = null;
+
+		var role =
 			foundedLocalizedUser.User?.Role?.LocalizedRoles
 			.Where(current => current.CultureId == foundedCulture.Id)
-			.FirstOrDefault()?.Title;
+			.FirstOrDefault();
+
+		if (role is not null)
+		{
+			roleTitle = role.Title;
+		}
+		// **************************************************
+
+		// **************************************************
+		string? genderTitle = null;
+		string? genderPrefix = null;
+
+		var gender =
+			foundedLocalizedUser.User?.Gender?.LocalizedGenders
+			.Where(current => current.CultureId == foundedCulture.Id)
+			.FirstOrDefault();
+
+		if (gender is not null)
+		{
+			genderTitle = gender.Title;
+			genderPrefix = gender.Prefix;
+		}
+		// **************************************************
 
 		// **************************************************
 		ViewModel =
 			new ViewModels.Pages.Features.Identity.ProfileViewModel
 			{
 				RoleTitle = roleTitle,
+				GenderTitle = genderTitle,
+				GenderPrefix = genderPrefix,
+
 				Hits = foundedLocalizedUser.Hits,
 				LastName = foundedLocalizedUser.LastName,
 				FirstName = foundedLocalizedUser.FirstName,
@@ -147,8 +183,15 @@ public class ProfileModel :
 				InsertDateTime = foundedLocalizedUser.InsertDateTime,
 				UpdateDateTime = foundedLocalizedUser.UpdateDateTime,
 
+				Score = foundedLocalizedUser.User!.Score,
+				ImageUrl = foundedLocalizedUser.User!.ImageUrl,
+				IsFeatured = foundedLocalizedUser.User!.IsFeatured,
+				IsVerified = foundedLocalizedUser.User!.IsVerified,
 				EmailAddress = foundedLocalizedUser.User!.EmailAddress,
+				WideImageUrl = foundedLocalizedUser.User!?.WideImageUrl,
 				CellPhoneNumber = foundedLocalizedUser.User!.CellPhoneNumber,
+				IsEmailAddressVerified = foundedLocalizedUser.User!.IsEmailAddressVerified,
+				IsCellPhoneNumberVerified = foundedLocalizedUser.User!.IsCellPhoneNumberVerified,
 			};
 		// **************************************************
 

@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About Me.
+        /// </summary>
+        public static string AboutMe {
+            get {
+                return ResourceManager.GetString("AboutMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action.
         /// </summary>
         public static string Action {
@@ -1312,6 +1321,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Personal Information.
+        /// </summary>
+        public static string PersonalInformation {
+            get {
+                return ResourceManager.GetString("PersonalInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Post.
         /// </summary>
         public static string Post {
@@ -1402,11 +1420,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register Time.
+        ///   Looks up a localized string similar to Register Date.
         /// </summary>
-        public static string RegisterDateTime {
+        public static string RegisterDate {
             get {
-                return ResourceManager.GetString("RegisterDateTime", resourceCulture);
+                return ResourceManager.GetString("RegisterDate", resourceCulture);
             }
         }
         
@@ -1690,11 +1708,11 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Profile Time.
+        ///   Looks up a localized string similar to Update Profile Date.
         /// </summary>
-        public static string UpdateProfileDateTime {
+        public static string UpdateProfileDate {
             get {
-                return ResourceManager.GetString("UpdateProfileDateTime", resourceCulture);
+                return ResourceManager.GetString("UpdateProfileDate", resourceCulture);
             }
         }
         
@@ -1731,6 +1749,15 @@ namespace Resources {
         public static string UserFullName {
             get {
                 return ResourceManager.GetString("UserFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Information.
+        /// </summary>
+        public static string UserInformation {
+            get {
+                return ResourceManager.GetString("UserInformation", resourceCulture);
             }
         }
         

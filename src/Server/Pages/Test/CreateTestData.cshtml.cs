@@ -629,8 +629,8 @@ public class CreateTestDataModel :
 
 	private void CreatePostImagesAsync()
 	{
-		var width = 915;
-		var height = 580;
+		var width = 1200;
+		var height = 630;
 
 		var path =
 			$"{HostEnvironment.ContentRootPath}\\wwwroot\\images\\predefined_posts";
@@ -691,8 +691,8 @@ public class CreateTestDataModel :
 
 	private void CreateSlideImagesAsync()
 	{
-		var width = 2880;
-		var height = 600;
+		var width = 1920;
+		var height = 400;
 
 		var path =
 			$"{HostEnvironment.ContentRootPath}\\wwwroot\\images\\predefined_slides";

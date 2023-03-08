@@ -42,17 +42,9 @@
 		.Take(count: Model.ViewModel.MaxDisplayPostCount)
 
 		.ToList();
-
-	if (posts.Count == 0)
-	{
-		return;
-	}
-
-	var currentUICultureName = Domain.Features
-		.Common.CultureEnumHelper.GetCurrentUICultureName();
 }
 
-@if(string.IsNullOrWhiteSpace(value: Model.ViewModel.WideImageUrl) == false)
+@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.WideImageUrl) == false)
 {
 	<div class="row mb-3">
 		<div class="col">
@@ -68,6 +60,16 @@
 			@(Html.Raw(Model.ViewModel.Body))
 		</div>
 	</div>
+}
+
+@{
+	if (posts.Count == 0)
+	{
+		return;
+	}
+
+	var currentUICultureName = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureName();
 }
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">

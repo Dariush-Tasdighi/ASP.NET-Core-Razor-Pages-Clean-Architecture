@@ -21,6 +21,7 @@
 		.Where(current => current.User!.IsActive)
 		.Where(current => current.User!.IsProfilePublic)
 		.Where(current => current.User!.IsDeleted == false)
+		.Where(current => current.User!.IsEmailAddressVerified)
 		.Where(current => string.IsNullOrWhiteSpace(current.User!.Username) == false)
 		//.Where(current => string.IsNullOrWhiteSpace(current.User!.ImageUrl) == false)
 
@@ -77,7 +78,7 @@
 
 		<div class="col">
 			<div class="card @(textBackground) h-100">
-				@if(string.IsNullOrWhiteSpace(value: item.ImageUrl) == false)
+				@if (string.IsNullOrWhiteSpace(value: item.ImageUrl) == false)
 				{
 					<img src="@(item.ImageUrl)" class="card-img-top" alt="@(displayName)">
 				}

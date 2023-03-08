@@ -657,11 +657,11 @@
   <data name="UserRoleTitle" xml:space="preserve">
     <value>User Role Title</value>
   </data>
-  <data name="RegisterDateTime" xml:space="preserve">
-    <value>Register Time</value>
+  <data name="RegisterDate" xml:space="preserve">
+    <value>Register Date</value>
   </data>
-  <data name="UpdateProfileDateTime" xml:space="preserve">
-    <value>Update Profile Time</value>
+  <data name="UpdateProfileDate" xml:space="preserve">
+    <value>Update Profile Date</value>
   </data>
   <data name="Data" xml:space="preserve">
     <value>Data</value>
@@ -707,5 +707,14 @@
   </data>
   <data name="Return" xml:space="preserve">
     <value>Return</value>
+  </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>Personal Information</value>
+  </data>
+  <data name="AboutMe" xml:space="preserve">
+    <value>About Me</value>
+  </data>
+  <data name="UserInformation" xml:space="preserve">
+    <value>User Information</value>
   </data>
 </root>

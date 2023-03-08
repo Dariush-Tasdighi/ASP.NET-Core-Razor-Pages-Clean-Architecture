@@ -690,11 +690,11 @@
   <data name="UserRoleTitle" xml:space="preserve">
     <value>نقش کاربر در سامانه</value>
   </data>
-  <data name="RegisterDateTime" xml:space="preserve">
-    <value>زمان ثبت‌نام</value>
+  <data name="RegisterDate" xml:space="preserve">
+    <value>تاریخ ثبت‌نام</value>
   </data>
-  <data name="UpdateProfileDateTime" xml:space="preserve">
-    <value>زمان ویرایش مشخصات</value>
+  <data name="UpdateProfileDate" xml:space="preserve">
+    <value>تاریخ ویرایش اطلاعات</value>
   </data>
   <data name="Data" xml:space="preserve">
     <value>Data</value>
@@ -740,5 +740,14 @@
   </data>
   <data name="Return" xml:space="preserve">
     <value>بازگشت</value>
+  </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>اطلاعات فردی</value>
+  </data>
+  <data name="AboutMe" xml:space="preserve">
+    <value>درباره من</value>
+  </data>
+  <data name="UserInformation" xml:space="preserve">
+    <value>اطلاعات کاربری</value>
   </data>
 </root>

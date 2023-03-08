@@ -196,6 +196,25 @@ public static class HtmlHelpers : object
 		return html.Raw(value: result);
 	}
 
+	public static Microsoft.AspNetCore.Html.IHtmlContent DtatDisplayDateOffset
+		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, System.DateTimeOffset? value)
+	{
+		if (value is null)
+		{
+			return html.Raw
+				(value: Constants.Format.NullValue);
+		}
+
+		var result =
+			value.Value.ToString
+			(format: Constants.Format.Date);
+
+		result =
+			result.ConvertDigitsToUnicode();
+
+		return html.Raw(value: result);
+	}
+
 	public static Microsoft.AspNetCore.Html.IHtmlContent DtatDisplayDateTimeOffset
 		(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper html, System.DateTimeOffset? value)
 	{
