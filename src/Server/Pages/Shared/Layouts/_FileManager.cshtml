@@ -18,6 +18,8 @@
 <html lang="@(currentCultureName)" dir="@(dir)">
 
 <head>
+	<partial name="PartialViews/_Seo" />
+
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -29,10 +31,8 @@
 <body>
 	<partial name="PartialViews/_DisplayToastMessages" />
 
-	<div class="container">
-		<partial name="PartialViews/Navbars/_NavbarMain" />
-		<partial name="PartialViews/Navbars/_NavbarAuthorized" />
-	</div>
+	<partial name="PartialViews/Navbars/_NavbarMain" />
+	<partial name="PartialViews/Navbars/_NavbarAuthorized" />
 
 	<main class="mt-3 mb-5 pb-5">
 		<div class="container" dir="ltr">

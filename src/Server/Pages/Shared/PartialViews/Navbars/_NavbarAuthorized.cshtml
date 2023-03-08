@@ -15,34 +15,34 @@
 	}
 }
 
-<header>
+<div class="container">
+	<header>
+		<nav class="navbar navbar-expand-md bg-light border-bottom pt-0 pb-0">
 
-	<nav class="navbar navbar-expand-md bg-light border-bottom pt-0 pb-0">
+			<div class="container">
 
-		<div class="container">
+				<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarAuthorized" aria-controls="navbarAuthorized" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarAuthorized" aria-controls="navbarAuthorized" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<div class="collapse navbar-collapse" id="navbarAuthorized">
 
-			<div class="collapse navbar-collapse" id="navbarAuthorized">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<partial name="/Pages/Features/Identity/PartialViews/_Navbar.cshtml" />
 
-					<partial name="/Pages/Features/Identity/PartialViews/_Navbar.cshtml" />
+						<partial name="/Pages/Features/Common/PartialViews/_Navbar.cshtml" />
 
-					<partial name="/Pages/Features/Common/PartialViews/_Navbar.cshtml" />
+						<partial name="/Pages/Features/Identity/PartialViews/_NavbarAdmin.cshtml" />
 
-					<partial name="/Pages/Features/Identity/PartialViews/_NavbarAdmin.cshtml" />
+						<partial name="/Pages/Features/Cms/PartialViews/_Navbar.cshtml" />
 
-					<partial name="/Pages/Features/Cms/PartialViews/_Navbar.cshtml" />
+					</ul>
 
-				</ul>
+				</div>
 
 			</div>
 
-		</div>
-
-	</nav>
-
-</header>
+		</nav>
+	</header>
+</div>

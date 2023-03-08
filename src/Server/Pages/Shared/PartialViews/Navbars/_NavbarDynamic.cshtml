@@ -28,115 +28,115 @@
 	}
 }
 
-<header>
+<div class="container">
+	<header>
+		<nav class="navbar navbar-expand-md bg-light border-bottom pt-0 pb-0">
 
-	<nav class="navbar navbar-expand-md bg-light border-bottom pt-0 pb-0">
+			<div class="container">
 
-		<div class="container">
+				<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarDynamic" aria-controls="navbarDynamic" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 
-			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarDynamic" aria-controls="navbarDynamic" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+				<div class="collapse navbar-collapse" id="navbarDynamic">
 
-			<div class="collapse navbar-collapse" id="navbarDynamic">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-					@foreach (var menuItem in menuItems)
-					{
-						if (menuItem.IsDisabled)
+						@foreach (var menuItem in menuItems)
 						{
-							<li class="nav-item">
-								<a class="nav-link disabled">
-									@(Html.Raw(value: menuItem.Title))
-								</a>
-							</li>
-
-							continue;
-						}
-
-						if (menuItem.Children.Count == 0)
-						{
-							var target = "_self";
-							if (menuItem.OpenUrlInNewWindow)
+							if (menuItem.IsDisabled)
 							{
-								target = "_blank";
+								<li class="nav-item">
+									<a class="nav-link disabled">
+										@(Html.Raw(value: menuItem.Title))
+									</a>
+								</li>
+
+								continue;
 							}
 
-							<li class="nav-item">
-								<a href="@(menuItem.NavigationUrl)" class="nav-link" target="@(target)">
+							if (menuItem.Children.Count == 0)
+							{
+								var target = "_self";
+								if (menuItem.OpenUrlInNewWindow)
+								{
+									target = "_blank";
+								}
+
+								<li class="nav-item">
+									<a href="@(menuItem.NavigationUrl)" class="nav-link" target="@(target)">
+										@(Html.Raw(value: menuItem.Title))
+									</a>
+								</li>
+
+								continue;
+							}
+
+							<li class="nav-item dropdown">
+
+								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									@(Html.Raw(value: menuItem.Title))
 								</a>
-							</li>
 
-							continue;
-						}
+								<ul class="dropdown-menu mt-0">
 
-						<li class="nav-item dropdown">
+									@{
+										var children =
+										menuItem.Children
+										.Where(current => current.IsVisible)
+										.OrderBy(current => current.Ordering)
+										.ThenBy(current => current.Title)
+										.ToList()
+										;
 
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								@(Html.Raw(value: menuItem.Title))
-							</a>
-
-							<ul class="dropdown-menu mt-0">
-
-								@{
-									var children =
-									menuItem.Children
-									.Where(current => current.IsVisible)
-									.OrderBy(current => current.Ordering)
-									.ThenBy(current => current.Title)
-									.ToList()
-									;
-
-									foreach (var subMenuItem in children)
-									{
-										var title =
-										subMenuItem.Title
-										.Replace(oldValue: " ", newValue: string.Empty);
-
-										if (title == "-")
+										foreach (var subMenuItem in children)
 										{
-											<li><hr class="dropdown-divider" /></li>
+											var title =
+											subMenuItem.Title
+											.Replace(oldValue: " ", newValue: string.Empty);
 
-											continue;
-										}
+											if (title == "-")
+											{
+												<li><hr class="dropdown-divider" /></li>
 
-										if (subMenuItem.IsDisabled)
-										{
+												continue;
+											}
+
+											if (subMenuItem.IsDisabled)
+											{
+												<li>
+													<a class="dropdown-item disabled">
+														@(Html.Raw(value: subMenuItem.Title))
+													</a>
+												</li>
+
+												continue;
+											}
+
+											var target = "_self";
+											if (subMenuItem.OpenUrlInNewWindow)
+											{
+												target = "_blank";
+											}
+
 											<li>
-												<a class="dropdown-item disabled">
+												<a href="@(subMenuItem.NavigationUrl)" class="dropdown-item" target="@(target)">
 													@(Html.Raw(value: subMenuItem.Title))
 												</a>
 											</li>
-
-											continue;
 										}
-
-										var target = "_self";
-										if (subMenuItem.OpenUrlInNewWindow)
-										{
-											target = "_blank";
-										}
-
-										<li>
-											<a href="@(subMenuItem.NavigationUrl)" class="dropdown-item" target="@(target)">
-												@(Html.Raw(value: subMenuItem.Title))
-											</a>
-										</li>
 									}
-								}
 
-							</ul>
+								</ul>
 
-						</li>
-					}
+							</li>
+						}
 
-				</ul>
+					</ul>
+				</div>
+
 			</div>
 
-		</div>
-
-	</nav>
-
-</header>
+		</nav>
+	</header>
+</div>

@@ -40,11 +40,12 @@ public class UpdateModel :
 			{
 				Id = current.Id,
 
-				GoogleCode = current.GoogleCode,
 				MasterPassword = current.MasterPassword,
+				GoogleAnalyticsCode = current.GoogleAnalyticsCode,
+				GoogleTagManagerCode = current.GoogleTagManagerCode,
 
-				IsLoginVisible = current.IsLoginVisible,
 				IsSslEnabled = current.IsSslEnabled,
+				IsLoginVisible = current.IsLoginVisible,
 				IsRegistrationEnabled = current.IsRegistrationEnabled,
 
 				FavoriteUserProfileLevel = current.FavoriteUserProfileLevel,
@@ -89,12 +90,13 @@ public class UpdateModel :
 		// **************************************************
 		foundedItem.SetUpdateDateTime();
 
-		foundedItem.GoogleCode = ViewModel.GoogleCode.Fix();
-		foundedItem.MasterPassword = ViewModel.MasterPassword.Fix();
-
 		foundedItem.IsLoginVisible = ViewModel.IsLoginVisible;
 		foundedItem.IsSslEnabled = ViewModel.IsSslEnabled;
 		foundedItem.IsRegistrationEnabled = ViewModel.IsRegistrationEnabled;
+
+		foundedItem.MasterPassword = ViewModel.MasterPassword.Fix();
+		foundedItem.GoogleAnalyticsCode = ViewModel.GoogleAnalyticsCode.Fix();
+		foundedItem.GoogleTagManagerCode = ViewModel.GoogleTagManagerCode.Fix();
 
 		foundedItem.FavoriteUserProfileLevel = ViewModel.FavoriteUserProfileLevel;
 		// **************************************************

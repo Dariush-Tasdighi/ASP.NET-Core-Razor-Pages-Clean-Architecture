@@ -19,105 +19,107 @@
 	}
 }
 
-<div id="carouselHomePage" class="carousel slide carousel-dark carousel-fade" data-bs-ride="carousel">
+<div class="container">
+	<div id="carouselHomePage" class="carousel slide carousel-dark carousel-fade" data-bs-ride="carousel">
 
-	<div class="carousel-indicators">
+		<div class="carousel-indicators">
 
-		@for (var index = 0; index <= slides.Count - 1; index++)
-		{
-			var currentSlide = slides[index];
-
-			if (index == 0)
+			@for (var index = 0; index <= slides.Count - 1; index++)
 			{
-				<button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="@(index)" aria-label="@(currentSlide.Title)" class="active" aria-current="true"></button>
+				var currentSlide = slides[index];
+
+				if (index == 0)
+				{
+					<button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="@(index)" aria-label="@(currentSlide.Title)" class="active" aria-current="true"></button>
+				}
+				else
+				{
+					<button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="@(index)" aria-label="@(currentSlide.Title)"></button>
+				}
 			}
-			else
+
+		</div>
+
+		<div class="carousel-inner">
+
+			@for (var index = 0; index <= slides.Count - 1; index++)
 			{
-				<button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="@(index)" aria-label="@(currentSlide.Title)"></button>
-			}
-		}
+				var currentSlide = slides[index];
 
-	</div>
+				@if (index == 0)
+				{
+					<div class="carousel-item active" data-bs-interval="@(currentSlide.Interval)">
 
-	<div class="carousel-inner">
-
-		@for (var index = 0; index <= slides.Count - 1; index++)
-		{
-			var currentSlide = slides[index];
-
-			@if (index == 0)
-			{
-				<div class="carousel-item active" data-bs-interval="@(currentSlide.Interval)">
-
-					@if (string.IsNullOrWhiteSpace(value: currentSlide.NavigationUrl))
-					{
-						<img src="@(currentSlide.ImageUrl)" class="d-block w-100" alt="@(currentSlide.Title)">
-					}
-					else
-					{
-						var target = "_self";
-
-						@if (currentSlide.OpenUrlInNewWindow)
+						@if (string.IsNullOrWhiteSpace(value: currentSlide.NavigationUrl))
 						{
-							target = "_blank";
+							<img src="@(currentSlide.ImageUrl)" class="d-block w-100" alt="@(currentSlide.Title)">
+						}
+						else
+						{
+							var target = "_self";
+
+							@if (currentSlide.OpenUrlInNewWindow)
+							{
+								target = "_blank";
+							}
+
+							<a href="@(currentSlide.NavigationUrl)" target="@(target)">
+								<img src="@(currentSlide.ImageUrl)" class="d-block w-100" alt="@(currentSlide.Title)">
+							</a>
 						}
 
-						<a href="@(currentSlide.NavigationUrl)" target="@(target)">
-							<img src="@(currentSlide.ImageUrl)" class="d-block w-100" alt="@(currentSlide.Title)">
-						</a>
-					}
-
-					@if (string.IsNullOrWhiteSpace(value: currentSlide.Caption) == false)
-					{
-						<div class="carousel-caption d-none d-md-block">
-							@(Html.Raw(value: currentSlide.Caption))
-						</div>
-					}
-
-				</div>
-			}
-			else
-			{
-				<div class="carousel-item" data-bs-interval="@(currentSlide.Interval)">
-
-					@if (string.IsNullOrWhiteSpace(value: currentSlide.NavigationUrl))
-					{
-						<img src="@(currentSlide.ImageUrl)" class="d-block w-100" alt="@(currentSlide.Title)">
-					}
-					else
-					{
-						var target = "_self";
-
-						@if (currentSlide.OpenUrlInNewWindow)
+						@if (string.IsNullOrWhiteSpace(value: currentSlide.Caption) == false)
 						{
-							target = "_blank";
+							<div class="carousel-caption d-none d-md-block">
+								@(Html.Raw(value: currentSlide.Caption))
+							</div>
 						}
 
-						<a href="@(currentSlide.NavigationUrl)" target="@(target)">
+					</div>
+				}
+				else
+				{
+					<div class="carousel-item" data-bs-interval="@(currentSlide.Interval)">
+
+						@if (string.IsNullOrWhiteSpace(value: currentSlide.NavigationUrl))
+						{
 							<img src="@(currentSlide.ImageUrl)" class="d-block w-100" alt="@(currentSlide.Title)">
-						</a>
-					}
+						}
+						else
+						{
+							var target = "_self";
 
-					@if (string.IsNullOrWhiteSpace(value: currentSlide.Caption) == false)
-					{
-						<div class="carousel-caption d-none d-md-block">
-							@(Html.Raw(value: currentSlide.Caption))
-						</div>
-					}
+							@if (currentSlide.OpenUrlInNewWindow)
+							{
+								target = "_blank";
+							}
 
-				</div>
+							<a href="@(currentSlide.NavigationUrl)" target="@(target)">
+								<img src="@(currentSlide.ImageUrl)" class="d-block w-100" alt="@(currentSlide.Title)">
+							</a>
+						}
+
+						@if (string.IsNullOrWhiteSpace(value: currentSlide.Caption) == false)
+						{
+							<div class="carousel-caption d-none d-md-block">
+								@(Html.Raw(value: currentSlide.Caption))
+							</div>
+						}
+
+					</div>
+				}
 			}
-		}
 
+		</div>
+
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselHomePage" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
 	</div>
-
-	<button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Previous</span>
-	</button>
-
-	<button class="carousel-control-next" type="button" data-bs-target="#carouselHomePage" data-bs-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Next</span>
-	</button>
 </div>

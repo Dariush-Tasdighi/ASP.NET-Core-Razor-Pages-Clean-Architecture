@@ -21,15 +21,6 @@ public class UpdateViewModel : object
 	#endregion /public System.Guid Id { get; set; }
 
 
-	#region public string? GoogleCode { get; set; }
-	/// <summary>
-	/// کد گوگل
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.GoogleCode))]
-	public string? GoogleCode { get; set; }
-	#endregion /public string? GoogleCode { get; set; }
 
 	#region public string? MasterPassword { get; set; }
 	/// <summary>
@@ -40,6 +31,24 @@ public class UpdateViewModel : object
 		Name = nameof(Resources.DataDictionary.MasterPassword))]
 	public string? MasterPassword { get; set; }
 	#endregion /public string? MasterPassword { get; set; }
+
+	#region public string? GoogleAnalyticsCode { get; set; }
+	/// <summary>
+	/// Google Analytics Code
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = "Google Analytics Code")]
+	public string? GoogleAnalyticsCode { get; set; }
+	#endregion /public string? GoogleAnalyticsCode { get; set; }
+
+	#region public string? GoogleTagManagerCode { get; set; }
+	/// <summary>
+	/// Google Tag Manager Code
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(Name = "Google Tag Manager Code")]
+	public string? GoogleTagManagerCode { get; set; }
+	#endregion /public string? GoogleTagManagerCode { get; set; }
 
 
 
