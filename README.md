@@ -10,7 +10,7 @@ In this project:
 - I did not use Identity Server, event Microsoft Identity, I used pure security
 - This project is absolutly multilingual but at the first time I create this project in two languages:
   - English
-  - Farsi (Persion)
+  - Farsi (Persian)
 - This project has two main Features:
   - CMS
   - Identity
