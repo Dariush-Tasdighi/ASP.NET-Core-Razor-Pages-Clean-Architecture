@@ -28,8 +28,6 @@ public class IndexItemViewModel : object
 
 	public int Hits { get; set; }
 
-	public int MaxDisplayPostCount { get; set; }
-
 	public System.DateTimeOffset InsertDateTime { get; set; }
 
 	public System.DateTimeOffset UpdateDateTime { get; set; }

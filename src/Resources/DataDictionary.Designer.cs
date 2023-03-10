@@ -1159,6 +1159,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max Post Count in Home Page.
+        /// </summary>
+        public static string MaxPostCountInHomePage {
+            get {
+                return ResourceManager.GetString("MaxPostCountInHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Post Count in Main Page.
+        /// </summary>
+        public static string MaxPostCountInMainPage {
+            get {
+                return ResourceManager.GetString("MaxPostCountInMainPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MenuItem.
         /// </summary>
         public static string MenuItem {

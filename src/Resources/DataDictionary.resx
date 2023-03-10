@@ -717,4 +717,10 @@
   <data name="UserInformation" xml:space="preserve">
     <value>User Information</value>
   </data>
+  <data name="MaxPostCountInHomePage" xml:space="preserve">
+    <value>Max Post Count in Home Page</value>
+  </data>
+  <data name="MaxPostCountInMainPage" xml:space="preserve">
+    <value>Max Post Count in Main Page</value>
+  </data>
 </root>

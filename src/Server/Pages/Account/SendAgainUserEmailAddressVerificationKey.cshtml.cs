@@ -46,7 +46,7 @@ public class SendAgainUserEmailAddressVerificationKeyModel :
 
 		// **************************************************
 		var userEmailAddress =
-			ViewModel.EmailAddress.ToLower();
+			ViewModel.EmailAddress!.ToLower();
 
 		var foundedUser =
 			await

@@ -24,7 +24,7 @@ public class CategoryViewModel : object
 
 	public int Hits { get; set; }
 	public int PostCount { get; set; }
-	public int MaxDisplayPostCount { get; set; }
+	public int MaxPostCountInMainPage { get; set; }
 
 	#endregion /Properties
 }

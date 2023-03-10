@@ -440,7 +440,7 @@ public static class ModelBuilderExtensions : object
 				CellPhoneNumber = "00989121087461",
 
 				ImageUrl = "/images/dariush.png",
-				CoverImageUrl = "/images/dariush_wide.png",
+				CoverImageUrl = "/images/dariush_cover.png",
 
 				//Password = "1234512345",
 

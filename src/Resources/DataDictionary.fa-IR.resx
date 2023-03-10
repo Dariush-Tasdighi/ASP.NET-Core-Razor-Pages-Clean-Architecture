@@ -750,4 +750,10 @@
   <data name="UserInformation" xml:space="preserve">
     <value>اطلاعات کاربری</value>
   </data>
+  <data name="MaxPostCountInHomePage" xml:space="preserve">
+    <value>حداکثر تعداد مطالب در صفحه خانه</value>
+  </data>
+  <data name="MaxPostCountInMainPage" xml:space="preserve">
+    <value>حداکثر تعداد مطالب در صفحه اصلی</value>
+  </data>
 </root>

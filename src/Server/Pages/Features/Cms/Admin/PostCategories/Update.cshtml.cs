@@ -55,7 +55,8 @@ public class UpdateModel :
 				Description = current.Description,
 				CoverImageUrl = current.CoverImageUrl,
 				DisplayInHomePage = current.DisplayInHomePage,
-				MaxDisplayPostCount = current.MaxDisplayPostCount,
+				MaxPostCountInHomePage = current.MaxPostCountInHomePage,
+				MaxPostCountInMainPage = current.MaxPostCountInMainPage,
 			})
 			.FirstOrDefaultAsync();
 
@@ -180,7 +181,9 @@ public class UpdateModel :
 
 		foundedItem.IsActive = ViewModel.IsActive;
 		foundedItem.DisplayInHomePage = ViewModel.DisplayInHomePage;
-		foundedItem.MaxDisplayPostCount = ViewModel.MaxDisplayPostCount;
+
+		foundedItem.MaxPostCountInHomePage = ViewModel.MaxPostCountInHomePage;
+		foundedItem.MaxPostCountInMainPage = ViewModel.MaxPostCountInMainPage;
 		// **************************************************
 
 		await DatabaseContext.SaveChangesAsync();

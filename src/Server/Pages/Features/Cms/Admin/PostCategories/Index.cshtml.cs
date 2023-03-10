@@ -58,7 +58,6 @@ public class IndexModel :
 				Hits = current.Hits,
 				Ordering = current.Ordering,
 				PostCount = current.Posts.Count,
-				MaxDisplayPostCount = current.MaxDisplayPostCount,
 			})
 			.ToListAsync()
 			;

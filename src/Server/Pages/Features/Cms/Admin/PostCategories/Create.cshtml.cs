@@ -128,7 +128,8 @@ public class CreateModel :
 
 				Hits = ViewModel.Hits,
 				Ordering = ViewModel.Ordering,
-				MaxDisplayPostCount = ViewModel.MaxDisplayPostCount,
+				MaxPostCountInHomePage = ViewModel.MaxPostCountInHomePage,
+				MaxPostCountInMainPage = ViewModel.MaxPostCountInMainPage,
 			};
 
 		await DatabaseContext.AddAsync(entity: newEntity);

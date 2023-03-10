@@ -144,7 +144,7 @@ public class CategoryModel :
 
 				PostCount = postCount,
 				Hits = foundedCategory.Hits,
-				MaxDisplayPostCount = foundedCategory.MaxDisplayPostCount,
+				MaxPostCountInMainPage = foundedCategory.MaxPostCountInMainPage,
 			};
 		// **************************************************
 

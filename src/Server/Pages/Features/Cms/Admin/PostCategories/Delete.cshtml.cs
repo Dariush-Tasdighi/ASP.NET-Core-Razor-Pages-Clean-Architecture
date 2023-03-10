@@ -57,7 +57,8 @@ public class DeleteModel :
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
 				DisplayInHomePage = current.DisplayInHomePage,
-				MaxDisplayPostCount = current.MaxDisplayPostCount,
+				MaxPostCountInHomePage = current.MaxPostCountInHomePage,
+				MaxPostCountInMainPage = current.MaxPostCountInMainPage,
 			})
 			.FirstOrDefaultAsync();
 

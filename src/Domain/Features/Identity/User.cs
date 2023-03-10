@@ -238,6 +238,16 @@ public class User :
 	public int Ordering { get; set; }
 	#endregion /public int Ordering { get; set; }
 
+	#region public int MaxPostCountInProfilePage { get; set; }
+	/// <summary>
+	/// حداکثر تعداد مطالب در صفحه پروفایل کاربر
+	/// </summary>
+	//[System.ComponentModel.DataAnnotations.Display
+	//	(ResourceType = typeof(Resources.DataDictionary),
+	//	Name = nameof(Resources.DataDictionary.MaxPostCountInProfilePage))]
+	public int MaxPostCountInProfilePage { get; set; }
+	#endregion /public int MaxPostCountInProfilePage { get; set; }
+
 
 
 	#region public string? Username { get; set; }

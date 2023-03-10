@@ -6,7 +6,8 @@ public class CreateViewModel : object
 	public CreateViewModel() : base()
 	{
 		Ordering = 10_000;
-		MaxDisplayPostCount = 48;
+		MaxPostCountInHomePage = 12;
+		MaxPostCountInMainPage = 48;
 	}
 	#endregion /Constructor
 
@@ -125,6 +126,16 @@ public class CreateViewModel : object
 
 
 
+	#region public int MaxPostCountInMainPage { get; set; }
+	/// <summary>
+	/// حداکثر تعداد مطالب در صفحه اصلی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.MaxPostCountInMainPage))]
+	public int MaxPostCountInMainPage { get; set; }
+	#endregion /public int MaxPostCountInMainPage { get; set; }
+
 	#region public bool DisplayInHomePage { get; set; }
 	/// <summary>
 	/// نمایش در صفحه اول / خانه
@@ -135,15 +146,17 @@ public class CreateViewModel : object
 	public bool DisplayInHomePage { get; set; }
 	#endregion /public bool DisplayInHomePage { get; set; }
 
-	#region public int MaxDisplayPostCount { get; set; }
+	#region public int MaxPostCountInHomePage { get; set; }
 	/// <summary>
-	/// حداکثر تعداد مطالب در زمان نمایش
+	/// حداکثر تعداد مطالب در صفحه اول سایت / خانه
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.MaxDisplayPostCount))]
-	public int MaxDisplayPostCount { get; set; }
-	#endregion /public int MaxDisplayPostCount { get; set; }
+		Name = nameof(Resources.DataDictionary.MaxPostCountInHomePage))]
+	public int MaxPostCountInHomePage { get; set; }
+	#endregion /public int MaxPostCountInHomePage { get; set; }
+
+
 
 	#region public int Hits { get; set; }
 	/// <summary>
@@ -154,6 +167,8 @@ public class CreateViewModel : object
 		Name = nameof(Resources.DataDictionary.Hits))]
 	public int Hits { get; set; }
 	#endregion /public int Hits { get; set; }
+
+
 
 	#region public string? Body { get; set; }
 	/// <summary>

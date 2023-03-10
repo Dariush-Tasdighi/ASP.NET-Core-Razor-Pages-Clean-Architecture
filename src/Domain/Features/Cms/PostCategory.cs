@@ -15,7 +15,6 @@ public class PostCategory :
 		Title = title;
 
 		Ordering = 10_000;
-		MaxDisplayPostCount = 48;
 
 		UpdateDateTime = InsertDateTime;
 
@@ -46,16 +45,6 @@ public class PostCategory :
 	public bool IsTestData { get; set; }
 	#endregion /public bool IsTestData { get; set; }
 
-	#region public bool DisplayInHomePage { get; set; }
-	/// <summary>
-	/// نمایش در صفحه اول / خانه
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.DisplayInHomePage))]
-	public bool DisplayInHomePage { get; set; }
-	#endregion /public bool DisplayInHomePage { get; set; }
-
 
 
 	#region public int Hits { get; set; }
@@ -83,15 +72,37 @@ public class PostCategory :
 	public int Ordering { get; set; }
 	#endregion /public int Ordering { get; set; }
 
-	#region public int MaxDisplayPostCount { get; set; }
+	#region public int MaxPostCountInMainPage { get; set; }
 	/// <summary>
-	/// حداکثر تعداد مطالب در زمان نمایش
+	/// حداکثر تعداد مطالب در صفحه اصلی
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.MaxDisplayPostCount))]
-	public int MaxDisplayPostCount { get; set; }
-	#endregion /public int MaxDisplayPostCount { get; set; }
+		Name = nameof(Resources.DataDictionary.MaxPostCountInMainPage))]
+	public int MaxPostCountInMainPage { get; set; }
+	#endregion /public int MaxPostCountInMainPage { get; set; }
+
+
+
+	#region public bool DisplayInHomePage { get; set; }
+	/// <summary>
+	/// نمایش در صفحه اول / خانه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.DisplayInHomePage))]
+	public bool DisplayInHomePage { get; set; }
+	#endregion /public bool DisplayInHomePage { get; set; }
+
+	#region public int MaxPostCountInHomePage { get; set; }
+	/// <summary>
+	/// حداکثر تعداد مطالب در صفحه اول سایت / خانه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.MaxPostCountInHomePage))]
+	public int MaxPostCountInHomePage { get; set; }
+	#endregion /public int MaxPostCountInHomePage { get; set; }
 
 
 
@@ -117,16 +128,6 @@ public class PostCategory :
 
 
 
-	#region public string? Body { get; set; }
-	/// <summary>
-	/// متن اصلی
-	/// </summary>
-	[System.ComponentModel.DataAnnotations.Display
-		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.Body))]
-	public string? Body { get; set; }
-	#endregion /public string? Body { get; set; }
-
 	#region public string Name { get; set; }
 	/// <summary>
 	/// نام
@@ -151,6 +152,16 @@ public class PostCategory :
 	ErrorMessageResourceName = nameof(Resources.Messages.Validations.Name))]
 	public string Name { get; set; }
 	#endregion /public string Name { get; set; }
+
+	#region public string? Body { get; set; }
+	/// <summary>
+	/// متن اصلی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Body))]
+	public string? Body { get; set; }
+	#endregion /public string? Body { get; set; }
 
 	#region public string Title { get; set; }
 	/// <summary>
