@@ -34,6 +34,8 @@
 
 			<dtat-full-checkbox asp-for="ViewModel.DoesSearchEnginesFollowIt" />
 
+			<dtat-full-select asp-for="ViewModel.TypeId" asp-items="@(Model.PostTypesSelectList)" />
+
 			<dtat-full-select asp-for="ViewModel.CategoryId" asp-items="@(Model.PostCategoriesSelectList)" />
 
 			<dtat-full-input asp-for="ViewModel.Title" />

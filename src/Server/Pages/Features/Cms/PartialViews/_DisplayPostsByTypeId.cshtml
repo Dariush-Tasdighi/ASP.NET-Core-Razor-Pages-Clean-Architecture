@@ -27,7 +27,7 @@
 	var posts =
 		DatabaseContext.Posts
 
-		.Where(current => current.CategoryId == Model)
+		.Where(current => current.TypeId == Model)
 		.Where(current => current.CultureId == currentCulture.Id)
 
 		.Where(current => current.IsActive)
@@ -62,13 +62,13 @@
 					DisplayAuthor = false,
 					Author = current.Author,
 
-					DisplayTypeLink = true,
-					TypeName = current.Type!.Name,
-					TypeTitle = current.Type!.Title,
+					DisplayTypeLink = false,
+					//TypeName = current.Type!.Name,
+					//TypeTitle = current.Type!.Title,
 
-					DisplayCategoryLink = false,
-					//CategoryName = current.Category!.Name,
-					//CategoryTitle = current.Category!.Title,
+					DisplayCategoryLink = true,
+					CategoryName = current.Category!.Name,
+					CategoryTitle = current.Category!.Title,
 
 					UpdateDateTime = current.UpdateDateTime,
 				})

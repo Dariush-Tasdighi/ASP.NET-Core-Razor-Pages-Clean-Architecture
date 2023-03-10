@@ -725,11 +725,41 @@ public static class ModelBuilderExtensions : object
 		// **************************************************
 
 		// **************************************************
+		var postTypesMenuItemPersian =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: culturePersian.Id, title: "دسته‌بندی‌ها")
+			{
+				Ordering = 9_400,
+				IsVisible = false,
+				IsDisabled = false,
+				NavigationUrl = "/types/fa-ir/",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: postTypesMenuItemPersian);
+		// **************************************************
+
+		// **************************************************
+		var postTypesMenuItemEnglish =
+			new Domain.Features.Cms.MenuItem
+			(cultureId: cultureEnglish.Id, title: "Types")
+			{
+				Ordering = 9_400,
+				IsVisible = false,
+				IsDisabled = false,
+				NavigationUrl = "/types/en-us/",
+			};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.MenuItem>().HasData(data: postTypesMenuItemEnglish);
+		// **************************************************
+
+		// **************************************************
 		var categoriesMenuItemPersian =
 			new Domain.Features.Cms.MenuItem
 			(cultureId: culturePersian.Id, title: "طبقه‌بندی‌ها")
 			{
-				Ordering = 9_400,
+				Ordering = 9_500,
 				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/categories/fa-ir/",
@@ -744,7 +774,7 @@ public static class ModelBuilderExtensions : object
 			new Domain.Features.Cms.MenuItem
 			(cultureId: cultureEnglish.Id, title: "Categories")
 			{
-				Ordering = 9_400,
+				Ordering = 9_500,
 				IsVisible = false,
 				IsDisabled = false,
 				NavigationUrl = "/categories/en-us/",
@@ -754,6 +784,82 @@ public static class ModelBuilderExtensions : object
 			.Cms.MenuItem>().HasData(data: categoriesMenuItemEnglish);
 		// **************************************************
 		// *** /Menu Items **********************************
+		// **************************************************
+
+		// **************************************************
+		// *** Post Types ***********************************
+		// **************************************************
+		var newsPostTypePersian = new Domain.Features.Cms.PostType
+			(cultureId: culturePersian.Id, name: "News", title: "خبر")
+		{
+			IsActive = true,
+
+			Ordering = 9_000,
+			MaxPostCountInHomePage = 12,
+			MaxPostCountInMainPage = 48,
+
+			ImageUrl = "/images/types/news.png",
+			CoverImageUrl = "/images/types/news_cover.png",
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.PostType>().HasData(data: newsPostTypePersian);
+		// **************************************************
+
+		// **************************************************
+		var newsPostTypeEnglish = new Domain.Features.Cms.PostType
+			(cultureId: cultureEnglish.Id, name: "News", title: "News")
+		{
+			IsActive = true,
+
+			Ordering = 9_000,
+			MaxPostCountInHomePage = 12,
+			MaxPostCountInMainPage = 48,
+
+			ImageUrl = "/images/types/news.png",
+			CoverImageUrl = "/images/types/news_cover.png",
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.PostType>().HasData(data: newsPostTypeEnglish);
+		// **************************************************
+
+		// **************************************************
+		var articlePostTypePersian = new Domain.Features.Cms.PostType
+			(cultureId: culturePersian.Id, name: "Article", title: "مقاله")
+		{
+			IsActive = true,
+
+			Ordering = 9_000,
+			MaxPostCountInHomePage = 12,
+			MaxPostCountInMainPage = 48,
+
+			ImageUrl = "/images/types/article.png",
+			CoverImageUrl = "/images/types/article_cover.png",
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.PostType>().HasData(data: articlePostTypePersian);
+		// **************************************************
+
+		// **************************************************
+		var articlePostTypeEnglish = new Domain.Features.Cms.PostType
+			(cultureId: cultureEnglish.Id, name: "Article", title: "Article")
+		{
+			IsActive = true,
+
+			Ordering = 9_000,
+			MaxPostCountInHomePage = 12,
+			MaxPostCountInMainPage = 48,
+
+			ImageUrl = "/images/types/article.png",
+			CoverImageUrl = "/images/types/article_cover.png",
+		};
+
+		modelBuilder.Entity<Domain.Features
+			.Cms.PostType>().HasData(data: articlePostTypeEnglish);
+		// **************************************************
+		// *** /Post Types **********************************
 		// **************************************************
 	}
 }

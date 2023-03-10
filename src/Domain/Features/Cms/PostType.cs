@@ -1,6 +1,6 @@
 ﻿namespace Domain.Features.Cms;
 
-public class PostCategory :
+public class PostType :
 	Seedwork.LocalizedEntity,
 	Dtat.Seedwork.Abstractions.IEntityHasIsActive,
 	Dtat.Seedwork.Abstractions.IEntityHasOrdering,
@@ -8,7 +8,7 @@ public class PostCategory :
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public PostCategory
+	public PostType
 		(System.Guid cultureId, string name, string title) : base(cultureId: cultureId)
 	{
 		Name = name;

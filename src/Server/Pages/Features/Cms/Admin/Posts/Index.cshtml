@@ -37,6 +37,9 @@
 				<th>
 				</th>
 				<th>
+					@(Resources.DataDictionary.PostType)
+				</th>
+				<th>
 					@(Resources.DataDictionary.Category)
 				</th>
 				<th>
@@ -94,6 +97,8 @@
 							@(Html.DtatGetIconDelete())
 						</a>
 					</table-actions>
+
+					@(Html.DtatDisplayStringWithTd(value: item.TypeName))
 
 					@(Html.DtatDisplayStringWithTd(value: item.CategoryName))
 

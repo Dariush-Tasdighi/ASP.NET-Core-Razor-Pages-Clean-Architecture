@@ -23,6 +23,7 @@ public class UpdateModel :
 	[Microsoft.AspNetCore.Mvc.BindProperty]
 	public ViewModels.Pages.Features.Cms.Admin.Posts.UpdateViewModel ViewModel { get; set; }
 
+	public Microsoft.AspNetCore.Mvc.Rendering.SelectList? PostTypesSelectList { get; set; }
 	public Microsoft.AspNetCore.Mvc.Rendering.SelectList? PostCategoriesSelectList { get; set; }
 
 	#endregion /Properties
@@ -46,21 +47,27 @@ public class UpdateModel :
 			.Select(current => new ViewModels.Pages.Features.Cms.Admin.Posts.UpdateViewModel()
 			{
 				Id = current.Id,
-				Body = current.Body,
+
+				TypeId = current.TypeId,
+				CategoryId = current.CategoryId,
+
 				Hits = current.Hits,
 				Score = current.Score,
+				Ordering = current.Ordering,
+
+				Body = current.Body,
 				Title = current.Title,
 				Author = current.Author,
-				IsDraft = current.IsDraft,
 				ImageUrl = current.ImageUrl,
-				IsActive = current.IsActive,
-				Ordering = current.Ordering,
-				IsDeleted = current.IsDeleted,
-				CategoryId = current.CategoryId,
-				IsFeatured = current.IsFeatured,
 				Description = current.Description,
 				Introduction = current.Introduction,
+				CoverImageUrl = current.CoverImageUrl,
 				AdminDescription = current.AdminDescription,
+
+				IsDraft = current.IsDraft,
+				IsActive = current.IsActive,
+				IsDeleted = current.IsDeleted,
+				IsFeatured = current.IsFeatured,
 				IsCommentingEnabled = current.IsCommentingEnabled,
 				DoesSearchEnginesIndexIt = current.DoesSearchEnginesIndexIt,
 				DoesSearchEnginesFollowIt = current.DoesSearchEnginesFollowIt,

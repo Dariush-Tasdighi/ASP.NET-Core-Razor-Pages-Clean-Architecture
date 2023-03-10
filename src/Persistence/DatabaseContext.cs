@@ -23,6 +23,7 @@ public class DatabaseContext :
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Cms.Post> Posts { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Cms.Slide> Slides { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Cms.Layout> Layouts { get; set; }
+	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Cms.PostType> PostTypes { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Cms.MenuItem> MenuItems { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Cms.PostComment> PostComments { get; set; }
 	public Microsoft.EntityFrameworkCore.DbSet<Domain.Features.Cms.PostCategory> PostCategories { get; set; }

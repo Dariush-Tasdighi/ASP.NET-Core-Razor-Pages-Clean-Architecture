@@ -93,6 +93,21 @@ public class CreateViewModel : object
 
 
 
+	#region public System.Guid TypeId { get; set; }
+	/// <summary>
+	/// دسته‌بندی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.PostType))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid TypeId { get; set; }
+	#endregion /public System.Guid TypeId { get; set; }
+
 	#region public System.Guid CategoryId { get; set; }
 	/// <summary>
 	/// طبقه‌بندی

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Server.Pages.Features.Cms;
 
-public class CategoriesModel :
+public class TypesModel :
 	Infrastructure.BasePageModelWithDatabaseContext
 {
 	#region Constructor
-	public CategoriesModel
+	public TypesModel
 		(Persistence.DatabaseContext databaseContext) :
 		base(databaseContext: databaseContext)
 	{

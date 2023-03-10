@@ -1402,6 +1402,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string PostType {
+            get {
+                return ResourceManager.GetString("PostType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Types.
+        /// </summary>
+        public static string PostTypes {
+            get {
+                return ResourceManager.GetString("PostTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prefix.
         /// </summary>
         public static string Prefix {

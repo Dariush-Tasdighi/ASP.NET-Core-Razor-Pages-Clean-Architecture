@@ -23,6 +23,7 @@ public class CreateModel :
 	[Microsoft.AspNetCore.Mvc.BindProperty]
 	public ViewModels.Pages.Features.Cms.Admin.Posts.CreateViewModel ViewModel { get; set; }
 
+	public Microsoft.AspNetCore.Mvc.Rendering.SelectList? PostTypesSelectList { get; set; }
 	public Microsoft.AspNetCore.Mvc.Rendering.SelectList? PostCategoriesSelectList { get; set; }
 
 	#endregion /Properties
@@ -32,6 +33,11 @@ public class CreateModel :
 	#region OnGetAsync()
 	public async System.Threading.Tasks.Task OnGetAsync()
 	{
+		PostTypesSelectList =
+			await
+			Infrastructure.SelectLists.GetPostTypesAsync
+			(databaseContext: DatabaseContext, selectedValue: null);
+
 		PostCategoriesSelectList =
 			await
 			Infrastructure.SelectLists.GetPostCategoriesAsync
@@ -47,10 +53,15 @@ public class CreateModel :
 	{
 		if (ModelState.IsValid == false)
 		{
+			PostTypesSelectList =
+				await
+				Infrastructure.SelectLists.GetPostTypesAsync
+				(databaseContext: DatabaseContext, selectedValue: ViewModel.TypeId);
+
 			PostCategoriesSelectList =
 				await
 				Infrastructure.SelectLists.GetPostCategoriesAsync
-				(databaseContext: DatabaseContext, selectedValue: null);
+				(databaseContext: DatabaseContext, selectedValue: ViewModel.CategoryId);
 
 			return Page();
 		}
@@ -99,8 +110,8 @@ public class CreateModel :
 
 		// **************************************************
 		var newEntity =
-			new Domain.Features.Cms.Post(cultureId: currentCulture.Id,
-			userId: currentUser.Id, ViewModel.CategoryId, title: ViewModel.Title.Fix()!)
+			new Domain.Features.Cms.Post(cultureId: currentCulture.Id, userId: currentUser.Id,
+			typeId: ViewModel.TypeId, ViewModel.CategoryId, title: ViewModel.Title.Fix()!)
 			{
 				Hits = ViewModel.Hits,
 				Score = ViewModel.Score,

@@ -29,7 +29,7 @@ public class CreateTestDataModel :
 
 	#region Methods
 
-	private int GetRandomNumber()
+	private int GetRandomColorNumber()
 	{
 		var byteArray =
 			System.Guid.NewGuid().ToByteArray();
@@ -37,12 +37,49 @@ public class CreateTestDataModel :
 		var seed = System.BitConverter
 			.ToInt32(value: byteArray, startIndex: 0);
 
-		var random = new System.Random(Seed: seed);
+		var random =
+			new System.Random(Seed: seed);
 
 		var value = random.Next
 			(minValue: 0, ColorService.Colors.Count);
 
 		return value;
+	}
+
+	private Domain.Features.Cms.PostType GetRandomPostType
+		(System.Collections.Generic.IList<Domain.Features.Cms.PostType> list)
+	{
+		var byteArray =
+			System.Guid.NewGuid().ToByteArray();
+
+		var seed = System.BitConverter
+			.ToInt32(value: byteArray, startIndex: 0);
+
+		var random =
+			new System.Random(Seed: seed);
+
+		var value = random.Next
+			(minValue: 0, maxValue: list.Count);
+
+		return list[value];
+	}
+
+	private Domain.Features.Cms.PostCategory GetRandomPostCategory
+		(System.Collections.Generic.IList<Domain.Features.Cms.PostCategory> list)
+	{
+		var byteArray =
+			System.Guid.NewGuid().ToByteArray();
+
+		var seed = System.BitConverter
+			.ToInt32(value: byteArray, startIndex: 0);
+
+		var random =
+			new System.Random(Seed: seed);
+
+		var value = random.Next
+			(minValue: 0, maxValue: list.Count);
+
+		return list[value];
 	}
 
 	public async System.Threading.Tasks.Task OnGet()
@@ -98,8 +135,8 @@ public class CreateTestDataModel :
 		await CreatePersianMenuItemsAsync();
 		await CreateEnglishMenuItemsAsync();
 
-		await CreatePersianPostCategoriesAsync();
-		await CreateEnglishPostCategoriesAsync();
+		await CreatePersianPostsAsync();
+		await CreateEnglishPostsAsync();
 	}
 
 	private async System.Threading.Tasks.Task CreatePersianSlidesAsync()
@@ -133,7 +170,7 @@ public class CreateTestDataModel :
 				$"<h1>{slideCaptionTemplate} {slideIndexString}</h1>";
 
 			var imageUrl =
-				$"/images/predefined_slides/slide_{GetRandomNumber()}.png";
+				$"/images/predefined_slides/slide_{GetRandomColorNumber()}.png";
 
 			var slide =
 				new Domain.Features.Cms.Slide
@@ -184,7 +221,7 @@ public class CreateTestDataModel :
 				$"<h1>{slideCaptionTemplate} {slideIndexString}</h1>";
 
 			var imageUrl =
-				$"/images/predefined_slides/slide_{GetRandomNumber()}.png";
+				$"/images/predefined_slides/slide_{GetRandomColorNumber()}.png";
 
 			var slide =
 				new Domain.Features.Cms.Slide
@@ -348,45 +385,60 @@ public class CreateTestDataModel :
 		await DatabaseContext.SaveChangesAsync();
 	}
 
-	private async System.Threading.Tasks.Task CreatePersianPostCategoriesAsync()
+	private async System.Threading.Tasks.Task CreatePersianPostsAsync()
 	{
-		var maxPostCategories = 12;
-		var maxPostsPerPostCategory = 24;
-
-		var persianCulture =
+		// **************************************************
+		var culture =
 			await
 			DatabaseContext.Cultures
 			.Where(current => current.CultureName.ToLower() == "fa-ir")
 			.FirstOrDefaultAsync();
 
-		if (persianCulture == null)
+		if (culture == null)
 		{
 			return;
 		}
+		// **************************************************
 
-		var dariushUser =
+		// **************************************************
+		var user =
 			await
 			DatabaseContext.Users
 			.Where(current => current.EmailAddress.ToLower() == "DariushT@GMail.com".ToLower())
 			.FirstOrDefaultAsync();
 
-		if (dariushUser == null)
+		if (user == null)
 		{
 			return;
 		}
+		// **************************************************
+
+		// **************************************************
+		var postCount = 300;
+		var postTypeCount = 3;
+		var postCategoryCount = 12;
 
 		var postTitleTemplate = "عنوان مطلب";
 		var postDescriptionTemplate = "توضیحات مطلب";
 
+		var postTypeNameTemplate = "Type";
+		var postTypeTitleTemplate = "عنوان دسته‌بندی";
+		var postTypeDescriptionTemplate = "توضیحات دسته‌بندی";
+
 		var postCategoryNameTemplate = "Category";
 		var postCategoryTitleTemplate = "عنوان طبقه‌بندی";
 		var postCategoryDescriptionTemplate = "توضیحات طبقه‌بندی";
+		// **************************************************
 
-		for (var postCategoryIndex = 1; postCategoryIndex <= maxPostCategories; postCategoryIndex++)
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		for (var postCategoryIndex = 1; postCategoryIndex <= postCategoryCount; postCategoryIndex++)
 		{
 			var postCategoryIndexString =
 				postCategoryIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+
 				.ConvertDigitsToUnicode();
 
 			var postCategoryName =
@@ -400,7 +452,7 @@ public class CreateTestDataModel :
 
 			var postCategory =
 				new Domain.Features.Cms.PostCategory
-				(cultureId: persianCulture.Id,
+				(cultureId: culture.Id,
 				name: postCategoryName, title: postCategoryTitle)
 				{
 					IsTestData = true,
@@ -410,178 +462,132 @@ public class CreateTestDataModel :
 					DisplayInHomePage = (postCategoryIndex % 3 == 0),
 
 					ImageUrl =
-							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
+							$"/images/predefined_posts/post_{GetRandomColorNumber()}.png",
 
 					CoverImageUrl =
-							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
+							$"/images/predefined_slides/slide_{GetRandomColorNumber()}.png",
 				};
 
 			await DatabaseContext.AddAsync(entity: postCategory);
-
-			for (var postIndex = 1; postIndex <= maxPostsPerPostCategory; postIndex++)
-			{
-				var postIndexString =
-					postIndex
-					.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-					.ConvertDigitsToUnicode();
-
-				var postTitle =
-					$"{postTitleTemplate} {postIndexString}";
-
-				var postDescription =
-					$"{postDescriptionTemplate} {postIndexString}";
-
-				var post =
-					new Domain.Features.Cms.Post
-					(cultureId: persianCulture.Id, userId: dariushUser.Id,
-					categoryId: postCategory.Id, title: postTitle)
-					{
-						IsTestData = true,
-
-						IsActive = (postIndex % 2 == 0),
-
-						IsDraft = false,
-						//IsDraft = (postIndex % 3 == 0),
-
-						IsFeatured = (postIndex % 3 == 0),
-
-						Description = postDescription,
-
-						ImageUrl =
-							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
-
-						CoverImageUrl =
-							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
-					};
-
-				//if(postIndex % 5 == 0)
-				//{
-				//	post.Delete();
-				//}
-
-				await DatabaseContext.AddAsync(entity: post);
-			}
 		}
 
 		await DatabaseContext.SaveChangesAsync();
-	}
+		// **************************************************
+		// **************************************************
+		// **************************************************
 
-	private async System.Threading.Tasks.Task CreateEnglishPostCategoriesAsync()
-	{
-		var maxPostCategories = 12;
-		var maxPostsPerPostCategory = 24;
-
-		var englishCulture =
-			await
-			DatabaseContext.Cultures
-			.Where(current => current.CultureName.ToLower() == "en-us")
-			.FirstOrDefaultAsync();
-
-		if (englishCulture == null)
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		for (var postTypeIndex = 1; postTypeIndex <= postTypeCount; postTypeIndex++)
 		{
-			return;
-		}
-
-		var dariushUser =
-			await
-			DatabaseContext.Users
-			.Where(current => current.EmailAddress.ToLower() == "DariushT@GMail.com".ToLower())
-			.FirstOrDefaultAsync();
-
-		if (dariushUser == null)
-		{
-			return;
-		}
-
-		var postTitleTemplate = "Post Title";
-		var postDescriptionTemplate = "Post Description";
-
-		var postCategoryNameTemplate = "Category";
-		var postCategoryTitleTemplate = "Category Title";
-		var postCategoryDescriptionTemplate = "Category Description";
-
-		for (var postCategoryIndex = 1; postCategoryIndex <= maxPostCategories; postCategoryIndex++)
-		{
-			var postCategoryIndexString =
-				postCategoryIndex
+			var postTypeIndexString =
+				postTypeIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-				;
 
-			var postCategoryName =
-				$"{postCategoryNameTemplate}_{postCategoryIndex}";
+				.ConvertDigitsToUnicode();
 
-			var postCategoryTitle =
-				$"{postCategoryTitleTemplate} {postCategoryIndexString}";
+			var postTypeName =
+				$"{postTypeNameTemplate}_{postTypeIndex}";
 
-			var postCategoryDescription =
-				$"{postCategoryDescriptionTemplate} {postCategoryIndexString}";
+			var postTypeTitle =
+				$"{postTypeTitleTemplate} {postTypeIndexString}";
+
+			var postTypeDescription =
+				$"{postTypeDescriptionTemplate} {postTypeIndexString}";
+
+			var postType =
+				new Domain.Features.Cms.PostType
+				(cultureId: culture.Id,
+				name: postTypeName, title: postTypeTitle)
+				{
+					IsTestData = true,
+					Description = postTypeDescription,
+
+					IsActive = (postTypeIndex % 2 == 0),
+					DisplayInHomePage = (postTypeIndex % 3 == 0),
+
+					ImageUrl =
+							$"/images/predefined_posts/post_{GetRandomColorNumber()}.png",
+
+					CoverImageUrl =
+							$"/images/predefined_slides/slide_{GetRandomColorNumber()}.png",
+				};
+
+			await DatabaseContext.AddAsync(entity: postType);
+		}
+
+		await DatabaseContext.SaveChangesAsync();
+		// **************************************************
+		// **************************************************
+		// **************************************************
+
+		// **************************************************
+		var postTypes =
+			DatabaseContext.PostTypes.ToList();
+
+		var postCategories =
+			DatabaseContext.PostCategories.ToList();
+		// **************************************************
+
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		for (var postIndex = 1; postIndex <= postCount; postIndex++)
+		{
+			var postIndexString =
+				postIndex
+				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+
+				.ConvertDigitsToUnicode();
+
+			var postTitle =
+				$"{postTitleTemplate} {postIndexString}";
+
+			var postDescription =
+				$"{postDescriptionTemplate} {postIndexString}";
+
+			var postType =
+				GetRandomPostType(list: postTypes);
 
 			var postCategory =
-				new Domain.Features.Cms.PostCategory
-				(cultureId: englishCulture.Id,
-				name: postCategoryName, title: postCategoryTitle)
+				GetRandomPostCategory(list: postCategories);
+
+			var post =
+				new Domain.Features.Cms.Post
+				(cultureId: culture.Id, userId: user.Id,
+				typeId: postType.Id, categoryId: postCategory.Id, title: postTitle)
 				{
 					IsTestData = true,
-					Description = postCategoryDescription,
 
-					IsActive = (postCategoryIndex % 2 == 0),
-					DisplayInHomePage = (postCategoryIndex % 3 == 0),
+					IsActive = (postIndex % 2 == 0),
+
+					IsDraft = false,
+					//IsDraft = (postIndex % 3 == 0),
+
+					IsFeatured = (postIndex % 3 == 0),
+
+					Description = postDescription,
 
 					ImageUrl =
-							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
+						$"/images/predefined_posts/post_{GetRandomColorNumber()}.png",
 
 					CoverImageUrl =
-							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
+						$"/images/predefined_slides/slide_{GetRandomColorNumber()}.png",
 				};
 
-			await DatabaseContext.AddAsync(entity: postCategory);
+			//if(postIndex % 5 == 0)
+			//{
+			//	post.Delete();
+			//}
 
-			for (var postIndex = 1; postIndex <= maxPostsPerPostCategory; postIndex++)
-			{
-				var postIndexString =
-					postIndex
-					.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
-					;
-
-				var postTitle =
-					$"{postTitleTemplate} {postIndexString}";
-
-				var postDescription =
-					$"{postDescriptionTemplate} {postIndexString}";
-
-				var post =
-					new Domain.Features.Cms.Post
-					(cultureId: englishCulture.Id, userId: dariushUser.Id,
-					categoryId: postCategory.Id, title: postTitle)
-					{
-						IsTestData = true,
-
-						IsActive = (postIndex % 2 == 0),
-
-						IsDraft = false,
-						//IsDraft = (postIndex % 3 == 0),
-
-						IsFeatured = (postIndex % 3 == 0),
-
-						Description = postDescription,
-
-						ImageUrl =
-							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
-
-						CoverImageUrl =
-							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
-					};
-
-				//if (postIndex % 5 == 0)
-				//{
-				//	post.Delete();
-				//}
-
-				await DatabaseContext.AddAsync(entity: post);
-			}
+			await DatabaseContext.AddAsync(entity: post);
 		}
 
 		await DatabaseContext.SaveChangesAsync();
+		// **************************************************
+		// **************************************************
+		// **************************************************
 	}
 
 	private void CreatePredefinedFoldersAsync()

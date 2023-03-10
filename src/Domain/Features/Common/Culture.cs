@@ -30,6 +30,9 @@ public class Culture :
 		MenuItems =
 			new System.Collections.Generic.List<Cms.MenuItem>();
 
+		PostTypes =
+			new System.Collections.Generic.List<Cms.PostType>();
+
 		PostCategories =
 			new System.Collections.Generic.List<Cms.PostCategory>();
 
@@ -179,6 +182,7 @@ public class Culture :
 	public virtual System.Collections.Generic.IList<Cms.Post> Posts { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.Slide> Slides { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.MenuItem> MenuItems { get; private set; }
+	public virtual System.Collections.Generic.IList<Cms.PostType> PostTypes { get; private set; }
 	public virtual System.Collections.Generic.IList<Cms.PostCategory> PostCategories { get; private set; }
 
 	public virtual System.Collections.Generic.IList<Identity.LocalizedRole> LocalizedRoles { get; private set; }

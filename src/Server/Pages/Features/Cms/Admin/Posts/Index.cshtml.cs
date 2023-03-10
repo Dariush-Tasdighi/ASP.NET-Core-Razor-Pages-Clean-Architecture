@@ -47,6 +47,8 @@ public class IndexModel :
 				.Features.Cms.Admin.Posts.IndexItemViewModel
 			{
 				Id = current.Id,
+
+				TypeId = current.TypeId,
 				UserId = current.UserId,
 				CategoryId = current.CategoryId,
 
@@ -75,7 +77,8 @@ public class IndexModel :
 				Author = current.User == null ? current.Author :
 					current.User.Username == null ? current.User.EmailAddress : current.User.Username,
 
-				CategoryName = current.Category == null ? null : current.Category.Name,
+				TypeName = current.Type!.Name,
+				CategoryName = current.Category!.Name,
 			})
 			.ToListAsync()
 			;

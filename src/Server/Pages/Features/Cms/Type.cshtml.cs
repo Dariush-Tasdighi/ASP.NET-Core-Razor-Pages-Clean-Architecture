@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Server.Pages.Features.Cms;
 
-public class CategoryModel :
+public class TypeModel :
 	Infrastructure.BasePageModelWithDatabaseContext
 {
 	#region Constructor
-	public CategoryModel
+	public TypeModel
 		(Persistence.DatabaseContext databaseContext) :
 		base(databaseContext: databaseContext)
 	{
@@ -17,7 +17,7 @@ public class CategoryModel :
 	#endregion /Constructor
 
 	#region Properties
-	public ViewModels.Pages.Features.Cms.CategoryViewModel ViewModel { get; set; }
+	public ViewModels.Pages.Features.Cms.TypeViewModel ViewModel { get; set; }
 	#endregion /Properties
 
 	#region Methods
@@ -81,22 +81,22 @@ public class CategoryModel :
 		// **************************************************
 
 		// **************************************************
-		var foundedCategory =
+		var foundedType =
 			await
-			DatabaseContext.PostCategories
+			DatabaseContext.PostTypes
 
 			.Where(current => current.CultureId == foundedCulture.Id)
 			.Where(current => current.Name.ToLower() == name.ToLower())
 
 			.FirstOrDefaultAsync();
 
-		if (foundedCategory is null)
+		if (foundedType is null)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
 		}
 
-		if (foundedCategory.IsActive == false)
+		if (foundedType.IsActive == false)
 		{
 			return RedirectToPage(pageName:
 				Constants.CommonRouting.NotFound);
@@ -104,7 +104,7 @@ public class CategoryModel :
 		// **************************************************
 
 		// **************************************************
-		foundedCategory.Hits++;
+		foundedType.Hits++;
 
 		await DatabaseContext.SaveChangesAsync();
 		// **************************************************
@@ -113,7 +113,7 @@ public class CategoryModel :
 		var postCount =
 			DatabaseContext.Posts
 
-			.Where(current => current.CategoryId == foundedCategory.Id)
+			.Where(current => current.TypeId == foundedType.Id)
 
 			.Where(current => current.IsActive)
 			.Where(current => current.IsDraft == false)
@@ -127,21 +127,21 @@ public class CategoryModel :
 
 		// **************************************************
 		ViewModel =
-			new ViewModels.Pages.Features.Cms.CategoryViewModel
+			new ViewModels.Pages.Features.Cms.TypeViewModel
 			{
-				Id = foundedCategory.Id,
+				Id = foundedType.Id,
 
-				ImageUrl = foundedCategory.ImageUrl,
-				CoverImageUrl = foundedCategory.CoverImageUrl,
+				ImageUrl = foundedType.ImageUrl,
+				CoverImageUrl = foundedType.CoverImageUrl,
 
-				Name = foundedCategory.Name,
-				Body = foundedCategory.Body,
-				Title = foundedCategory.Title,
-				Description = foundedCategory.Description,
+				Name = foundedType.Name,
+				Body = foundedType.Body,
+				Title = foundedType.Title,
+				Description = foundedType.Description,
 
 				PostCount = postCount,
-				Hits = foundedCategory.Hits,
-				MaxPostCountInMainPage = foundedCategory.MaxPostCountInMainPage,
+				Hits = foundedType.Hits,
+				MaxPostCountInMainPage = foundedType.MaxPostCountInMainPage,
 			};
 		// **************************************************
 

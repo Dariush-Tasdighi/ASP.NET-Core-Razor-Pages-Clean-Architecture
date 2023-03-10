@@ -1,6 +1,6 @@
-﻿@page "/categories/{culture?}"
+﻿@page "/types/{culture?}"
 
-@model Server.Pages.Features.Cms.CategoriesModel
+@model Server.Pages.Features.Cms.TypesModel
 
 @inject Persistence.DatabaseContext DatabaseContext
 
@@ -8,13 +8,13 @@
 
 @{
 	var pageTitle =
-		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.Categories}";
+		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.PostTypes}";
 
 	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
 
 	// TODO -> Convert To ViewModel for Better Performance
 	var items =
-		DatabaseContext.PostCategories
+		DatabaseContext.PostTypes
 
 		.Where(current => current.CultureId == Model.CultureId)
 
@@ -61,7 +61,7 @@
 				</div>
 
 				<div class="card-footer d-grid">
-					<a href="/category/@(currentUICultureName)/@(item.Name)" class="btn btn-sm btn-primary">
+					<a href="/type/@(currentUICultureName)/@(item.Name)" class="btn btn-sm btn-primary">
 						@(Resources.DataDictionary.Watch)
 					</a>
 				</div>

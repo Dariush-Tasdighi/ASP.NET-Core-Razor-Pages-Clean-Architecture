@@ -17,7 +17,6 @@ public class DeleteTestDataModel :
 		await DeletePostsAsync();
 		await DeleteSlidesAsync();
 		await DeleteMenuItemsAsync();
-		await DeletePostCategoriesAsync();
 	}
 
 	private async System.Threading.Tasks.Task DeletePostsAsync()
@@ -44,6 +43,20 @@ public class DeleteTestDataModel :
 		.Where(current => current.IsTestData)
 		.ExecuteDeleteAsync();
 		// **************************************************
+
+		// **************************************************
+		await
+		DatabaseContext.PostTypes
+		.Where(current => current.IsTestData)
+		.ExecuteDeleteAsync();
+		// **************************************************
+
+		// **************************************************
+		await
+		DatabaseContext.PostCategories
+		.Where(current => current.IsTestData)
+		.ExecuteDeleteAsync();
+		// **************************************************
 	}
 
 	private async System.Threading.Tasks.Task DeleteSlidesAsync()
@@ -65,14 +78,6 @@ public class DeleteTestDataModel :
 		await
 		DatabaseContext.MenuItems
 		.Where(current => current.ParentId == null)
-		.Where(current => current.IsTestData)
-		.ExecuteDeleteAsync();
-	}
-
-	private async System.Threading.Tasks.Task DeletePostCategoriesAsync()
-	{
-		await
-		DatabaseContext.PostCategories
 		.Where(current => current.IsTestData)
 		.ExecuteDeleteAsync();
 	}

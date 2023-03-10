@@ -14,9 +14,16 @@ public class IndexItemViewModel : object
 
 	public System.Guid Id { get; set; }
 
+
+	public System.Guid TypeId { get; set; }
+
+	public string? TypeName { get; set; }
+
+
 	public System.Guid CategoryId { get; set; }
 
 	public string? CategoryName { get; set; }
+
 
 	public System.Guid UserId { get; set; }
 

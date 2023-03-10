@@ -723,4 +723,10 @@
   <data name="MaxPostCountInMainPage" xml:space="preserve">
     <value>Max Post Count in Main Page</value>
   </data>
+  <data name="PostType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="PostTypes" xml:space="preserve">
+    <value>Types</value>
+  </data>
 </root>

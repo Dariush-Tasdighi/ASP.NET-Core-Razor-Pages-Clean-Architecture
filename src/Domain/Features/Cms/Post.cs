@@ -9,13 +9,14 @@ public class Post :
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public Post(System.Guid cultureId,
-		System.Guid userId, System.Guid categoryId, string title) : base(cultureId: cultureId)
+	public Post(System.Guid cultureId, System.Guid userId, System.Guid typeId,
+		System.Guid categoryId, string title) : base(cultureId: cultureId)
 	{
 		Title = title;
 		Ordering = 10_000;
 
 		UserId = userId;
+		TypeId = typeId;
 		CategoryId = categoryId;
 
 		UpdateDateTime = InsertDateTime;
@@ -56,6 +57,36 @@ public class Post :
 		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
 	public virtual Identity.User? User { get; set; }
 	#endregion /public virtual Identity.User? User { get; set; }
+
+	#region public System.Guid TypeId { get; set; }
+	/// <summary>
+	/// دسته‌بندی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.PostType))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid TypeId { get; set; }
+	#endregion /public System.Guid TypeId { get; set; }
+
+	#region public virtual PostType? Type { get; set; }
+	/// <summary>
+	/// دسته‌بندی
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.PostType))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public virtual PostType? Type { get; set; }
+	#endregion /public virtual PostType? Type { get; set; }
 
 	#region public System.Guid CategoryId { get; set; }
 	/// <summary>

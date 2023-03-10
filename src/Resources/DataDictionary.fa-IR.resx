@@ -756,4 +756,10 @@
   <data name="MaxPostCountInMainPage" xml:space="preserve">
     <value>حداکثر تعداد مطالب در صفحه اصلی</value>
   </data>
+  <data name="PostType" xml:space="preserve">
+    <value>دسته‌بندی</value>
+  </data>
+  <data name="PostTypes" xml:space="preserve">
+    <value>دسته‌بندی‌ها</value>
+  </data>
 </root>
