@@ -36,22 +36,24 @@ public static class Utility
 	/// <param name="body">متن</param>
 	/// <param name="mailSetting">تنظیمات</param>
 	/// <returns></returns>
-	public static void Send
+	public static async System.Threading.Tasks.Task SendAsync
 		(
 			string subject,
 			string body,
 			Abstractions.IMailSetting mailSetting,
-			System.Net.Mail.MailPriority priority = System.Net.Mail.MailPriority.High
+			System.Net.Mail.MailPriority priority = System.Net.Mail.MailPriority.High,
+			System.Threading.CancellationToken cancellationToken = default
 		)
 	{
-		Send(sender: null,
+		await SendAsync(sender: null,
 			recipients: null,
 			subject: subject,
 			body: body,
 			priority: priority,
 			attachmentPathNames: null,
 			deliveryNotification: System.Net.Mail.DeliveryNotificationOptions.None,
-			mailSetting: mailSetting);
+			mailSetting: mailSetting,
+			cancellationToken: cancellationToken);
 	}
 
 	/// <summary>
@@ -63,13 +65,14 @@ public static class Utility
 	/// <param name="priority">اهمیت</param>
 	/// <param name="mailSetting">تنظیمات</param>
 	/// <returns></returns>
-	public static void Send
+	public static async System.Threading.Tasks.Task SendAsync
 		(
 			System.Net.Mail.MailAddress recipient,
 			string subject,
 			string body,
 			Abstractions.IMailSetting mailSetting,
-			System.Net.Mail.MailPriority priority = System.Net.Mail.MailPriority.Normal
+			System.Net.Mail.MailPriority priority = System.Net.Mail.MailPriority.Normal,
+			System.Threading.CancellationToken cancellationToken = default
 		)
 	{
 		// **************************************************
@@ -82,14 +85,15 @@ public static class Utility
 		}
 		// **************************************************
 
-		Send(sender: null,
+		await SendAsync(sender: null,
 			recipients: recipients,
 			subject: subject,
 			body: body,
 			priority: priority,
 			attachmentPathNames: null,
 			deliveryNotification: System.Net.Mail.DeliveryNotificationOptions.None,
-			mailSetting: mailSetting);
+			mailSetting: mailSetting,
+			cancellationToken: cancellationToken);
 	}
 
 	/// <summary>
@@ -104,7 +108,7 @@ public static class Utility
 	/// <param name="deliveryNotification">اطلاع‌رسانی از ارسال</param>
 	/// <param name="mailSetting">تنظیمات</param>
 	/// <returns></returns>
-	public static void Send
+	public static async System.Threading.Tasks.Task SendAsync
 		(
 			System.Net.Mail.MailAddress? sender,
 			System.Net.Mail.MailAddressCollection? recipients,
@@ -114,7 +118,8 @@ public static class Utility
 			System.Net.Mail.MailPriority priority = System.Net.Mail.MailPriority.Normal,
 			System.Net.Mail.DeliveryNotificationOptions
 				deliveryNotification = System.Net.Mail.DeliveryNotificationOptions.None,
-			System.Collections.Generic.List<string>? attachmentPathNames = null
+			System.Collections.Generic.List<string>? attachmentPathNames = null,
+			System.Threading.CancellationToken cancellationToken = default
 		)
 	{
 		// **************************************************
@@ -342,10 +347,10 @@ public static class Utility
 			// **************************************************
 
 			// **************************************************
-			mailMessage.Headers.Add(name: "Dtat.Net.Mail_Version", value: "6.0.0");
+			mailMessage.Headers.Add(name: "Dtat.Net.Mail_Version", value: "6.1.0");
 			mailMessage.Headers.Add(name: "Dtat.Net.Mail_Url", value: "https://DTAT.ir");
 			mailMessage.Headers.Add(name: "Dtat.Net.Mail_Author", value: "Mr. Dariush Tasdighi");
-			mailMessage.Headers.Add(name: "Dtat.Net.Mail_Date", value: "1401/12/14 - 2023/03/05");
+			mailMessage.Headers.Add(name: "Dtat.Net.Mail_Date", value: "1401/12/18 - 2023/03/09");
 			// **************************************************
 			// *** /Mail Message Configuration ******************
 			// **************************************************
@@ -426,7 +431,17 @@ public static class Utility
 			// *** /Smtp Client Configuration *******************
 			// **************************************************
 
-			smtpClient.Send(message: mailMessage);
+			//smtpClient.SendCompleted += (s, e) =>
+			//{
+			//	mailMessage?.Dispose();
+			//	smtpClient?.Dispose();
+			//};
+
+			//smtpClient.SendAsync
+			//	(message: mailMessage, userToken: null);
+
+			await smtpClient.SendMailAsync
+				(message: mailMessage, cancellationToken: cancellationToken);
 		}
 		catch
 		{
@@ -435,10 +450,7 @@ public static class Utility
 		finally
 		{
 			mailMessage?.Dispose();
-			mailMessage = null;
-
 			smtpClient?.Dispose();
-			smtpClient = null;
 		}
 	}
 }

@@ -6,26 +6,65 @@
 	var currentUICultureLcid = Domain.Features
 		.Common.CultureEnumHelper.GetCurrentUICultureLcid();
 
-	// TODO -> Convert To ViewModel for Better Performance
+	var currentCulture =
+		await
+		DatabaseContext.Cultures
+		.Where(current => current.Lcid == currentUICultureLcid)
+		.FirstOrDefaultAsync();
+
+	if (currentCulture == null)
+	{
+		return;
+	}
+
 	var posts =
 		DatabaseContext.Posts
-		.Include(current => current.Category)
 
-		.Where(current => current.Culture != null &&
-			current.Culture.Lcid == currentUICultureLcid)
+		.Where(current => current.CultureId == currentCulture.Id)
 
 		.Where(current => current.IsActive)
 		.Where(current => current.IsDraft == false)
 		.Where(current => current.IsDeleted == false)
 
+		// TODO
+		//.Where(current => current.Type != null && current.Type.IsActive)
 		.Where(current => current.Category != null && current.Category.IsActive)
 
 		.Where(current => current.User != null && current.User.IsActive)
-
 		.Where(current => current.User != null && current.User.IsDeleted == false)
+		.Where(current => current.User != null && current.User.IsEmailAddressVerified)
 
 		.OrderByDescending(current => current.IsFeatured)
 		.ThenByDescending(current => current.UpdateDateTime)
+
+		.Select(current => new ViewModels.Pages.Features.Cms.PartialViews.DisplayPostCardViewModel
+				{
+					//TextBackground
+
+					// TODO
+					//TypeName,
+					//TypeTitle
+					//DisplayTypeLink
+
+					Id = current.Id,
+					Hits = current.Hits,
+					IsVerified = current.IsVerified,
+
+					Title = current.Title,
+					ImageUrl = current.ImageUrl,
+					Description = current.Description,
+
+					Username = current.User!.Username,
+
+					DisplayAuthor = true,
+					Author = current.Author,
+
+					DisplayCategoryLink = true,
+					CategoryName = current.Category!.Name,
+					CategoryTitle = current.Category!.Title,
+
+					UpdateDateTime = current.UpdateDateTime,
+				})
 
 		.Skip(count: 0)
 		.Take(count: 24)
@@ -36,51 +75,15 @@
 	{
 		return;
 	}
-
-	var currentUICultureName = Domain.Features
-		.Common.CultureEnumHelper.GetCurrentUICultureName();
 }
 
-<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4">
 
 	@for (var index = 0; index <= posts.Count - 1; index++)
 	{
 		var post = posts[index];
 
-		var textBackground = "text-bg-light";
-		if (post.IsFeatured)
-		{
-			textBackground = "text-bg-warning";
-		}
-
-		<div class="col">
-			<div class="card @(textBackground) h-100">
-				<img src="@(post.ImageUrl)" class="card-img-top" alt="@(post.Title)">
-
-				<div class="card-body">
-					<h5 class="card-title">
-						@(post.Title)
-					</h5>
-
-					<p class="card-text">
-						@(post.Description)
-					</p>
-				</div>
-
-				<div class="card-footer">
-					<a href="/post/@(currentUICultureName)/@(post.Id)" class="btn btn-primary">
-						@(Resources.DataDictionary.Watch)
-					</a>
-
-					@if (post.Category is not null)
-					{
-						<a href="/Category/@(currentUICultureName)/@(post.Category.Name)" class="btn btn-primary">
-							@(post.Category.Title)
-						</a>
-					}
-				</div>
-			</div>
-		</div>
+		<partial name="Features/Cms/PartialViews/_DisplayPostCard" model="post" />
 	}
 
 </div>

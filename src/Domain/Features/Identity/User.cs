@@ -133,7 +133,7 @@ public class User :
 
 	#region public bool IsVerified { get; set; }
 	/// <summary>
-	/// وضعیت
+	/// تایید شده
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),

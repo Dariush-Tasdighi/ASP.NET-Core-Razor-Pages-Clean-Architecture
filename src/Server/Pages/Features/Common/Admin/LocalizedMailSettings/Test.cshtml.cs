@@ -39,6 +39,7 @@ public class TestModel :
 
 		try
 		{
+			// **************************************************
 			var subject =
 				"Test Subject";
 
@@ -48,12 +49,31 @@ public class TestModel :
 			var body =
 				$"<h3>Welcome to our site!</h3><p>Domain: {domainName}</p>";
 
-			var recipient = new System.Net.Mail
-				.MailAddress(address: "DariushT@GMail.com", displayName: "آقای داریوش تصدیقی");
+			//var recipient = new System.Net.Mail.MailAddress
+			//	(address: "DariushT@GMail.com", displayName: "آقای داریوش تصدیقی");
 
-			Dtat.Net.Mail.Utility.Send
+			var recipient = new System.Net.Mail.MailAddress
+				(address: "Dariush.Tasdighi@Hotmail.com", displayName: "آقای داریوش تصدیقی");
+
+			await Dtat.Net.Mail.Utility.SendAsync
 				(recipient: recipient, subject: subject,
 				body: body, mailSetting: localizedMailSetting);
+			// **************************************************
+
+			// **************************************************
+			//var subject =
+			//	"test mail";
+
+			//var body =
+			//	$"hello please test my mail server";
+
+			//var recipient = new System.Net.Mail.MailAddress
+			//	(address: "test-fj0awttbi@srv1.mail-tester.com");
+
+			//await Dtat.Net.Mail.Utility.SendAsync
+			//	(recipient: recipient, subject: subject,
+			//	body: body, mailSetting: localizedMailSetting);
+			// **************************************************
 		}
 		catch (System.Exception ex)
 		{

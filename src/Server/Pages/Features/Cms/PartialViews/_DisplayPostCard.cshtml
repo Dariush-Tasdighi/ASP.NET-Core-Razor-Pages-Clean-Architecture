@@ -1,0 +1,113 @@
+﻿@model ViewModels.Pages.Features.Cms.PartialViews.DisplayPostCardViewModel
+
+@{
+	var currentUICultureName = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureName();
+}
+
+<div class="col">
+
+	<div class="card @(Model.TextBackground) h-100">
+
+		@if (string.IsNullOrWhiteSpace(value: Model.ImageUrl))
+		{
+
+		}
+		else
+		{
+			<img src="@(Model.ImageUrl)" class="card-img-top" alt="@(Model.Title)" />
+		}
+
+		<div class="card-body">
+
+			<h5 class="card-title">
+				@(Model.Title)
+
+				@if (Model.IsVerified)
+				{
+					<i class="bi bi-star-fill text-warning" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="@(Resources.DataDictionary.IsVerified)"></i>
+				}
+			</h5>
+
+			<p class="card-text">
+
+				@(Model.Description)
+
+			</p>
+
+			<p class="card-text">
+
+				@if (Model.UpdateDateTime.HasValue)
+				{
+					<i class="bi bi-calendar"></i>
+
+					@(Html.DtatDisplayDateOffset(value: Model.UpdateDateTime))
+				}
+
+				@if (Model.Hits > 0)
+				{
+					<i class="bi bi-eye"></i>
+
+					@(Html.DtatDisplayInteger(value: Model.Hits))
+				}
+
+				@if (Model.DisplayAuthor)
+				{
+					@if (string.IsNullOrWhiteSpace(value: Model.Author) == false)
+					{
+						<br />
+
+						<i class="bi bi-person"></i>
+
+						@if (string.IsNullOrWhiteSpace(value: Model.Username))
+						{
+							@(Model.Author)
+						}
+						else
+						{
+							<a href="/Profile/@(currentUICultureName)/@(Model.Username)" class="text-decoration-none">
+								@(Model.Author)
+							</a>
+						}
+					}
+				}
+
+			</p>
+
+		</div>
+
+		<div class="card-footer">
+			<a href="/post/@(currentUICultureName)/@(Model.Id)" class="btn btn-primary btn-sm">
+				@(Resources.DataDictionary.Watch)
+			</a>
+
+			@if (Model.DisplayTypeLink)
+			{
+				if (string.IsNullOrWhiteSpace(value: Model.TypeName) == false)
+				{
+					if (string.IsNullOrWhiteSpace(value: Model.TypeTitle) == false)
+					{
+						<a href="/Type/@(currentUICultureName)/@(Model.TypeName)" class="btn btn-secondary btn-sm">
+							@(Model.TypeTitle)
+						</a>
+					}
+				}
+			}
+
+			@if (Model.DisplayCategoryLink)
+			{
+				if (string.IsNullOrWhiteSpace(value: Model.CategoryName) == false)
+				{
+					if (string.IsNullOrWhiteSpace(value: Model.CategoryTitle) == false)
+					{
+						<a href="/Category/@(currentUICultureName)/@(Model.CategoryName)" class="btn btn-secondary btn-sm">
+							@(Model.CategoryTitle)
+						</a>
+					}
+				}
+			}
+		</div>
+
+	</div>
+
+</div>

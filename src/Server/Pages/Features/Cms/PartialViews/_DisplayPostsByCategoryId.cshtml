@@ -5,18 +5,7 @@
 @using Microsoft.EntityFrameworkCore
 
 @{
-	if (Model is null)
-	{
-		return;
-	}
-
-	var currentPost =
-		await
-		DatabaseContext.Posts
-		.Where(current => current.Id == Model)
-		.FirstOrDefaultAsync();
-
-	if (currentPost is null)
+	if(Model is null)
 	{
 		return;
 	}
@@ -38,8 +27,8 @@
 	var posts =
 		DatabaseContext.Posts
 
+		.Where(current => current.CategoryId == Model)
 		.Where(current => current.CultureId == currentCulture.Id)
-		.Where(current => current.CategoryId == currentPost.CategoryId)
 
 		.Where(current => current.IsActive)
 		.Where(current => current.IsDraft == false)
@@ -58,9 +47,11 @@
 
 		.Select(current => new ViewModels.Pages.Features.Cms.PartialViews.DisplayPostCardViewModel
 				{
+					//TextBackground
+
+					// TODO
 					//TypeName,
 					//TypeTitle
-					//TextBackground
 					//DisplayTypeLink
 
 					Id = current.Id,
@@ -72,19 +63,19 @@
 					Description = current.Description,
 
 					Username = current.User!.Username,
-
-					DisplayAuthor = true,
+ 
+					DisplayAuthor = false,
 					Author = current.Author,
 
-					DisplayCategoryLink = true,
-					CategoryName = current.Category!.Name,
-					CategoryTitle = current.Category!.Title,
+					DisplayCategoryLink = false,
+					//CategoryName = current.Category!.Name,
+					//CategoryTitle = current.Category!.Title,
 
 					UpdateDateTime = current.UpdateDateTime,
 				})
 
 		.Skip(count: 0)
-		.Take(count: 6)
+		.Take(count: 24)
 
 		.ToList();
 
@@ -94,7 +85,7 @@
 	}
 }
 
-<div class="row row-cols-1 g-4">
+<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4">
 
 	@for (var index = 0; index <= posts.Count - 1; index++)
 	{

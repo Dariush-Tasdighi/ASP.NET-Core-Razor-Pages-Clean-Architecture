@@ -171,6 +171,8 @@ public class ProfileModel :
 		ViewModel =
 			new ViewModels.Pages.Features.Identity.ProfileViewModel
 			{
+				Id = foundedLocalizedUser.UserId,
+
 				RoleTitle = roleTitle,
 				GenderTitle = genderTitle,
 				GenderPrefix = genderPrefix,

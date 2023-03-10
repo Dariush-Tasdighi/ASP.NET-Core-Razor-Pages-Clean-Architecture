@@ -11,6 +11,18 @@ public class ProfileViewModel : object
 
 	#region Properties
 
+	#region public System.Guid Id { get; set; }
+	/// <summary>
+	/// شناسه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.Id))]
+	public System.Guid Id { get; set; }
+	#endregion /public System.Guid Id { get; set; }
+
+
+
 	#region public int Hits { get; set; }
 	/// <summary>
 	/// تعداد دفعات بازدید

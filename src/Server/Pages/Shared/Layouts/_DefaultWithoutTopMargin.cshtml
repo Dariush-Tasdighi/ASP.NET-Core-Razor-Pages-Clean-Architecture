@@ -36,10 +36,14 @@
 	<partial name="PartialViews/_DisplayToastMessages" />
 
 	<partial name="PartialViews/Navbars/_NavbarMain" />
+	<partial name="PartialViews/Navbars/_NavbarDynamic" />
+	<partial name="PartialViews/Navbars/_NavbarAuthorized" />
 
-	<div class="container px-4 pb-5 mb-5">
-		@(RenderBody())
-	</div>
+	<main class="mb-5 pb-5">
+		<div class="container">
+			@(RenderBody())
+		</div>
+	</main>
 
 	<partial name="PartialViews/_Footer" />
 

@@ -129,6 +129,16 @@ public class Post :
 	public bool IsTestData { get; set; }
 	#endregion /public bool IsTestData { get; set; }
 
+	#region public bool IsVerified { get; set; }
+	/// <summary>
+	/// تایید شده
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsVerified))]
+	public bool IsVerified { get; set; }
+	#endregion /public bool IsVerified { get; set; }
+
 	#region public bool IsDeleted { get; private set; }
 	/// <summary>
 	/// آیا به طور مجازی حذف شده؟

@@ -59,7 +59,7 @@ public class UserService :
 
 		var siteUrl = $"{schema}://{domainName}";
 
-		var link = $"{siteUrl}?key={foundedUser.EmailAddressVerificationKey}";
+		var link = $"{siteUrl}/Account/VerifyUserEmailAddress/?key={foundedUser.EmailAddressVerificationKey}";
 
 		var body =
 			$"<h3>Welcome to our site!</h3>" +
@@ -71,7 +71,7 @@ public class UserService :
 		var recipient = new System.Net.Mail.MailAddress
 			(address: foundedUser.EmailAddress, displayName: foundedUser.EmailAddress);
 
-		Dtat.Net.Mail.Utility.Send
+		await Dtat.Net.Mail.Utility.SendAsync
 			(recipient: recipient, subject: subject,
 			body: body, mailSetting: localizedMailSetting);
 	}
@@ -121,9 +121,11 @@ public class UserService :
 			var recipient = new System.Net.Mail.MailAddress
 				(address: user.EmailAddress, displayName: user.EmailAddress);
 
-			Dtat.Net.Mail.Utility.Send
-				(recipient: recipient, subject: subject,
-				body: body, mailSetting: localizedMailSetting);
+			await Dtat.Net.Mail.Utility.SendAsync
+				(recipient: recipient,
+				subject: subject,
+				body: body,
+				mailSetting: localizedMailSetting);
 		}
 	}
 }
