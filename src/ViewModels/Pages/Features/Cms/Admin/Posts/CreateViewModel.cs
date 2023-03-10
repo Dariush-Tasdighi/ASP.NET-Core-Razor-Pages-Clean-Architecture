@@ -123,6 +123,8 @@ public class CreateViewModel : object
 	public System.Guid CategoryId { get; set; }
 	#endregion /public System.Guid CategoryId { get; set; }
 
+
+
 	#region public string Title { get; set; }
 	/// <summary>
 	/// عنوان صفحه
@@ -179,6 +181,16 @@ public class CreateViewModel : object
 		Name = nameof(Resources.DataDictionary.ImageUrl))]
 	public string? ImageUrl { get; set; }
 	#endregion /public string? ImageUrl { get; set; }
+
+	#region public string? CoverImageUrl { get; set; }
+	/// <summary>
+	/// نشانی تصویر کاور
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.CoverImageUrl))]
+	public string? CoverImageUrl { get; set; }
+	#endregion /public string? CoverImageUrl { get; set; }
 
 	#region public string? Introduction { get; set; }
 	/// <summary>

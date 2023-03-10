@@ -798,8 +798,8 @@ public static class ModelBuilderExtensions : object
 			MaxPostCountInHomePage = 12,
 			MaxPostCountInMainPage = 48,
 
-			ImageUrl = "/images/types/news.png",
-			CoverImageUrl = "/images/types/news_cover.png",
+			//ImageUrl = "/images/types/fa-ir/news.png",
+			//CoverImageUrl = "/images/types/fa-ir/news_cover.png",
 		};
 
 		modelBuilder.Entity<Domain.Features
@@ -816,8 +816,8 @@ public static class ModelBuilderExtensions : object
 			MaxPostCountInHomePage = 12,
 			MaxPostCountInMainPage = 48,
 
-			ImageUrl = "/images/types/news.png",
-			CoverImageUrl = "/images/types/news_cover.png",
+			//ImageUrl = "/images/types/en-us/news.png",
+			//CoverImageUrl = "/images/types/en-us/news_cover.png",
 		};
 
 		modelBuilder.Entity<Domain.Features
@@ -830,30 +830,30 @@ public static class ModelBuilderExtensions : object
 		{
 			IsActive = true,
 
-			Ordering = 9_000,
+			Ordering = 9_100,
 			MaxPostCountInHomePage = 12,
 			MaxPostCountInMainPage = 48,
 
-			ImageUrl = "/images/types/article.png",
-			CoverImageUrl = "/images/types/article_cover.png",
+			//ImageUrl = "/images/types/fa-ir/article.png",
+			//CoverImageUrl = "/images/types/fa-ir/article_cover.png",
 		};
 
 		modelBuilder.Entity<Domain.Features
 			.Cms.PostType>().HasData(data: articlePostTypePersian);
 		// **************************************************
 
-		// **************************************************
+		// **************************************************            
 		var articlePostTypeEnglish = new Domain.Features.Cms.PostType
 			(cultureId: cultureEnglish.Id, name: "Article", title: "Article")
 		{
 			IsActive = true,
 
-			Ordering = 9_000,
+			Ordering = 9_100,
 			MaxPostCountInHomePage = 12,
 			MaxPostCountInMainPage = 48,
 
-			ImageUrl = "/images/types/article.png",
-			CoverImageUrl = "/images/types/article_cover.png",
+			//ImageUrl = "/images/types/en-us/article.png",
+			//CoverImageUrl = "/images/types/en-us/article_cover.png",
 		};
 
 		modelBuilder.Entity<Domain.Features

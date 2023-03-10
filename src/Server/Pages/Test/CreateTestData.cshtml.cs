@@ -46,7 +46,7 @@ public class CreateTestDataModel :
 		return value;
 	}
 
-	private Domain.Features.Cms.PostType GetRandomPostType
+	private static Domain.Features.Cms.PostType GetRandomPostType
 		(System.Collections.Generic.IList<Domain.Features.Cms.PostType> list)
 	{
 		var byteArray =
@@ -64,7 +64,7 @@ public class CreateTestDataModel :
 		return list[value];
 	}
 
-	private Domain.Features.Cms.PostCategory GetRandomPostCategory
+	private static Domain.Features.Cms.PostCategory GetRandomPostCategory
 		(System.Collections.Generic.IList<Domain.Features.Cms.PostCategory> list)
 	{
 		var byteArray =
@@ -418,15 +418,15 @@ public class CreateTestDataModel :
 		var postTypeCount = 3;
 		var postCategoryCount = 12;
 
-		var postTitleTemplate = "عنوان مطلب";
+		var postTitleTemplate = "مطلب";
 		var postDescriptionTemplate = "توضیحات مطلب";
 
 		var postTypeNameTemplate = "Type";
-		var postTypeTitleTemplate = "عنوان دسته‌بندی";
+		var postTypeTitleTemplate = "دسته‌بندی";
 		var postTypeDescriptionTemplate = "توضیحات دسته‌بندی";
 
 		var postCategoryNameTemplate = "Category";
-		var postCategoryTitleTemplate = "عنوان طبقه‌بندی";
+		var postCategoryTitleTemplate = "طبقه‌بندی";
 		var postCategoryDescriptionTemplate = "توضیحات طبقه‌بندی";
 		// **************************************************
 
@@ -439,7 +439,8 @@ public class CreateTestDataModel :
 				postCategoryIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
 
-				.ConvertDigitsToUnicode();
+				.ConvertDigitsToUnicode()
+				;
 
 			var postCategoryName =
 				$"{postCategoryNameTemplate}_{postCategoryIndex}";
@@ -485,7 +486,8 @@ public class CreateTestDataModel :
 				postTypeIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
 
-				.ConvertDigitsToUnicode();
+				.ConvertDigitsToUnicode()
+				;
 
 			var postTypeName =
 				$"{postTypeNameTemplate}_{postTypeIndex}";
@@ -524,10 +526,14 @@ public class CreateTestDataModel :
 
 		// **************************************************
 		var postTypes =
-			DatabaseContext.PostTypes.ToList();
+			DatabaseContext.PostTypes
+			.Where(current => current.CultureId == culture.Id)
+			.ToList();
 
 		var postCategories =
-			DatabaseContext.PostCategories.ToList();
+			DatabaseContext.PostCategories
+			.Where(current => current.CultureId == culture.Id)
+			.ToList();
 		// **************************************************
 
 		// **************************************************
@@ -539,7 +545,214 @@ public class CreateTestDataModel :
 				postIndex
 				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
 
-				.ConvertDigitsToUnicode();
+				.ConvertDigitsToUnicode()
+				;
+
+			var postTitle =
+				$"{postTitleTemplate} {postIndexString}";
+
+			var postDescription =
+				$"{postDescriptionTemplate} {postIndexString}";
+
+			var postType =
+				GetRandomPostType(list: postTypes);
+
+			var postCategory =
+				GetRandomPostCategory(list: postCategories);
+
+			var post =
+				new Domain.Features.Cms.Post
+				(cultureId: culture.Id, userId: user.Id,
+				typeId: postType.Id, categoryId: postCategory.Id, title: postTitle)
+				{
+					IsTestData = true,
+
+					IsActive = (postIndex % 2 == 0),
+
+					IsDraft = false,
+					//IsDraft = (postIndex % 3 == 0),
+
+					IsFeatured = (postIndex % 3 == 0),
+
+					Description = postDescription,
+
+					ImageUrl =
+						$"/images/predefined_posts/post_{GetRandomColorNumber()}.png",
+
+					CoverImageUrl =
+						$"/images/predefined_slides/slide_{GetRandomColorNumber()}.png",
+				};
+
+			//if(postIndex % 5 == 0)
+			//{
+			//	post.Delete();
+			//}
+
+			await DatabaseContext.AddAsync(entity: post);
+		}
+
+		await DatabaseContext.SaveChangesAsync();
+		// **************************************************
+		// **************************************************
+		// **************************************************
+	}
+
+	private async System.Threading.Tasks.Task CreateEnglishPostsAsync()
+	{
+		// **************************************************
+		var culture =
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.CultureName.ToLower() == "en-us")
+			.FirstOrDefaultAsync();
+
+		if (culture == null)
+		{
+			return;
+		}
+		// **************************************************
+
+		// **************************************************
+		var user =
+			await
+			DatabaseContext.Users
+			.Where(current => current.EmailAddress.ToLower() == "DariushT@GMail.com".ToLower())
+			.FirstOrDefaultAsync();
+
+		if (user == null)
+		{
+			return;
+		}
+		// **************************************************
+
+		// **************************************************
+		var postCount = 300;
+		var postTypeCount = 3;
+		var postCategoryCount = 12;
+
+		var postTitleTemplate = "Post";
+		var postDescriptionTemplate = "Post Description";
+
+		var postTypeNameTemplate = "Type";
+		var postTypeTitleTemplate = "Type";
+		var postTypeDescriptionTemplate = "Type Description";
+
+		var postCategoryNameTemplate = "Category";
+		var postCategoryTitleTemplate = "Category";
+		var postCategoryDescriptionTemplate = "Category Description";
+		// **************************************************
+
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		for (var postCategoryIndex = 1; postCategoryIndex <= postCategoryCount; postCategoryIndex++)
+		{
+			var postCategoryIndexString =
+				postCategoryIndex
+				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+				;
+
+			var postCategoryName =
+				$"{postCategoryNameTemplate}_{postCategoryIndex}";
+
+			var postCategoryTitle =
+				$"{postCategoryTitleTemplate} {postCategoryIndexString}";
+
+			var postCategoryDescription =
+				$"{postCategoryDescriptionTemplate} {postCategoryIndexString}";
+
+			var postCategory =
+				new Domain.Features.Cms.PostCategory
+				(cultureId: culture.Id,
+				name: postCategoryName, title: postCategoryTitle)
+				{
+					IsTestData = true,
+					Description = postCategoryDescription,
+
+					IsActive = (postCategoryIndex % 2 == 0),
+					DisplayInHomePage = (postCategoryIndex % 3 == 0),
+
+					ImageUrl =
+							$"/images/predefined_posts/post_{GetRandomColorNumber()}.png",
+
+					CoverImageUrl =
+							$"/images/predefined_slides/slide_{GetRandomColorNumber()}.png",
+				};
+
+			await DatabaseContext.AddAsync(entity: postCategory);
+		}
+
+		await DatabaseContext.SaveChangesAsync();
+		// **************************************************
+		// **************************************************
+		// **************************************************
+
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		for (var postTypeIndex = 1; postTypeIndex <= postTypeCount; postTypeIndex++)
+		{
+			var postTypeIndexString =
+				postTypeIndex
+				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+				;
+
+			var postTypeName =
+				$"{postTypeNameTemplate}_{postTypeIndex}";
+
+			var postTypeTitle =
+				$"{postTypeTitleTemplate} {postTypeIndexString}";
+
+			var postTypeDescription =
+				$"{postTypeDescriptionTemplate} {postTypeIndexString}";
+
+			var postType =
+				new Domain.Features.Cms.PostType
+				(cultureId: culture.Id,
+				name: postTypeName, title: postTypeTitle)
+				{
+					IsTestData = true,
+					Description = postTypeDescription,
+
+					IsActive = (postTypeIndex % 2 == 0),
+					DisplayInHomePage = (postTypeIndex % 3 == 0),
+
+					ImageUrl =
+							$"/images/predefined_posts/post_{GetRandomColorNumber()}.png",
+
+					CoverImageUrl =
+							$"/images/predefined_slides/slide_{GetRandomColorNumber()}.png",
+				};
+
+			await DatabaseContext.AddAsync(entity: postType);
+		}
+
+		await DatabaseContext.SaveChangesAsync();
+		// **************************************************
+		// **************************************************
+		// **************************************************
+
+		// **************************************************
+		var postTypes =
+			DatabaseContext.PostTypes
+			.Where(current => current.CultureId == culture.Id)
+			.ToList();
+
+		var postCategories =
+			DatabaseContext.PostCategories
+			.Where(current => current.CultureId == culture.Id)
+			.ToList();
+		// **************************************************
+
+		// **************************************************
+		// **************************************************
+		// **************************************************
+		for (var postIndex = 1; postIndex <= postCount; postIndex++)
+		{
+			var postIndexString =
+				postIndex
+				.ToString().PadLeft(totalWidth: 2, paddingChar: '0')
+				;
 
 			var postTitle =
 				$"{postTitleTemplate} {postIndexString}";

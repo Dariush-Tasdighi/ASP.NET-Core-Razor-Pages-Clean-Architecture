@@ -5,7 +5,7 @@
 @using Microsoft.EntityFrameworkCore
 
 @{
-	if(Model is null)
+	if (Model is null)
 	{
 		return;
 	}
@@ -34,25 +34,22 @@
 		.Where(current => current.IsDraft == false)
 		.Where(current => current.IsDeleted == false)
 
-		// TODO
-		//.Where(current => current.Type != null && current.Type.IsActive)
-		.Where(current => current.Category != null && current.Category.IsActive)
+		.Where(current => current.Type!.IsActive)
+		.Where(current => current.Category!.IsActive)
 
-		.Where(current => current.User != null && current.User.IsActive)
-		.Where(current => current.User != null && current.User.IsDeleted == false)
-		.Where(current => current.User != null && current.User.IsEmailAddressVerified)
+		.Where(current => current.User!.IsDeleted == false)
+
+		// فکر می‌کنم که به دو دستور ذیل نیازی نیست
+		//.Where(current => current.User!.IsActive)
+		//.Where(current => current.User!.IsEmailAddressVerified)
 
 		.OrderByDescending(current => current.IsFeatured)
 		.ThenByDescending(current => current.UpdateDateTime)
 
-		.Select(current => new ViewModels.Pages.Features.Cms.PartialViews.DisplayPostCardViewModel
+		.Select(current => new ViewModels.Pages
+			.Features.Cms.PartialViews.DisplayPostCardViewModel
 				{
 					//TextBackground
-
-					// TODO
-					//TypeName,
-					//TypeTitle
-					//DisplayTypeLink
 
 					Id = current.Id,
 					Hits = current.Hits,
@@ -63,9 +60,13 @@
 					Description = current.Description,
 
 					Username = current.User!.Username,
- 
+
 					DisplayAuthor = false,
 					//Author = current.Author,
+
+					DisplayTypeLink = true,
+					TypeName = current.Type!.Name,
+					TypeTitle = current.Type!.Title,
 
 					DisplayCategoryLink = true,
 					CategoryName = current.Category!.Name,

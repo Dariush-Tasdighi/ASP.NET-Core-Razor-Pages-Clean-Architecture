@@ -44,7 +44,8 @@ public class UpdateModel :
 			await
 			DatabaseContext.Posts
 			.Where(current => current.Id == id.Value)
-			.Select(current => new ViewModels.Pages.Features.Cms.Admin.Posts.UpdateViewModel()
+			.Select(current => new ViewModels.Pages
+			.Features.Cms.Admin.Posts.UpdateViewModel()
 			{
 				Id = current.Id,
 
@@ -83,10 +84,15 @@ public class UpdateModel :
 
 		ViewModel = result;
 
+		PostTypesSelectList =
+			await
+			Infrastructure.SelectLists.GetPostTypesAsync
+			(databaseContext: DatabaseContext, selectedValue: null);
+
 		PostCategoriesSelectList =
 			await
 			Infrastructure.SelectLists.GetPostCategoriesAsync
-			(databaseContext: DatabaseContext, selectedValue: ViewModel.CategoryId);
+			(databaseContext: DatabaseContext, selectedValue: null);
 
 		return Page();
 	}
@@ -98,6 +104,11 @@ public class UpdateModel :
 	{
 		if (ModelState.IsValid == false)
 		{
+			PostTypesSelectList =
+				await
+				Infrastructure.SelectLists.GetPostTypesAsync
+				(databaseContext: DatabaseContext, selectedValue: ViewModel.TypeId);
+
 			PostCategoriesSelectList =
 				await
 				Infrastructure.SelectLists.GetPostCategoriesAsync
@@ -128,13 +139,13 @@ public class UpdateModel :
 		foundedItem.Ordering = ViewModel.Ordering;
 
 		foundedItem.Title = ViewModel.Title.Fix()!;
-		//foundedItem.Title = ViewModel.Title.Fix();
 
 		foundedItem.Body = ViewModel.Body.Fix();
 		foundedItem.Author = ViewModel.Author.Fix();
 		foundedItem.ImageUrl = ViewModel.ImageUrl.Fix();
 		foundedItem.Description = ViewModel.Description.Fix();
 		foundedItem.Introduction = ViewModel.Introduction.Fix();
+		foundedItem.CoverImageUrl = ViewModel.CoverImageUrl.Fix();
 		foundedItem.AdminDescription = ViewModel.AdminDescription.Fix();
 
 		foundedItem.IsDraft = ViewModel.IsDraft;

@@ -122,6 +122,7 @@ public class CreateModel :
 				ImageUrl = ViewModel.ImageUrl.Fix(),
 				Description = ViewModel.Description.Fix(),
 				Introduction = ViewModel.Introduction.Fix(),
+				CoverImageUrl = ViewModel.CoverImageUrl.Fix(),
 				AdminDescription = ViewModel.AdminDescription.Fix(),
 
 				IsDraft = ViewModel.IsDraft,
