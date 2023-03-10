@@ -130,15 +130,15 @@ public class UpdateProfileViewModel : object
 	public string? ImageUrl { get; set; }
 	#endregion /public string? ImageUrl { get; set; }
 
-	#region public string? WideImageUrl { get; set; }
+	#region public string? CoverImageUrl { get; set; }
 	/// <summary>
-	/// نشانی تصویر پهن
+	/// نشانی تصویر کاور
 	/// </summary>
 	[System.ComponentModel.DataAnnotations.Display
 		(ResourceType = typeof(Resources.DataDictionary),
-		Name = nameof(Resources.DataDictionary.WideImageUrl))]
-	public string? WideImageUrl { get; set; }
-	#endregion /public string? WideImageUrl { get; set; }
+		Name = nameof(Resources.DataDictionary.CoverImageUrl))]
+	public string? CoverImageUrl { get; set; }
+	#endregion /public string? CoverImageUrl { get; set; }
 
 	#region public string? Description { get; set; }
 	/// <summary>

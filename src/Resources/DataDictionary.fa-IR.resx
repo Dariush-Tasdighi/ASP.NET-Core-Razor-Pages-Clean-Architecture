@@ -702,8 +702,8 @@
   <data name="LocalizedApplicationSetting" xml:space="preserve">
     <value>تنظیمات سامانه برحسب زبان</value>
   </data>
-  <data name="WideImageUrl" xml:space="preserve">
-    <value>نشانی تصویر پهن</value>
+  <data name="CoverImageUrl" xml:space="preserve">
+    <value>نشانی تصویر کاور</value>
   </data>
   <data name="IsRegistrationEnabled" xml:space="preserve">
     <value>ثبت‌نام فعال است</value>

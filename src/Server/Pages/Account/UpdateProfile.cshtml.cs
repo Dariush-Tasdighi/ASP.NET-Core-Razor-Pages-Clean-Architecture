@@ -68,7 +68,7 @@ public class UpdateProfileModel :
 		ViewModel.GenderId = foundedUser.GenderId;
 		ViewModel.ImageUrl = foundedUser.ImageUrl;
 		ViewModel.Username = foundedUser.Username;
-		ViewModel.WideImageUrl = foundedUser.WideImageUrl;
+		ViewModel.CoverImageUrl = foundedUser.CoverImageUrl;
 		ViewModel.NationalCode = foundedUser.NationalCode;
 		ViewModel.IsProfilePublic = foundedUser.IsProfilePublic;
 		ViewModel.CellPhoneNumber = foundedUser.CellPhoneNumber;
@@ -263,7 +263,7 @@ public class UpdateProfileModel :
 		foundedUser.IsProfilePublic = ViewModel.IsProfilePublic;
 
 		foundedUser.ImageUrl = ViewModel.ImageUrl.Fix();
-		foundedUser.WideImageUrl = ViewModel.WideImageUrl.Fix();
+		foundedUser.CoverImageUrl = ViewModel.CoverImageUrl.Fix();
 		// **************************************************
 
 		// **************************************************

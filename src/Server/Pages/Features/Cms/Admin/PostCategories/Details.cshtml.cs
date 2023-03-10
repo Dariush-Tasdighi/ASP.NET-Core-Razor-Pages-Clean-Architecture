@@ -51,7 +51,7 @@ public class DetailsModel :
 				Ordering = current.Ordering,
 				PostCount = current.Posts.Count,
 				Description = current.Description,
-				WideImageUrl = current.WideImageUrl,
+				CoverImageUrl = current.CoverImageUrl,
 				InsertDateTime = current.InsertDateTime,
 				UpdateDateTime = current.UpdateDateTime,
 				DisplayInHomePage = current.DisplayInHomePage,

@@ -20,7 +20,7 @@ public class CategoryViewModel : object
 	public string? Description { get; set; }
 
 	public string? ImageUrl { get; set; }
-	public string? WideImageUrl { get; set; }
+	public string? CoverImageUrl { get; set; }
 
 	public int Hits { get; set; }
 	public int PostCount { get; set; }

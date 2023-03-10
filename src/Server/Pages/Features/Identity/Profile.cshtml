@@ -31,11 +31,11 @@
 
 <partial name="PartialViews/_DisplayPageMessages" />
 
-@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.WideImageUrl) == false)
+@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.CoverImageUrl) == false)
 {
 	<div class="row d-none d-md-block">
 		<div class="col p-0">
-			<img src="@(Model.ViewModel.WideImageUrl)" alt="@(Model.ViewModel.DisplayName)" class="img-fluid" />
+			<img src="@(Model.ViewModel.CoverImageUrl)" alt="@(Model.ViewModel.DisplayName)" class="img-fluid" />
 		</div>
 	</div>
 }

@@ -190,7 +190,7 @@ public class ProfileModel :
 				IsFeatured = foundedLocalizedUser.User!.IsFeatured,
 				IsVerified = foundedLocalizedUser.User!.IsVerified,
 				EmailAddress = foundedLocalizedUser.User!.EmailAddress,
-				WideImageUrl = foundedLocalizedUser.User!?.WideImageUrl,
+				CoverImageUrl = foundedLocalizedUser.User!?.CoverImageUrl,
 				CellPhoneNumber = foundedLocalizedUser.User!.CellPhoneNumber,
 				IsEmailAddressVerified = foundedLocalizedUser.User!.IsEmailAddressVerified,
 				IsCellPhoneNumberVerified = foundedLocalizedUser.User!.IsCellPhoneNumberVerified,

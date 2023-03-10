@@ -412,7 +412,7 @@ public class CreateTestDataModel :
 					ImageUrl =
 							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
 
-					WideImageUrl =
+					CoverImageUrl =
 							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
 				};
 
@@ -450,7 +450,7 @@ public class CreateTestDataModel :
 						ImageUrl =
 							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
 
-						WideImageUrl =
+						CoverImageUrl =
 							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
 					};
 
@@ -530,7 +530,7 @@ public class CreateTestDataModel :
 					ImageUrl =
 							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
 
-					WideImageUrl =
+					CoverImageUrl =
 							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
 				};
 
@@ -568,7 +568,7 @@ public class CreateTestDataModel :
 						ImageUrl =
 							$"/images/predefined_posts/post_{GetRandomNumber()}.png",
 
-						WideImageUrl =
+						CoverImageUrl =
 							$"/images/predefined_slides/slide_{GetRandomNumber()}.png",
 					};
 

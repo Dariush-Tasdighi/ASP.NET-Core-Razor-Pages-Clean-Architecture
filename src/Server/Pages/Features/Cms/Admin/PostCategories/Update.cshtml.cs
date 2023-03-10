@@ -53,7 +53,7 @@ public class UpdateModel :
 				IsActive = current.IsActive,
 				Ordering = current.Ordering,
 				Description = current.Description,
-				WideImageUrl = current.WideImageUrl,
+				CoverImageUrl = current.CoverImageUrl,
 				DisplayInHomePage = current.DisplayInHomePage,
 				MaxDisplayPostCount = current.MaxDisplayPostCount,
 			})
@@ -176,7 +176,7 @@ public class UpdateModel :
 		foundedItem.Body = ViewModel.Body.Fix();
 		foundedItem.ImageUrl = ViewModel.ImageUrl.Fix();
 		foundedItem.Description = ViewModel.Description.Fix();
-		foundedItem.WideImageUrl = ViewModel.WideImageUrl.Fix();
+		foundedItem.CoverImageUrl = ViewModel.CoverImageUrl.Fix();
 
 		foundedItem.IsActive = ViewModel.IsActive;
 		foundedItem.DisplayInHomePage = ViewModel.DisplayInHomePage;

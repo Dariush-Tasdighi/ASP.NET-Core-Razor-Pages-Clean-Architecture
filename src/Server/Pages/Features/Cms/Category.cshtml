@@ -13,11 +13,11 @@
 		"Layouts/_DefaultWithoutTopMargin";
 }
 
-@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.WideImageUrl) == false)
+@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.CoverImageUrl) == false)
 {
 	<div class="row">
 		<div class="col">
-			<img src="@(Model.ViewModel.WideImageUrl)" alt="@(Model.ViewModel.Title)" class="img-fluid">
+			<img src="@(Model.ViewModel.CoverImageUrl)" alt="@(Model.ViewModel.Title)" class="img-fluid">
 		</div>
 	</div>
 }

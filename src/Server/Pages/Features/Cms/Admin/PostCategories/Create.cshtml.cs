@@ -121,7 +121,7 @@ public class CreateModel :
 				Description = ViewModel.Description.Fix(),
 
 				ImageUrl = ViewModel.ImageUrl.Fix(),
-				WideImageUrl = ViewModel.WideImageUrl.Fix(),
+				CoverImageUrl = ViewModel.CoverImageUrl.Fix(),
 
 				IsActive = ViewModel.IsActive,
 				DisplayInHomePage = ViewModel.DisplayInHomePage,

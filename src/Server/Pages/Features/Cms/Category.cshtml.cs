@@ -135,7 +135,7 @@ public class CategoryModel :
 				Id = foundedCategory.Id,
 
 				ImageUrl = foundedCategory.ImageUrl,
-				WideImageUrl = foundedCategory.WideImageUrl,
+				CoverImageUrl = foundedCategory.CoverImageUrl,
 
 				Name = foundedCategory.Name,
 				Body = foundedCategory.Body,

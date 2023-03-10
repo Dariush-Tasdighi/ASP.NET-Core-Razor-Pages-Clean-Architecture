@@ -304,6 +304,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cover Image Url.
+        /// </summary>
+        public static string CoverImageUrl {
+            get {
+                return ResourceManager.GetString("CoverImageUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create of.
         /// </summary>
         public static string CreateOf {
@@ -1839,15 +1848,6 @@ namespace Resources {
         public static string Websites {
             get {
                 return ResourceManager.GetString("Websites", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Wide Image Url.
-        /// </summary>
-        public static string WideImageUrl {
-            get {
-                return ResourceManager.GetString("WideImageUrl", resourceCulture);
             }
         }
         

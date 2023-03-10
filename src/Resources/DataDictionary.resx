@@ -669,8 +669,8 @@
   <data name="LocalizedApplicationSetting" xml:space="preserve">
     <value>Application Settings based on Culture</value>
   </data>
-  <data name="WideImageUrl" xml:space="preserve">
-    <value>Wide Image Url</value>
+  <data name="CoverImageUrl" xml:space="preserve">
+    <value>Cover Image Url</value>
   </data>
   <data name="IsRegistrationEnabled" xml:space="preserve">
     <value>Registration Enabled</value>
