@@ -1402,7 +1402,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type.
+        ///   Looks up a localized string similar to Post Type.
         /// </summary>
         public static string PostType {
             get {
@@ -1411,7 +1411,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Types.
+        ///   Looks up a localized string similar to Post Types.
         /// </summary>
         public static string PostTypes {
             get {
@@ -1713,6 +1713,24 @@ namespace Resources {
         public static string Top {
             get {
                 return ResourceManager.GetString("Top", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Types.
+        /// </summary>
+        public static string Types {
+            get {
+                return ResourceManager.GetString("Types", resourceCulture);
             }
         }
         

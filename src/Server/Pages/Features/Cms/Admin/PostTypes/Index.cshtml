@@ -1,9 +1,9 @@
 ﻿@page
-@model Server.Pages.Features.Cms.Admin.PostCategories.IndexModel
+@model Server.Pages.Features.Cms.Admin.PostTypes.IndexModel
 
 @{
 	var pageTitle =
-		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.PostCategories}";
+		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.PostTypes}";
 
 	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
 
@@ -91,7 +91,7 @@
 					@(Html.DtatDisplayIntegerWithTd(value: item.Ordering))
 
 					<td dir="ltr">
-						<a href="~/category/@(currentUICultureName)/@(item.Name)">@(item.Name)</a>
+						<a href="~/type/@(currentUICultureName)/@(item.Name)">@(item.Name)</a>
 					</td>
 
 					@(Html.DtatDisplayStringWithTd(value: item.Title))

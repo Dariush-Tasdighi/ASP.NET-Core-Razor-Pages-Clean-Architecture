@@ -757,9 +757,15 @@
     <value>حداکثر تعداد مطالب در صفحه اصلی</value>
   </data>
   <data name="PostType" xml:space="preserve">
-    <value>دسته‌بندی</value>
+    <value>دسته‌بندی مطالب</value>
   </data>
   <data name="PostTypes" xml:space="preserve">
+    <value>دسته‌بندی‌های مطالب</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>دسته‌بندی</value>
+  </data>
+  <data name="Types" xml:space="preserve">
     <value>دسته‌بندی‌ها</value>
   </data>
 </root>
