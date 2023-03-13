@@ -10,6 +10,9 @@ public class LocalizedMailSetting :
 		(System.Guid cultureId) : base(cultureId: cultureId)
 	{
 		UpdateDateTime = InsertDateTime;
+
+		SmtpClientPortNumber = 25;
+		SmtpClientTimeout = 100_000;
 	}
 	#endregion /Constructor
 

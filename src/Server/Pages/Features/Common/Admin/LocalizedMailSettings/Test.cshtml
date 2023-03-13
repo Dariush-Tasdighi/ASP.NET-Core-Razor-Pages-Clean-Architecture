@@ -9,42 +9,44 @@
 	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
 }
 
-@if (Model.ViewModel is null)
-{
-	<h3>
-		@(Resources.Messages.Successes.EmailSentSuccessfully)
-	</h3>
-}
-else
-{
-	<div class="row">
-		<div class="col" dir="ltr">
-			<ul>
+<form method="post">
 
-				@{
-					var exception = Model.ViewModel;
+	<section-form>
 
-					while (exception != null)
-					{
-						<li>
-							@(exception.Message)
-						</li>
+		<fieldset>
 
-						exception = exception.InnerException;
-					}
-				}
+			<section-form-header>
+				@(pageTitle)
+			</section-form-header>
 
-			</ul>
-		</div>
-	</div>
-}
+			<partial name="PartialViews/_DisplayPageMessages" />
 
-<hr />
+			<dtat-full-input asp-for="ViewModel.EmailSubject" />
 
-<div class="row">
-	<div class="col">
-		<a asp-page="Update">
-			@(Resources.DataDictionary.Return)
-		</a>
-	</div>
-</div>
+			<hr />
+
+			<dtat-full-input asp-for="ViewModel.RecipientEmailAddress" dir="ltr" />
+
+			<dtat-full-input asp-for="ViewModel.RecipientDisplayName" />
+
+			<hr />
+
+			<dtat-full-textarea asp-for="ViewModel.EmailBody" />
+
+		</fieldset>
+
+		<section-form-buttons>
+			<button-send />
+			<button-reset />
+		</section-form-buttons>
+
+		<section-form-footer>
+			<a asp-page="Update">
+				@(Resources.DataDictionary.UpdateOf)
+				@(Resources.DataDictionary.LocalizedApplicationSetting)
+			</a>
+		</section-form-footer>
+
+	</section-form>
+
+</form>

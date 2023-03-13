@@ -735,4 +735,16 @@
   <data name="Types" xml:space="preserve">
     <value>Types</value>
   </data>
+  <data name="EmailBody" xml:space="preserve">
+    <value>Email Body</value>
+  </data>
+  <data name="EmailSubject" xml:space="preserve">
+    <value>Email Subject</value>
+  </data>
+  <data name="RecipientDisplayName" xml:space="preserve">
+    <value>Recipient Display Name</value>
+  </data>
+  <data name="RecipientEmailAddress" xml:space="preserve">
+    <value>Recipient Email Address</value>
+  </data>
 </root>

@@ -177,6 +177,9 @@
   <data name="Save" xml:space="preserve">
     <value>ذخیره</value>
   </data>
+  <data name="Send" xml:space="preserve">
+    <value>ارسال</value>
+  </data>
   <data name="SendAgainEmailAddressVerificationKey" xml:space="preserve">
     <value>ارسال مجدد کد تایید نشانی پست الکترونیکی</value>
   </data>

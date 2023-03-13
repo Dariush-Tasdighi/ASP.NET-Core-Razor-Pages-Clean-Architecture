@@ -86,6 +86,32 @@ public static class Utility : object
 		return icon;
 	}
 
+	public static Microsoft.AspNetCore.Mvc.Rendering.TagBuilder GetIconSend()
+	{
+		var icon =
+			new Microsoft.AspNetCore.Mvc
+			.Rendering.TagBuilder(tagName: "i");
+
+		icon.AddCssClass(value: "mx-1");
+		icon.AddCssClass(value: "bi");
+		icon.AddCssClass(value: "bi-send");
+
+		return icon;
+	}
+
+	public static Microsoft.AspNetCore.Mvc.Rendering.TagBuilder GetIconSubmit()
+	{
+		var icon =
+			new Microsoft.AspNetCore.Mvc
+			.Rendering.TagBuilder(tagName: "i");
+
+		icon.AddCssClass(value: "mx-1");
+		icon.AddCssClass(value: "bi");
+		icon.AddCssClass(value: "bi-hand-thumbs-up");
+
+		return icon;
+	}
+
 	public static Microsoft.AspNetCore.Mvc.Rendering.TagBuilder GetIconCustom(string iconName)
 	{
 		var icon =
@@ -314,7 +340,7 @@ public static class Utility : object
 		var currentValues =
 			new System.Collections.Generic.List<string>();
 
-		if(@for is null)
+		if (@for is null)
 		{
 			return string.Empty;
 		}
@@ -327,7 +353,7 @@ public static class Utility : object
 		{
 			var value = @for.Model.ToString();
 
-			if(value is not null)
+			if (value is not null)
 			{
 				currentValues.Add(item: value);
 			}
@@ -425,7 +451,7 @@ public static class Utility : object
 		var tagBuilder =
 			generator.GenerateSelect
 			(viewContext: viewContext, modelExplorer: @for.ModelExplorer, optionLabel: @OptionLabel,
-			expression: @for.Name, selectList: @Items,allowMultiple: false, htmlAttributes: null);
+			expression: @for.Name, selectList: @Items, allowMultiple: false, htmlAttributes: null);
 
 		tagBuilder.AddCssClass
 			(value: "form-control");

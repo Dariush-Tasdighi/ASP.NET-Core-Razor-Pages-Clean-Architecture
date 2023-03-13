@@ -556,6 +556,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email Body.
+        /// </summary>
+        public static string EmailBody {
+            get {
+                return ResourceManager.GetString("EmailBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email Subject.
+        /// </summary>
+        public static string EmailSubject {
+            get {
+                return ResourceManager.GetString("EmailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Favorite User Profile Level.
         /// </summary>
         public static string FavoriteUserProfileLevel {
@@ -1461,6 +1479,24 @@ namespace Resources {
         public static string PublishStartDateTime {
             get {
                 return ResourceManager.GetString("PublishStartDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recipient Display Name.
+        /// </summary>
+        public static string RecipientDisplayName {
+            get {
+                return ResourceManager.GetString("RecipientDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recipient Email Address.
+        /// </summary>
+        public static string RecipientEmailAddress {
+            get {
+                return ResourceManager.GetString("RecipientEmailAddress", resourceCulture);
             }
         }
         

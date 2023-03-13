@@ -195,6 +195,7 @@ public static class SelectLists : object
 	}
 	#endregion /GetGendersForAdminAsync()
 
+	#region GetPostTypesAsync()
 	public static async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetPostTypesAsync
 		(Persistence.DatabaseContext databaseContext, object? selectedValue = null)
@@ -237,7 +238,9 @@ public static class SelectLists : object
 
 		return result;
 	}
+	#endregion /GetPostTypesAsync()
 
+	#region GetPostCategoriesAsync()
 	public static async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.Rendering.SelectList> GetPostCategoriesAsync
 		(Persistence.DatabaseContext databaseContext, object? selectedValue = null)
@@ -280,4 +283,5 @@ public static class SelectLists : object
 
 		return result;
 	}
+	#endregion /GetPostCategoriesAsync()
 }

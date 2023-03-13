@@ -85,3 +85,6 @@ virtual IList<Page> VerifiedPages { get; private set; }		virtual User? VerifierU
 		;
 -------------------------------------------------------------------------------------------
 
+Gmail API:
+
+https://mycodebit.com/send-emails-in-asp-net-core-5-using-gmail-api/

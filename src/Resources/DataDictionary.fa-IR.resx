@@ -768,4 +768,16 @@
   <data name="Types" xml:space="preserve">
     <value>دسته‌بندی‌ها</value>
   </data>
+  <data name="EmailBody" xml:space="preserve">
+    <value>متن نامه</value>
+  </data>
+  <data name="EmailSubject" xml:space="preserve">
+    <value>موضوع نامه</value>
+  </data>
+  <data name="RecipientDisplayName" xml:space="preserve">
+    <value>نام و نام خانوادگی گیرنده</value>
+  </data>
+  <data name="RecipientEmailAddress" xml:space="preserve">
+    <value>نشانی پست الکترونیکی گیرنده</value>
+  </data>
 </root>

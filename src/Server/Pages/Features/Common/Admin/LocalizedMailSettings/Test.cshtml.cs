@@ -12,6 +12,8 @@ public class TestModel :
 		Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor) :
 		base(databaseContext: databaseContext)
 	{
+		ViewModel = new();
+
 		HttpContextAccessor = httpContextAccessor;
 		LocalizedMailSettingService = localizedMailSettingService;
 	}
@@ -19,70 +21,88 @@ public class TestModel :
 
 	#region Properties
 
-	[Microsoft.AspNetCore.Mvc.BindProperty]
-	public System.Exception? ViewModel { get; set; }
-
 	private Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor { get; }
 	private Services.Features.Common.LocalizedMailSettingService LocalizedMailSettingService { get; }
+
+	[Microsoft.AspNetCore.Mvc.BindProperty]
+	public System.Exception? Exception { get; set; }
+
+	[Microsoft.AspNetCore.Mvc.BindProperty]
+	public ViewModels.Pages.Features.Common.Admin.LocalizedMailSettings.TestViewModel ViewModel { get; set; }
 
 	#endregion /Properties
 
 	#region Methods
 
 	#region OnGetAsync()
-	public async System.Threading.Tasks.Task
-		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync()
+	public async System.Threading.Tasks.Task OnGetAsync()
 	{
-		var localizedMailSetting =
-			await
-			LocalizedMailSettingService.GetInstanceAsync();
+		ViewModel.EmailBody = "Email Body Test";
+		ViewModel.EmailSubject = "Email Subject Test";
+		ViewModel.RecipientEmailAddress = "DariushT@GMail.com";
+		ViewModel.RecipientDisplayName = "Mr. Dariush Tasdighi";
+
+		await System.Threading.Tasks.Task.CompletedTask;
+	}
+	#endregion /OnGetAsync()
+
+	#region OnPostAsync()
+	public async System.Threading.Tasks.Task
+	<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
+	{
+		if (ModelState.IsValid == false)
+		{
+			return Page();
+		}
 
 		try
 		{
-			// **************************************************
-			var subject =
-				"Test Subject";
+			var localizedMailSetting =
+				await
+				LocalizedMailSettingService.GetInstanceAsync();
 
-			var domainName =
-				HttpContextAccessor.HttpContext?.Request.Host.Value;
+			// **************************************************
+			var hostUrl =
+				Infrastructure.HttpContextHelper.GetCurrentHostUrl
+				(httpContext: HttpContextAccessor.HttpContext);
 
 			var body =
-				$"<h3>Welcome to our site!</h3><p>Domain: {domainName}</p>";
+				$"{ViewModel.EmailBody}<br /><p>Host: <a href='{hostUrl}'>{hostUrl}</a></p>";
 
-			//var recipient = new System.Net.Mail.MailAddress
-			//	(address: "DariushT@GMail.com", displayName: "آقای داریوش تصدیقی");
-
-			var recipient = new System.Net.Mail.MailAddress
-				(address: "Dariush.Tasdighi@Hotmail.com", displayName: "آقای داریوش تصدیقی");
+			var recipient =
+				new System.Net.Mail.MailAddress
+				(address: ViewModel.RecipientEmailAddress!,
+				displayName: ViewModel.RecipientDisplayName);
 
 			await Dtat.Net.Mail.Utility.SendAsync
-				(recipient: recipient, subject: subject,
+				(recipient: recipient, subject: ViewModel.EmailSubject!,
 				body: body, mailSetting: localizedMailSetting);
 			// **************************************************
 
 			// **************************************************
-			//var subject =
-			//	"test mail";
+			var successMessage = string.Format
+				(format: Resources.Messages.Successes.EmailSentSuccessfully);
 
-			//var body =
-			//	$"hello please test my mail server";
-
-			//var recipient = new System.Net.Mail.MailAddress
-			//	(address: "test-fj0awttbi@srv1.mail-tester.com");
-
-			//await Dtat.Net.Mail.Utility.SendAsync
-			//	(recipient: recipient, subject: subject,
-			//	body: body, mailSetting: localizedMailSetting);
+			AddPageSuccess(message: successMessage);
 			// **************************************************
 		}
 		catch (System.Exception ex)
 		{
-			ViewModel = ex;
+			var exception = ex;
+
+			while (exception != null)
+			{
+				AddPageError
+					(message: exception.Message);
+
+				exception =
+					exception.InnerException;
+			}
 		}
 
 		return Page();
 	}
-	#endregion /OnGetAsync()
+	#endregion /OnPostAsync()
 
 	#endregion /Methods
 }
