@@ -47,11 +47,15 @@ public class LoginModel :
 				Constants.CommonRouting.NotFound);
 		}
 
-		if (currentCulture.IsActive == false)
-		{
-			return RedirectToPage(pageName:
-				Constants.CommonRouting.NotFound);
-		}
+		// در صفحه ورود، نباید دستورات ذیل نوشته شود
+		// اگر کاربر به اشتباه، همه زبان‌های سامانه را
+		// غیرفعال کرده باشد، دیگر امکان ورود به سامانه
+		// را نخواهد داشت
+		//if (currentCulture.IsActive == false)
+		//{
+		//	return RedirectToPage(pageName:
+		//		Constants.CommonRouting.NotFound);
+		//}
 		// **************************************************
 
 		ViewModel.ReturnUrl = returnUrl;
@@ -80,11 +84,15 @@ public class LoginModel :
 				Constants.CommonRouting.NotFound);
 		}
 
-		if (currentCulture.IsActive == false)
-		{
-			return RedirectToPage(pageName:
-				Constants.CommonRouting.NotFound);
-		}
+		// در صفحه ورود، نباید دستورات ذیل نوشته شود
+		// اگر کاربر به اشتباه، همه زبان‌های سامانه را
+		// غیرفعال کرده باشد، دیگر امکان ورود به سامانه
+		// را نخواهد داشت
+		//if (currentCulture.IsActive == false)
+		//{
+		//	return RedirectToPage(pageName:
+		//		Constants.CommonRouting.NotFound);
+		//}
 		// **************************************************
 
 		if (ModelState.IsValid == false)

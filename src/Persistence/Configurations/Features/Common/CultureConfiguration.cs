@@ -98,7 +98,7 @@ internal sealed class CultureConfiguration : object, Microsoft
 
 		// **************************************************
 		builder
-			.HasMany(current => current.LocalizedGenders)
+			.HasMany(current => current.LocalizedRoles)
 			.WithOne(other => other.Culture)
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.CultureId)
@@ -120,7 +120,7 @@ internal sealed class CultureConfiguration : object, Microsoft
 
 		// **************************************************
 		builder
-			.HasMany(current => current.LocalizedRoles)
+			.HasMany(current => current.LocalizedGenders)
 			.WithOne(other => other.Culture)
 			.IsRequired(required: true)
 			.HasForeignKey(other => other.CultureId)
@@ -130,6 +130,17 @@ internal sealed class CultureConfiguration : object, Microsoft
 		// **************************************************
 
 
+
+		// **************************************************
+		builder
+			.HasMany(current => current.ApplicationSettings)
+			.WithOne(other => other.DefaultCulture)
+			.IsRequired(required: true)
+			.HasForeignKey(other => other.DefaultCultureId)
+			.OnDelete(deleteBehavior:
+				Microsoft.EntityFrameworkCore.DeleteBehavior.NoAction)
+			;
+		// **************************************************
 
 		// **************************************************
 		builder

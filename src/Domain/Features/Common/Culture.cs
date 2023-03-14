@@ -49,11 +49,14 @@ public class Culture :
 
 
 
+		ApplicationSettings =
+			new System.Collections.Generic.List<ApplicationSetting>();
+
 		LocalizedMailSettings =
-			new System.Collections.Generic.List<Common.LocalizedMailSetting>();
+			new System.Collections.Generic.List<LocalizedMailSetting>();
 
 		LocalizedApplicationSettings =
-			new System.Collections.Generic.List<Common.LocalizedApplicationSetting>();
+			new System.Collections.Generic.List<LocalizedApplicationSetting>();
 	}
 	#endregion /Constructor
 
@@ -165,6 +168,30 @@ public class Culture :
 
 	#endregion /Properties
 
+	#region Read Only Properties
+
+	public string DisplayName
+	{
+		get
+		{
+			var status =
+				Resources.DataDictionary.Inactive;
+
+			if (IsActive)
+			{
+				status =
+					Resources.DataDictionary.Active;
+			}
+
+			var result =
+				$"{NativeName} ({status})";
+
+			return result;
+		}
+	}
+
+	#endregion /Read Only Properties
+
 	#region Methods
 
 	#region SetUpdateDateTime()
@@ -189,8 +216,9 @@ public class Culture :
 	public virtual System.Collections.Generic.IList<Identity.LocalizedUser> LocalizedUsers { get; private set; }
 	public virtual System.Collections.Generic.IList<Identity.LocalizedGender> LocalizedGenders { get; private set; }
 
-	public virtual System.Collections.Generic.IList<Common.LocalizedMailSetting> LocalizedMailSettings { get; private set; }
-	public virtual System.Collections.Generic.IList<Common.LocalizedApplicationSetting> LocalizedApplicationSettings { get; private set; }
+	public virtual System.Collections.Generic.IList<ApplicationSetting> ApplicationSettings { get; private set; }
+	public virtual System.Collections.Generic.IList<LocalizedMailSetting> LocalizedMailSettings { get; private set; }
+	public virtual System.Collections.Generic.IList<LocalizedApplicationSetting> LocalizedApplicationSettings { get; private set; }
 
 	#endregion /Collections
 }

@@ -20,6 +20,21 @@ public class UpdateViewModel : object
 	public System.Guid Id { get; set; }
 	#endregion /public System.Guid Id { get; set; }
 
+	#region public System.Guid DefaultCultureId { get; set; }
+	/// <summary>
+	/// زبان پیش‌فرض
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.DefaultCulture))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid DefaultCultureId { get; set; }
+	#endregion /public System.Guid DefaultCultureId { get; set; }
+
 
 
 	#region public string? MasterPassword { get; set; }

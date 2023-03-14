@@ -20,6 +20,8 @@ public class UpdateModel :
 
 	#region Properties
 
+	public Microsoft.AspNetCore.Mvc.Rendering.SelectList? CulturesSelectList { get; set; }
+
 	[Microsoft.AspNetCore.Mvc.BindProperty]
 	public ViewModels.Pages.Features.Common.Admin.ApplicationSettings.UpdateViewModel ViewModel { get; set; }
 
@@ -31,6 +33,11 @@ public class UpdateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync()
 	{
+		CulturesSelectList =
+			await
+			Infrastructure.SelectLists.GetCulturesForAdminAsync
+			(databaseContext: DatabaseContext, selectedValue: null);
+
 		var result =
 			await
 			DatabaseContext.ApplicationSettings
@@ -39,6 +46,8 @@ public class UpdateModel :
 				.Features.Common.Admin.ApplicationSettings.UpdateViewModel()
 			{
 				Id = current.Id,
+
+				DefaultCultureId = current.DefaultCultureId,
 
 				MasterPassword = current.MasterPassword,
 				GoogleAnalyticsCode = current.GoogleAnalyticsCode,
@@ -68,6 +77,11 @@ public class UpdateModel :
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
+		CulturesSelectList =
+			await
+			Infrastructure.SelectLists.GetCulturesForAdminAsync
+			(databaseContext: DatabaseContext, selectedValue: ViewModel.DefaultCultureId);
+
 		if (ModelState.IsValid == false)
 		{
 			return Page();
@@ -90,8 +104,10 @@ public class UpdateModel :
 		// **************************************************
 		foundedItem.SetUpdateDateTime();
 
-		foundedItem.IsLoginVisible = ViewModel.IsLoginVisible;
+		foundedItem.DefaultCultureId = ViewModel.DefaultCultureId;
+
 		foundedItem.IsSslEnabled = ViewModel.IsSslEnabled;
+		foundedItem.IsLoginVisible = ViewModel.IsLoginVisible;
 		foundedItem.IsRegistrationEnabled = ViewModel.IsRegistrationEnabled;
 
 		foundedItem.MasterPassword = ViewModel.MasterPassword.Fix();

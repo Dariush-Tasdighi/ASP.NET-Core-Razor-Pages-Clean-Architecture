@@ -1,19 +1,21 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Server.Pages;
 
 public class ChangeCultureModel : Infrastructure.BasePageModel
 {
 	public ChangeCultureModel
-		(Infrastructure.Settings.ApplicationSettings applicationSettings) : base()
+		(Persistence.DatabaseContext databaseContext) : base()
 	{
-		ApplicationSettings = applicationSettings;
+		DatabaseContext = databaseContext;
 	}
 
-	private Infrastructure.Settings.ApplicationSettings ApplicationSettings { get; }
+	private Persistence.DatabaseContext DatabaseContext { get; }
 
-	public Microsoft.AspNetCore.Mvc.IActionResult OnGet(string? cultureName)
+	public async System.Threading.Tasks.Task
+		<Microsoft.AspNetCore.Mvc.IActionResult> OnGet(string? cultureName)
 	{
 		// **************************************************
 		// using Microsoft.AspNetCore.Http;
@@ -31,13 +33,33 @@ public class ChangeCultureModel : Infrastructure.BasePageModel
 		// **************************************************
 
 		// **************************************************
-		var defaultCultureName =
-			ApplicationSettings.CultureSettings.DefaultCultureName;
+		// **************************************************
+		// **************************************************
+		var defaultCultureName = "fa-IR";
+
+		var applicationSetting =
+			await
+			DatabaseContext.ApplicationSettings
+			.FirstOrDefaultAsync();
+
+		if (applicationSetting is not null)
+		{
+			if (applicationSetting.DefaultCulture is not null)
+			{
+				defaultCultureName =
+					applicationSetting.DefaultCulture.CultureName;
+			}
+		}
 
 		var supportedCultureNames =
-			ApplicationSettings.CultureSettings.SupportedCultureNames?
-			.ToList()
+			await
+			DatabaseContext.Cultures
+			.Where(current => current.IsActive)
+			.Select(current => current.CultureName)
+			.ToListAsync()
 			;
+		// **************************************************
+		// **************************************************
 		// **************************************************
 
 		// **************************************************

@@ -394,6 +394,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Culture.
+        /// </summary>
+        public static string DefaultCulture {
+            get {
+                return ResourceManager.GetString("DefaultCulture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [No Value].
         /// </summary>
         public static string DefaultNullValue {

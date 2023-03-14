@@ -780,4 +780,7 @@
   <data name="RecipientEmailAddress" xml:space="preserve">
     <value>نشانی پست الکترونیکی گیرنده</value>
   </data>
+  <data name="DefaultCulture" xml:space="preserve">
+    <value>زبان پیش‌فرض</value>
+  </data>
 </root>

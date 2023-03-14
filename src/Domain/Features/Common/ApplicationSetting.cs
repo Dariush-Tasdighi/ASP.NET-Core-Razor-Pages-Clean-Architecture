@@ -5,13 +5,47 @@ public class ApplicationSetting :
 	Dtat.Seedwork.Abstractions.IEntityHasUpdateDateTime
 {
 	#region Constructor
-	public ApplicationSetting() : base()
+	public ApplicationSetting(System.Guid defaultCultureId) : base()
 	{
 		UpdateDateTime = InsertDateTime;
+
+		DefaultCultureId = defaultCultureId;
 	}
 	#endregion /Constructor
 
 	#region Properties
+
+	#region public System.Guid DefaultCultureId { get; set; }
+	/// <summary>
+	/// زبان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.DefaultCulture))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public System.Guid DefaultCultureId { get; set; }
+	#endregion /public System.Guid DefaultCultureId { get; set; }
+
+	#region public virtual Features.Common.Culture? DefaultCulture { get; private set; }
+	/// <summary>
+	/// زبان
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.DefaultCulture))]
+
+	[System.ComponentModel.DataAnnotations.Required
+		(AllowEmptyStrings = false,
+		ErrorMessageResourceType = typeof(Resources.Messages.Validations),
+		ErrorMessageResourceName = nameof(Resources.Messages.Validations.Required))]
+	public virtual Features.Common.Culture? DefaultCulture { get; private set; }
+	#endregion /public virtual Features.Common.Culture? DefaultCulture { get; private set; }
+
+
 
 	#region public string? MasterPassword { get; set; }
 	/// <summary>

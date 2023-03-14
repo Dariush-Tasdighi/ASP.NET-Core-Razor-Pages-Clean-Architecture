@@ -861,5 +861,17 @@ public static class ModelBuilderExtensions : object
 		// **************************************************
 		// *** /Post Types **********************************
 		// **************************************************
+
+		// **************************************************
+		// *** Application Setting **************************
+		// **************************************************
+		var applicationSetting = new Domain.Features
+			.Common.ApplicationSetting(defaultCultureId: culturePersian.Id);
+
+		modelBuilder.Entity<Domain.Features
+			.Common.ApplicationSetting>().HasData(data: applicationSetting);
+		// **************************************************
+		// *** /Application Setting *************************
+		// **************************************************
 	}
 }

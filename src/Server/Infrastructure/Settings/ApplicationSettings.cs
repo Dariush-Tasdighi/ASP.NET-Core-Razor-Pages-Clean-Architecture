@@ -9,9 +9,6 @@ public class ApplicationSettings : object
 		ToastSettings =
 			new ToastSettings();
 
-		CultureSettings =
-			new CultureSettings();
-
 		FileManagerSettings =
 			new FileManagerSettings();
 
@@ -22,7 +19,6 @@ public class ApplicationSettings : object
 	public string[]? ActivationKeys { get; set; }
 
 	public ToastSettings ToastSettings { get; set; }
-	public CultureSettings CultureSettings { get; set; }
 	public FileManagerSettings FileManagerSettings { get; set; }
 	public TablesDefaultSettings TablesDefaultSettings { get; set; }
 }

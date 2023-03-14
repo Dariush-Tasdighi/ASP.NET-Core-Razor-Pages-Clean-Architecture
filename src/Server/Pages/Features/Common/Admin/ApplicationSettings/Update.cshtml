@@ -23,6 +23,10 @@
 
 			<partial name="PartialViews/_DisplayPageMessages" />
 
+			<dtat-full-select asp-for="ViewModel.DefaultCultureId" asp-items="@(Model.CulturesSelectList)" />
+
+			<hr />
+
 			<dtat-full-input asp-for="ViewModel.MasterPassword" dir="ltr" />
 
 			<dtat-full-input asp-for="ViewModel.FavoriteUserProfileLevel" />

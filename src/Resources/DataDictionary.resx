@@ -747,4 +747,7 @@
   <data name="RecipientEmailAddress" xml:space="preserve">
     <value>Recipient Email Address</value>
   </data>
+  <data name="DefaultCulture" xml:space="preserve">
+    <value>Default Culture</value>
+  </data>
 </root>

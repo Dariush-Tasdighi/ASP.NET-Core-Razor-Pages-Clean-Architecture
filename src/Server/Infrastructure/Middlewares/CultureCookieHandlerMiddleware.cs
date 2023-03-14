@@ -1,4 +1,7 @@
-﻿namespace Infrastructure.Middlewares;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
+namespace Infrastructure.Middlewares;
 
 public class CultureCookieHandlerMiddleware : object
 {
@@ -18,13 +21,13 @@ public class CultureCookieHandlerMiddleware : object
 		var cultureName =
 			httpContext.Request.Cookies[key: CookieName];
 
-		if (string.IsNullOrWhiteSpace(cultureName))
+		if (string.IsNullOrWhiteSpace(value: cultureName))
 		{
 			return null;
 		}
 
 		if (supportedCultureNames is null ||
-			supportedCultureNames.Contains(cultureName) == false)
+			supportedCultureNames.Contains(item: cultureName) == false)
 		{
 			return null;
 		}
@@ -34,7 +37,7 @@ public class CultureCookieHandlerMiddleware : object
 
 	public static void SetCulture(string? cultureName)
 	{
-		if (string.IsNullOrWhiteSpace(cultureName) == false)
+		if (string.IsNullOrWhiteSpace(value: cultureName) == false)
 		{
 			var cultureInfo =
 				new System.Globalization.CultureInfo(name: cultureName);
@@ -101,7 +104,7 @@ public class CultureCookieHandlerMiddleware : object
 
 		httpContext.Response.Cookies.Delete(key: CookieName);
 
-		if (string.IsNullOrWhiteSpace(cultureName) == false)
+		if (string.IsNullOrWhiteSpace(value: cultureName) == false)
 		{
 			httpContext.Response.Cookies.Append
 				(key: CookieName, value: cultureName, options: cookieOptions);
@@ -110,27 +113,45 @@ public class CultureCookieHandlerMiddleware : object
 	#endregion /Statics
 
 	public CultureCookieHandlerMiddleware
-		(Microsoft.AspNetCore.Http.RequestDelegate next,
-		Settings.ApplicationSettings applicationSettings) : base()
+		(Microsoft.AspNetCore.Http.RequestDelegate next) : base()
 	{
 		Next = next;
-
-		ApplicationSettings = applicationSettings;
 	}
 
 	private Microsoft.AspNetCore.Http.RequestDelegate Next { get; }
 
-	private Settings.ApplicationSettings ApplicationSettings { get; }
-
 	public async System.Threading.Tasks.Task InvokeAsync
-		(Microsoft.AspNetCore.Http.HttpContext httpContext)
+		(Microsoft.AspNetCore.Http.HttpContext httpContext,
+		Persistence.DatabaseContext databaseContext)
 	{
 		// **************************************************
-		var defaultCultureName =
-			ApplicationSettings.CultureSettings.DefaultCultureName;
+		// **************************************************
+		// **************************************************
+		var defaultCultureName = "fa-IR";
+
+		var applicationSetting =
+			await
+			databaseContext.ApplicationSettings
+			.FirstOrDefaultAsync();
+
+		if (applicationSetting is not null)
+		{
+			if (applicationSetting.DefaultCulture is not null)
+			{
+				defaultCultureName =
+					applicationSetting.DefaultCulture.CultureName;
+			}
+		}
 
 		var supportedCultureNames =
-			ApplicationSettings.CultureSettings.SupportedCultureNames;
+			await
+			databaseContext.Cultures
+			.Where(current => current.IsActive)
+			.Select(current => current.CultureName)
+			.ToListAsync()
+			;
+		// **************************************************
+		// **************************************************
 		// **************************************************
 
 		// **************************************************
@@ -139,10 +160,12 @@ public class CultureCookieHandlerMiddleware : object
 			(httpContext: httpContext,
 			supportedCultureNames: supportedCultureNames);
 
-		if (currentCultureName is null)
-		{
-			currentCultureName = defaultCultureName;
-		}
+		//if (currentCultureName is null)
+		//{
+		//	currentCultureName = defaultCultureName;
+		//}
+
+		currentCultureName ??= defaultCultureName;
 
 		SetCulture(cultureName: currentCultureName);
 		// **************************************************
