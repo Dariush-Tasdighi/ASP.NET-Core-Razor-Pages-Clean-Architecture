@@ -6,8 +6,13 @@
 	ViewData[Constants.ViewDataKeyName.PageTitle] = Model.ViewModel.Title;
 	ViewData[Constants.ViewDataKeyName.PageDescription] = Model.ViewModel.Description;
 
+	ViewData[Constants.ViewDataKeyName.PageAuthor] = "Mr. Dariush Tasdighi - آقای داریوش تصدیقی";
+
 	Layout =
 		$"Layouts/{Model.ViewModel.LayoutName}";
 }
 
-@(Html.Raw(Model.ViewModel.Body))
+@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.Body) == false)
+{
+	@(Html.Raw(Model.ViewModel.Body))
+}

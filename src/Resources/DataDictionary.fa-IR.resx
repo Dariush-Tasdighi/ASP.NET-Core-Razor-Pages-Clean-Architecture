@@ -783,4 +783,7 @@
   <data name="DefaultCulture" xml:space="preserve">
     <value>زبان پیش‌فرض</value>
   </data>
+  <data name="IsGoogleSsoEnabled" xml:space="preserve">
+    <value>امکان ورود به سامانه از طریق گوگل</value>
+  </data>
 </root>

@@ -86,8 +86,7 @@ public class PageModel :
 
 			.Include(current => current.Layout)
 
-			.Where(current => current.Culture != null
-				&& current.Culture.Id == foundedCulture.Id)
+			.Where(current => current.CultureId  == foundedCulture.Id)
 			.Where(current => current.Name.ToLower() == name.ToLower())
 
 			.FirstOrDefaultAsync();
@@ -115,13 +114,12 @@ public class PageModel :
 		ViewModel =
 			new ViewModels.Pages.Features.Cms.PageViewModel
 			{
-				Body = foundedPage.Body,
 				Title = foundedPage.Title,
-
 				LayoutName = foundedPage.Layout!.Name,
-				//LayoutName = foundedPage.Layout.Name,
 
-				Description = foundedPage.Description,
+				Body = foundedPage.Body,
+ 				Description = foundedPage.Description,
+
 				UpdateDateTime = foundedPage.UpdateDateTime,
 			};
 		// **************************************************

@@ -109,6 +109,16 @@ public class ApplicationSetting :
 	public bool IsLoginVisible { get; set; }
 	#endregion /public bool IsLoginVisible { get; set; }
 
+	#region public bool IsGoogleSsoEnabled { get; set; }
+	/// <summary>
+	/// امکان ورود به سامانه از طریق گوگل
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.IsGoogleSsoEnabled))]
+	public bool IsGoogleSsoEnabled { get; set; }
+	#endregion /public bool IsGoogleSsoEnabled { get; set; }
+
 	#region public bool IsRegistrationEnabled { get; set; }
 	/// <summary>
 	/// ثبت‌نام فعال است

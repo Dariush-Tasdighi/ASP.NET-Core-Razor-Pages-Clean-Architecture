@@ -6,6 +6,9 @@
 		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.Users}";
 
 	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+
+	var currentUICultureName = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureName();
 }
 
 <section-page-header>
@@ -57,12 +60,9 @@
 				<th>
 					@(Resources.DataDictionary.CellPhoneNumberInBrief)
 				</th>
-				@*<th>@(Resources.DataDictionary.InsertDateTime)</th>
-				*@
 				<th>
 					@(Resources.DataDictionary.UpdateDateTime)
 				</th>
-				@*<th>@(Resources.DataDictionary.LastLoginDateTime)</th>*@
 			</tr>
 		</thead>
 
@@ -95,29 +95,29 @@
 					<td dir="ltr">
 						@(Html.DtatDisplayInlineBoolean
 							(value: item.IsEmailAddressVerified))
+
 						@(item.EmailAddress)
 					</td>
-
-					@*@(Html.DtatDisplayStringWithTd(value: item.EmailAddress, isLeftToRight: true))*@
-					@*@(Html.DtatDisplayBooleanWithTd(value: item.IsEmailAddressVerified))*@
 
 					@(Html.DtatDisplayStringWithTd(value: item.FullName))
 
 					@(Html.DtatDisplayStringWithTd(value: item.RoleTitle))
 
-					@(Html.DtatDisplayStringWithTd
-						(value: item.Username, isLeftToRight: true))
+					<td dir="ltr">
+						@if (string.IsNullOrWhiteSpace(value: item.Username) == false)
+						{
+							<a href="/profile/@(currentUICultureName)/@(item.Username)">
+								@(item.Username)
+							</a>
+						}
+					</td>
 
 					<td dir="ltr">
 						@(Html.DtatDisplayInlineBoolean
 							(value: item.IsCellPhoneNumberVerified))
+
 						@(item.CellPhoneNumber)
 					</td>
-
-					@*@(Html.DtatDisplayStringWithTd(value: item.CellPhoneNumber, isLeftToRight: true))*@
-					@*@(Html.DtatDisplayBooleanWithTd(value: item.IsCellPhoneNumberVerified))*@
-
-					@*@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.InsertDateTime))*@
 
 					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.UpdateDateTime))
 

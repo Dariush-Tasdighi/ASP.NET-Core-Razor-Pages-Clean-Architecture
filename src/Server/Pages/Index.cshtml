@@ -3,10 +3,16 @@
 @model Server.Pages.IndexModel
 
 @{
-	var pageTitle =
-		Resources.PageTitles.Index;
+	var applicationSetting =
+		Model.LocalizedApplicationSetting;
 
-	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+	if (applicationSetting is not null)
+	{
+		ViewData[Constants.ViewDataKeyName.PageTitle] = applicationSetting.HomePageTitle;
+		ViewData[Constants.ViewDataKeyName.PageAuthor] = applicationSetting.HomePageAuthor;
+		ViewData[Constants.ViewDataKeyName.PageImageUrl] = applicationSetting.HomePageImageUrl;
+		ViewData[Constants.ViewDataKeyName.PageDescription] = applicationSetting.HomePageDescription;
+	}
 
 	Layout =
 		"Layouts/_HomePage";

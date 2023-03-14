@@ -1,18 +1,62 @@
 ﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor
+@inject Services.Features.Common.LocalizedApplicationSettingService LocalizedApplicationSettingService
 
 @{
-	var siteUrl = $"https://{httpContextAccessor.HttpContext?.Request.Host.Value}";
-	var imageUrl = $"{siteUrl}/images/Dariush.png";
+	var localizedApplicationSetting =
+		await
+		LocalizedApplicationSettingService.GetInstanceAsync();
+
+	var siteTitle =
+		localizedApplicationSetting.HomePageTitle;
+
+	var pageTitle =
+		ViewData[Constants.ViewDataKeyName.PageTitle] as string;
+
+	var pageAuthor =
+		ViewData[Constants.ViewDataKeyName.PageAuthor] as string;
+
+	var pageImageUrl =
+		ViewData[Constants.ViewDataKeyName.PageImageUrl] as string;
+
+	var pageDescription =
+		ViewData[Constants.ViewDataKeyName.PageDescription] as string;
+
+	var siteUrl = Infrastructure.HttpContextHelper
+		.GetCurrentHostUrl(httpContext: httpContextAccessor.HttpContext);
+
+	if (string.IsNullOrWhiteSpace(value: pageImageUrl) == false)
+	{
+		if (pageImageUrl.ToLower().StartsWith(value: "http") == false)
+		{
+			pageImageUrl =
+				$"{siteUrl}\\{pageImageUrl}";
+		}
+	}
 }
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content="@(siteUrl)" />
 
-<meta property="og:image" content="@(imageUrl)" />
-<meta property="og:image:width" content="800" />
-<meta property="og:image:height" content="800" />
-<meta property="og:image:alt" content="Dariush Tasdighi - داریوش تصدیقی" />
+@if (string.IsNullOrWhiteSpace(value: siteTitle) == false)
+{
+	<meta property="og:site_name" content="@(siteTitle)" />
+}
 
-<meta property="og:site_name" content="Dariush Tasdighi - داریوش تصدیقی" />
-<meta property="og:title" content="An Advanced ASP.NET Core Razor Page Template" />
-<meta property="og:description" content="This site has been developed by .NET 7, C# language and ASP.NET Core Razor Pages Technology!" />
+@if (string.IsNullOrWhiteSpace(value: pageImageUrl) == false)
+{
+	@*<meta property="og:image:width" content="800" />*@
+	@*<meta property="og:image:height" content="800" />*@
+
+	<meta property="og:image" content="@(pageImageUrl)" />
+	<meta property="og:image:alt" content="@(pageTitle)" />
+}
+
+@if (string.IsNullOrWhiteSpace(value: pageTitle) == false)
+{
+	<meta property="og:title" content="@(pageTitle)" />
+}
+
+@if (string.IsNullOrWhiteSpace(value: pageDescription) == false)
+{
+	<meta property="og:description" content="@(pageDescription)" />
+}

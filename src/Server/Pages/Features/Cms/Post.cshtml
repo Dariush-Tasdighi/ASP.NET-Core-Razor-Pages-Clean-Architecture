@@ -5,10 +5,20 @@
 @{
 	ViewData[Constants.ViewDataKeyName.PageTitle] = Model.ViewModel.Title;
 	ViewData[Constants.ViewDataKeyName.PageAuthor] = Model.ViewModel.Author;
+	ViewData[Constants.ViewDataKeyName.PageImageUrl] = Model.ViewModel.ImageUrl;
 	ViewData[Constants.ViewDataKeyName.PageDescription] = Model.ViewModel.Description;
 }
 
-<div class="row">
+@if (string.IsNullOrWhiteSpace(value: Model.ViewModel.CoverImageUrl) == false)
+{
+	<div class="row">
+		<div class="col">
+			<img src="@(Model.ViewModel.CoverImageUrl)" alt="@(Model.ViewModel.Title)" class="img-fluid">
+		</div>
+	</div>
+}
+
+<div class="row mt-3">
 	<div class="col-lg-9">
 		@(Html.Raw(Model.ViewModel.Body))
 

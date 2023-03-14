@@ -55,6 +55,7 @@ public class UpdateModel :
 
 				IsSslEnabled = current.IsSslEnabled,
 				IsLoginVisible = current.IsLoginVisible,
+				IsGoogleSsoEnabled = current.IsGoogleSsoEnabled,
 				IsRegistrationEnabled = current.IsRegistrationEnabled,
 
 				FavoriteUserProfileLevel = current.FavoriteUserProfileLevel,
@@ -108,6 +109,7 @@ public class UpdateModel :
 
 		foundedItem.IsSslEnabled = ViewModel.IsSslEnabled;
 		foundedItem.IsLoginVisible = ViewModel.IsLoginVisible;
+		foundedItem.IsGoogleSsoEnabled = ViewModel.IsGoogleSsoEnabled;
 		foundedItem.IsRegistrationEnabled = ViewModel.IsRegistrationEnabled;
 
 		foundedItem.MasterPassword = ViewModel.MasterPassword.Fix();

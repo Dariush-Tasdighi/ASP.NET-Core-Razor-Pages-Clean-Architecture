@@ -102,10 +102,8 @@ public class PostModel :
 			.Include(current => current.User)
 			.Include(current => current.Category)
 
-			.Where(current => current.Culture != null
-				&& current.Culture.Id == foundedCulture.Id)
-
 			.Where(current => current.Id == idGuid.Value)
+			.Where(current => current.CultureId == foundedCulture.Id)
 
 			.FirstOrDefaultAsync();
 
@@ -192,6 +190,7 @@ public class PostModel :
 				ImageUrl = foundedPost.ImageUrl,
 				Description = foundedPost.Description,
 				CategoryName = foundedPost.Category.Name,
+				CoverImageUrl = foundedPost.CoverImageUrl,
 
 				InsertDateTime = foundedPost.InsertDateTime,
 				UpdateDateTime = foundedPost.UpdateDateTime,

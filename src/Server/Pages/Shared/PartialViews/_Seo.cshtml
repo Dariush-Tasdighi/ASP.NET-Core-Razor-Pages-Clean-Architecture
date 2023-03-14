@@ -39,7 +39,6 @@
 					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 		})(window, document, 'script', 'dataLayer', '@(googleTagManagerCode)');</script>
 	<!-- End Google Tag Manager -->
-
 	<!-- Google Tag Manager (noscript) -->
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=@(googleTagManagerCode)" height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -47,30 +46,36 @@
 	<!-- End Google Tag Manager (noscript) -->
 }
 
-<title>
-	@(ViewData[Constants.ViewDataKeyName.PageTitle])
-</title>
+<meta name="robots" content="index, follow" />
 
 @{
-	var pageDescription =
-		ViewData[Constants.ViewDataKeyName.PageDescription] as string;
+	var pageTitle =
+		ViewData[Constants.ViewDataKeyName.PageTitle] as string;
 
-	if (string.IsNullOrWhiteSpace(value: pageDescription) == false)
-	{
-		<meta name="description" content="@(pageDescription)" />
-	}
-}
-
-@{
 	var pageAuthor =
 		ViewData[Constants.ViewDataKeyName.PageAuthor] as string;
 
-	if (string.IsNullOrWhiteSpace(value: pageAuthor) == false)
-	{
-		<meta name="author" content="@(pageAuthor)" />
-	}
-	else
-	{
-		<meta name="author" content="Dariush Tasdighi - داریوش تصدیقی" />
-	}
+	var pageDescription =
+		ViewData[Constants.ViewDataKeyName.PageDescription] as string;
+}
+
+@if (string.IsNullOrWhiteSpace(value: pageTitle) == false)
+{
+	<title>
+		@(pageTitle)
+	</title>
+}
+
+@if (string.IsNullOrWhiteSpace(value: pageAuthor) == false)
+{
+	<meta name="author" content="@(pageAuthor)" />
+}
+else
+{
+	<meta name="author" content="Mr. Dariush Tasdighi - آقای داریوش تصدیقی" />
+}
+
+@if (string.IsNullOrWhiteSpace(value: pageDescription) == false)
+{
+	<meta name="description" content="@(pageDescription)" />
 }

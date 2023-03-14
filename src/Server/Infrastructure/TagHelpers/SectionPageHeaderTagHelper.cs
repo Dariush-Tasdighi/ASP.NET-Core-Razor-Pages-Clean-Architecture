@@ -44,6 +44,7 @@ public class SectionPageHeaderTagHelper :
 			new Microsoft.AspNetCore.Mvc
 			.Rendering.TagBuilder(tagName: "h3");
 
+		body.AddCssClass(value: "mt-3");
 		body.AddCssClass(value: "mb-3");
 		body.AddCssClass(value: "text-center");
 

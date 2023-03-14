@@ -26,6 +26,14 @@ public static class ViewDataKeyName : object
 		}
 	}
 
+	public static string PageImageUrl
+	{
+		get
+		{
+			return "PageImageUrl";
+		}
+	}
+
 	public static string PageDescription
 	{
 		get

@@ -8,9 +8,6 @@
 @{
 	ViewData[Constants.ViewDataKeyName.PageTitle] = Model.ViewModel.Title;
 	ViewData[Constants.ViewDataKeyName.PageDescription] = Model.ViewModel.Description;
-
-	Layout =
-		"Layouts/_DefaultWithoutTopMargin";
 }
 
 @if (string.IsNullOrWhiteSpace(value: Model.ViewModel.CoverImageUrl) == false)

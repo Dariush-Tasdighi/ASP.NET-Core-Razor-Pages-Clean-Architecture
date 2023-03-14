@@ -1,13 +1,13 @@
-﻿namespace Infrastructure.TagHelpers;
+﻿namespace Infrastructure.TagHelpers.Buttons;
 
 [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement
-	(tag: "button-delete",
+	(tag: "button-create",
 	ParentTag = "section-form-buttons",
 	TagStructure = Microsoft.AspNetCore.Razor.TagHelpers.TagStructure.WithoutEndTag)]
-public class ButtonDeleteTagHelper :
+public class ButtonCreateTagHelper :
 	Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
 {
-	public ButtonDeleteTagHelper() : base()
+	public ButtonCreateTagHelper() : base()
 	{
 	}
 
@@ -17,7 +17,7 @@ public class ButtonDeleteTagHelper :
 	{
 		// **************************************************
 		var icon =
-			Utility.GetIconDelete();
+			Utility.GetIconCreate();
 		// **************************************************
 
 		// **************************************************
@@ -29,10 +29,10 @@ public class ButtonDeleteTagHelper :
 			(key: "type", value: "submit");
 
 		body.AddCssClass(value: "btn");
-		body.AddCssClass(value: "btn-danger");
+		body.AddCssClass(value: "btn-primary");
 
 		body.InnerHtml.AppendHtml(content: icon);
-		body.InnerHtml.Append(unencoded: Resources.ButtonCaptions.Delete);
+		body.InnerHtml.Append(unencoded: Resources.ButtonCaptions.Create);
 		// **************************************************
 
 		// **************************************************

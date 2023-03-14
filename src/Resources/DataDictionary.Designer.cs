@@ -880,6 +880,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Google Login Enabled.
+        /// </summary>
+        public static string IsGoogleSsoEnabled {
+            get {
+                return ResourceManager.GetString("IsGoogleSsoEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Login Visible.
         /// </summary>
         public static string IsLoginVisible {

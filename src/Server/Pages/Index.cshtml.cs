@@ -7,11 +7,23 @@ namespace Server.Pages;
 public class IndexModel :
 	Infrastructure.BasePageModelWithDatabaseContext
 {
+	#region Constructor
 	public IndexModel
-		(Persistence.DatabaseContext databaseContext) : base(databaseContext: databaseContext)
+		(Persistence.DatabaseContext databaseContext,
+		Services.Features.Common.LocalizedApplicationSettingService localizedApplicationSettingService) : base(databaseContext: databaseContext)
 	{
+		LocalizedApplicationSettingService = localizedApplicationSettingService;
 	}
+	#endregion /Constructor
 
+	#region Properties
+	public Domain.Features.Common.LocalizedApplicationSetting? LocalizedApplicationSetting { get; set; }
+	private Services.Features.Common.LocalizedApplicationSettingService LocalizedApplicationSettingService { get; }
+	#endregion /Properties
+
+	#region Methods
+
+	#region OnGetAsync()
 	public async System.Threading.Tasks.Task
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnGetAsync(string? culture = null)
 	{
@@ -51,6 +63,13 @@ public class IndexModel :
 		}
 		// **************************************************
 
+		LocalizedApplicationSetting =
+			await
+			LocalizedApplicationSettingService.GetInstanceAsync();
+
 		return Page();
 	}
+	#endregion /OnGetAsync()
+
+	#endregion /Methods
 }

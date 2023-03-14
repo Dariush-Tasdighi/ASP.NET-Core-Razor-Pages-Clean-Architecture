@@ -750,4 +750,7 @@
   <data name="DefaultCulture" xml:space="preserve">
     <value>Default Culture</value>
   </data>
+  <data name="IsGoogleSsoEnabled" xml:space="preserve">
+    <value>Google Login Enabled</value>
+  </data>
 </root>
