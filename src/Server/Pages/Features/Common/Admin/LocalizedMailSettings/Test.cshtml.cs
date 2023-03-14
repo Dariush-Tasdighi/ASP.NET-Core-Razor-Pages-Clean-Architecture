@@ -67,7 +67,7 @@ public class TestModel :
 				(httpContext: HttpContextAccessor.HttpContext);
 
 			var body =
-				$"{ViewModel.EmailBody}<br /><p>Host: <a href='{hostUrl}'>{hostUrl}</a></p>";
+				$"{ViewModel.EmailBody}<br /><p>Host: <a href='{hostUrl}'>{hostUrl}</a> - Version: {Infrastructure.Version.Value}</p>";
 
 			var recipient =
 				new System.Net.Mail.MailAddress

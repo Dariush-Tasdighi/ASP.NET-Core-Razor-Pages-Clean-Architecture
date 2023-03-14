@@ -1,57 +1,28 @@
-﻿namespace Infrastructure.Settings
+﻿namespace Infrastructure.Settings;
+
+public class ApplicationSettings : object
 {
-	public class ApplicationSettings : object
+	public static readonly string KeyName = nameof(ApplicationSettings);
+
+	public ApplicationSettings() : base()
 	{
-		public static readonly string KeyName = nameof(ApplicationSettings);
+		ToastSettings =
+			new ToastSettings();
 
-		public ApplicationSettings() : base()
-		{
-			IconSettings =
-				new IconSettings();
+		CultureSettings =
+			new CultureSettings();
 
-			ToastSettings =
-				new ToastSettings();
+		FileManagerSettings =
+			new FileManagerSettings();
 
-			CultureSettings =
-				new CultureSettings();
-
-			FileManagerSettings =
-				new FileManagerSettings();
-
-			TablesDefaultSettings =
-				new TablesDefaultSettings();
-		}
-
-		// **********
-		public string? Version { get; set; }
-		// **********
-
-		// **********
-		public string? MasterPassword { get; set; }
-		// **********
-
-		// **********
-		public string[]? ActivationKeys { get; set; }
-		// **********
-
-		// **********
-		public IconSettings IconSettings { get; set; }
-		// **********
-
-		// **********
-		public ToastSettings ToastSettings { get; set; }
-		// **********
-
-		// **********
-		public CultureSettings CultureSettings { get; set; }
-		// **********
-
-		// **********
-		public FileManagerSettings FileManagerSettings { get; set; }
-		// **********
-
-		// **********
-		public TablesDefaultSettings TablesDefaultSettings { get; set; }
-		// **********
+		TablesDefaultSettings =
+			new TablesDefaultSettings();
 	}
+
+	public string[]? ActivationKeys { get; set; }
+
+	public ToastSettings ToastSettings { get; set; }
+	public CultureSettings CultureSettings { get; set; }
+	public FileManagerSettings FileManagerSettings { get; set; }
+	public TablesDefaultSettings TablesDefaultSettings { get; set; }
 }

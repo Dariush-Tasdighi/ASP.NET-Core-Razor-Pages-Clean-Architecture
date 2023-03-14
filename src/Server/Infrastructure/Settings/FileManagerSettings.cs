@@ -1,44 +1,28 @@
-﻿namespace Infrastructure.Settings
+﻿namespace Infrastructure.Settings;
+
+public class FileManagerSettings : object
 {
-	public class FileManagerSettings : object
+	public FileManagerSettings() : base()
 	{
-		public FileManagerSettings() : base()
-		{
-			DisplayDateTimeFormat = "yyyy/MM/dd [HH:mm:ss]";
+		DisplayDateTimeFormat =
+			"yyyy/MM/dd [HH:mm:ss]";
 
-			TableHeaderStyle = "table-primary";
-			TableFooterStyle = "table-secondary";
-			TableStyle = "table table-bordered table-sm table-striped table-hover";
+		TableHeaderStyle = "table-primary";
+		TableFooterStyle = "table-secondary";
+		TableStyle = "table table-bordered table-sm table-striped table-hover";
 
-			PictureExtensions =
-				new string[] { ".ico", ".png", ".jpg", ".jpeg", ".bmp", ".gif" };
+		PictureExtensions =
+			new string[] { ".ico", ".png", ".jpg", ".jpeg", ".bmp", ".gif" };
 
-			PermittedFileExtensions =
-				new string[] { ".ico", ".png", ".jpg", ".jpeg", ".bmp", ".gif" };
-		}
-
-		// **********
-		public string TableStyle { get; set; }
-		// **********
-
-		// **********
-		public string TableHeaderStyle { get; set; }
-		// **********
-
-		// **********
-		public string TableFooterStyle { get; set; }
-		// **********
-
-		// **********
-		public string DisplayDateTimeFormat { get; set; }
-		// **********
-
-		// **********
-		public string[] PictureExtensions { get; set; }
-		// **********
-
-		// **********
-		public string[] PermittedFileExtensions { get; set; }
-		// **********
+		PermittedFileExtensions =
+			new string[] { ".ico", ".png", ".jpg", ".jpeg", ".bmp", ".gif" };
 	}
+
+	public string TableStyle { get; set; }
+	public string TableHeaderStyle { get; set; }
+	public string TableFooterStyle { get; set; }
+	public string DisplayDateTimeFormat { get; set; }
+
+	public string[] PictureExtensions { get; set; }
+	public string[] PermittedFileExtensions { get; set; }
 }

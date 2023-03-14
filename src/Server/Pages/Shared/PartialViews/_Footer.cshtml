@@ -10,6 +10,7 @@
 <footer class="footer border-top py-3 bg-light text-muted fixed-bottom">
 
 	<div class="container text-muted">
+
 		@*Domain: @(httpContextAccessor.HttpContext?.Request.Host.Value)*@
 
 		<environment include="Development" exclude="Production">
@@ -25,9 +26,11 @@
 
 		@if (string.IsNullOrWhiteSpace(value: localizedApplicationSetting.ApplicationVersioin) == false)
 		{
-			@(Html.Raw(localizedApplicationSetting.ApplicationVersioin)
-				)
+			@(Html.Raw(localizedApplicationSetting.ApplicationVersioin))
+			<text>&nbsp;</text>
+			@(Dtat.String.ConvertDigitsToUnicode(value: Infrastructure.Version.Value))
 		}
+
 	</div>
 
 </footer>
