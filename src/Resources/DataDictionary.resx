@@ -753,4 +753,13 @@
   <data name="IsGoogleSsoEnabled" xml:space="preserve">
     <value>Google Login Enabled</value>
   </data>
+  <data name="LogoutDateTime" xml:space="preserve">
+    <value>Logout Time</value>
+  </data>
+  <data name="LoginLogs" xml:space="preserve">
+    <value>Login Logs</value>
+  </data>
+  <data name="LoginDateTime" xml:space="preserve">
+    <value>Login Time</value>
+  </data>
 </root>

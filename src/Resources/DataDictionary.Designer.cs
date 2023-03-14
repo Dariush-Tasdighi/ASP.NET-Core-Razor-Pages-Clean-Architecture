@@ -1168,6 +1168,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login Time.
+        /// </summary>
+        public static string LoginDateTime {
+            get {
+                return ResourceManager.GetString("LoginDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login Logs.
+        /// </summary>
+        public static string LoginLogs {
+            get {
+                return ResourceManager.GetString("LoginLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout Time.
+        /// </summary>
+        public static string LogoutDateTime {
+            get {
+                return ResourceManager.GetString("LogoutDateTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Male.
         /// </summary>
         public static string Male {

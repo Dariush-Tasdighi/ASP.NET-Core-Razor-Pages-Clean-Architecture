@@ -69,5 +69,20 @@ public class LoginLog : Seedwork.Entity
 	public string UserIP { get; set; }
 	#endregion /public string UserIP { get; set; }
 
+
+
+	#region public System.DateTimeOffset? LogoutDateTime { get; set; }
+	/// <summary>
+	/// زمان خروج از سامانه
+	/// </summary>
+	[System.ComponentModel.DataAnnotations.Display
+		(ResourceType = typeof(Resources.DataDictionary),
+		Name = nameof(Resources.DataDictionary.LogoutDateTime))]
+
+	[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated
+		(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None)]
+	public System.DateTimeOffset? LogoutDateTime { get; set; }
+	#endregion /public System.DateTimeOffset? LogoutDateTime { get; set; }
+
 	#endregion /Properties
 }

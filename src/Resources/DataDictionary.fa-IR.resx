@@ -786,4 +786,13 @@
   <data name="IsGoogleSsoEnabled" xml:space="preserve">
     <value>امکان ورود به سامانه از طریق گوگل</value>
   </data>
+  <data name="LogoutDateTime" xml:space="preserve">
+    <value>زمان خروج از سامانه</value>
+  </data>
+  <data name="LoginLogs" xml:space="preserve">
+    <value>ورودهای به سامانه</value>
+  </data>
+  <data name="LoginDateTime" xml:space="preserve">
+    <value>زمان ورود به سامانه</value>
+  </data>
 </root>

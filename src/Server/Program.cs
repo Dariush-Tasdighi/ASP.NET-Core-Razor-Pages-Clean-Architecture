@@ -151,17 +151,20 @@ builder.Services.AddDbContext<Persistence.DatabaseContext>
 // **************************************************
 
 // **************************************************
-builder.Services.AddScoped<Services.Features
-	.Identity.UserService>();
+builder.Services.AddScoped
+	<Services.Features.Identity.UserService>();
 
-builder.Services.AddScoped<Services.Features
-	.Common.ApplicationSettingService>();
+builder.Services.AddScoped
+	<Services.Features.Common.ApplicationSettingService>();
 
-builder.Services.AddScoped<Services.Features
-	.Common.LocalizedMailSettingService>();
+builder.Services.AddScoped
+	<Services.Features.Identity.AuthenticatedUserService>();
 
-builder.Services.AddScoped<Services.Features
-	.Common.LocalizedApplicationSettingService>();
+builder.Services.AddScoped
+	<Services.Features.Common.LocalizedMailSettingService>();
+
+builder.Services.AddScoped
+	<Services.Features.Common.LocalizedApplicationSettingService>();
 // **************************************************
 
 // **************************************************

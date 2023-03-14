@@ -1,0 +1,66 @@
+﻿@page
+
+@model Server.Pages.Account.LoginLogsModel
+
+@{
+	var pageTitle =
+		$"{Resources.DataDictionary.ListOf} {Resources.DataDictionary.LoginLogs}";
+
+	ViewData[Constants.ViewDataKeyName.PageTitle] = pageTitle;
+
+	var currentUICultureName = Domain.Features
+		.Common.CultureEnumHelper.GetCurrentUICultureName();
+}
+
+<section-page-header>
+	@(pageTitle)
+</section-page-header>
+
+<partial name="PartialViews/_DisplayPageMessages" />
+
+<section-table>
+	<table>
+		<caption>
+			@(pageTitle)
+		</caption>
+
+		<thead>
+			<tr>
+				<th>
+					@(Resources.DataDictionary.RowNumber)
+				</th>
+				<th>
+					Session ID
+				</th>
+				<th>
+					@(Resources.DataDictionary.IP)
+				</th>
+				<th>
+					@(Resources.DataDictionary.LoginDateTime)
+				</th>
+				<th>
+					@(Resources.DataDictionary.LogoutDateTime)
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@for (var index = 0; index <= Model.ViewModel.Count - 1; index++)
+			{
+				var item = Model.ViewModel[index];
+
+				<tr>
+					@(Html.DtatDisplayRowNumberWithTd(value: index + 1))
+
+					@(Html.DtatDisplayStringWithTd(value: item.Id.ToString(), isLeftToRight: true))
+
+					@(Html.DtatDisplayStringWithTd(value: item.UserIP, isLeftToRight: true))
+
+					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.InsertDateTime))
+
+					@(Html.DtatDisplayDateTimeOffsetWithTd(value: item.LogoutDateTime))
+				</tr>
+			}
+		</tbody>
+	</table>
+</section-table>

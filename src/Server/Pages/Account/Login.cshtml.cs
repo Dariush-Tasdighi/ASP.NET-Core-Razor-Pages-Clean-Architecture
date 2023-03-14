@@ -67,6 +67,17 @@ public class LoginModel :
 		<Microsoft.AspNetCore.Mvc.IActionResult> OnPostAsync()
 	{
 		// **************************************************
+		var userIP = Infrastructure.HttpContextHelper
+			.GetRemoteIpAddress(httpContext: HttpContext);
+
+		if(userIP is null)
+		{
+			return RedirectToPage(pageName:
+				Constants.CommonRouting.BadRequest);
+		}
+		// **************************************************
+
+		// **************************************************
 		var currentUICultureLcid = Domain.Features
 			.Common.CultureEnumHelper.GetCurrentUICultureLcid();
 
@@ -173,6 +184,17 @@ public class LoginModel :
 			return Page();
 		}
 
+		if (foundedUser.IsActive == false)
+		{
+			var errorMessage =
+				string.Format(format:
+				Resources.Messages.Errors.UserIsNotActive);
+
+			AddPageError(message: errorMessage);
+
+			return Page();
+		}
+
 		if (foundedUser.Role.IsActive == false)
 		{
 			var errorMessage =
@@ -184,23 +206,18 @@ public class LoginModel :
 			return Page();
 		}
 
-		if (foundedUser.IsActive == false)
-		{
-			var errorMessage =
-				string.Format(format:
-				Resources.Messages.Errors.UserIsNotActive);
-
-			AddPageError(message: errorMessage);
-
-			return Page();
-		}
-		// **************************************************
-
-		// **************************************************
 		foundedUser.LastLoginDateTime = Dtat.DateTime.Now;
+		// **************************************************
+
+		// **************************************************
+		var loginLog =
+			new Domain.Features.Identity
+			.LoginLog(userId: foundedUser.Id, userIP: userIP);
+
+		await DatabaseContext.AddAsync(entity: loginLog);
+		// **************************************************
 
 		await DatabaseContext.SaveChangesAsync();
-		// **************************************************
 
 		// **************************************************
 		// **************************************************
@@ -291,6 +308,20 @@ public class LoginModel :
 
 			claims.Add(item: claim);
 		}
+		// **************************************************
+
+		// **************************************************
+		claim = new System.Security.Claims
+			.Claim(type: "IP", value: userIP);
+
+		claims.Add(item: claim);
+		// **************************************************
+
+		// **************************************************
+		claim = new System.Security.Claims.Claim
+			(type: "SessionId", value: loginLog.Id.ToString());
+
+		claims.Add(item: claim);
 		// **************************************************
 		// **************************************************
 		// **************************************************
